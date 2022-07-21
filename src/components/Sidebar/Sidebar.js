@@ -55,7 +55,7 @@ const structure = [
   {
     id: 4,
     label: "Variations",
-    link: "/app/notifications",
+    link: "/app/variation",
     icon: <BorderOuter />,
   },
   {
@@ -79,7 +79,7 @@ const structure = [
   {
     id: 8,
     label: "Reset Password",
-    link: "/app/notifications",
+    link: "/app/changepassword",
     icon: <LockSharp />,
   },
   {

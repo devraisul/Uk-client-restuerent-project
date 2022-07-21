@@ -34,6 +34,8 @@ import { useLayoutState } from "../../context/LayoutContext";
 import Menu from "../../pages/Menu/Menu";
 import AddReviewTag from "../../pages/AddReviewTag/AddReviewTag";
 import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatisfaction";
+import Addveriation from "../../pages/Addvariation/Addveriation";
+import ChangePass from "../../pages/ResetPass/ChangePass";
 
 function Layout(props) {
   var classes = useStyles();
@@ -56,9 +58,11 @@ function Layout(props) {
             <Route path="/app/dashboard" component={Tables} />
             {/* <Route path="/app/typography" component={Typography} /> */}
             <Route path="/app/menu" component={Menu} />
-            {/* <Route path="/app/tables" component={Dashboard} /> */}
+            <Route path="/app/tables" component={Dashboard} />
             <Route path="/app/addReviewTag" component={AddReviewTag} />
+            <Route path="/app/variation" component={Addveriation} />
             <Route path="/app/reviews" component={CustomerSatisfaction} />
+            <Route path="/app/changepassword" component={ChangePass} />
             {/* <Route path="/app/notifications" component={Notifications} /> */}
           </Switch>
           {/* <Box
