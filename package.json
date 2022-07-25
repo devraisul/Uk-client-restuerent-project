@@ -2,7 +2,6 @@
   "name": "react-material-admin",
   "version": "1.1.0",
   "private": true,
-  "homepage": "./",
   "resolutions": {
     "websocket-extensions": "^0.1.4",
     "node-forge": "^0.10.0",
@@ -28,10 +27,11 @@
     "react-modern-calendar-datepicker": "^3.1.6",
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
+    "react-scripts": "^5.0.1",
     "react-syntax-highlighter": "^15.4.3",
     "recharts": "^2.0.4",
-    "tinycolor2": "^1.4.2"
+    "tinycolor2": "^1.4.2",
+    "tomtom-react-searchbox": "^0.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

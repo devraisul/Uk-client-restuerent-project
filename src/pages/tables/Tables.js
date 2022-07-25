@@ -35,10 +35,9 @@ export default function Tables() {
   const classes = useStyles();
 
   React.useEffect(() => {
-    getMenu(user.restaurant[0].id)
+    getMenu(user?.restaurant[0]?.id)
       .then(res => {
         setMenus(res);
-        console.log(res);
       })
   }, [])
   const datatableData = [
@@ -46,22 +45,10 @@ export default function Tables() {
       [`${data.name}`, `${data.description}`, "Yonkers", "NY"]
     ))
   ];
-  console.log(mock.table);
-  console.log(menus);
   return (
     <>
       <PageTitle title="All Menus" />
       <Grid container spacing={4}>
-        {/* <Grid item xs={12}>
-          <MUIDataTable
-            title="Menu List"
-            data={datatableData}
-            columns={["Name", "Description", "", "Total dishes"]}
-            options={{
-              filterType: "checkbox",
-            }}
-          />
-        </Grid> */}
         <Grid item xs={12}>
           <Widget title="Menu List" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
             <Table data={menus} />

@@ -24,7 +24,7 @@ import Header from "../Header";
 import Sidebar from "../Sidebar";
 
 // pages
-import Dashboard from "../../pages/dashboard";
+// import Dashboard from "../../pages/dashboard";
 import Typography from "../../pages/typography";
 // import Notifications from "../../pages/notifications";
 import Tables from "../../pages/tables";
@@ -36,6 +36,7 @@ import AddReviewTag from "../../pages/AddReviewTag/AddReviewTag";
 import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatisfaction";
 import Addveriation from "../../pages/Addvariation/Addveriation";
 import ChangePass from "../../pages/ResetPass/ChangePass";
+import UpdateRestaurent from "../../pages/UpdateRestaurent/UpdateRestaurent";
 
 function Layout(props) {
   var classes = useStyles();
@@ -58,11 +59,12 @@ function Layout(props) {
             <Route path="/app/dashboard" component={Tables} />
             {/* <Route path="/app/typography" component={Typography} /> */}
             <Route path="/app/menu" component={Menu} />
-            <Route path="/app/tables" component={Dashboard} />
+            {/* <Route path="/app/tables" component={Dashboard} /> */}
             <Route path="/app/addReviewTag" component={AddReviewTag} />
             <Route path="/app/variation" component={Addveriation} />
             <Route path="/app/reviews" component={CustomerSatisfaction} />
             <Route path="/app/changepassword" component={ChangePass} />
+            <Route path="/app/updateRestaurent" component={UpdateRestaurent} />
             {/* <Route path="/app/notifications" component={Notifications} /> */}
           </Switch>
           {/* <Box

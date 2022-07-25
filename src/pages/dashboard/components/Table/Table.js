@@ -31,8 +31,8 @@ export default function TableComponent({ data }) {
       <TableBody>
         {data?.map((item, index) => (
           <TableRow key={index}>
-            <TableCell className="pl-3 fw-normal">{item.name}</TableCell>
-            <TableCell>{item.description}</TableCell>
+            <TableCell className="pl-3 fw-normal">{item?.name}</TableCell>
+            <TableCell>{item?.description}</TableCell>
             <TableCell>{''}</TableCell>
             <TableCell>{''}</TableCell>
             <TableCell>

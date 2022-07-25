@@ -33,7 +33,6 @@ import { useAuth } from "../../context/AuthContext";
 export default function Header(props) {
   var classes = useStyles();
   const { user, logout } = useAuth()
-  console.log(user);
 
   // global
   var layoutState = useLayoutState();
@@ -117,7 +116,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              {user.first_Name}{user.last_Name}
+              {user?.first_Name}{user?.last_Name}
             </Typography>
           </div>
           <MenuItem

@@ -45,7 +45,7 @@ const structure = [
     link: "/app/menu",
     icon: <RestaurantMenu />,
   },
-  { id: 2, label: "Update Restaurent", link: "/app/tables", icon: <TableIcon /> },
+  { id: 2, label: "Update Restaurent", link: "/app/updateRestaurent", icon: <TableIcon /> },
   {
     id: 3,
     label: "Add Review Tag",

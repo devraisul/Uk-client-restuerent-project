@@ -1,0 +1,18 @@
+.react-searchbox__input-wrapper{
+  display: flex !important;
+}
+.cardB{
+  width: 50%;
+  margin: 0 auto;
+}
+.react-searchbox__input{
+  padding: 10px 2px;
+}
+
+@media (min-width: 992px) { 
+  
+  .cardB{
+    width: 2000px;
+    margin: 0 auto;
+  }
+ }
