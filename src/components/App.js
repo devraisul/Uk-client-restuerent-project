@@ -12,6 +12,9 @@ import Login from "../pages/login";
 import { useUserState } from "../context/UserContext";
 import AuthProvider, { useAuth } from "../context/AuthContext";
 import AddRestaurentForm from "../pages/login/AddRestaurentForm";
+import UserMenu from "../pages/UserMenu/UserMenu";
+import ShowReviews from "../pages/showReviews/ShowReviews";
+import TabMenu from "../pages/TabMenu/TabMenu";
 
 export default function App() {
   // global
@@ -29,6 +32,9 @@ export default function App() {
         />
         <PrivateRoute path="/app" component={Layout} />
         <PublicRoute path="/login" component={Login} />
+        <Route path="/usermenu/:id" component={UserMenu} />
+        <Route path="/review/:id" component={ShowReviews} />
+        <Route path="/tabmenu/:id" component={TabMenu} />
         <PublicRoute path="/addrestaurent" component={AddRestaurentForm} />
         <Route component={Error} />
       </Switch>

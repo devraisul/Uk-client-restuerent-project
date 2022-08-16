@@ -37,6 +37,8 @@ import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatis
 import Addveriation from "../../pages/Addvariation/Addveriation";
 import ChangePass from "../../pages/ResetPass/ChangePass";
 import UpdateRestaurent from "../../pages/UpdateRestaurent/UpdateRestaurent";
+import ShowReviews from "../../pages/showReviews/ShowReviews";
+import ViewMenu from "../../pages/ViewMenu/ViewMenu";
 
 function Layout(props) {
   var classes = useStyles();
@@ -63,6 +65,8 @@ function Layout(props) {
             <Route path="/app/addReviewTag" component={AddReviewTag} />
             <Route path="/app/variation" component={Addveriation} />
             <Route path="/app/reviews" component={CustomerSatisfaction} />
+            <Route path="/app/show-reviews" component={ShowReviews} />
+            <Route path="/app/view-menu/:keyId/" component={ViewMenu} />
             <Route path="/app/changepassword" component={ChangePass} />
             <Route path="/app/updateRestaurent" component={UpdateRestaurent} />
             {/* <Route path="/app/notifications" component={Notifications} /> */}

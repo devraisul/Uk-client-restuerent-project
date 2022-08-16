@@ -36,86 +36,64 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
+import { useAuth } from "../../context/AuthContext";
 
-const structure = [
-  { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
-  {
-    id: 1,
-    label: "Menu",
-    link: "/app/menu",
-    icon: <RestaurantMenu />,
-  },
-  { id: 2, label: "Update Restaurent", link: "/app/updateRestaurent", icon: <TableIcon /> },
-  {
-    id: 3,
-    label: "Add Review Tag",
-    link: "/app/addReviewTag",
-    icon: <RateReview />,
-  },
-  {
-    id: 4,
-    label: "Variations",
-    link: "/app/variation",
-    icon: <BorderOuter />,
-  },
-  {
-    id: 5,
-    label: "Show Reviews",
-    link: "/app/notifications",
-    icon: <Visibility />,
-  },
-  {
-    id: 6,
-    label: "View Menus",
-    link: "/app/notifications",
-    icon: <MenuBook />,
-  },
-  {
-    id: 7,
-    label: "View WebPage",
-    link: "/app/notifications",
-    icon: <Web />,
-  },
-  {
-    id: 8,
-    label: "Reset Password",
-    link: "/app/changepassword",
-    icon: <LockSharp />,
-  },
-  {
-    id: 9,
-    label: "Customer Satisfac",
-    link: "/app/reviews",
-    icon: <SentimentSatisfied />,
-  },
-  // { id: 5, type: "divider" },
-  // { id: 6, type: "title", label: "HELP" },
-  // { id: 7, label: "Library", link: "https://flatlogic.com/templates", icon: <LibraryIcon /> },
-  // { id: 8, label: "Support", link: "https://flatlogic.com/forum", icon: <SupportIcon /> },
-  // { id: 9, label: "FAQ", link: "https://flatlogic.com/forum", icon: <FAQIcon /> },
-  // { id: 10, type: "divider" },
-  // { id: 11, type: "title", label: "PROJECTS" },
-  // {
-  //   id: 12,
-  //   label: "My recent",
-  //   link: "",
-  //   icon: <Dot size="small" color="warning" />,
-  // },
-  // {
-  //   id: 13,
-  //   label: "Starred",
-  //   link: "",
-  //   icon: <Dot size="small" color="primary" />,
-  // },
-  // {
-  //   id: 14,
-  //   label: "Background",
-  //   link: "",
-  //   icon: <Dot size="small" color="secondary" />,
-  // },
-];
+
 
 function Sidebar({ location }) {
+  const { user } = useAuth()
+  const structure = [
+    { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
+    {
+      id: 1,
+      label: "Menu",
+      link: "/app/menu",
+      icon: <RestaurantMenu />,
+    },
+    { id: 2, label: "Update Restaurent", link: "/app/updateRestaurent", icon: <TableIcon /> },
+    {
+      id: 3,
+      label: "Add Review Tag",
+      link: "/app/addReviewTag",
+      icon: <RateReview />,
+    },
+    {
+      id: 4,
+      label: "Variations",
+      link: "/app/variation",
+      icon: <BorderOuter />,
+    },
+    {
+      id: 5,
+      label: "Show Reviews",
+      link: "/app/show-reviews",
+      icon: <Visibility />,
+    },
+    {
+      id: 6,
+      label: "View Menus",
+      link: `/app/view-menu/${user?.restaurant[0]?.Key_ID}/${user?.restaurant[0]?.id}`,
+      icon: <MenuBook />,
+    },
+    {
+      id: 7,
+      label: "View WebPage",
+      link: `/usermenu/${user?.restaurant[0]?.Key_ID}?id=${user?.restaurant[0]?.id}`,
+      icon: <Web />,
+    },
+    {
+      id: 8,
+      label: "Reset Password",
+      link: "/app/changepassword",
+      icon: <LockSharp />,
+    },
+    {
+      id: 9,
+      label: "Customer Satisfac",
+      link: "/app/reviews",
+      icon: <SentimentSatisfied />,
+    }
+  ];
   var classes = useStyles();
   var theme = useTheme();
 

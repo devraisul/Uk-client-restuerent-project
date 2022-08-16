@@ -36,3 +36,23 @@ export const editRestaurent = async (id, data) => {
     .catch(err => console.log(err))
   return editRestaurentResponse
 }
+
+// get Restaurent
+export const getRestaurent = async (id) => {
+  let addRestaurentResponse;
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  await axios.get(`/api/restaurant/${id}`, config)
+    .then(res => {
+      addRestaurentResponse = res.data;
+    })
+    .catch(err => console.log(err))
+  return addRestaurentResponse
+}

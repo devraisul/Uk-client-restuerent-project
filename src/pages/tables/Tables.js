@@ -58,7 +58,7 @@ export default function Tables() {
       <Box className={classes.qrcode}>
         <div>
           <h1> QR Code</h1>
-          <QRCode value={`https://menuqrcodes.co.uk/System/usermenu/`} />
+          <QRCode value={`https://menuqrcodes.co.uk/System/usermenu/${user?.restaurant[0]?.Key_ID}/${user?.restaurant[0]?.id}`} />
         </div>
       </Box>
     </>

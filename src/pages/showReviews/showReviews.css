@@ -1,0 +1,96 @@
+
+
+/* Utilities */
+.containerF {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 2rem;
+  margin-top: 6rem;
+  margin-bottom: 12.55rem;
+}
+
+.cardReview2 {
+  
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f3f5;
+  margin-bottom: 20px;
+  -webkit-column-break-inside: avoid;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
+}
+/* Force varying heights to simulate dynamic content */
+
+
+.clip-star {
+  background: gold;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%,   68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%,   2% 35%, 39% 35%);
+  display: inline-block;
+  height: 40px;
+  width: 40px;}
+  
+  .clip-star2 {
+    background: rgb(209, 208, 208);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%,   68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%,   2% 35%, 39% 35%);
+    display: inline-block;
+    height: 40px;
+    width: 40px;}
+
+.w3-light-grey, .w3-hover-light-grey:hover, .w3-light-gray, .w3-hover-light-gray:hover {
+  color:  rgba(0, 0, 0, 0.5)!important;
+  background-color: #f1f1f1!important;
+  display: flex;
+  margin-top: 1.2%;
+}
+.w3-green, .w3-hover-green:hover {
+  color: #4caf4f00!important;
+  background-color: #4CAF50!important;
+  text-align: center;
+}
+
+.columnReview2 {
+  float: left;
+  width: 75%;
+  height: fit-content;
+  padding: 10px;
+  
+}
+.columnReview {
+  float: left;
+  
+  height: fit-content;
+  padding: 10px;
+ 
+}
+
+/* Clear floats after the columns */
+
+.rowReview:after {
+  content: "";
+  display: table;
+
+  clear: both;
+}
+
+.stars {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.starsT {
+  width: 100%;
+  display: flow-root;
+  justify-content: center;
+  grid-gap: 8px;
+  gap: 8px;
+}
+.star {
+  position: relative;
+  cursor: pointer;
+}
+
+
+  
