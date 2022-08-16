@@ -12,6 +12,7 @@ import Table from "../dashboard/components/Table/Table";
 import mock from "../dashboard/mock";
 import { useAuth } from "../../context/AuthContext";
 import { getMenu } from "../../Apis/Menu";
+import AllMenu from "../Menu/AllMenu/AllMenu";
 
 
 
@@ -31,27 +32,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function Tables() {
   const { user } = useAuth();
-  const [menus, setMenus] = React.useState();
   const classes = useStyles();
-
-  React.useEffect(() => {
-    getMenu(user?.restaurant[0]?.id)
-      .then(res => {
-        setMenus(res);
-      })
-  }, [])
-  const datatableData = [
-    menus?.map(data => (
-      [`${data.name}`, `${data.description}`, "Yonkers", "NY"]
-    ))
-  ];
   return (
     <>
       <PageTitle title="All Menus" />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <Widget title="Menu List" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
-            <Table data={menus} />
+            <AllMenu
+              id={user.restaurant[0].id}
+            />
           </Widget>
         </Grid>
       </Grid>

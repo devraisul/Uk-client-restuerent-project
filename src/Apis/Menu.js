@@ -38,3 +38,24 @@ export const getMenu = async (id) => {
     .catch(err => console.log(err));
   return addMenuResponse
 }
+
+// update menu
+export const Editmenusingle = async (data) => {
+  let addMenuResponse;
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  console.log(data);
+  await axios.patch(`/api/menu/Updatemenu`, data, config)
+    .then(res => {
+      addMenuResponse = res;
+    })
+    .catch(err => console.log(err));
+  return addMenuResponse
+}

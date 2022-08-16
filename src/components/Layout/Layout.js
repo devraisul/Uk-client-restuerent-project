@@ -31,7 +31,6 @@ import Tables from "../../pages/tables";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
-import Menu from "../../pages/Menu/Menu";
 import AddReviewTag from "../../pages/AddReviewTag/AddReviewTag";
 import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatisfaction";
 import Addveriation from "../../pages/Addvariation/Addveriation";
@@ -39,6 +38,7 @@ import ChangePass from "../../pages/ResetPass/ChangePass";
 import UpdateRestaurent from "../../pages/UpdateRestaurent/UpdateRestaurent";
 import ShowReviews from "../../pages/showReviews/ShowReviews";
 import ViewMenu from "../../pages/ViewMenu/ViewMenu";
+import MenuHandle from "../../pages/Menu/MenuHandle";
 
 function Layout(props) {
   var classes = useStyles();
@@ -60,7 +60,7 @@ function Layout(props) {
           <Switch>
             <Route path="/app/dashboard" component={Tables} />
             {/* <Route path="/app/typography" component={Typography} /> */}
-            <Route path="/app/menu" component={Menu} />
+            <Route path="/app/menu" component={MenuHandle} />
             {/* <Route path="/app/tables" component={Dashboard} /> */}
             <Route path="/app/addReviewTag" component={AddReviewTag} />
             <Route path="/app/variation" component={Addveriation} />

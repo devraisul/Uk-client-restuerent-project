@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import axios from "axios";
+import './app.css'
 // components
 import Layout from "./Layout";
 
