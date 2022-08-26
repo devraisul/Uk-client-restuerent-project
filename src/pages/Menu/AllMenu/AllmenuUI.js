@@ -61,7 +61,7 @@ const AllmenuUI = ({ menus, index, id }) => {
           </div>
         </form></td>
         <td>
-          {menus?.name === 'Deals' ? (<Fragment><Link to={`/add-deal/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>) : (<Fragment><Link to={`/add-dish/${menus?.name}/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>)}</td>
+          {menus?.name === 'Deals' ? (<Fragment><Link to={`/add-deal/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>) : (<Fragment><Link to={`/api/add-dish/${menus?.name}/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>)}</td>
 
         <td><Link to={`/menu/${id}/${menus?.id}`} className='btn btn-light'>{menus?.dishes.length}</Link></td>
 
@@ -77,7 +77,7 @@ const AllmenuUI = ({ menus, index, id }) => {
         <td>{menus?.name} </td>
         <td>{menus?.description}</td>
         <td>
-          {menus?.name === 'Deals' ? (<Fragment><Link to={`/add-deal/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>) : (<Fragment><Link to={`/add-dish/${menus?.name}/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>)}</td>
+          {menus?.name === 'Deals' ? (<Fragment><Link to={`/app/add-deal/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>) : (<Fragment><Link to={`/app/add-dish/${menus?.name}/${id}/${menus?.id}`} className='btn btn-light'>View/Add dishes</Link></Fragment>)}</td>
 
         <td><Link to={`/menu/${id}/${menus?.id}`} className='btn btn-light'>{menus?.dishes.length}</Link></td>
 

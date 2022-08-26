@@ -59,3 +59,24 @@ export const Editmenusingle = async (data) => {
     .catch(err => console.log(err));
   return addMenuResponse
 }
+
+// update menu
+export const Editmenumultiple = async (data) => {
+  let addMenuResponse;
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  console.log(data);
+  await axios.patch(`/api/menu/Edit/multiple`, data, config)
+    .then(res => {
+      addMenuResponse = res;
+    })
+    .catch(err => console.log(err));
+  return addMenuResponse
+}

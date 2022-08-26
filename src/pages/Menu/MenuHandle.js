@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AddMenu from './AllMenu/AddMenu';
 import AllMenu from './AllMenu/AllMenu';
+import Editmenu from './AllMenu/Editmenu';
 const MenuHandle = () => {
   const { user } = useAuth()
   const [showaddmenu, setshowaddmenu] = useState(false);
@@ -38,7 +39,7 @@ const MenuHandle = () => {
         </div>
       </div>
       {showaddmenu ? (<AddMenu id={user.restaurant[0].id} />) : ('')}
-      {/* {editall ? (<Editmenu id={user.restaurant[0].id} />) : ('')} */}
+      {editall ? (<Editmenu id={user.restaurant[0].id} />) : ('')}
       {showallmenu ? (<AllMenu id={user.restaurant[0].id} />) : ('')}
 
 

@@ -39,6 +39,7 @@ import UpdateRestaurent from "../../pages/UpdateRestaurent/UpdateRestaurent";
 import ShowReviews from "../../pages/showReviews/ShowReviews";
 import ViewMenu from "../../pages/ViewMenu/ViewMenu";
 import MenuHandle from "../../pages/Menu/MenuHandle";
+import DishHandle from "../../pages/Menu/DishHandle";
 
 function Layout(props) {
   var classes = useStyles();
@@ -61,6 +62,7 @@ function Layout(props) {
             <Route path="/app/dashboard" component={Tables} />
             {/* <Route path="/app/typography" component={Typography} /> */}
             <Route path="/app/menu" component={MenuHandle} />
+            <Route path="/app/add-dish/:dishName/:Rid/:Did" component={DishHandle} />
             {/* <Route path="/app/tables" component={Dashboard} /> */}
             <Route path="/app/addReviewTag" component={AddReviewTag} />
             <Route path="/app/variation" component={Addveriation} />
