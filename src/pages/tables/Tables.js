@@ -40,7 +40,7 @@ export default function Tables() {
         <Grid item xs={12}>
           <Widget title="Menu List" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
             <AllMenu
-              id={user.restaurant[0].id}
+              id={user?.restaurant[0].id}
             />
           </Widget>
         </Grid>

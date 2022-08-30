@@ -21,6 +21,7 @@ const TabMenu = () => {
   const [loading, setLoading] = useState(false)
   const [loading2, setLoading2] = useState(false)
   const [loadingdishes, setLoadingdishes] = useState(false)
+
   useEffect(() => {
     setLoading(true)
     setLoading2(true)
@@ -41,6 +42,7 @@ const TabMenu = () => {
         setLoadingdishes(false)
       })
   }, [id]);
+  
   console.log(restuarant);
   const [showdishesEven, setshowdishesEven] = useState(false);
   const [showdishesodd, setshowdishesodd] = useState(false);
@@ -156,7 +158,8 @@ const TabMenu = () => {
                   <input type="checkbox" className='inputA' id="chck1" onClick={() => toggleCollapse("chck1", 0)} />
 
                   {collapse === 0 ? (
-                    <Fragment>  <div className="tabA-content"> {//get dishes of a selected menu
+                    <Fragment>  
+                      <div className="tabA-content"> {//get dishes of a selected menu
                       aLL_dishes?.map((ALL_dishes) => (
                         <Fragment>
                           <AlldishesUI
@@ -167,9 +170,9 @@ const TabMenu = () => {
                         </Fragment>
 
                       ))}
-                    </div></Fragment>) : ''}
-
-
+                    </div>
+                    </Fragment>
+                    ) : ''}
                 </div>
 
                 {menus?.map((menus, i) => (
@@ -205,7 +208,10 @@ const TabMenu = () => {
 
                 <input type="checkbox" className='inputA' id={"chck" + MenuName} onClick={() => toggleCollapse("chck" + MenuName, MenuId)} />
 
-                {menus?.Menu_id === collapse ? (<div className="tabA-content"> <Alldishes id={MenuId} /> </div>) : ''}
+                {menus?.Menu_id === collapse ? (
+                <div className="tabA-content"> 
+                <Alldishes id={MenuId} /> 
+                </div>) : ''}
               </div>
             </div>
           </div>
