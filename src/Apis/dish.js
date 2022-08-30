@@ -88,7 +88,7 @@ export const addDishImage = async (id) => {
 }
 
 // Add Dish 
-export const adddish = async (id, data) => {
+export const adddish = async (menuId, data) => {
   let getaddDishImage;
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
@@ -100,7 +100,7 @@ export const adddish = async (id, data) => {
     },
   };
   console.log(data);
-  await axios.post(`/api/dishes/multiple/${id}`, data, config)
+  await axios.post(`/api/dishes/multiple/${menuId}`, {dishes: data}, config)
     .then(res => {
       getaddDishImage = res;
     })

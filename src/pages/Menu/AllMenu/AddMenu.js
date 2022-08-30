@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 //Add menu Form
 const AddMenu = ({ id }) => {
+  console.log(id);
   const [inputList, setInputList] = useState([{ name: "", description: "" }]);
   // handle input change
   const handleInputChange = (e, index) => {
@@ -114,17 +115,14 @@ const AddMenu = ({ id }) => {
       <h1 className='large text-center text-primary'>ADD Menu</h1>
       <table className="fl-table">
 
-        <thead>
+        {/* <thead>
           <tr>
-            {/* <th width="10%">#</th>
-                            <th>Menu Name</th>
-                            <th>Menu Description</th> */}
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th width="10%">id</th>
+            <th>Menu Name</th>
+            <th>Menu Description</th>
+            
           </tr>
-        </thead>
+        </thead> */}
 
         {inputList.map((x, i) => {
           return (
@@ -134,7 +132,6 @@ const AddMenu = ({ id }) => {
                   {i + 1}
                 </td>
                 <td>
-
                   <TextField
                     style={{ marginTop: "15px", marginRight: "15px" }}
                     name="name"
@@ -161,14 +158,9 @@ const AddMenu = ({ id }) => {
                   </IconButton>) : ('')}
                 </td>
                 <td>
-
                   {inputList[i].name || inputList[i].description === !'' ? <Fragment> {inputList.length - 1 === i && <Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" onClick={(e) => handleAddClick(i)}><Add />Add More</Button>}</Fragment> : <Fragment><Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" disabled><Add />Add More</Button></Fragment>}
-
-
                 </td>
-
               </tr>
-
             </tbody>
           );
         })}
