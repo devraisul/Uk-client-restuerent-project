@@ -100,7 +100,28 @@ export const adddish = async (menuId, data) => {
     },
   };
   console.log(data);
-  await axios.post(`/api/dishes/multiple/${menuId}`, {dishes: data}, config)
+  await axios.post(`/api/dishes/multiple/${menuId}`, { dishes: data }, config)
+    .then(res => {
+      getaddDishImage = res;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  return getaddDishImage
+}
+// Add Dish 
+export const getuserdeal = async () => {
+  let getaddDishImage;
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  await axios.get(`/api/dishes/getusermenu/dealsdishes`, config)
     .then(res => {
       getaddDishImage = res;
     })

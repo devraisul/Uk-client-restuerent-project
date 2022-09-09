@@ -92,7 +92,8 @@ export const gettype = async (id, did) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.get(`/api/variation/multiple/dish_variation/${id}/${did}`, config)
+  console.log(id, did);
+  await axios.get(`/api/variation/${id}/${did}`, config)
     .then(res => {
       addVariationResponse = res.data;
     })

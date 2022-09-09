@@ -8,7 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 import Alldishes from '../AllDishes/Alldishes';
 import Cart from '../Review/Cart';
 import Review from '../Review/Review';
-import AlldishesUI from '../ViewMenu/AlldishesUI';
+import BuyDishes from './BuyDishes';
 import './tabmenu.css'
 
 const TabMenu = () => {
@@ -21,7 +21,7 @@ const TabMenu = () => {
   const [loading, setLoading] = useState(false)
   const [loading2, setLoading2] = useState(false)
   const [loadingdishes, setLoadingdishes] = useState(false)
-
+  console.log(menus);
   useEffect(() => {
     setLoading(true)
     setLoading2(true)
@@ -42,7 +42,7 @@ const TabMenu = () => {
         setLoadingdishes(false)
       })
   }, [id]);
-  
+
   console.log(restuarant);
   const [showdishesEven, setshowdishesEven] = useState(false);
   const [showdishesodd, setshowdishesodd] = useState(false);
@@ -104,101 +104,123 @@ const TabMenu = () => {
     }
 
   }
+  console.log(aLL_dishes);
   return loading && loading2 ? (
     <div>Loading ....</div>
   ) : (
-    <Fragment >
-      <section className='landing2'>
-        <div className='dark-overlay'>
-          <div className='landing-inner'>
-            <div className='x-largeLogo'>  {!restuarant?.Logo ? (<img
-              className="centerImage2"
-              src={ImageComing}
-              alt="logo"
-            />) : (<img
-              className="centerImage2"
-              src={ImageComing}
-              alt='Logo'
-            />)} </div>
-            <p className='lead2'>{restuarant?.Name}</p>
-            <Link to={`/review/${id}`} className='aReview' >
-              Show review
-            </Link>
-            <p className='address'>{restuarant?.Address},Postcode: {restuarant?.PostCode}</p>
+    <>
+      <Fragment >
+        <section className='landing2'>
+          <div className='dark-overlay'>
+            <div className='landing-inner'>
+              <div className='x-largeLogo'>  {!restuarant?.Logo ? (<img
+                className="centerImage2"
+                src={ImageComing}
+                alt="logo"
+              />) : (<img
+                className="centerImage2"
+                src={restuarant?.Logo}
+                alt='Logo'
+              />)} </div>
+              <p className='lead2'>{restuarant?.Name}</p>
+              <Link to={`/review/${id}`} className='aReview' >
+                Show review
+              </Link>
+              <p className='address'>{restuarant?.Address},Postcode: {restuarant?.PostCode}</p>
 
+            </div>
           </div>
+        </section>
+        {isAuthenticated ? ('') : (<p className='logoname2M'>{!loading2 ? (restuarant?.Name) : ('')}</p>)}
+        <div className="scrollmenu">
+          <a onClick={(e) => onClickk(e)}> ALL</a>
+          {// all menu
+            menus?.map((menus) => (
+              <Fragment>
+                <a style={{ cursor: "pointer" }} onClick={(e) => onClick(e, menus.id, menus.name)}>
+                  {menus.name}
+                </a>
+
+              </Fragment>
+            ))}
+
         </div>
-      </section>
-      {isAuthenticated ? ('') : (<p className='logoname2M'>{!loading2 ? (restuarant?.Name) : ('')}</p>)}
-      <div className="scrollmenu">
-        <a onClick={(e) => onClickk(e)}> ALL</a>
-        {// all menu
-          menus?.map((menus) => (
-            <Fragment>
-              <a onClick={(e) => onClick(e, menus.Menu_id, menus.Menu_Name)}>
-                {menus.Menu_Name}
-              </a>
-            </Fragment>
-          ))}
-      </div>
 
-      <Review page={'tabmenu'} id={id} url={restuarant?.Key_ID} />
-      <Cart id={id} />
+        <Review page={'tabmenu'} id={id} url={restuarant?.Key_ID} />
+        <Cart id={id} />
 
-      {// All dishes in a menu
-        Initalstate ? (<Fragment>{loadingdishes ? null : (<Fragment>
+        {// All dishes in a menu
+          Initalstate ? (<Fragment>{loadingdishes ? null : (<Fragment>
 
+            <div className="rowA" >
+
+              <div className="colA">
+                <div id="accordion" className="tabsA">
+                  <div className="tabA" >
+                    <label className="tabA-label" for="chck1" >All dishes  {collapse === 0 ? (<i className="fas fa-chevron-down"></i>) : (<i className="fas fa-chevron-right"></i>)}</label>
+
+                    <input type="checkbox" className='inputA' id="chck1" onClick={() => toggleCollapse("chck1", 0)} />
+
+                    {collapse === 0 ? (
+                      <Fragment>  <div className="grid-containerUM"> {//get dishes of a selected menu
+                        aLL_dishes?.map((ALL_dishes) => (
+                          <Fragment>
+                            <BuyDishes
+                              key={ALL_dishes.id}
+                              dishes={ALL_dishes}
+                              id={ALL_dishes.id}
+                            />
+                          </Fragment>
+
+                        ))}
+                      </div></Fragment>) : ''}
+
+
+                  </div>
+
+                  {menus?.map((menus, i) => (
+                    <Fragment>
+
+                      <div className="tabA">
+                        <label className="tabA-label" for={"chck" + menus.name} >{menus.name}  {menus.id === collapse ? (<i className="fas fa-chevron-down"></i>) : (<i className="fas fa-chevron-right"></i>)}</label>
+
+                        <input type="checkbox" className='inputA' id={"chck" + menus.name} onClick={() => toggleCollapse("chck" + menus.name, menus.id)} />
+
+                        {menus.id === collapse ? (<div className="tabA-content"> <Alldishes id={menus.id} /> </div>) : ''}
+                      </div>
+                    </Fragment>))
+                  }
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </Fragment>)} </Fragment>) : (null)}
+
+
+        {showdishesEven ? (<Fragment>
           <div className="rowA" >
 
             <div className="colA">
               <div id="accordion" className="tabsA">
-                <div className="tabA" >
-                  <label className="tabA-label" for="chck1" >All dishes  {collapse === 0 ? (<i className="fas fa-chevron-down"></i>) : (<i className="fas fa-chevron-right"></i>)}</label>
 
-                  <input type="checkbox" className='inputA' id="chck1" onClick={() => toggleCollapse("chck1", 0)} />
+                <div className="tabA">
+                  <label className="tabA-label" for={"chck" + MenuName} >{MenuName}  {MenuId === collapse ? (<i className="fas fa-chevron-down"></i>) : (<i className="fas fa-chevron-right"></i>)}</label>
 
-                  {collapse === 0 ? (
-                    <Fragment>  
-                      <div className="tabA-content"> {//get dishes of a selected menu
-                      aLL_dishes?.map((ALL_dishes) => (
-                        <Fragment>
-                          <AlldishesUI
-                            key={ALL_dishes.ressult_id}
-                            dishes={ALL_dishes}
-                            id={9}
-                          />
-                        </Fragment>
+                  <input type="checkbox" className='inputA' id={"chck" + MenuName} onClick={() => toggleCollapse("chck" + MenuName, MenuId)} />
 
-                      ))}
-                    </div>
-                    </Fragment>
-                    ) : ''}
+                  {menus.ìd === collapse ? (<div className="tabA-content"> <Alldishes id={MenuId} /> </div>) : ''}
                 </div>
-
-                {menus?.map((menus, i) => (
-                  <Fragment>
-
-                    <div className="tabA">
-                      <label className="tabA-label" for={"chck" + menus?.Menu_Name} >{menus?.Menu_Name}  {menus?.Menu_id === collapse ? (<i className="fas fa-chevron-down"></i>) : (<i className="fas fa-chevron-right"></i>)}</label>
-
-                      <input type="checkbox" className='inputA' id={"chck" + menus?.Menu_Name} onClick={() => toggleCollapse("chck" + menus?.Menu_Name, menus?.Menu_id)} />
-
-                      {menus?.Menu_id === collapse ? (<div className="tabA-content"> <Alldishes id={menus?.Menu_id} /> </div>) : ''}
-                    </div>
-                  </Fragment>))
-                }
               </div>
             </div>
-
-
-
-
           </div>
-        </Fragment>)} </Fragment>) : (null)}
 
 
-      {showdishesEven ? (<Fragment>
-        <div className="rowA" >
+        </Fragment>) : (null)}
+
+        {showdishesodd ? (<div className="rowA" >
 
           <div className="colA">
             <div id="accordion" className="tabsA">
@@ -208,35 +230,14 @@ const TabMenu = () => {
 
                 <input type="checkbox" className='inputA' id={"chck" + MenuName} onClick={() => toggleCollapse("chck" + MenuName, MenuId)} />
 
-                {menus?.Menu_id === collapse ? (
-                <div className="tabA-content"> 
-                <Alldishes id={MenuId} /> 
-                </div>) : ''}
+                {menus.id === collapse ? (<div className="tabA-content"> <Alldishes id={MenuId} /> </div>) : ''}
               </div>
             </div>
           </div>
-        </div>
+        </div>) : (null)}
 
-
-      </Fragment>) : (null)}
-
-      {showdishesodd ? (<div className="rowA" >
-
-        <div className="colA">
-          <div id="accordion" className="tabsA">
-
-            <div className="tabA">
-              <label className="tabA-label" for={"chck" + MenuName} >{MenuName}  {MenuId === collapse ? (<i className="fas fa-chevron-down"></i>) : (<i className="fas fa-chevron-right"></i>)}</label>
-
-              <input type="checkbox" className='inputA' id={"chck" + MenuName} onClick={() => toggleCollapse("chck" + MenuName, MenuId)} />
-
-              {menus?.Menu_id === collapse ? (<div className="tabA-content"> <Alldishes id={MenuId} /> </div>) : ''}
-            </div>
-          </div>
-        </div>
-      </div>) : (null)}
-
-    </Fragment>
+      </Fragment>
+    </>
   );
 };
 
