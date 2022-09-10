@@ -126,10 +126,6 @@ div.scrollmenu {
   overflow: auto;
   white-space: nowrap;
   margin-top: 250px;
-  padding: 1em;
-  margin-left: 15px;
-  margin-right: 15px;
-  border-radius: 8px;
 }
 
 div.scrollmenu a{

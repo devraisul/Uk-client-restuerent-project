@@ -1,17 +1,20 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Shoppingcart from './Shoppingcart';
 import './review.css'
+import { addproduct } from '../../Apis/shoppingcart';
+import { useAuth } from '../../context/AuthContext';
 const Cart = ({ id }) => {
 
-
+  const { product } = useAuth()
 
   const [count, setcount] = useState(0)
   // const Menudata = useSelector(state => notifications.number)
 
   //now set this array into your initial array
-  // useEffect(() => {
-  //   setcount(count + 1)
-  // }, [count]);
+
+  useEffect(() => {
+    setcount(product?.Qty)
+  }, [product.Qty]);
 
 
   // toggle menu list

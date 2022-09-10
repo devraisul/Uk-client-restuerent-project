@@ -4,19 +4,19 @@ import { gettype, gettypecount, Variationlink } from '../../Apis/variation';
 import './viewMenu.css'
 //Add dish Form
 const LinkVariation = ({ rid, id }) => {
+
   const [variations, setVaration] = useState()
   const [loading, setLoading] = useState(false)
   const [loading_count, setLoading_count] = useState(false)
   const [variations_count, setVariations_count] = useState()
   useEffect(() => {
     setLoading(true)
-    gettype(rid)
+    gettype(rid, id)
       .then(res => {
         setVaration(res)
         setLoading(false)
       })
-  }, [gettype]);
-  console.log(rid)
+  }, [id, rid]);
   const [inputList, setInputList] = useState([{ no_of_varation_allowed: "", typeID: "", Type: "" }]);
 
 
@@ -25,30 +25,26 @@ const LinkVariation = ({ rid, id }) => {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
-    if (name == 'Type') {
+    if (name === 'Type') {
       handleInputChangeType(e, index, value)
-
     }
     setInputList(list);
 
   };
-  console.log(inputList)
   const handleInputChangeType = (e, index, value) => {
     setLoading_count(true)
-    var x = variations.x.filter(item => item.Name === value);
-    console.log(x[0].varation_type_id)
-
+    var x = variations?.filter(item => item.name === value);
+    console.log(x);
 
     const list = [...inputList];
     list[index]['typeID'] = x[0].varation_type_id;
     setInputList(list);
-    gettypecount(x[0].varation_type_id)
+    gettypecount(x[0].id)
       .then(res => {
         setVariations_count(res);
         setLoading_count(false)
       })
   };
-  console.log(variations)
   // handle click event of the Add button
   const handleAddClick = (i) => {
 
@@ -100,7 +96,7 @@ const LinkVariation = ({ rid, id }) => {
     <div>Loading ....</div>
   ) : (
     <div className='containerLBB'>
-      {variations.x.length === 0 ? (<Fragment>
+      {variations?.x?.length === 0 ? (<Fragment>
         <div className='form'>Add Some Variations First To Continue!
           <Link to={`/AddVariationtype/${rid}`} className='btn btn-primary-submit'>
             Variations
@@ -109,7 +105,7 @@ const LinkVariation = ({ rid, id }) => {
       </Fragment>) : (
         <div>
 
-          {inputList.map((x, i) => {
+          {inputList?.map((x, i) => {
             return (
               <div className='form'>
 
@@ -117,14 +113,14 @@ const LinkVariation = ({ rid, id }) => {
 
                 <div className='form-group'>
 
-                  <select name='Type' value={x.Type}
+                  <select name='Type' value={x?.Type}
                     onChange={e => handleInputChange(e, i)}>
                     <option value='0'>* Select a type</option>
-                    {variations.x.map((item, i) => {
+                    {variations?.map((item, i) => {
 
                       return (
 
-                        <option value={item.Name} >{item.Name}</option>
+                        <option value={item?.name} >{item?.name}</option>
                       )
                     })}
 
@@ -133,13 +129,12 @@ const LinkVariation = ({ rid, id }) => {
 
                 <div className='form-group'>
 
-                  <select type='number' name='no_of_varation_allowed' value={x.no_of_varation_allowed}
+                  <select type='number' name='no_of_varation_allowed' value={x?.no_of_varation_allowed}
                     onChange={e => handleInputChange(e, i)}>
                     <option value='0'>* Select No of Variation Allowed</option>
-                    {loading_count ? (<option>loading....</option>) : (<Fragment>{variations_count.results.map((item, i) => {
+                    {loading_count ? (<option>loading....</option>) : (<Fragment>{variations_count?.results?.map((item, i) => {
 
                       return (
-
                         <option value={i + 1} >{i + 1}</option>
                       )
                     })}</Fragment>)}
