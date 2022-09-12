@@ -3,9 +3,14 @@ import { Fragment } from "react";
 import { gettables } from "../../Apis/table";
 
 const Shoppingcart = ({ id,rand }) => {
-  const subtotal=0
-  const [amount, setAmount] = useState(subtotal + 3.60 + 5.00);
+  var subtotal=0
+  // const [subtotal, setSubtotal] = useState(0)/
+  const [amount, setAmount] = useState();
   const [cartItems, setCartItems] = useState([]);
+
+  // useEffect(()=>{
+  //   setAmount()
+  // },[subtotal])
 
   useEffect(()=>{
     setCartItems(JSON.parse(localStorage.getItem('cart_items'))!==null?JSON.parse(localStorage.getItem('cart_items')):[])
@@ -20,19 +25,24 @@ console.log(cartItems);
   //   Name: '',
   //   Remarks: '',
   //   table_number: '',
-
+ 
   // });
 
   // const { Name, Remarks, table_number } = formData;
 
-  // const updatecartminus=()=>{
-  // }
-  // const removecart =()=>{
+  const updatecartminus=(i)=>{
+    console.log('add');
+  }
+  const removecart =()=>{
+    console.log('remove');
 
-  // }
-  // const updatecartadd =()=>{
 
-  // }
+  }
+  const updatecartadd =()=>{
+    console.log('update');
+
+
+  }
   //   //set the entered data into state
   // const onChange = (e) =>
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -65,11 +75,16 @@ console.log(cartItems);
             <ul className="sidenavv__list">
               {cartItems.map((cartItem, i) => (
                 <Fragment key={i}>
-                  <li className="sidenavv__list-item">
+  <noscript>{subtotal = subtotal + parseFloat(cartItem.price)}</noscript>
+
+                  
+                  {/* {setSubtotal(subtotal+parseFloat(cartItem.price))} */}
+                  <li style={{backgroundColor:'#eeeeee',marginBottom:5}} className="sidenavv__list-item">
                     <div>
-                      <p className="product-card-name"> {cartItem.Name} </p>
+                      <p className="product-card-name"> {cartItem.name} </p>
+                      <br />
                       <p className="cart-subtotal-amount">
-                        £{cartItem.Dish_Price}{" "}
+                        £{cartItem.price}{" "}
                       </p>
                     </div>
                     <div className="product-card-des">
@@ -119,21 +134,21 @@ console.log(cartItems);
                       // )}
                       */}
                       <div className="remove-product-i">
-                        {cartItem.Qty > 1 ? (
+                        {cartItem.quantity > 1 ? (
                           <i
                             className=" fas fa-minus"
-                            // onClick={(e) => updatecartminus(cartItem)}
+                            onClick={(e) => updatecartminus(cartItem)}
                           ></i>
                         ) : (
                           <i
                             className="fas fa-trash-alt"
-                            // onClick={(e) => removecart(cartItem)}
+                            onClick={(e) => removecart(cartItem)}
                           ></i>
                         )}
-                        {cartItem.Qty}{" "}
+                        {cartItem.quantity}{" "}
                         <i
                           className="fas fa-plus"
-                          // onClick={(e) => updatecartadd(cartItem)}
+                          onClick={(e) => updatecartadd(cartItem)}
                         ></i>
                       </div>
                     </div>
@@ -144,13 +159,13 @@ console.log(cartItems);
                 <div>
                   <div>
                     <p className="cart-subtotal">Subtotal:</p>
-                    <p className="cart-subtotal-amount">£{subtotal} </p>
+                    <p className="cart-subtotal-amount">£ {subtotal} </p>
                   </div>
                   <div className="totals-item totals-item-total">
                     <p className="cart-total">
                       Total:<p className="em">(Incl.GST)</p>
                     </p>
-                    <p className="cart-total-amount">£{amount} </p>
+                    <p className="cart-total-amount">£{subtotal + 3.60+5.00} </p>
                   </div>
                 </div>
                 {showplaceorder ? (

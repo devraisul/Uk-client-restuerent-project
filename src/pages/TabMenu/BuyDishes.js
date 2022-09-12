@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 
 //all dishes show UI in owner dashboard
 const BuyDishes = ({ dishes, id }) => {
-  console.log(dishes);
+  // console.log(dishes);
   const { addproduct, adduserdealproduct } = useAuth();
   const [showvaration, setshowvaration] = useState(false);
   const [showvarationD, setshowvarationD] = useState(0);
@@ -33,10 +33,11 @@ const BuyDishes = ({ dishes, id }) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
-    data.quantity=count;
+    // console.log('ddddddddd',dishes);
+    dishes.quantity=count;
     const cartItem = JSON.parse(localStorage.getItem('cart_items')) || []
     // console.log('FORM DATA',data);
-    localStorage.setItem('cart_items',JSON.stringify([...cartItem,data]));
+    localStorage.setItem('cart_items',JSON.stringify([...cartItem,dishes]));
 }
   // console.log(errors);
 
@@ -221,15 +222,6 @@ const BuyDishes = ({ dishes, id }) => {
 
         <Popup open={open2} closeOnDocumentClick onClose={closeModal}>
         <form onSubmit={handleSubmit(onSubmit)}>
-
-        <input style={{display:'none'}} value={dishes.name} type="text" placeholder="dish_name" {...register("dish_name", {require:true})} />
-        <input style={{display:'none'}} value={dishes.price} type="number" placeholder="dish_price" {...register("dish_price", {require:true})} />
-        <input style={{display:'none'}} value={dishes.restaurant_id} type="number" placeholder="restaurant_id" {...register("restaurant_id", {require:true})} />
-        <input style={{display:'none'}} value={dishes.menu_id} type="number" placeholder="menu_id" {...register("menu_id", {require:true})} />
-        <input style={{display:'none'}} value={dishes.id} type="number" placeholder="dish_id" {...register("dish_id", {require:true})} />
-        {/* <input style={{display:'none'}} value={count?count:0} type="number" placeholder="quantity" {...register("quantity", {require:true})} /> */}
-
- 
 
             <a className="close" onClick={(e) => setOpen2(false)}>
               &times;
