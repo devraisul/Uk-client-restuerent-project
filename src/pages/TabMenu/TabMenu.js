@@ -21,6 +21,7 @@ const TabMenu = () => {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [loadingdishes, setLoadingdishes] = useState(false);
+  const [changeCartItems, setChangeCartItems] = useState(0)
   useEffect(() => {
     setLoading(true);
     setLoading2(true);
@@ -141,7 +142,7 @@ const TabMenu = () => {
           }
         </div>
         <Review page={"tabmenu"} id={id} url={restuarant?.Key_ID} />
-        <Cart id={id} />
+        <Cart setChangeCartItems={setChangeCartItems} changeCartItems={changeCartItems} id={id} />
 
         {
           // All dishes in a menu
@@ -178,6 +179,7 @@ const TabMenu = () => {
                                     <Fragment key={ALL_dishes.id}>
                                       {console.log(ALL_dishes.id)}
                                       <BuyDishes
+                                      setChangeCartItems={setChangeCartItems}
                                         key={ALL_dishes.id}
                                         dishes={ALL_dishes}
                                         id={ALL_dishes.id}

@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { gettables } from "../../Apis/table";
 
-const Shoppingcart = ({ id,rand }) => {
+const Shoppingcart = ({ id,rand,setChangeCartItems }) => {
   var subtotal=0
   // const [subtotal, setSubtotal] = useState(0)/
   const [amount, setAmount] = useState();
   const [cartItems, setCartItems] = useState([]);
-
+  const [change, setChange] = useState(0)
   // useEffect(()=>{
   //   setAmount()
   // },[subtotal])
 
   useEffect(()=>{
     setCartItems(JSON.parse(localStorage.getItem('cart_items'))!==null?JSON.parse(localStorage.getItem('cart_items')):[])
-  },[rand])
+  },[rand,change])
   const [showplaceorder, setshowplaceorder] = useState(false);
 console.log(cartItems);
   // useEffect(() => {
@@ -30,18 +30,22 @@ console.log(cartItems);
 
   // const { Name, Remarks, table_number } = formData;
 
-  const updatecartminus=(i)=>{
-    console.log('add');
+  const decrCartItemsQuantity=(index,quantity)=>{
+    // cartItems[index]
+    cartItems[index].quantity = quantity;
+    localStorage.setItem('cart_items',JSON.stringify(cartItems))
+    setChange(Math.random())
   }
-  const removecart =()=>{
-    console.log('remove');
-
-
+  const deleteCartItem =(index)=>{
+    cartItems.splice(index, 1)
+    localStorage.setItem('cart_items',JSON.stringify(cartItems))
+    setChange(Math.random())
+    setChangeCartItems(Math.random())
   }
-  const updatecartadd =()=>{
-    console.log('update');
-
-
+  const incrCartItemsQuantity =(index,quantity)=>{
+    cartItems[index].quantity = quantity;
+    localStorage.setItem('cart_items',JSON.stringify(cartItems))
+    setChange(Math.random())
   }
   //   //set the entered data into state
   // const onChange = (e) =>
@@ -137,18 +141,18 @@ console.log(cartItems);
                         {cartItem.quantity > 1 ? (
                           <i
                             className=" fas fa-minus"
-                            onClick={(e) => updatecartminus(cartItem)}
+                            onClick={(e) => decrCartItemsQuantity(i,cartItem.quantity-1)}
                           ></i>
                         ) : (
                           <i
                             className="fas fa-trash-alt"
-                            onClick={(e) => removecart(cartItem)}
+                            onClick={(e) => deleteCartItem(i,cartItem.quantity)}
                           ></i>
                         )}
                         {cartItem.quantity}{" "}
                         <i
                           className="fas fa-plus"
-                          onClick={(e) => updatecartadd(cartItem)}
+                          onClick={(e) => incrCartItemsQuantity(i,cartItem.quantity+1)}
                         ></i>
                       </div>
                     </div>

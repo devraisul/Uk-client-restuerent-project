@@ -3,17 +3,17 @@ import Shoppingcart from './Shoppingcart';
 import './review.css'
 import { addproduct } from '../../Apis/shoppingcart';
 import { useAuth } from '../../context/AuthContext';
-const Cart = ({ id }) => {
+const Cart = ({ id,changeCartItems,setChangeCartItems }) => {
   const { product } = useAuth()
-  const [count, setcount] = useState(0)
+  const [count, setcount] = useState([])
   const [rand, setRand] = useState(0)
   // const Menudata = useSelector(state => notifications.number)
 
   //now set this array into your initial array
 
   useEffect(() => {
-    setcount(product?.Qty)
-  }, [product.Qty]);
+    setcount(JSON.parse(localStorage.getItem('cart_items')))
+  }, [changeCartItems]);
 
 
   // toggle menu list
@@ -32,7 +32,7 @@ const Cart = ({ id }) => {
       <div>
         <div className='cart-icon' id='myTopnav1' onClick={toggleMenu}>
           <i className='fa fa-shopping-cart'></i>
-          <span className='products-count'>{count}</span>
+          <span className='products-count'>{count.length}</span>
         </div>
 
 
@@ -51,7 +51,7 @@ const Cart = ({ id }) => {
               <i className="fas fa-shopping-bag"></i>
               <h1 className='large text-primary'>Cart</h1>
             </div>
-            <Shoppingcart rand={rand} id={id} />
+            <Shoppingcart setChangeCartItems={setChangeCartItems} rand={rand} id={id} />
           </aside>
         </aside>
 

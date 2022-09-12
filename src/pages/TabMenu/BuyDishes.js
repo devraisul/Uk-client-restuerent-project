@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 
 //all dishes show UI in owner dashboard
-const BuyDishes = ({ dishes, id }) => {
+const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
   // console.log(dishes);
   const { addproduct, adduserdealproduct } = useAuth();
   const [showvaration, setshowvaration] = useState(false);
@@ -34,10 +34,12 @@ const BuyDishes = ({ dishes, id }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
     // console.log('ddddddddd',dishes);
+
     dishes.quantity=count;
     const cartItem = JSON.parse(localStorage.getItem('cart_items')) || []
     // console.log('FORM DATA',data);
     localStorage.setItem('cart_items',JSON.stringify([...cartItem,dishes]));
+    setChangeCartItems(Math.random())
 }
   // console.log(errors);
 
@@ -48,16 +50,7 @@ const BuyDishes = ({ dishes, id }) => {
   const [dishvariation, setdishvariation] = useState([
     { variationID: "", variation_Name: "", variation_Type: "", Dish_Name: "" },
   ]);
-  const [formData,] = useState({
-    DishID: id,
-    Name: dishes?.name,
-    Description: dishes?.description,
-    variation: dishes?.variation,
-    Qty: count,
-    Dish_Price: price,
-    img: dishes?.image,
-    Type: dishes?.type,
-  });
+
 
   useEffect(() => {
     if (initial === true) {
@@ -222,10 +215,14 @@ const BuyDishes = ({ dishes, id }) => {
 
         <Popup open={open2} closeOnDocumentClick onClose={closeModal}>
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <a className="close" onClick={(e) => setOpen2(false)}>
               &times;
             </a>
+            <h1>
+{dishes.name}
+
+            </h1>
+
             <div className="form-groupp" style={{ display: "flex" }}>
               <div>
                 <i className="fas fa-minus" onClick={(e) => handleminus()}></i>
