@@ -61,8 +61,8 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
     if (dishes?.type === "deal") {
       getuserdeal();
     }
-  }, [getuserdeal]);
 
+  }, [getuserdeal]);
   //set allowedvaration on checked or unchecked
   const onchecked = (
     e,
@@ -178,13 +178,15 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
   const handdelvariations = (id, e) => {
     setDishIDcheck(id);
   };
-  const handdeleClick = () => {
+  const handdeleClick = (id) => {
+    getVariationByDishId(id)
+      .then(res => console.log('variation', res))
     setOpen2(true);
     openpopup(true);
   };
   return (
     <Fragment>
-      <div className="grid-itemUM" onClick={(e) => setOpen2(true)}>
+      <div className="grid-itemUM" onClick={(e) => handdeleClick(dishes?.id)}>
         <h4>{dishes?.name}</h4>
         <div className="infoicon">
           <i className="fas fa-info"></i>
@@ -210,22 +212,22 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
         </div>
 
         <Popup open={open2} closeOnDocumentClick onClose={closeModal}>
-        
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <a className="close" onClick={(e) => setOpen2(false)}>
               &times;
             </a>
-            <img height={300} src={`${dishes.image?dishes.image:'/no-image.png'}`} />
-            <h1 style={{textAlign:'center'}}>{dishes.name}</h1>
+            <img height={300} src={`${dishes.image ? dishes.image : '/no-image.png'}`} />
+            <h1 style={{ textAlign: 'center' }}>{dishes.name}</h1>
 
-            {getVariationByDishId().then(res => console.log('variation',res))}
 
-            <div className="form-groupp" style={{ display: "flex",alignItems:'center',justifyContent:'center',width:'100%'}}>
+
+            <div className="form-groupp" style={{ display: "flex", alignItems: 'center', justifyContent: 'center', width: '100%' }}>
               <div>
                 <i className="fas fa-minus" onClick={(e) => handleminus()}></i>
               </div>
               <div>
-                <h2 style={{textAlign:'center'}}>{count}</h2>
+                <h2 style={{ textAlign: 'center' }}>{count}</h2>
               </div>
               <div>
                 <i
@@ -236,7 +238,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
             </div>
             <Fragment>
               <input
-              style={{width:'100%'}}
+                style={{ width: '100%' }}
                 type="submit"
                 className="btn btn-primary"
                 value="Add to order"

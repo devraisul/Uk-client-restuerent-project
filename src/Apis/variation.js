@@ -126,8 +126,8 @@ export const gettypecount = async (id) => {
 
 
 
-export const getVariationByDishId = async () => {
-  // let addVariationResponse;
+export const getVariationByDishId = async (id) => {
+  let addVariationResponse;
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {
@@ -137,10 +137,10 @@ export const getVariationByDishId = async () => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.get(`/api/variation/dish_variation/13`, config)
+  await axios.get(`/api/variation/dish_variation/${id}`, config)
     .then(res => {
-      return res;
+      addVariationResponse = res;
     })
     .catch(err => console.log(err));
-  // return addVariationResponse
+  return addVariationResponse
 }
