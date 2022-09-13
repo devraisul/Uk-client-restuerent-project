@@ -120,3 +120,27 @@ export const gettypecount = async (id) => {
     .catch(err => console.log(err));
   return addVariationResponse
 }
+
+
+
+
+
+
+export const getVariationByDishId = async () => {
+  // let addVariationResponse;
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  await axios.get(`/api/variation/dish_variation/13`, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  // return addVariationResponse
+}

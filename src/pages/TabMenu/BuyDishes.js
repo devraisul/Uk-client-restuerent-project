@@ -3,11 +3,11 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { getuserdeal } from "../../Apis/dish";
 import { useAuth } from "../../context/AuthContext";
-import { useForm } from 'react-hook-form';
-
+import { useForm } from "react-hook-form";
+import { getVariationByDishId } from "../../Apis/variation";
 
 //all dishes show UI in owner dashboard
-const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
+const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
   // console.log(dishes);
   const { addproduct, adduserdealproduct } = useAuth();
   const [showvaration, setshowvaration] = useState(false);
@@ -29,28 +29,25 @@ const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
   const [update, setupdate] = useState(true);
   const closeModal2 = () => setOpen2(false);
 
-  
-
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
     // console.log('ddddddddd',dishes);
 
-    dishes.quantity=count;
-    const cartItem = JSON.parse(localStorage.getItem('cart_items')) || []
+    dishes.quantity = count;
+    const cartItem = JSON.parse(localStorage.getItem("cart_items")) || [];
     // console.log('FORM DATA',data);
-    localStorage.setItem('cart_items',JSON.stringify([...cartItem,dishes]));
-    setChangeCartItems(Math.random())
-}
+    localStorage.setItem("cart_items", JSON.stringify([...cartItem, dishes]));
+    setChangeCartItems(Math.random());
+  };
   // console.log(errors);
-
-
-
-
 
   const [dishvariation, setdishvariation] = useState([
     { variationID: "", variation_Name: "", variation_Type: "", Dish_Name: "" },
   ]);
-
 
   useEffect(() => {
     if (initial === true) {
@@ -211,48 +208,39 @@ const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
           <p className="DishPrice"> £ {dishes?.price} </p>{" "}
         </div>
 
-
-
         <Popup open={open2} closeOnDocumentClick onClose={closeModal}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        
+          <form onSubmit={handleSubmit(onSubmit)}>
             <a className="close" onClick={(e) => setOpen2(false)}>
               &times;
             </a>
-            <h1>
-{dishes.name}
-
-            </h1>
-
-            <div className="form-groupp" style={{ display: "flex" }}>
+            <img height={300} src={`${dishes.image?dishes.image:'/no-image.png'}`} />
+            <h1 style={{textAlign:'center'}}>{dishes.name}</h1>
+            {getVariationByDishId().then(res => console.log('variation',res))}
+            <div className="form-groupp" style={{ display: "flex",alignItems:'center',justifyContent:'center',width:'100%'}}>
               <div>
                 <i className="fas fa-minus" onClick={(e) => handleminus()}></i>
               </div>
               <div>
-                <h2>{count}</h2>
+                <h2 style={{textAlign:'center'}}>{count}</h2>
               </div>
               <div>
-                {" "}
                 <i
                   className="fas fa-plus"
                   onClick={(e) => setcount(count + 1)}
                 ></i>
               </div>
             </div>
-          <Fragment>
-            <input
-              type="submit"
-              className="btn btn-primary"
-              value="Add to order"
-            />
-          </Fragment>
+            <Fragment>
+              <input
+              style={{width:'100%'}}
+                type="submit"
+                className="btn btn-primary"
+                value="Add to order"
+              />
+            </Fragment>
           </form>
         </Popup>
-
-
-
-
-
-        
       </div>
     </Fragment>
   );
