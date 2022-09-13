@@ -3,18 +3,22 @@ import { Fragment } from "react";
 import { gettables } from "../../Apis/table";
 
 const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
-  var subtotal = 0
+  var subtotal = 0;
   // const [subtotal, setSubtotal] = useState(0)/
   const [amount, setAmount] = useState();
   const [cartItems, setCartItems] = useState([]);
-  const [change, setChange] = useState(0)
+  const [change, setChange] = useState(0);
   // useEffect(()=>{
   //   setAmount()
   // },[subtotal])
 
   useEffect(() => {
-    setCartItems(JSON.parse(localStorage.getItem('cart_items')) !== null ? JSON.parse(localStorage.getItem('cart_items')) : [])
-  }, [rand, change])
+    setCartItems(
+      JSON.parse(localStorage.getItem("cart_items")) !== null
+        ? JSON.parse(localStorage.getItem("cart_items"))
+        : [],
+    );
+  }, [rand, change]);
   const [showplaceorder, setshowplaceorder] = useState(false);
   // useEffect(() => {
   //   gettables(id);
@@ -32,20 +36,20 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   const decrCartItemsQuantity = (index, quantity) => {
     // cartItems[index]
     cartItems[index].quantity = quantity;
-    localStorage.setItem('cart_items', JSON.stringify(cartItems))
-    setChange(Math.random())
-  }
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
+    setChange(Math.random());
+  };
   const deleteCartItem = (index) => {
-    cartItems.splice(index, 1)
-    localStorage.setItem('cart_items', JSON.stringify(cartItems))
-    setChange(Math.random())
-    setChangeCartItems(Math.random())
-  }
+    cartItems.splice(index, 1);
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
+    setChange(Math.random());
+    setChangeCartItems(Math.random());
+  };
   const incrCartItemsQuantity = (index, quantity) => {
     cartItems[index].quantity = quantity;
-    localStorage.setItem('cart_items', JSON.stringify(cartItems))
-    setChange(Math.random())
-  }
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
+    setChange(Math.random());
+  };
   //   //set the entered data into state
   // const onChange = (e) =>
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -78,17 +82,37 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
             <ul className="sidenavv__list">
               {cartItems.map((cartItem, i) => (
                 <Fragment key={i}>
-                  <noscript>{subtotal = subtotal + parseFloat(cartItem.price)}</noscript>
-
+                  <noscript>
+                    {(subtotal = subtotal + parseFloat(cartItem.price))}
+                  </noscript>
 
                   {/* {setSubtotal(subtotal+parseFloat(cartItem.price))} */}
-                  <li style={{ backgroundColor: '#eeeeee', marginBottom: 5 }} className="sidenavv__list-item">
+                  <li
+                    style={{ backgroundColor: "#eeeeee", marginBottom: 5 }}
+                    className="sidenavv__list-item"
+                  >
                     <div>
                       <p className="product-card-name"> {cartItem.name} </p>
                       <br />
-                      <p className="cart-subtotal-amount">
-                        £{cartItem.price}{" "}
-                      </p>
+                      <p className="cart-subtotal-amount">£{cartItem.price} </p>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        color: "gray",
+                        marginTop:10,
+                        fontSize:'0.8rem'
+                      }}
+                    >
+                      <h1>Variations:</h1>
+                      <div>( 
+                      {cartItem.variations.map((variation, i) => (
+                        <span>{`${JSON.parse(variation).name} ,`}</span>
+                      ))}
+                       )
+                      </div> 
+                       
                     </div>
                     <div className="product-card-des">
                       {/* {
@@ -140,18 +164,24 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                         {cartItem.quantity > 1 ? (
                           <i
                             className=" fas fa-minus"
-                            onClick={(e) => decrCartItemsQuantity(i, cartItem.quantity - 1)}
+                            onClick={(e) =>
+                              decrCartItemsQuantity(i, cartItem.quantity - 1)
+                            }
                           ></i>
                         ) : (
                           <i
                             className="fas fa-trash-alt"
-                            onClick={(e) => deleteCartItem(i, cartItem.quantity)}
+                            onClick={(e) =>
+                              deleteCartItem(i, cartItem.quantity)
+                            }
                           ></i>
                         )}
                         {cartItem.quantity}{" "}
                         <i
                           className="fas fa-plus"
-                          onClick={(e) => incrCartItemsQuantity(i, cartItem.quantity + 1)}
+                          onClick={(e) =>
+                            incrCartItemsQuantity(i, cartItem.quantity + 1)
+                          }
                         ></i>
                       </div>
                     </div>
@@ -168,7 +198,9 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                     <p className="cart-total">
                       Total:<p className="em">(Incl.GST)</p>
                     </p>
-                    <p className="cart-total-amount">£{subtotal + 3.60 + 5.00} </p>
+                    <p className="cart-total-amount">
+                      £{subtotal + 3.6 + 5.0}{" "}
+                    </p>
                   </div>
                 </div>
                 {showplaceorder ? (
@@ -179,8 +211,8 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                           type="text"
                           placeholder="Enter Name"
                           name="Name"
-                        // value={Name}
-                        // onChange={(e) => onChange(e)}
+                          // value={Name}
+                          // onChange={(e) => onChange(e)}
                         />
                       </div>
                       <div>
@@ -188,14 +220,15 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                           <textarea
                             placeholder="Order Remarks"
                             name="Remarks"
-                          // value={Remarks}
-                          // onChange={(e) => onChange(e)}
+                            // value={Remarks}
+                            // onChange={(e) => onChange(e)}
                           />
                         </div>
                       </div>
                     </form>
-                    <button className="btnnn "
-                    // onClick={(e) => onSubmit(e)}
+                    <button
+                      className="btnnn "
+                      // onClick={(e) => onSubmit(e)}
                     >
                       Place order
                     </button>

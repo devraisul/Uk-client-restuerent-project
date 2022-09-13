@@ -33,8 +33,8 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log('ddddddddd',data.variations);
-    // dishes.variations = JSON.parse(data.variations);
+    // console.log('ddddddddd',data.variations);
+    dishes.variations = data.variations;
     dishes.quantity = count;
     const cartItem = JSON.parse(localStorage.getItem("cart_items")) || [];
     // console.log('FORM DATA',data);
@@ -129,12 +129,14 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
                   <h1 className="btn btn-primary">
                     {`Choose ${dishVariation.no_of_varation_allowed} ${dishVariation?.variation_type?.name} `}
                   </h1>
-                  <div  sx={{ flexDirection: 'column' }}>
+                  <div style={{display:'flex',flexDirection:'column'}}  sx={{ flexDirection: 'column' }}>
                   {dishVariation.variation_type.variation.map((variation, j) => (
                     <Fragment key={j}>
                       <input type={'checkbox'} value={
-                        JSON.stringify({name:variation.name,
-                        price:variation.price})
+                        JSON.stringify({
+                          name:variation.name,
+                        price:variation.price
+                      })
                     }
                       name="variations"
                       {...register("variations")}
