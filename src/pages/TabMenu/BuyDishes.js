@@ -4,10 +4,10 @@ import "reactjs-popup/dist/index.css";
 import { getuserdeal } from "../../Apis/dish";
 import { useAuth } from "../../context/AuthContext";
 import { useForm } from 'react-hook-form';
-
+import ImageComing from '../../assets/image-coming-soon.png'
 
 //all dishes show UI in owner dashboard
-const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
+const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
   // console.log(dishes);
   const { addproduct, adduserdealproduct } = useAuth();
   const [showvaration, setshowvaration] = useState(false);
@@ -29,19 +29,19 @@ const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
   const [update, setupdate] = useState(true);
   const closeModal2 = () => setOpen2(false);
 
-  
+
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
     // console.log('ddddddddd',dishes);
 
-    dishes.quantity=count;
+    dishes.quantity = count;
     const cartItem = JSON.parse(localStorage.getItem('cart_items')) || []
     // console.log('FORM DATA',data);
-    localStorage.setItem('cart_items',JSON.stringify([...cartItem,dishes]));
+    localStorage.setItem('cart_items', JSON.stringify([...cartItem, dishes]));
     setChangeCartItems(Math.random())
-}
-  // console.log(errors);
+  }
+  console.log(dishes);
 
 
 
@@ -180,13 +180,13 @@ const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
   const handdelvariations = (id, e) => {
     setDishIDcheck(id);
   };
-  const handdeleClick = () => {
+  const handdeleClick = (id) => {
     setOpen2(true);
-    openpopup(true);
+    console.log(id);
   };
   return (
     <Fragment>
-      <div className="grid-itemUM" onClick={(e) => setOpen2(true)}>
+      <div className="grid-itemUM" onClick={() => handdeleClick(dishes?.id)}>
         <h4>{dishes?.name}</h4>
         <div className="infoicon">
           <i className="fas fa-info"></i>
@@ -214,37 +214,41 @@ const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
 
 
         <Popup open={open2} closeOnDocumentClick onClose={closeModal}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <a className="close" onClick={(e) => setOpen2(false)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <a style={{ marginRight: '5px' }} className="close" onClick={(e) => setOpen2(false)}>
               &times;
             </a>
-            <h1>
-{dishes.name}
+            <div style={{ padding: "10px 50px", textAlign: "center" }}>
+              <img src={ImageComing} alt="" />
+              <h1>
+                {dishes?.name}
 
-            </h1>
+              </h1>
 
-            <div className="form-groupp" style={{ display: "flex" }}>
-              <div>
-                <i className="fas fa-minus" onClick={(e) => handleminus()}></i>
+              <div className="form-groupp" style={{ display: "flex", justifyContent: "center", marginRight: "20px" }}>
+                <div>
+                  <i className="fas fa-minus" style={{ cursor: "pointer" }} onClick={(e) => handleminus()}></i>
+                </div>
+                <div>
+                  <h2>{count}</h2>
+                </div>
+                <div>
+                  {" "}
+                  <i
+                    className="fas fa-plus"
+                    onClick={(e) => setcount(count + 1)}
+                    style={{ cursor: "pointer" }}
+                  ></i>
+                </div>
               </div>
-              <div>
-                <h2>{count}</h2>
-              </div>
-              <div>
-                {" "}
-                <i
-                  className="fas fa-plus"
-                  onClick={(e) => setcount(count + 1)}
-                ></i>
-              </div>
+              <Fragment>
+                <input
+                  type="submit"
+                  className="btn btn-primary"
+                  value="Add to order"
+                />
+              </Fragment>
             </div>
-          <Fragment>
-            <input
-              type="submit"
-              className="btn btn-primary"
-              value="Add to order"
-            />
-          </Fragment>
           </form>
         </Popup>
 
@@ -252,7 +256,7 @@ const BuyDishes = ({ dishes, id,setChangeCartItems }) => {
 
 
 
-        
+
       </div>
     </Fragment>
   );

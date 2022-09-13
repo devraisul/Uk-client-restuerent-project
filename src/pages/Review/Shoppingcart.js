@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { gettables } from "../../Apis/table";
 
-const Shoppingcart = ({ id,rand,setChangeCartItems }) => {
-  var subtotal=0
+const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
+  var subtotal = 0
   // const [subtotal, setSubtotal] = useState(0)/
   const [amount, setAmount] = useState();
   const [cartItems, setCartItems] = useState([]);
@@ -12,11 +12,11 @@ const Shoppingcart = ({ id,rand,setChangeCartItems }) => {
   //   setAmount()
   // },[subtotal])
 
-  useEffect(()=>{
-    setCartItems(JSON.parse(localStorage.getItem('cart_items'))!==null?JSON.parse(localStorage.getItem('cart_items')):[])
-  },[rand,change])
+  useEffect(() => {
+    setCartItems(JSON.parse(localStorage.getItem('cart_items')) !== null ? JSON.parse(localStorage.getItem('cart_items')) : [])
+  }, [rand, change])
   const [showplaceorder, setshowplaceorder] = useState(false);
-console.log(cartItems);
+  console.log(cartItems);
   // useEffect(() => {
   //   gettables(id);
   // }, [gettables]);
@@ -25,26 +25,26 @@ console.log(cartItems);
   //   Name: '',
   //   Remarks: '',
   //   table_number: '',
- 
+
   // });
 
   // const { Name, Remarks, table_number } = formData;
 
-  const decrCartItemsQuantity=(index,quantity)=>{
+  const decrCartItemsQuantity = (index, quantity) => {
     // cartItems[index]
     cartItems[index].quantity = quantity;
-    localStorage.setItem('cart_items',JSON.stringify(cartItems))
+    localStorage.setItem('cart_items', JSON.stringify(cartItems))
     setChange(Math.random())
   }
-  const deleteCartItem =(index)=>{
+  const deleteCartItem = (index) => {
     cartItems.splice(index, 1)
-    localStorage.setItem('cart_items',JSON.stringify(cartItems))
+    localStorage.setItem('cart_items', JSON.stringify(cartItems))
     setChange(Math.random())
     setChangeCartItems(Math.random())
   }
-  const incrCartItemsQuantity =(index,quantity)=>{
+  const incrCartItemsQuantity = (index, quantity) => {
     cartItems[index].quantity = quantity;
-    localStorage.setItem('cart_items',JSON.stringify(cartItems))
+    localStorage.setItem('cart_items', JSON.stringify(cartItems))
     setChange(Math.random())
   }
   //   //set the entered data into state
@@ -79,11 +79,11 @@ console.log(cartItems);
             <ul className="sidenavv__list">
               {cartItems.map((cartItem, i) => (
                 <Fragment key={i}>
-  <noscript>{subtotal = subtotal + parseFloat(cartItem.price)}</noscript>
+                  <noscript>{subtotal = subtotal + parseFloat(cartItem.price)}</noscript>
 
-                  
+
                   {/* {setSubtotal(subtotal+parseFloat(cartItem.price))} */}
-                  <li style={{backgroundColor:'#eeeeee',marginBottom:5}} className="sidenavv__list-item">
+                  <li style={{ backgroundColor: '#eeeeee', marginBottom: 5 }} className="sidenavv__list-item">
                     <div>
                       <p className="product-card-name"> {cartItem.name} </p>
                       <br />
@@ -141,18 +141,18 @@ console.log(cartItems);
                         {cartItem.quantity > 1 ? (
                           <i
                             className=" fas fa-minus"
-                            onClick={(e) => decrCartItemsQuantity(i,cartItem.quantity-1)}
+                            onClick={(e) => decrCartItemsQuantity(i, cartItem.quantity - 1)}
                           ></i>
                         ) : (
                           <i
                             className="fas fa-trash-alt"
-                            onClick={(e) => deleteCartItem(i,cartItem.quantity)}
+                            onClick={(e) => deleteCartItem(i, cartItem.quantity)}
                           ></i>
                         )}
                         {cartItem.quantity}{" "}
                         <i
                           className="fas fa-plus"
-                          onClick={(e) => incrCartItemsQuantity(i,cartItem.quantity+1)}
+                          onClick={(e) => incrCartItemsQuantity(i, cartItem.quantity + 1)}
                         ></i>
                       </div>
                     </div>
@@ -169,7 +169,7 @@ console.log(cartItems);
                     <p className="cart-total">
                       Total:<p className="em">(Incl.GST)</p>
                     </p>
-                    <p className="cart-total-amount">£{subtotal + 3.60+5.00} </p>
+                    <p className="cart-total-amount">£{subtotal + 3.60 + 5.00} </p>
                   </div>
                 </div>
                 {showplaceorder ? (
@@ -180,8 +180,8 @@ console.log(cartItems);
                           type="text"
                           placeholder="Enter Name"
                           name="Name"
-                          // value={Name}
-                          // onChange={(e) => onChange(e)}
+                        // value={Name}
+                        // onChange={(e) => onChange(e)}
                         />
                       </div>
                       <div>
@@ -189,13 +189,13 @@ console.log(cartItems);
                           <textarea
                             placeholder="Order Remarks"
                             name="Remarks"
-                            // value={Remarks}
-                            // onChange={(e) => onChange(e)}
+                          // value={Remarks}
+                          // onChange={(e) => onChange(e)}
                           />
                         </div>
                       </div>
                     </form>
-                    <button className="btnnn " 
+                    <button className="btnnn "
                     // onClick={(e) => onSubmit(e)}
                     >
                       Place order
