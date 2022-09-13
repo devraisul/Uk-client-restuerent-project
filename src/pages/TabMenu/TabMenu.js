@@ -61,7 +61,7 @@ const TabMenu = () => {
     } else {
       setCollapse(i);
     }
-    console.log(collapse);
+    // console.log(collapse);
   };
 
   //show all menu
@@ -177,9 +177,9 @@ const TabMenu = () => {
                                   //get dishes of a selected menu
                                   aLL_dishes?.map((ALL_dishes) => (
                                     <Fragment key={ALL_dishes.id}>
-                                      {console.log(ALL_dishes.id)}
+                                      {/* {console.log(ALL_dishes.id)} */}
                                       <BuyDishes
-                                      setChangeCartItems={setChangeCartItems}
+                                        setChangeCartItems={setChangeCartItems}
                                         key={ALL_dishes.id}
                                         dishes={ALL_dishes}
                                         id={ALL_dishes.id}

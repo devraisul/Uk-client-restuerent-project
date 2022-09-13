@@ -137,7 +137,7 @@ export const getVariationByDishId = async (id) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.get(`/api/variation/dish_variation/${id}`, config)
+  await axios.get(`/api/variation/dish_variation/13`, config)
     .then(res => {
       addVariationResponse = res;
     })

@@ -16,7 +16,6 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     setCartItems(JSON.parse(localStorage.getItem('cart_items')) !== null ? JSON.parse(localStorage.getItem('cart_items')) : [])
   }, [rand, change])
   const [showplaceorder, setshowplaceorder] = useState(false);
-  console.log(cartItems);
   // useEffect(() => {
   //   gettables(id);
   // }, [gettables]);
