@@ -6,6 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { getVariationByDishId } from "../../Apis/variation";
 
+import ImageComing from '../../assets/image-coming-soon.png'
 //all dishes show UI in owner dashboard
 const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
   // console.log(dishes);
@@ -216,7 +217,9 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
             </a>
             <img height={300} src={`${dishes.image?dishes.image:'/no-image.png'}`} />
             <h1 style={{textAlign:'center'}}>{dishes.name}</h1>
+
             {getVariationByDishId().then(res => console.log('variation',res))}
+
             <div className="form-groupp" style={{ display: "flex",alignItems:'center',justifyContent:'center',width:'100%'}}>
               <div>
                 <i className="fas fa-minus" onClick={(e) => handleminus()}></i>

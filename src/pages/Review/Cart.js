@@ -3,7 +3,7 @@ import Shoppingcart from './Shoppingcart';
 import './review.css'
 import { addproduct } from '../../Apis/shoppingcart';
 import { useAuth } from '../../context/AuthContext';
-const Cart = ({ id,changeCartItems,setChangeCartItems }) => {
+const Cart = ({ id, changeCartItems, setChangeCartItems }) => {
   const { product } = useAuth()
   const [count, setcount] = useState([])
   const [rand, setRand] = useState(0)
@@ -32,7 +32,7 @@ const Cart = ({ id,changeCartItems,setChangeCartItems }) => {
       <div>
         <div className='cart-icon' id='myTopnav1' onClick={toggleMenu}>
           <i className='fa fa-shopping-cart'></i>
-          <span className='products-count'>{count.length}</span>
+          <span className='products-count'>{count?.length}</span>
         </div>
 
 
