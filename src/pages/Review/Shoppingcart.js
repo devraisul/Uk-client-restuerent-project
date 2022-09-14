@@ -101,18 +101,18 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                         display: "flex",
                         flexDirection: "column",
                         color: "gray",
-                        marginTop:10,
-                        fontSize:'0.8rem'
+                        marginTop: 10,
+                        fontSize: '0.8rem'
                       }}
                     >
                       <h1>Variations:</h1>
-                      <div>( 
-                      {cartItem.variations.map((variation, i) => (
-                        <span>{`${JSON.parse(variation).name} ,`}</span>
-                      ))}
-                       )
-                      </div> 
-                       
+                      <div>(
+                        {cartItem?.variations?.map((variation, i) => (
+                          <span>{`${JSON.parse(variation).name} ,`}</span>
+                        ))}
+                        )
+                      </div>
+
                     </div>
                     <div className="product-card-des">
                       {/* {
@@ -211,8 +211,8 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                           type="text"
                           placeholder="Enter Name"
                           name="Name"
-                          // value={Name}
-                          // onChange={(e) => onChange(e)}
+                        // value={Name}
+                        // onChange={(e) => onChange(e)}
                         />
                       </div>
                       <div>
@@ -220,15 +220,15 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                           <textarea
                             placeholder="Order Remarks"
                             name="Remarks"
-                            // value={Remarks}
-                            // onChange={(e) => onChange(e)}
+                          // value={Remarks}
+                          // onChange={(e) => onChange(e)}
                           />
                         </div>
                       </div>
                     </form>
                     <button
                       className="btnnn "
-                      // onClick={(e) => onSubmit(e)}
+                    // onClick={(e) => onSubmit(e)}
                     >
                       Place order
                     </button>

@@ -57,7 +57,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
     }
   }, [getuserdeal]);
   //set allowedvaration on checked or unchecked
-  
+
   // set dish Qty
   const handleminus = () => {
     if (count > 1) {
@@ -124,27 +124,30 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
 
             {dishVariations.length !== 0 &&
               dishVariations.map((dishVariation, i) => (
-                <Fragment key={i}>
+                <div style={{ display: 'flex', justifyContent: "center" }} key={i}>
                   {/* {console.log(dishVariation)} */}
-                  <h1 className="btn btn-primary">
-                    {`Choose ${dishVariation.no_of_varation_allowed} ${dishVariation?.variation_type?.name} `}
-                  </h1>
-                  <div style={{display:'flex',flexDirection:'column'}}  sx={{ flexDirection: 'column' }}>
-                  {dishVariation.variation_type.variation.map((variation, j) => (
-                    <Fragment key={j}>
-                      <input type={'checkbox'} value={
-                        JSON.stringify({
-                          name:variation.name,
-                        price:variation.price
-                      })
-                    }
-                      name="variations"
-                      {...register("variations")}
-                      />{variation.name}
-                    </Fragment>
-                  ))}
+                  <div>
+                    <h1 className="btn btn-primary">
+                      {`Choose ${dishVariation.no_of_varation_allowed} ${dishVariation?.variation_type?.name} `}
+                    </h1>
+                    <div sx={{ flexDirection: 'column' }}>
+                      {dishVariation.variation_type.variation.map((variation, j) => (
+                        <Fragment key={j}>
+                          <input type={'checkbox'} value={
+                            JSON.stringify({
+                              name: variation.name,
+                              price: variation.price
+                            })
+                          }
+                            name="variations"
+                            {...register("variations")}
+                          />
+                          <span style={{ marginLeft: '10px' }}>{variation.name}</span> <br />
+                        </Fragment>
+                      ))}
+                    </div>
                   </div>
-                </Fragment>
+                </div>
               ))}
 
             <div
