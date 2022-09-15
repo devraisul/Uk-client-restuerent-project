@@ -70,7 +70,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                       <h1>Variations:</h1>
                       <div>(
                         {cartItem?.variations?.map((variation, i) => (
-                          <span>{`${JSON.parse(variation).name} ,`}</span>
+                          <span key={i}>{`${JSON.parse(variation).name} ,`}</span>
                         ))}
                         )
                       </div>
