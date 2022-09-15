@@ -4,9 +4,13 @@ import { gettables } from "../../Apis/table";
 
 const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   var subtotal = 0;
+  // const [subtotal, setSubtotal] = useState(0)/
   const [amount, setAmount] = useState();
   const [cartItems, setCartItems] = useState([]);
   const [change, setChange] = useState(0);
+  // useEffect(()=>{
+  //   setAmount()
+  // },[subtotal])
 
   useEffect(() => {
     setCartItems(
@@ -16,8 +20,21 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     );
   }, [rand, change]);
   const [showplaceorder, setshowplaceorder] = useState(false);
-  
+  // useEffect(() => {
+  //   gettables(id);
+  // }, [gettables]);
+
+  // const [formData, setFormData] = useState({
+  //   Name: '',
+  //   Remarks: '',
+  //   table_number: '',
+
+  // });
+
+  // const { Name, Remarks, table_number } = formData;
+
   const decrCartItemsQuantity = (index, quantity) => {
+    // cartItems[index]
     cartItems[index].quantity = quantity;
     localStorage.setItem("cart_items", JSON.stringify(cartItems));
     setChange(Math.random());
@@ -33,7 +50,26 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     localStorage.setItem("cart_items", JSON.stringify(cartItems));
     setChange(Math.random());
   };
-  
+  //   //set the entered data into state
+  // const onChange = (e) =>
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  // //handel changes of Qty
+
+  // useEffect(() => {
+  //   setAmount(subtotal + 3.60 + 5.00)
+  //   // setCartItems(JSON.parse(localStorage.getItem('cart_items')))
+  // });
+
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   // addorderbyuser(products, amount, id, { Name, Remarks, table_number })
+  //   // emptycartorder()
+  // };
+  // var setVarDisplay = "";
+  // const setVarDisplay = (x) => {
+  //   setVarDisplay = x;
+  // };
   return (
     <Fragment>
       <div>
@@ -49,6 +85,8 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                   <noscript>
                     {(subtotal = subtotal + parseFloat(cartItem.price))}
                   </noscript>
+
+                  {/* {setSubtotal(subtotal+parseFloat(cartItem.price))} */}
                   <li
                     style={{ backgroundColor: "#eeeeee", marginBottom: 5 }}
                     className="sidenavv__list-item"
@@ -77,7 +115,51 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
 
                     </div>
                     <div className="product-card-des">
-
+                      {/* {
+                      cartItem.Type === "deal" ? (
+                        <p className="product-variation">
+                          {
+                          cartItem.variation
+                          }
+                        </p>
+                      ) : ( 
+                        // // <Fragment>
+                        //   {cartItem.variation
+                        //     ? cartItem.variation.map((vari, i) => (
+                                // <Fragment key={i}>
+                                //   {setVarDisplay === vari.variation_Type ? (
+                                //     ""
+                                //   ) : (
+                                //     <Fragment>
+                                //       <p>
+                                //         {vari.variation_Type}(
+                                //         {cartItem.variation.map((y, i) => (
+                                //           <Fragment key={i}>
+                                //             {vari.variation_Type ===
+                                //             y.variation_Type ? (
+                                //               <Fragment>
+                                //                 {setVarDisplay(
+                                //                   vari.variation_Type,
+                                //                 )}
+                                //                 <p className="product-variation">
+                                //                   {y.variation_Name}
+                                //                 </p>
+                                //               </Fragment>
+                                //             ) : (
+                                //               ""
+                                //             )}
+                                //           </Fragment>
+                                //         ))}
+                                //         )
+                                //       </p>
+                                //     </Fragment>
+                                //   )}
+                                // </Fragment>
+                              // ))
+                            // : null}
+                        // </Fragment>
+                      // )}
+                      */}
                       <div className="remove-product-i">
                         {cartItem.quantity > 1 ? (
                           <i
@@ -129,6 +211,8 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                           type="text"
                           placeholder="Enter Name"
                           name="Name"
+                        // value={Name}
+                        // onChange={(e) => onChange(e)}
                         />
                       </div>
                       <div>
@@ -136,12 +220,15 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                           <textarea
                             placeholder="Order Remarks"
                             name="Remarks"
+                          // value={Remarks}
+                          // onChange={(e) => onChange(e)}
                           />
                         </div>
                       </div>
                     </form>
                     <button
                       className="btnnn "
+                    // onClick={(e) => onSubmit(e)}
                     >
                       Place order
                     </button>
