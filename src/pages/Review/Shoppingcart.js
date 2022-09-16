@@ -7,7 +7,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   const [amount, setAmount] = useState();
   const [cartItems, setCartItems] = useState([]);
   const [change, setChange] = useState(0);
-
+let subtotal = 0
   useEffect(() => {
     setCartItems(
       JSON.parse(localStorage.getItem("cart_items")) !== null
@@ -35,9 +35,9 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     setChange(Math.random());
   };
 
-  useEffect(() => {
-    console.log(subTotal);
-  },[subTotal]);
+  // useEffect(() => {
+  //   console.log(subTotal);
+  // },[subTotal]);
   return (
     <Fragment>
       <div>
@@ -159,14 +159,14 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                 <div>
                   <div>
                     <p className="cart-subtotal">Subtotal:</p>
-                    <p className="cart-subtotal-amount">£ {subTotal} </p>
+                    <p className="cart-subtotal-amount">£ {subtotal} </p>
                   </div>
                   <div className="totals-item totals-item-total">
                     <p className="cart-total">
                       Total:<p className="em">(Incl.GST)</p>
                     </p>
                     <p className="cart-total-amount">
-                      £{subTotal + 3.6 + 5.0}
+                      £{subtotal + 3.6 + 5.0}
                       {""}
                     </p>
                   </div>
