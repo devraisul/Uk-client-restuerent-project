@@ -33,8 +33,8 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    // console.log('ddddddddd',data.variations);
-    dishes.variations = data.variations;
+    // console.log('ddddddddd',data?.variations?data.variations:'{}');
+    dishes.variations = data?.variations?data.variations:[];
     dishes.quantity = count;
     const cartItem = JSON.parse(localStorage.getItem("cart_items")) || [];
     // console.log('FORM DATA',data);
@@ -42,7 +42,6 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
     setChangeCartItems(Math.random());
   };
   // console.log(errors);
-
 
   useEffect(() => {
     if (initial === true) {
@@ -122,64 +121,91 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
             />
             <h1 style={{ textAlign: "center" }}>{dishes?.name}</h1>
 
-            {dishVariations.length !== 0 &&
+            {dishVariations.length !== 0 ? (
               dishVariations.map((dishVariation, i) => (
-                <div style={{ display: 'flex', justifyContent: "center" }} key={i}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                  }}
+                  key={i}
+                >
                   {/* {console.log(dishVariation)} */}
                   <div>
-                    <h1 className="btn btn-primary">
+                    <div style={{
+                      width:'100%',
+                      display:'flex',
+                      alignItems:'center',
+                      justifyContent:'center'
+                    }}>
+
+                      <h1 style={{width:'100%'}} className="btn btn-primary fs-5 mb-5">
                       {`Choose ${dishVariation.no_of_varation_allowed} ${dishVariation?.variation_type?.name} `}
                     </h1>
-                    <div sx={{ flexDirection: 'column' }}>
-                      {dishVariation.variation_type.variation.map((variation, j) => (
-                        <Fragment key={j}>
-                          <input type={'checkbox'} value={
-                            JSON.stringify({
-                              name: variation.name,
-                              price: variation.price
-                            })
-                          }
-                            name="variations"
-                            {...register("variations")}
-                          />
-                          <span style={{ marginLeft: '10px' }}>{variation.name}</span> <br />
-                        </Fragment>
-                      ))}
+                    </div>
+                    
+                    <div>
+                      {dishVariation.variation_type.variation.map(
+                        (variation, j) => (
+                          <Fragment key={j}>
+                            <input
+                              type={"checkbox"}
+                              value={
+                                (variation?.name && variation?.price) ?
+                                (JSON.stringify({
+                                name: variation.name ? variation.name:0,
+                                price: variation.price ?  variation.price:0,
+                              })):(
+                                '{}'
+                              )
+                            }
+                              name="variations"
+                              {...register("variations")}
+                            />
+                            <span style={{ marginLeft: "10px" }}>
+                              {variation.name}
+                            </span>{" "}
+                            <br />
+                          </Fragment>
+                        )
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                  <div
+                    // className="form-groupp"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <i
+                      style={{ cursor: "pointer" }}
+                      className="fas fa-minus"
+                      onClick={(e) => handleminus()}
+                    ></i>
+                    <h2 style={{ textAlign: "center" }}>{count}</h2>
+                    <i
+                      style={{ cursor: "pointer" }}
+                      className="fas fa-plus"
+                      onClick={(e) => setcount(count + 1)}
+                    ></i>
+                  </div>
 
-            <div
-              className="form-groupp"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "100%",
-              }}
-            >
-              <div>
-                <i className="fas fa-minus" onClick={(e) => handleminus()}></i>
+                  <input
+                    // style={{ width: "100%" }}
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Add to order"
+                  />
+                </div>
+              ))
+            ) : (
+              <div style={{ width: "100%" }} className="text-center">
+                Loading...
               </div>
-              <div>
-                <h2 style={{ textAlign: "center" }}>{count}</h2>
-              </div>
-              <div>
-                <i
-                  className="fas fa-plus"
-                  onClick={(e) => setcount(count + 1)}
-                ></i>
-              </div>
-            </div>
-            <Fragment>
-              <input
-                style={{ width: "100%" }}
-                type="submit"
-                className="btn btn-primary"
-                value="Add to order"
-              />
-            </Fragment>
+            )}
           </form>
         </Popup>
       </div>
