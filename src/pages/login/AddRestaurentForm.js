@@ -203,11 +203,7 @@ const AddRestaurentForm = () => {
                                 ) : (
                                     <Button
                                         type="submit"
-                                        // disabled={
-                                        //   loginValue.length === 0 ||
-                                        //   passwordValue.length === 0 ||
-                                        //   nameValue.length === 0
-                                        // }
+                                       z
                                         size="large"
                                         variant="contained"
                                         color="primary"

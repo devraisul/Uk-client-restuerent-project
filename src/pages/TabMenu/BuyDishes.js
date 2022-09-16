@@ -6,10 +6,9 @@ import { useAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { getVariationByDishId } from "../../Apis/variation";
 
-import ImageComing from "../../assets/image-coming-soon.png";
 //all dishes show UI in owner dashboard
 const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
-  // console.log(dishes);
+
   const { addproduct, adduserdealproduct } = useAuth();
   const [DishIDcheck, setDishIDcheck] = useState(false);
   const [count, setcount] = useState(1);
@@ -81,7 +80,6 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
     getVariationByDishId(id).then((res) => setDishVariations(res.data));
     setOpen2(true);
     openpopup(true);
-    console.log(dishVariations);
   };
   return (
     <Fragment>
@@ -192,7 +190,6 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
                       onClick={(e) => setcount(count + 1)}
                     ></i>
                   </div>
-
                   <input
                     // style={{ width: "100%" }}
                     type="submit"

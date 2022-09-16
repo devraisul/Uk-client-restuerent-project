@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { gettables } from "../../Apis/table";
+import { useAuth } from "../../context/AuthContext";
 
 const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
- const [subTotal, setSubTotal] = useState(0)
+  var subtotal = 0;
   const [amount, setAmount] = useState();
   const [cartItems, setCartItems] = useState([]);
   const [change, setChange] = useState(0);
-let subtotal = 0
+
+  const {user,isAuthenticated}=useAuth()
+
   useEffect(() => {
     setCartItems(
       JSON.parse(localStorage.getItem("cart_items")) !== null
@@ -16,8 +19,9 @@ let subtotal = 0
     );
   }, [rand, change]);
 
+
   const decrCartItemsQuantity = (index, quantity) => {
-    cartItems[index].quantity = quantity;
+    cartItems[index].price = cartItems[index].price * quantity
     localStorage.setItem("cart_items", JSON.stringify(cartItems));
     setChange(Math.random());
   };
@@ -35,9 +39,10 @@ let subtotal = 0
     setChange(Math.random());
   };
 
-  // useEffect(() => {
-  //   console.log(subTotal);
-  // },[subTotal]);
+  const onSubmit = () =>{
+    console.log('clicked');
+  }
+
   return (
     <Fragment>
       <div>
@@ -65,18 +70,17 @@ let subtotal = 0
                             ? cartItem.variations.map((variation) => {
                                 cartItem.price =
                                   cartItem.price + JSON.parse(variation).price;
+                                  (
+                                    <>
+                                    {cartItem.price}
+                                    </>
+                                  )
                               })
                             : (cartItem.price = cartItem.price)
 
                           
-                        }{
-                          <>
-                          {cartItem.price}
-                          {
-                            setSubTotal(subTotal+cartItem.price)
-                          }
-                          </>
                         }
+                        
                       </p>
                     </div>
                     <div
@@ -173,7 +177,7 @@ let subtotal = 0
                 </div>
                 <button
                   className="btn btn-primary"
-                  // onClick={(e) => onSubmit(e)}
+                  onClick={() => onSubmit()}
                 >
                   Place order
                 </button>
