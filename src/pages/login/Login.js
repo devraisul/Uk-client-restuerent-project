@@ -43,6 +43,7 @@ function Login(props) {
       email: e.target.email.value,
       password: e.target.password.value,
     };
+    console.log(data);
     userLogin(data)
       .then((res) => {
         setIsAuthenticated(true);
@@ -107,12 +108,12 @@ function Login(props) {
 
                   <TextField
                     id="email"
-                    InputProps={{
-                      classes: {
-                        // underline: classes.textFieldUnderline,
-                        input: classes.textField,
-                      },
-                    }}
+                    // InputProps={{
+                    //   classes: {
+                    //     // underline: classes.textFieldUnderline,
+                    //     input: classes.textField,
+                    //   },
+                    // }}
                     name="email"
                     margin="normal"
                     variant="outlined"
@@ -124,12 +125,12 @@ function Login(props) {
 
                   <TextField
                     id="password"
-                    InputProps={{
-                      classes: {
-                        // underline: classes.textFieldUnderline,
-                        input: classes.textField,
-                      },
-                    }}
+                    // InputProps={{
+                    //   classes: {
+                    //     // underline: classes.textFieldUnderline,
+                    //     input: classes.textField,
+                    //   },
+                    // }}
                     variant="outlined"
                     name="password"
                     margin="normal"
@@ -141,9 +142,15 @@ function Login(props) {
 
                   <div>
                     Don't have an accoun?
-                    <NavLink to={"/addrestaurent"} style={{
-                      color:'#536dfe'
-                    }}> Create Account.</NavLink>
+                    <NavLink
+                      to={"/addrestaurent"}
+                      style={{
+                        color: "#536dfe",
+                      }}
+                    >
+                      {" "}
+                      Create Account.
+                    </NavLink>
                   </div>
 
                   <div className={classes.formButtons}>
