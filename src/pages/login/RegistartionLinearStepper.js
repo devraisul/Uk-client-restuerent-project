@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["Basic information", "Contact Information", "Security"];
+  return ["Basic information", "Contact information", "Security information"];
 }
 const BasicForm = () => {
   const { control } = useFormContext();

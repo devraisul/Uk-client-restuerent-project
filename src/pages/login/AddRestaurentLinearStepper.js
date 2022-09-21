@@ -29,7 +29,7 @@ function getSteps() {
     "Personal Information",
     "Contact Information",
     "Adress Information",
-    "Restaurent Website Information",
+    "Website Information",
   ];
 }
 
@@ -212,8 +212,8 @@ const WebsiteForm = () => {
           />
         )}
       />
-
-      <Controller
+<div>
+<Controller
         control={control}
         name="enable_question"
         render={({ field }) => (
@@ -224,11 +224,14 @@ const WebsiteForm = () => {
             label="enable_question"
             variant="outlined"
             placeholder="Enter Your question"
-            margin="normal"
+            // margin="normal"
             {...field}
           />
         )}
       />
+      <lable htmlFor='enable_question'>Enable Question</lable>
+</div>
+      
     </>
   );
 };
@@ -313,7 +316,12 @@ console.log('FINAL',data);
   //   console.log(data);
   // };
   return (
-    <div>
+    <div style={{
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center',
+      flexDirection:'column'
+    }}>
       <h1
         style={{
           textAlign: "center",
@@ -329,6 +337,7 @@ console.log('FINAL',data);
         {steps.map((step, index) => {
           const labelProps = {};
           const stepProps = {};
+          
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
