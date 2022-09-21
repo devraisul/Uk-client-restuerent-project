@@ -50,33 +50,30 @@ const UpdateRestaurent = () => {
         })
         .catch(err => console.log(err))
     }
-
-
-
   };
 
   const fetchdistance = (x) => {
     setFormData({ ...formData, Address: x.address.freeformAddress, PostCode: x.address.postalCode });
   }
+
+
   return (
     <Fragment>
       <Toaster
         position="top-right"
         reverseOrder={false}
       />
-      <div className='containerB'>
-        <div className='cardB'>
+      <div className='container'>
+        <div className='card'>
           {!user.restaurant[0].Logo ? (
             "Don't Have image"
           ) : (<img
-            className='roundimgE2'
-            src={''}
+            // className='roundimgE2'
+            src={user.restaurant[0].Logo}
             alt='Logo'
           />)}
           <h1 className='large text-primary'>Edit Restaurant</h1>
-
           <form onSubmit={(e) => onSubmit(e)}>
-
             <div className='form-group'>
               <TextField
                 id="filled-basic"
@@ -87,6 +84,8 @@ const UpdateRestaurent = () => {
                 name='Name'
                 value={Name}
                 onChange={(e) => onChange(e)}
+                style={{ paddingTop: '15px',width:'100%' }}
+
               />
             </div>
             <div className='form-group'>
@@ -94,13 +93,10 @@ const UpdateRestaurent = () => {
 
             </div>
             <div className='form-group'>
-
               <p>Enter Address to Update</p>
-
-
               <SearchBox
                 onResultChoose={(result) => fetchdistance(result)}
-
+                style={{ paddingTop: '15px',width:'100%' }}
                 searchOptions={{
                   key: 'l2nwZ2J9wGbTZRb9C8OyAzv7pv0E30iY',
                   language: 'en-Gb',
@@ -121,7 +117,7 @@ const UpdateRestaurent = () => {
                 name='PostCode'
                 value={PostCode}
                 onChange={(e) => onChange(e)}
-                style={{ paddingTop: '15px' }}
+                style={{ paddingTop: '15px',width:'100%' }}
               />
               {/* <input
                
@@ -152,6 +148,8 @@ const UpdateRestaurent = () => {
                 type='file'
                 id='image'
                 name='image'
+                style={{ width: "100%" }}
+
                 onChange={(e) => onFileChange(e)}
               />
 
@@ -163,7 +161,7 @@ const UpdateRestaurent = () => {
                 color="primary"
                 size="large"
                 fullWidth
-                style={{ width: "10%" }}
+                style={{ width: "100%" }}
               >
                 Save Changes
               </Button>

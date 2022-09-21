@@ -2,8 +2,9 @@ import axios from "axios";
 
 // Add Restaurent
 export const addRestaurent = async (data) => {
+  console.log('from api',data);
   let addRestaurentResponse;
-  const token = JSON.parse(localStorage.token)
+  const token = JSON.parse(localStorage?.token)
   const config = {
     headers: {
       "Content-Type": "application/json",

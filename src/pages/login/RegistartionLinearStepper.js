@@ -6,7 +6,6 @@ import {
   Stepper,
   Step,
   StepLabel,
-  Checkbox,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -16,7 +15,8 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
-import { addRestaurent } from "../../Apis/Restaurent";
+import { userRegister } from "../../Apis/Auth";
+import { useAuth } from "../../context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -25,30 +25,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return [
-    "Personal Information",
-    "Contact Information",
-    "Adress Information",
-    "Restaurent Website Information",
-  ];
+  return ["Basic information", "Contact Information", "Security"];
 }
-
 const BasicForm = () => {
   const { control } = useFormContext();
   return (
     <>
       <Controller
         control={control}
-        name="Name"
+        name="first_Name"
         render={({ field }) => (
           <TextField
-            type={"text"}
-            required
-            id="name"
-            label="Name"
+            id="first-name"
+            label="First Name"
             variant="outlined"
-            placeholder="Enter Your Name"
+            placeholder="Enter Your First Name"
             fullWidth
+            required
+            type={'text'}
             margin="normal"
             {...field}
           />
@@ -57,15 +51,16 @@ const BasicForm = () => {
 
       <Controller
         control={control}
-        name="About"
+        name="last_Name"
         render={({ field }) => (
           <TextField
-            type={"text"}
-            id="about"
-            label="About"
+            id="last-name"
+            label="Last Name"
             variant="outlined"
-            placeholder="About"
+            placeholder="Enter Your Last Name"
             fullWidth
+            type={'text'}
+            required
             margin="normal"
             {...field}
           />
@@ -80,32 +75,31 @@ const ContactForm = () => {
     <>
       <Controller
         control={control}
-        name="EmailAddress"
+        name="email"
         render={({ field }) => (
           <TextField
-            required
-            type={"email"}
             id="email"
             label="E-mail"
             variant="outlined"
+            type={'email'}
             placeholder="Enter Your E-mail Address"
+            required
             fullWidth
             margin="normal"
             {...field}
           />
         )}
       />
-
       <Controller
         control={control}
-        name="PhoneNumber"
+        name="phone"
         render={({ field }) => (
           <TextField
-            type={"number"}
-            required
             id="phone-number"
             label="Phone Number"
             variant="outlined"
+            type={'text'}
+            required
             placeholder="Enter Your Phone Number"
             fullWidth
             margin="normal"
@@ -116,181 +110,80 @@ const ContactForm = () => {
     </>
   );
 };
-const AboutForm = () => {
+const SecurityForm = () => {
   const { control } = useFormContext();
   return (
     <>
       <Controller
         control={control}
-        name="Address"
+        name="password"
         render={({ field }) => (
           <TextField
+            id="password"
+            label="Password"
+            variant="outlined"
+            placeholder="Password"
+            type={'password'}
             required
-            type={"text"}
-            id="address"
-            label="Address"
-            variant="outlined"
-            placeholder="Enter Your Address"
             fullWidth
             margin="normal"
             {...field}
           />
         )}
       />
-      <Controller
-        control={control}
-        name="PostCode"
-        render={({ field }) => (
-          <TextField
-            required
-            type={"number"}
-            id="PostCode"
-            label="Post Code"
-            variant="outlined"
-            placeholder="Enter Your PostCode"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
-    </>
-  );
-};
-const WebsiteForm = () => {
-  const { control } = useFormContext();
-  return (
-    <>
-      <Controller
-        control={control}
-        name="Webpage"
-        render={({ field }) => (
-          <TextField
-            type={"text"}
-            required
-            id="webpage"
-            label="Webpage"
-            variant="outlined"
-            placeholder="Enter Your Webpage"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="homeText"
-        render={({ field }) => (
-          <TextField
-            type={"text"}
-            required
-            id="homeText"
-            label="Home Text"
-            variant="outlined"
-            placeholder="Enter Your Tome Text"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="AdditionalInformation"
-        render={({ field }) => (
-          <TextField
-            type={"text"}
-            id="AdditionalInformation"
-            label="AdditionalInformation"
-            variant="outlined"
-            placeholder="Enter Your question"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="enable_question"
-        render={({ field }) => (
-          <Checkbox
-            color="primary"
-            type={"checkbox"}
-            id="enable_question"
-            label="enable_question"
-            variant="outlined"
-            placeholder="Enter Your question"
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
+      
     </>
   );
 };
 
 function getStepContent(step) {
+  console.log(step);
   switch (step) {
     case 0:
       return <BasicForm />;
     case 1:
       return <ContactForm />;
     case 2:
-      return <AboutForm />;
-    case 3:
-      return <WebsiteForm />;
+      return <SecurityForm />;
     default:
       return "unknown step";
   }
 }
 
-const AddRestaurentLinearStepper = () => {
-  const history = useHistory()
+const RegistartionLinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
-      Name: "",
-      About: "",
-      EmailAddress: "",
-      PhoneNumber: "",
-      Address: "",
-      PostCode: "",
-      Webpage: "",
-      AdditionalInformation: "",
-      enable_question: "",
+      first_Name: "",
+      last_Name: "",
+      email: "",
+      phone: "",
+      password: "",
+      type: "restaurant_Owner",
     },
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { setIsAuthenticated, setUser } = useAuth();
+  const history = useHistory();
   const steps = getSteps();
 
-  const isStepOptional = (step) => {
-    return step === 1 || step === 2;
-  };
+
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
   };
+
   const handleNext = (data) => {
     console.log(data);
-
     if (activeStep == steps.length - 1) {
-      setIsLoading(true);
-console.log('FINAL',data);
-      addRestaurent(data).then((res) => {
+      userRegister(data).then((res) => {
+        setUser(res.data.user);
         setIsLoading(false);
+
         console.log(res);
         setActiveStep(activeStep + 1);
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-
-        setTimeout(() => {
-          history.push("/login");
-        }, 5000);
+        setTimeout(() => history.push("/addrestaurent"), 2000);
       });
     } else {
       setActiveStep(activeStep + 1);
@@ -299,19 +192,11 @@ console.log('FINAL',data);
       );
     }
   };
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  // const handleSkip = () => {
-  //   if (!isStepSkipped(activeStep)) {
-  //     setSkippedSteps([...skippedSteps, activeStep]);
-  //   }
-  //   setActiveStep(activeStep + 1);
-  // };
 
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
   return (
     <div>
       <h1
@@ -322,13 +207,14 @@ console.log('FINAL',data);
           fontWeight: "bold",
         }}
       >
-        Create Restaurent
+        Create An Account
       </h1>
 
       <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((step, index) => {
           const labelProps = {};
           const stepProps = {};
+          
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
@@ -341,12 +227,9 @@ console.log('FINAL',data);
       </Stepper>
 
       {activeStep === steps.length ? (
-        <h1 style={{
-          textAlign:'center',
-          fontWeight:'bold'
-        }}>
-          <span>Congratulations!</span>  your Restaurent is added succesfully.
-        </h1>
+        <Typography variant="h3" align="center">
+          Thank You
+        </Typography>
       ) : (
         <>
           <FormProvider {...methods}>
@@ -362,7 +245,7 @@ console.log('FINAL',data);
                     marginBottom: "20px",
                   }}
                 >
-                  Back to Home
+                  Already have an accoun?
                   <NavLink
                     to={"/login"}
                     style={{
@@ -370,7 +253,7 @@ console.log('FINAL',data);
                     }}
                   >
                     {" "}
-                    Home
+                    Login.
                   </NavLink>
                 </div>
                 <Button
@@ -380,16 +263,7 @@ console.log('FINAL',data);
                 >
                   back
                 </Button>
-                {/* {isStepOptional(activeStep) && (
-                  <Button
-                    className={classes.button}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSkip}
-                  >
-                    skip
-                  </Button>
-                )} */}
+                
                 <Button
                   className={classes.button}
                   variant="contained"
@@ -408,4 +282,4 @@ console.log('FINAL',data);
   );
 };
 
-export default AddRestaurentLinearStepper;
+export default RegistartionLinearStepper;

@@ -55,28 +55,7 @@ function Login(props) {
         toast.error(err.response?.data?.message);
       });
   };
-  const handleRegister = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    if (e.target.pass.value === e.target.confirm_Pass.value) {
-      const data = {
-        first_Name: e.target.first_Name.value,
-        last_Name: e.target.last_Name.value,
-        email: e.target.email.value,
-        phone: e.target.phone.value,
-        password: e.target.pass.value,
-        type: "restaurant_Owner",
-      };
-      console.log(data);
-      userRegister(data).then((res) => {
-        setUser(res.data.user);
-        history.push("/addrestaurent");
-        setIsLoading(false);
-      });
-    } else {
-      setError(true);
-    }
-  };
+
   return (
     <Container component={Box}>
       <Grid className={classes.container}>
@@ -105,7 +84,6 @@ function Login(props) {
                   >
                     Login
                   </h1>
-
                   <TextField
                     id="email"
                     // InputProps={{
@@ -143,7 +121,7 @@ function Login(props) {
                   <div>
                     Don't have an accoun?
                     <NavLink
-                      to={"/addrestaurent"}
+                      to={"/registration"}
                       style={{
                         color: "#536dfe",
                       }}

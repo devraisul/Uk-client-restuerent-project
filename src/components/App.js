@@ -16,6 +16,7 @@ import AddRestaurentForm from "../pages/login/AddRestaurentForm";
 import UserMenu from "../pages/UserMenu/UserMenu";
 import ShowReviews from "../pages/showReviews/ShowReviews";
 import TabMenu from "../pages/TabMenu/TabMenu";
+import Registration from "../pages/login/Registration";
 
 export default function App() {
   // global
@@ -33,6 +34,7 @@ export default function App() {
         />
         <PrivateRoute path="/app" component={Layout} />
         <PublicRoute path="/login" component={Login} />
+        <PublicRoute path="/registration" component={Registration} />
         <Route path="/usermenu/:id" component={UserMenu} />
         <Route path="/review/:id" component={ShowReviews} />
         <Route path="/tabmenu/:id" component={TabMenu} />

@@ -14,14 +14,16 @@ export const userLogin = async (data) => {
 
 // login response
 export const userRegister = async (data) => {
+  console.log('from api',data);
   let loginResponse;
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  await axios.post(`/api/owner`, data, config)
+  // const config = {
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  // };
+  await axios.post(`/api/owner`, data)
     .then(res => {
+      console.log('response',res);
       loginResponse = res.data;
       window.localStorage.setItem('user', JSON.stringify(loginResponse.data.user));
       window.localStorage.setItem('token', JSON.stringify(loginResponse.token));
