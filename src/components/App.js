@@ -17,6 +17,7 @@ import UserMenu from "../pages/UserMenu/UserMenu";
 import ShowReviews from "../pages/showReviews/ShowReviews";
 import TabMenu from "../pages/TabMenu/TabMenu";
 import Registration from "../pages/login/Registration";
+import CustomerRegistration from "../pages/Review/CustomerRegistration";
 
 export default function App() {
   // global
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/review/:id" component={ShowReviews} />
         <Route path="/tabmenu/:id" component={TabMenu} />
         <PublicRoute path="/addrestaurent" component={AddRestaurentForm} />
+        <Route path="/customer_registration" component={CustomerRegistration} />
         <Route component={Error} />
       </Switch>
     </BrowserRouter>

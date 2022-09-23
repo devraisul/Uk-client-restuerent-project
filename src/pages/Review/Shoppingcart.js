@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import { gettables } from "../../Apis/table";
 import { useAuth } from "../../context/AuthContext";
 
@@ -10,8 +11,9 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   const [change, setChange] = useState(0);
 
   const {user,isAuthenticated}=useAuth()
-
+  const history = useHistory()
   useEffect(() => {
+    localStorage.getItem('customer_details')===null&&localStorage.setItem('customer_details',JSON.stringify([]))
     setCartItems(
       JSON.parse(localStorage.getItem("cart_items")) !== null
         ? JSON.parse(localStorage.getItem("cart_items"))
@@ -40,7 +42,10 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   };
 
   const onSubmit = () =>{
-    console.log('clicked');
+    JSON.parse(localStorage.getItem('customer_details')).email !== undefined ?
+    alert('called API') :
+    history.push('/customer_registration')
+    // placeOrder()
   }
 
   return (
@@ -62,7 +67,6 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                     <div>
                       <p className="product-card-name"> {cartItem.name} </p>
                       <br />
-
                       <p className="cart-subtotal-amount">
                         £
                         {
@@ -77,10 +81,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                                   )
                               })
                             : (cartItem.price = cartItem.price)
-
-                          
                         }
-                        
                       </p>
                     </div>
                     <div

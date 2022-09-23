@@ -43,11 +43,14 @@ const AddRestaurentForm = () => {
   return (
     <>
       <CssBaseline />
-      <Container component={Box} p={4}>
+      <Container component={Box} p={10}>
         <Paper component={Box} p={4}>
           <div
             style={{
               padding: "0px 50px",
+              display:'flex',
+              justifyContent:'center',
+              alignItems:'center'
             }}
           >
             <AddRestaurentLinearStepper />

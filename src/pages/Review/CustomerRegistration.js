@@ -1,9 +1,8 @@
-// import { Button, CircularProgress, Fade, Grid, Tab, Tabs, TextField, Typography } from '@material-ui/core';
 import { CssBaseline, Container, Paper, Box } from "@material-ui/core";
-import RegistartionLinearStepper from "./RegistartionLinearStepper";
+import CustomerRegistartionLinearStepper from "./CustomerRegistartionLinearStepper";
 
   
-export default function Registration() {
+export default function CustomerRegistration() {
   return (
     <>
       <CssBaseline />
@@ -17,7 +16,7 @@ export default function Registration() {
               alignItems:'center'
             }}
           >
-            <RegistartionLinearStepper />
+            <CustomerRegistartionLinearStepper />
           </div>
         </Paper>
       </Container>

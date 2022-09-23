@@ -34,16 +34,18 @@ function getSteps() {
 }
 
 const BasicForm = () => {
-  const { control } = useFormContext();
+  const { control,formState:{errors} } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="Name"
+        rules={{
+          required:"* Name is required"
+        }}
         render={({ field }) => (
           <TextField
             type={"text"}
-            required
             id="name"
             label="Name"
             variant="outlined"
@@ -51,6 +53,8 @@ const BasicForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            error={errors.Name}
+            helperText={errors?.Name?.message}
           />
         )}
       />
@@ -75,15 +79,17 @@ const BasicForm = () => {
   );
 };
 const ContactForm = () => {
-  const { control } = useFormContext();
+  const { control,formState:{errors} } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="EmailAddress"
+        rules={{
+          required:"* Email is required"
+        }}
         render={({ field }) => (
           <TextField
-            required
             type={"email"}
             id="email"
             label="E-mail"
@@ -92,23 +98,30 @@ const ContactForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            error={errors.EmailAddress}
+            helperText={errors?.EmailAddress?.message}
           />
         )}
       />
-
       <Controller
         control={control}
         name="PhoneNumber"
-        render={({ field }) => (
+        rules={{
+          required:"* Phone number mustbe have 11 digit (require)",
+          minLength:11,
+          maxLength:11
+        }}
+        render={({ field,formState:{errors} }) => (
           <TextField
             type={"number"}
-            required
             id="phone-number"
             label="Phone Number"
             variant="outlined"
-            placeholder="Enter Your Phone Number"
+            placeholder="Enter Your 11 Digit Phone Number"
             fullWidth
             margin="normal"
+            error={errors.PhoneNumber}
+            helperText={errors?.PhoneNumber?.message}
             {...field}
           />
         )}
@@ -117,15 +130,17 @@ const ContactForm = () => {
   );
 };
 const AboutForm = () => {
-  const { control } = useFormContext();
+  const { control,formState:{errors} } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="Address"
+        rules={{
+          required:'* Adress is required'
+        }}
         render={({ field }) => (
           <TextField
-            required
             type={"text"}
             id="address"
             label="Address"
@@ -134,15 +149,18 @@ const AboutForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            helperText={errors?.Address?.message}
           />
         )}
       />
       <Controller
         control={control}
         name="PostCode"
+        rules={{
+          required:"* Postcode is required"
+        }}
         render={({ field }) => (
           <TextField
-            required
             type={"number"}
             id="PostCode"
             label="Post Code"
@@ -151,6 +169,7 @@ const AboutForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            helperText={errors?.PostCode?.message}
           />
         )}
       />
@@ -158,16 +177,18 @@ const AboutForm = () => {
   );
 };
 const WebsiteForm = () => {
-  const { control } = useFormContext();
+  const { control,formState:{errors} } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="Webpage"
+        rules={{
+          required:"* Webpage is required"
+        }}
         render={({ field }) => (
           <TextField
             type={"text"}
-            required
             id="webpage"
             label="Webpage"
             variant="outlined"
@@ -175,16 +196,19 @@ const WebsiteForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            helperText={errors?.Webpage?.message}
           />
         )}
       />
       <Controller
         control={control}
         name="homeText"
+        rules={{
+          required:"* Home text is required"
+        }}
         render={({ field }) => (
           <TextField
             type={"text"}
-            required
             id="homeText"
             label="Home Text"
             variant="outlined"
@@ -192,6 +216,7 @@ const WebsiteForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            helperText={errors?.homeText?.message}
           />
         )}
       />
@@ -235,7 +260,6 @@ const WebsiteForm = () => {
     </>
   );
 };
-
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -250,7 +274,6 @@ function getStepContent(step) {
       return "unknown step";
   }
 }
-
 const AddRestaurentLinearStepper = () => {
   const history = useHistory()
   const classes = useStyles();
@@ -264,9 +287,10 @@ const AddRestaurentLinearStepper = () => {
       PostCode: "",
       Webpage: "",
       AdditionalInformation: "",
-      enable_question: "",
+      enable_question: false,
     },
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
@@ -279,18 +303,14 @@ const AddRestaurentLinearStepper = () => {
     return skippedSteps.includes(step);
   };
   const handleNext = (data) => {
-    console.log(data);
-
     if (activeStep == steps.length - 1) {
       setIsLoading(true);
-console.log('FINAL',data);
       addRestaurent(data).then((res) => {
         setIsLoading(false);
         console.log(res);
         setActiveStep(activeStep + 1);
         localStorage.removeItem("user");
         localStorage.removeItem("token");
-
         setTimeout(() => {
           history.push("/login");
         }, 5000);
@@ -352,9 +372,14 @@ console.log('FINAL',data);
       {activeStep === steps.length ? (
         <h1 style={{
           textAlign:'center',
-          fontWeight:'bold'
+          fontWeight:'bold',
+          fontSize:'15px'
+
         }}>
-          <span>Congratulations!</span>  your Restaurent is added succesfully.
+          <span style={{
+            fontSize:'25px'
+          }}>Congratulations!</span> <br/>
+          your Restaurent is added succesfully.
         </h1>
       ) : (
         <>
@@ -366,22 +391,7 @@ console.log('FINAL',data);
                   marginTop: "20px",
                 }}
               >
-                <div
-                  style={{
-                    marginBottom: "20px",
-                  }}
-                >
-                  Back to Home
-                  <NavLink
-                    to={"/login"}
-                    style={{
-                      color: "#536dfe",
-                    }}
-                  >
-                    {" "}
-                    Home
-                  </NavLink>
-                </div>
+                
                 <Button
                   className={classes.button}
                   disabled={activeStep === 0}
@@ -389,24 +399,15 @@ console.log('FINAL',data);
                 >
                   back
                 </Button>
-                {/* {isStepOptional(activeStep) && (
-                  <Button
-                    className={classes.button}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSkip}
-                  >
-                    skip
-                  </Button>
-                )} */}
                 <Button
+                disabled={isLoading?true:false}
                   className={classes.button}
                   variant="contained"
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>
             </form>

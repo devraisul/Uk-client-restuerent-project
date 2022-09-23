@@ -50,3 +50,30 @@ export const changePass = async () => {
     })
   return changePassResponse
 }
+
+
+
+
+
+
+
+
+
+export const customerRegister = async (data) => {
+  console.log('from api',data);
+  let loginResponse;
+  // const config = {
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  // };
+  await axios.post(`/api/owner/user/registration`, data)
+    .then(res => {
+      console.log('response',res);
+      loginResponse = res.data;
+      console.log(loginResponse);
+      // window.localStorage.setItem('user', JSON.stringify(loginResponse.data.user));
+      // window.localStorage.setItem('token', JSON.stringify(loginResponse.token));
+    })
+  return loginResponse
+}
