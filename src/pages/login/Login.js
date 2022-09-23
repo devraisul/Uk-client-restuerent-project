@@ -14,7 +14,7 @@ import {
   Box,
 } from "@material-ui/core";
 import { NavLink, useHistory, withRouter } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
 
 // styles
 import useStyles from "./styles";
@@ -52,7 +52,7 @@ function Login(props) {
       })
       .catch((err) => {
         setIsLoading(false);
-        toast.error(err.response?.data?.message);
+        setError(err?.message);
       });
   };
 
@@ -69,7 +69,7 @@ function Login(props) {
                       color="secondary"
                       className={classes.errorMessage}
                     >
-                      Something is wrong with your login or password :(
+                      ***Your email or password is incorrect.***
                     </Typography>
                   </Fade>
                 )}
@@ -130,7 +130,7 @@ function Login(props) {
                       Create Account.
                     </NavLink>
                   </div>
-
+                  
                   <div className={classes.formButtons}>
                     {isLoading ? (
                       <CircularProgress

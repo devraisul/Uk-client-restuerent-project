@@ -93,6 +93,7 @@ const SecurityForm = () => {
             placeholder="email"
             type={'email'}
             fullWidth
+            required
             margin="normal"
             {...field}
           />

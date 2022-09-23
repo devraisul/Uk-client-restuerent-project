@@ -96,6 +96,7 @@ const ContactForm = () => {
             variant="outlined"
             placeholder="Enter Your E-mail Address"
             fullWidth
+            required
             margin="normal"
             {...field}
             error={errors.EmailAddress}
