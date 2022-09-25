@@ -42,10 +42,10 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   };
 
   const onSubmit = () =>{
-    JSON.parse(localStorage.getItem('customer_details')).email !== undefined ?
-    alert('called API') :
+    (JSON.parse(localStorage.getItem('customer_details')).length > 0) ?
+    history.push('/place_order')
+     :
     history.push('/customer_registration')
-    // placeOrder()
   }
 
   return (

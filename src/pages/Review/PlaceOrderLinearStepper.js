@@ -17,8 +17,6 @@ import {
 import { NavLink, useHistory } from "react-router-dom";
 // import { customerRegister, userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
-import { customerRegister } from "../../Apis/Auth";
-import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -62,7 +60,7 @@ const ContactForm = () => {
         }}
         render={({ field }) => (
           <TextField
-            id="phonenumber"
+            id="phone-number"
             label="Phone Number"
             variant="outlined"
             type={'text'}
@@ -105,8 +103,7 @@ const SecurityForm = () => {
         control={control}
         name="password"
         rules={{
-          required:"* Password must be minimum 6 digit required",
-          minLength:6
+          required:"* Password is required"
         }}
         render={({ field }) => (
           <TextField
@@ -126,6 +123,7 @@ const SecurityForm = () => {
     </>
   );
 };
+
 function getStepContent(step) {
   console.log(step);
   switch (step) {
@@ -137,7 +135,8 @@ function getStepContent(step) {
       return "unknown step";
   }
 }
-const CustomerRegistartionLinearStepper = () => {
+
+const PlaceOrderLinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
@@ -155,16 +154,6 @@ const CustomerRegistartionLinearStepper = () => {
   const steps = getSteps();
 
 
-
-
-  useEffect(()=>{
-    if ((JSON.parse(localStorage.getItem('customer_details')).length > 0)) {
-      history.push('/place_order')
-    }
-  },[])
-
-
-
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
   };
@@ -172,13 +161,13 @@ const CustomerRegistartionLinearStepper = () => {
   const handleNext = (data) => {
     console.log(data);
     if (activeStep == steps.length - 1) {
-      customerRegister(data).then((res) => {
-        setIsLoading(false);
-        if(res.token){
-          setActiveStep(activeStep + 1);
-          setTimeout(() => history.push("/place_order"), 1000);
-        }
-      });
+      // customerRegister(data).then((res) => {
+        // setUser(res.data.user);
+        // setIsLoading(false);
+        // console.log(res);
+        setActiveStep(activeStep + 1);
+        // setTimeout(() => history.push("/addrestaurent"), 2000);
+      // });
     } else {
       setActiveStep(activeStep + 1);
       setSkippedSteps(
@@ -206,7 +195,7 @@ const CustomerRegistartionLinearStepper = () => {
           fontWeight: "bold",
         }}
       >
-        Create An Account
+        Place Order
       </h1>
 
       <Stepper alternativeLabel activeStep={activeStep}>
@@ -281,4 +270,4 @@ const CustomerRegistartionLinearStepper = () => {
   );
 };
 
-export default CustomerRegistartionLinearStepper;
+export default PlaceOrderLinearStepper;
