@@ -1,9 +1,16 @@
-// import { Button, CircularProgress, Fade, Grid, Tab, Tabs, TextField, Typography } from '@material-ui/core';
 import { CssBaseline, Container, Paper, Box } from "@material-ui/core";
-import RegistartionLinearStepper from "./RegistartionLinearStepper";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import PlaceOrderLinearStepper from "./PlaceOrderLinearStepper";
 
   
-export default function Registration() {
+export default function PlaceOrderForm() {
+  const history = useHistory();
+  useEffect(()=>{
+    if (!(JSON.parse(localStorage.getItem('customer_details')).length > 0)) {
+      history.push('/customer_registration')
+    }
+  },[])
   return (
     <>
       <CssBaseline />
@@ -17,7 +24,7 @@ export default function Registration() {
               alignItems:'center'
             }}
           >
-            <RegistartionLinearStepper />
+            <PlaceOrderLinearStepper />
           </div>
         </Paper>
       </Container>

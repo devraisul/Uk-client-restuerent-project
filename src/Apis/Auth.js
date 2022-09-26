@@ -50,3 +50,31 @@ export const changePass = async () => {
     })
   return changePassResponse
 }
+
+
+
+
+
+
+
+
+
+export const customerRegister = async (data) => {
+  console.log('from api',data);
+  let loginResponse;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  await axios.post(`/api/owner/user/registration`, data, config)
+    .then(res => {
+      loginResponse = res.data;
+      window.localStorage.setItem('customer_details', JSON.stringify([{
+        customer: loginResponse.data.user,
+        customer_token:loginResponse.token
+      }]))
+      return loginResponse;
+    })
+  return loginResponse
+}

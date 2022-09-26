@@ -1,17 +1,17 @@
 import React from "react";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import MUIDataTable from "mui-datatables";
+// import MUIDataTable from "mui-datatables";
 import QRCode from 'qrcode.react';
 // components
 import PageTitle from "../../components/PageTitle";
 import Widget from "../../components/Widget";
-import Table from "../dashboard/components/Table/Table";
+// import Table from "../dashboard/components/Table/Table";
 
 // data
-import mock from "../dashboard/mock";
+// import mock from "../dashboard/mock";
 import { useAuth } from "../../context/AuthContext";
-import { getMenu } from "../../Apis/Menu";
+// import { getMenu } from "../../Apis/Menu";
 import AllMenu from "../Menu/AllMenu/AllMenu";
 
 
@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
 export default function Tables() {
   const { user } = useAuth();
   const classes = useStyles();
+  // console.log(user);
   return (
     <>
       <PageTitle title="All Menus" />
@@ -40,7 +41,7 @@ export default function Tables() {
         <Grid item xs={12}>
           <Widget title="Menu List" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
             <AllMenu
-              id={user?.restaurant[0].id}
+              id={user?.restaurant[0]?.id}
             />
           </Widget>
         </Grid>

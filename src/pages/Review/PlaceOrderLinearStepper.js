@@ -15,7 +15,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
-import { userRegister } from "../../Apis/Auth";
+// import { customerRegister, userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,11 +23,10 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
 }));
-
 function getSteps() {
-  return ["Basic information", "Contact information", "Security information"];
+  return ["Contact information", "Security information"];
 }
-const BasicForm = () => {
+const ContactForm = () => {
   const { control,formState:{errors} } = useFormContext();
   return (
     <>
@@ -39,67 +38,15 @@ const BasicForm = () => {
         }}
         render={({ field }) => (
           <TextField
-            id="first-name"
-            label="First Name"
+            id="first_Name"
+            label="Full Name"
             variant="outlined"
-            placeholder="Enter Your First Name"
-            fullWidth
-            required
             type={'text'}
-            margin="normal"
-            {...field}
-            helperText={errors?.first_Name?.message}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="last_Name"
-        rules={{
-          required:"* Last name is required"
-        }}
-        render={({ field }) => (
-          <TextField
-            id="last-name"
-            label="Last Name"
-            variant="outlined"
-            placeholder="Enter Your Last Name"
-            fullWidth
-            type={'text'}
-            required
-            margin="normal"
-            {...field}
-            helperText={errors?.last_Name?.message}
-
-          />
-        )}
-      />
-    </>
-  );
-};
-const ContactForm = () => {
-  const { control,formState:{errors} } = useFormContext();
-  return (
-    <>
-      <Controller
-        control={control}
-        name="email"
-        rules={{
-          required:"* Email is required"
-        }}
-        render={({ field }) => (
-          <TextField
-            id="email"
-            label="E-mail"
-            variant="outlined"
-            type={'email'}
-            placeholder="Enter Your E-mail Address"
+            placeholder="Enter Your Name"
             required
             fullWidth
             margin="normal"
             {...field}
-            helperText={errors?.email?.message}
           />
         )}
       />
@@ -121,6 +68,7 @@ const ContactForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            helperText={errors?.phone?.message}
           />
         )}
       />
@@ -131,6 +79,26 @@ const SecurityForm = () => {
   const { control,formState:{errors} } = useFormContext();
   return (
     <>
+      <Controller
+        control={control}
+        name="email"
+        rules={{
+          required:"* Email is required"
+        }}
+        render={({ field }) => (
+          <TextField
+            id="email"
+            label="E-mail"
+            variant="outlined"
+            placeholder="email"
+            type={'email'}
+            fullWidth
+            required
+            margin="normal"
+            {...field}
+          />
+        )}
+      />
       <Controller
         control={control}
         name="password"
@@ -151,52 +119,31 @@ const SecurityForm = () => {
           />
         )}
       />
-      <Controller
-        control={control}
-        name="type"
-        render={({ field }) => (
-          <TextField
-            id="type"
-            label="Type"
-            variant="outlined"
-            placeholder="Owner"
-            type={'text'}
-            required
-            disabled
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
       
     </>
   );
 };
+
 function getStepContent(step) {
   console.log(step);
   switch (step) {
     case 0:
-      return <BasicForm />;
-    case 1:
       return <ContactForm />;
-    case 2:
+    case 1:
       return <SecurityForm />;
     default:
       return "unknown step";
   }
 }
 
-const RegistartionLinearStepper = () => {
+const PlaceOrderLinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
       first_Name: "",
-      last_Name: "",
       email: "",
       phone: "",
       password: "",
-      type: "restaurant_Owner",
     },
   });
   const [activeStep, setActiveStep] = useState(0);
@@ -212,14 +159,15 @@ const RegistartionLinearStepper = () => {
   };
 
   const handleNext = (data) => {
+    console.log(data);
     if (activeStep == steps.length - 1) {
-      setIsLoading(true);
-      userRegister(data).then((res) => {
-        setUser(res.data.user);
-        setIsLoading(false);
+      // customerRegister(data).then((res) => {
+        // setUser(res.data.user);
+        // setIsLoading(false);
+        // console.log(res);
         setActiveStep(activeStep + 1);
-        setTimeout(() => history.push("/addrestaurent"), 2000);
-      });
+        // setTimeout(() => history.push("/addrestaurent"), 2000);
+      // });
     } else {
       setActiveStep(activeStep + 1);
       setSkippedSteps(
@@ -235,9 +183,9 @@ const RegistartionLinearStepper = () => {
   return (
     <div style={{
       display:'flex',
-      justifyContent:'center',
-      alignItems:'center',
-      flexDirection:'column'
+  justifyContent:'center',
+  alignItems:'center',
+  flexDirection:'column'
     }}>
       <h1
         style={{
@@ -247,8 +195,9 @@ const RegistartionLinearStepper = () => {
           fontWeight: "bold",
         }}
       >
-        Create An Account
+        Place Order
       </h1>
+
       <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((step, index) => {
           const labelProps = {};
@@ -259,9 +208,7 @@ const RegistartionLinearStepper = () => {
           }
           return (
             <Step {...stepProps} key={index}>
-              <StepLabel style={{
-                width:'150px'
-              }} {...labelProps}>{step}</StepLabel>
+              <StepLabel style={{width:'150px'}} {...labelProps}>{step}</StepLabel>
             </Step>
           );
         })}
@@ -310,10 +257,9 @@ const RegistartionLinearStepper = () => {
                   className={classes.button}
                   variant="contained"
                   color="primary"
-                  // onClick={handleNext}
                   type="submit"
                 >
-                {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
+                  {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>
             </form>
@@ -324,4 +270,4 @@ const RegistartionLinearStepper = () => {
   );
 };
 
-export default RegistartionLinearStepper;
+export default PlaceOrderLinearStepper;

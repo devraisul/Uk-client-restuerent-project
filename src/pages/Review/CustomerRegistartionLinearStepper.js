@@ -15,19 +15,20 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
-import { userRegister } from "../../Apis/Auth";
+// import { customerRegister, userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
+import { customerRegister } from "../../Apis/Auth";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   button: {
     marginRight: theme.spacing(1),
   },
 }));
-
 function getSteps() {
-  return ["Basic information", "Contact information", "Security information"];
+  return ["Contact information", "Security information"];
 }
-const BasicForm = () => {
+const ContactForm = () => {
   const { control,formState:{errors} } = useFormContext();
   return (
     <>
@@ -39,46 +40,44 @@ const BasicForm = () => {
         }}
         render={({ field }) => (
           <TextField
-            id="first-name"
-            label="First Name"
+            id="first_Name"
+            label="Full Name"
             variant="outlined"
-            placeholder="Enter Your First Name"
-            fullWidth
-            required
             type={'text'}
+            placeholder="Enter Your Name"
+            required
+            fullWidth
             margin="normal"
             {...field}
-            helperText={errors?.first_Name?.message}
           />
         )}
       />
-
       <Controller
         control={control}
-        name="last_Name"
+        name="phone"
         rules={{
-          required:"* Last name is required"
+          required:"* Phone number mustbe have 11 digit (require)",
+          minLength:11,
+          maxLength:11
         }}
         render={({ field }) => (
           <TextField
-            id="last-name"
-            label="Last Name"
+            id="phonenumber"
+            label="Phone Number"
             variant="outlined"
-            placeholder="Enter Your Last Name"
-            fullWidth
             type={'text'}
-            required
+            placeholder="Enter Your 11 Digit Phone Number"
+            fullWidth
             margin="normal"
             {...field}
-            helperText={errors?.last_Name?.message}
-
+            helperText={errors?.phone?.message}
           />
         )}
       />
     </>
   );
 };
-const ContactForm = () => {
+const SecurityForm = () => {
   const { control,formState:{errors} } = useFormContext();
   return (
     <>
@@ -93,49 +92,21 @@ const ContactForm = () => {
             id="email"
             label="E-mail"
             variant="outlined"
+            placeholder="email"
             type={'email'}
-            placeholder="Enter Your E-mail Address"
+            fullWidth
             required
-            fullWidth
-            margin="normal"
-            {...field}
-            helperText={errors?.email?.message}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="phone"
-        rules={{
-          required:"* Phone number mustbe have 11 digit (require)",
-          minLength:11,
-          maxLength:11
-        }}
-        render={({ field }) => (
-          <TextField
-            id="phone-number"
-            label="Phone Number"
-            variant="outlined"
-            type={'text'}
-            placeholder="Enter Your 11 Digit Phone Number"
-            fullWidth
             margin="normal"
             {...field}
           />
         )}
       />
-    </>
-  );
-};
-const SecurityForm = () => {
-  const { control,formState:{errors} } = useFormContext();
-  return (
-    <>
       <Controller
         control={control}
         name="password"
         rules={{
-          required:"* Password is required"
+          required:"* Password must be minimum 6 digit required",
+          minLength:6
         }}
         render={({ field }) => (
           <TextField
@@ -151,24 +122,6 @@ const SecurityForm = () => {
           />
         )}
       />
-      <Controller
-        control={control}
-        name="type"
-        render={({ field }) => (
-          <TextField
-            id="type"
-            label="Type"
-            variant="outlined"
-            placeholder="Owner"
-            type={'text'}
-            required
-            disabled
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
       
     </>
   );
@@ -177,26 +130,21 @@ function getStepContent(step) {
   console.log(step);
   switch (step) {
     case 0:
-      return <BasicForm />;
-    case 1:
       return <ContactForm />;
-    case 2:
+    case 1:
       return <SecurityForm />;
     default:
       return "unknown step";
   }
 }
-
-const RegistartionLinearStepper = () => {
+const CustomerRegistartionLinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
       first_Name: "",
-      last_Name: "",
       email: "",
       phone: "",
       password: "",
-      type: "restaurant_Owner",
     },
   });
   const [activeStep, setActiveStep] = useState(0);
@@ -207,18 +155,29 @@ const RegistartionLinearStepper = () => {
   const steps = getSteps();
 
 
+
+
+  useEffect(()=>{
+    if ((JSON.parse(localStorage.getItem('customer_details')).length > 0)) {
+      history.push('/place_order')
+    }
+  },[])
+
+
+
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
   };
 
   const handleNext = (data) => {
+    console.log(data);
     if (activeStep == steps.length - 1) {
-      setIsLoading(true);
-      userRegister(data).then((res) => {
-        setUser(res.data.user);
+      customerRegister(data).then((res) => {
         setIsLoading(false);
-        setActiveStep(activeStep + 1);
-        setTimeout(() => history.push("/addrestaurent"), 2000);
+        if(res.token){
+          setActiveStep(activeStep + 1);
+          setTimeout(() => history.push("/place_order"), 1000);
+        }
       });
     } else {
       setActiveStep(activeStep + 1);
@@ -235,9 +194,9 @@ const RegistartionLinearStepper = () => {
   return (
     <div style={{
       display:'flex',
-      justifyContent:'center',
-      alignItems:'center',
-      flexDirection:'column'
+  justifyContent:'center',
+  alignItems:'center',
+  flexDirection:'column'
     }}>
       <h1
         style={{
@@ -249,6 +208,7 @@ const RegistartionLinearStepper = () => {
       >
         Create An Account
       </h1>
+
       <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((step, index) => {
           const labelProps = {};
@@ -259,9 +219,7 @@ const RegistartionLinearStepper = () => {
           }
           return (
             <Step {...stepProps} key={index}>
-              <StepLabel style={{
-                width:'150px'
-              }} {...labelProps}>{step}</StepLabel>
+              <StepLabel style={{width:'150px'}} {...labelProps}>{step}</StepLabel>
             </Step>
           );
         })}
@@ -310,10 +268,9 @@ const RegistartionLinearStepper = () => {
                   className={classes.button}
                   variant="contained"
                   color="primary"
-                  // onClick={handleNext}
                   type="submit"
                 >
-                {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
+                  {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>
             </form>
@@ -324,4 +281,4 @@ const RegistartionLinearStepper = () => {
   );
 };
 
-export default RegistartionLinearStepper;
+export default CustomerRegistartionLinearStepper;
