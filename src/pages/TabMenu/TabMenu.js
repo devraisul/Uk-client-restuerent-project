@@ -4,6 +4,7 @@ import { getAllDish } from "../../Apis/dish";
 import { getMenu } from "../../Apis/Menu";
 import { getRestaurent } from "../../Apis/Restaurent";
 import ImageComing from "../../assets/image-coming-soon.png";
+import Loading from "../../components/Loading/Loading";
 import { useAuth } from "../../context/AuthContext";
 import Alldishes from "../AllDishes/Alldishes";
 import Cart from "../Review/Cart";
@@ -90,8 +91,8 @@ const TabMenu = () => {
     }
   };
 
-  return loading && loading2 ? (
-    <div>Loading ....</div>
+  return loading && loading2 ? (  
+    <Loading />
   ) : (
     <>
       <Fragment>
@@ -219,7 +220,10 @@ const TabMenu = () => {
                               {menus.id === collapse ? (
                                 <div className="tabA-content">
                                   {" "}
-                                  <Alldishes id={menus.id} />{" "}
+                                  <Alldishes
+                                   id={menus.id}
+                                   setChangeCartItems={setChangeCartItems}
+                                   />{" "}
                                 </div>
                               ) : (
                                 ""
@@ -261,7 +265,9 @@ const TabMenu = () => {
                     {menus.ìd === collapse ? (
                       <div className="tabA-content">
                         {" "}
-                        <Alldishes id={MenuId} />{" "}
+                        <Alldishes
+                        setChangeCartItems={setChangeCartItems}
+                        id={MenuId} />{" "}
                       </div>
                     ) : (
                       ""
@@ -297,7 +303,9 @@ const TabMenu = () => {
                   {menus.id === collapse ? (
                     <div className="tabA-content">
                       {" "}
-                      <Alldishes id={MenuId} />{" "}
+                      <Alldishes 
+                      setChangeCartItems={setChangeCartItems}
+                      id={MenuId} />{" "}
                     </div>
                   ) : (
                     ""

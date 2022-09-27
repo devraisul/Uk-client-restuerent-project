@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { getdish } from '../../../Apis/dish';
-import AlldishesUI from '../../ViewMenu/AlldishesUI'
+import Loading from '../../../components/Loading/Loading';
+import AlldishesUI from '../../ViewMenu/AlldishesUI';
 
 const Alldish = ({ menuId, menuName }) => {
   const [dishes, setDishes] = React.useState()
@@ -26,7 +27,7 @@ const Alldish = ({ menuId, menuName }) => {
   }
 
   return loading ? (
-    <div>Loading ....</div>
+    <Loading />
   ) : (
     <Fragment>
       <div className='table-wrapper'>

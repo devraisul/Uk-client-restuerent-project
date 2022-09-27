@@ -1,7 +1,8 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gettype, gettypecount, Variationlink } from '../../Apis/variation';
-import './viewMenu.css'
+import Loading from '../../components/Loading/Loading';
+import './viewMenu.css';
 //Add dish Form
 const LinkVariation = ({ rid, id }) => {
 
@@ -93,7 +94,7 @@ const LinkVariation = ({ rid, id }) => {
   };
 
   return loading ? (
-    <div>Loading ....</div>
+    <Loading />
   ) : (
     <div className='containerLBB'>
       {variations?.x?.length === 0 ? (<Fragment>

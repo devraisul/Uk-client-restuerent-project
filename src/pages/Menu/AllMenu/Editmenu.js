@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Editmenumultiple, getMenu } from '../../../Apis/Menu';
+import Loading from '../../../components/Loading/Loading';
 
 const Editmenu = ({ id }) => {
   const [menus, setMenus] = useState([])
@@ -53,7 +54,7 @@ const Editmenu = ({ id }) => {
       })
   }
   return loading ? (
-    <div>Loading ....</div>
+    <Loading />
   ) : (
     <div className='table-wrapper'>
       {inputList?.length === 0 ? (<p>Add Menu first to Edit!</p>) : (<Fragment><h1 className='large text-center text-primary'>Edit Dish</h1>  <table className="fl-table">

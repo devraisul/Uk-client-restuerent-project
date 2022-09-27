@@ -1,18 +1,12 @@
-import React, { useState } from "react";
 import {
-  Typography,
-  TextField,
-  Button,
-  Stepper,
-  Step,
-  StepLabel,
+  Button, Step,
+  StepLabel, Stepper, TextField, Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import {
-  useForm,
   Controller,
-  FormProvider,
-  useFormContext,
+  FormProvider, useForm, useFormContext
 } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
 // import { customerRegister, userRegister } from "../../Apis/Auth";
@@ -23,8 +17,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
 }));
+
 function getSteps() {
-  return ["Contact information", "Security information"];
+  return ["Customer information", "Order information"];
 }
 const ContactForm = () => {
   const { control,formState:{errors} } = useFormContext();
@@ -32,13 +27,31 @@ const ContactForm = () => {
     <>
       <Controller
         control={control}
-        name="first_Name"
+        name="amount"
+        render={({ field }) => (
+          <TextField
+          style={{
+            display:'none'
+          }}
+            id="amount"
+            variant="outlined"
+            type={'number'}
+            required
+            fullWidth
+            margin="normal"
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="customer_name"
         rules={{
           required:"* First name is required"
         }}
         render={({ field }) => (
           <TextField
-            id="first_Name"
+            id="customer_name"
             label="Full Name"
             variant="outlined"
             type={'text'}
@@ -72,6 +85,26 @@ const ContactForm = () => {
           />
         )}
       />
+      <Controller
+        control={control}
+        name="address"
+        rules={{
+          required:"* Please Enter Your Address (require)",
+        }}
+        render={({ field }) => (
+          <TextField
+            id="address"
+            label="Address"
+            variant="outlined"
+            type={'text'}
+            placeholder="Enter Your Address"
+            fullWidth
+            margin="normal"
+            {...field}
+            helperText={errors?.address?.message}
+          />
+        )}
+      />
     </>
   );
 };
@@ -81,17 +114,17 @@ const SecurityForm = () => {
     <>
       <Controller
         control={control}
-        name="email"
+        name="remarks"
         rules={{
-          required:"* Email is required"
+          required:"* Remarks is required"
         }}
         render={({ field }) => (
           <TextField
-            id="email"
-            label="E-mail"
+            id="remarks"
+            label="Remarks"
             variant="outlined"
-            placeholder="email"
-            type={'email'}
+            placeholder="remarks"
+            type={'text'}
             fullWidth
             required
             margin="normal"
@@ -101,17 +134,37 @@ const SecurityForm = () => {
       />
       <Controller
         control={control}
-        name="password"
+        name="table_number"
         rules={{
-          required:"* Password is required"
+          required:"* Table Number is required"
         }}
         render={({ field }) => (
           <TextField
-            id="password"
-            label="Password"
+            id="table_number"
+            label="Table Number"
             variant="outlined"
-            placeholder="Password"
-            type={'password'}
+            placeholder="Table Number"
+            type={'number'}
+            fullWidth
+            margin="normal"
+            {...field}
+            helperText={errors?.password?.message}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="type"
+        rules={{
+          required:"* Type is required"
+        }}
+        render={({ field }) => (
+          <TextField
+            id="type"
+            label="Type"
+            variant="outlined"
+            placeholder="Type"
+            type={'number'}
             fullWidth
             margin="normal"
             {...field}
@@ -133,17 +186,23 @@ function getStepContent(step) {
       return <SecurityForm />;
     default:
       return "unknown step";
-  }
+  } 
 }
 
 const PlaceOrderLinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
-      first_Name: "",
-      email: "",
-      phone: "",
-      password: "",
+      amount: JSON.parse(localStorage.getItem('order-details'))?.price,
+
+      customer_name: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.first_Name,
+      phone: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.phone,
+      address: "",
+      
+      remarks: "",
+      table_number: "",
+      type: "",
+      
     },
   });
   const [activeStep, setActiveStep] = useState(0);
@@ -165,7 +224,7 @@ const PlaceOrderLinearStepper = () => {
         // setUser(res.data.user);
         // setIsLoading(false);
         // console.log(res);
-        setActiveStep(activeStep + 1);
+        // setActiveStep(activeStep + 1);
         // setTimeout(() => history.push("/addrestaurent"), 2000);
       // });
     } else {
@@ -213,7 +272,13 @@ const PlaceOrderLinearStepper = () => {
           );
         })}
       </Stepper>
-
+        <span
+        style={{
+          fontWeight:'bold',
+          fontSize:'2rem',
+          color:'gray'
+        }}
+        >Total: £{JSON.parse(localStorage.getItem('order-details'))?.price}</span>
       {activeStep === steps.length ? (
         <Typography variant="h3" align="center">
           Thank You
@@ -233,7 +298,7 @@ const PlaceOrderLinearStepper = () => {
                     marginBottom: "20px",
                   }}
                 >
-                  Already have an accoun?
+                  Go 
                   <NavLink
                     to={"/login"}
                     style={{
@@ -241,7 +306,7 @@ const PlaceOrderLinearStepper = () => {
                     }}
                   >
                     {" "}
-                    Login.
+                    Back?
                   </NavLink>
                 </div>
                 <Button
