@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { getMenu } from '../../../Apis/Menu';
+import Loading from '../../../components/Loading/Loading';
 import AllmenuUI from './AllmenuUI';
 
 const AllMenu = ({ id }) => {
@@ -16,7 +17,7 @@ const AllMenu = ({ id }) => {
   }, [id])
   
   return loading ? (
-    <div>Loading ....</div>
+    <Loading />
   ) : (
     <Fragment>
       <div className='table-wrapper'>

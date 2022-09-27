@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { getDish } from '../../Apis/dish';
+import Loading from '../../components/Loading/Loading';
 import { useAuth } from '../../context/AuthContext';
 import AlldishesUI from './AlldishesUI';
-import './viewMenu.css'
+import './viewMenu.css';
 const ViewMenu = () => {
   const { user } = useAuth()
   const [allDish, setAllDish] = React.useState();
@@ -18,7 +19,7 @@ const ViewMenu = () => {
   }, [user]);
 
   return loading ? (
-    <div>Loading ....</div>
+    <Loading />
   ) : (
     <Fragment>
       <div className='padd'>

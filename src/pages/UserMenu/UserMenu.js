@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getRestaurent } from '../../Apis/Restaurent';
-import './usermenu.css'
-import Menu from '../../assets/menu.png'
-import Review from '../../assets/review.png'
-import ImageComing from '../../assets/image-coming-soon.png'
+import ImageComing from '../../assets/image-coming-soon.png';
+import Menu from '../../assets/menu.png';
+import Review from '../../assets/review.png';
+import Loading from '../../components/Loading/Loading';
+import './usermenu.css';
 const UserMenu = () => {
   const [loading, setLoading] = React.useState(false)
   const [restaurant, setRestaurant] = React.useState()
@@ -20,7 +21,7 @@ const UserMenu = () => {
   }, [id]);
   console.log(restaurant);
   return loading ? (
-    <div>Loading ....</div>
+    <Loading />
   ) : (
     <Fragment>
       <section className='landing2'>

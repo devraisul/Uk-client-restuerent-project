@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { gettables } from "../../Apis/table";
 import { useAuth } from "../../context/AuthContext";
 
 const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
-  var subtotal = 0;
-  const [amount, setAmount] = useState();
+  var subtotal =0;
+  const [amount, setAmount] = useState(200);
   const [cartItems, setCartItems] = useState([]);
   const [change, setChange] = useState(0);
 
-  const {user,isAuthenticated}=useAuth()
+  const { user, isAuthenticated } = useAuth();
+
   const history = useHistory()
   useEffect(() => {
-    localStorage.getItem('customer_details')===null&&localStorage.setItem('customer_details',JSON.stringify([]))
+    localStorage.getItem('customer_details') === null && localStorage.setItem('customer_details', JSON.stringify([]))
     setCartItems(
       JSON.parse(localStorage.getItem("cart_items")) !== null
         ? JSON.parse(localStorage.getItem("cart_items"))
@@ -21,12 +20,11 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     );
   }, [rand, change]);
 
-
   const decrCartItemsQuantity = (index, quantity) => {
-    cartItems[index].price = cartItems[index].price * quantity
+    cartItems[index].quantity = quantity;
     localStorage.setItem("cart_items", JSON.stringify(cartItems));
     setChange(Math.random());
-  };
+  };      
 
   const deleteCartItem = (index) => {
     cartItems.splice(index, 1);
@@ -41,11 +39,11 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     setChange(Math.random());
   };
 
-  const onSubmit = () =>{
+  const onSubmit = () => {
     (JSON.parse(localStorage.getItem('customer_details')).length > 0) ?
-    history.push('/place_order')
-     :
-    history.push('/customer_registration')
+      history.push('/place_order')
+      :
+      history.push('/customer_registration')
   }
 
   return (
@@ -70,17 +68,13 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                       <p className="cart-subtotal-amount">
                         £
                         {
-                          cartItem.variations.length > 0
-                            ? cartItem.variations.map((variation) => {
-                                cartItem.price =
-                                  cartItem.price + JSON.parse(variation).price;
-                                  (
-                                    <>
-                                    {cartItem.price}
-                                    </>
-                                  )
-                              })
-                            : (cartItem.price = cartItem.price)
+                          cartItem.variations.length > 0 ? cartItem.variations.map((variation) => (
+                            // cartItem.price = cartItem.price + JSON.parse(variation).price;
+                            <>
+                              {cartItem.price}
+                            </>
+                          ))
+                          :cartItem.price
                         }
                       </p>
                     </div>
@@ -100,15 +94,12 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                             (
                             {cartItem?.variations?.map((variation, i) => (
                               <Fragment key={i}>
-                                {/* {subtotal=subtotal+JSON.parse(variation).price} */}
                                 {i + 1 >= cartItem.variations.length ? (
-                                  <span>{` ${
-                                    JSON.parse(variation).name
-                                  } `}</span>
+                                  <span>{` ${JSON.parse(variation).name
+                                    } `}</span>
                                 ) : (
-                                  <span>{` ${
-                                    JSON.parse(variation).name
-                                  } , `}</span>
+                                  <span>{` ${JSON.parse(variation).name
+                                    } , `}</span>
                                 )}
                               </Fragment>
                             ))}

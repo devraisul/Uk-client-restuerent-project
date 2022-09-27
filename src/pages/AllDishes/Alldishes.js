@@ -1,12 +1,11 @@
 import React from 'react';
 import { getdish } from '../../Apis/dish';
+import Loading from '../../components/Loading/Loading';
 import BuyDishes from '../TabMenu/BuyDishes';
-import AlldishesUI from '../ViewMenu/AlldishesUI';
 
-const Alldishes = ({ id }) => {
+const Alldishes = ({ id, setChangeCartItems }) => {
   const [dishes, setDishes] = React.useState([])
   const [loading, setLoading] = React.useState(false)
-  console.log(id);
   React.useEffect(() => {
     setLoading(true)
     getdish(id)
@@ -16,7 +15,7 @@ const Alldishes = ({ id }) => {
       })
   }, [id])
   return loading ? (
-    <div>Loading ....</div>
+    <Loading />
   ) : (
     <React.Fragment>
       {dishes.length === 0 ? (<p>No dish Added Yet!</p>) : (
@@ -24,6 +23,7 @@ const Alldishes = ({ id }) => {
           <div className="grid-containerUM">
             {dishes.map((dishes) => (
               <BuyDishes
+                setChangeCartItems={setChangeCartItems}
                 key={dishes.restaurant_id}
                 dishes={dishes}
                 id={id}
