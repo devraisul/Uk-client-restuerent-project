@@ -22,16 +22,7 @@ export const addMenu = async (id, data) => {
 
 export const getMenu = async (id) => {
   let addMenuResponse;
-  const userInfo = localStorage.getItem('data')
-  const jwt = JSON.parse(userInfo);
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      'Accept': 'application/json',
-      "Authorization": `Bearer ${jwt.token}`
-    },
-  };
-  await axios.get(`/api/menu/AllbuId/${id}`, config)
+  await axios.get(`/api/menu/AllbuId/${id}`)
     .then(res => {
       addMenuResponse = res.data;
     })

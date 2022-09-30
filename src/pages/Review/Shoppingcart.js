@@ -45,7 +45,12 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
       :
       history.push('/customer_registration')
   }
+  let sum = 0;
 
+  for (let i = 0; i < cartItems.length; i++) {
+    sum += (cartItems[i].price * cartItems[i].quantity);
+  }
+  console.log(sum);
   return (
     <Fragment>
       <div>
@@ -59,30 +64,30 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
               {cartItems.map((cartItem, i) => (
                 <Fragment key={i}>
                   <li
-                    style={{ 
-                      backgroundColor: "#eeeeee", 
-                      marginBottom: 5 
+                    style={{
+                      backgroundColor: "#eeeeee",
+                      marginBottom: 5
                     }}
                     className="sidenavv__list-item"
                   >
                     <div style={{
-                      display: 'flex', 
+                      display: 'flex',
                       flexDirection: 'row',
-                      justifyContent:'start',
-                      alignItems:'center'
+                      justifyContent: 'start',
+                      alignItems: 'center'
                     }}>
                       <img
                         style={{
                           width: '50px'
                         }}
-                        src={cartItem?.image?`https://mughalsignandprint.co.uk/restaurant/${cartItem?.image}`:"https://i.postimg.cc/BQv5vFdv/no-pictures.png"} alt={cartItem.name} />
-                      <p style={{fontSize:'0.8rem', marginLeft:'5px'}} className="product-card-name"> {cartItem.name} </p>
+                        src={cartItem?.image ? `https://mughalsignandprint.co.uk/restaurant/${cartItem?.image}` : "https://i.postimg.cc/BQv5vFdv/no-pictures.png"} alt={cartItem.name} />
+                      <p style={{ fontSize: '0.8rem', marginLeft: '5px' }} className="product-card-name"> {cartItem.name} </p>
                     </div>
 
                     <div>
                       <p style={{
-                        fontWeight:'bold',
-                        color:'#999'
+                        fontWeight: 'bold',
+                        color: '#999'
                       }} className="cart-subtotal-amount">
                         £
                         {
@@ -171,16 +176,17 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
               ))}
               <li className="sidenavv__list-item">
                 <div>
-                  <div>
+                  {/* <div>
                     <p className="cart-subtotal">Subtotal:</p>
                     <p className="cart-subtotal-amount">£ {subtotal} </p>
-                  </div>
+                  </div> */}
                   <div className="totals-item totals-item-total">
                     <p className="cart-total">
                       Total:<p className="em">(Incl.GST)</p>
                     </p>
                     <p className="cart-total-amount">
-                      £{subtotal + 3.6 + 5.0}
+                      £{sum}
+                      {/* £{subtotal + 3.6 + 5.0} */}
                       {""}
                     </p>
                   </div>

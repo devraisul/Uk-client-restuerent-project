@@ -32,7 +32,7 @@ const Cart = ({ id, changeCartItems, setChangeCartItems }) => {
       <div>
         <div className='cart-icon' id='myTopnav1' onClick={toggleMenu}>
           <i className='fa fa-shopping-cart'></i>
-          <span className='products-count'>{count?.length}</span>
+          <span className='products-count'>{count ? count?.length : 0}</span>
         </div>
 
 
