@@ -1,5 +1,5 @@
 import {
-  Button, Step,
+  Button, MenuItem, Select, Step,
   StepLabel, Stepper, TextField, Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +8,8 @@ import {
   Controller,
   FormProvider, useForm, useFormContext
 } from "react-hook-form";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
+import { placeOrder } from "../../Apis/placeOrder";
 // import { customerRegister, userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
 
@@ -22,7 +23,8 @@ function getSteps() {
   return ["Customer information", "Order information"];
 }
 const ContactForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
+  console.log(errors?.phone)
   return (
     <>
       <Controller
@@ -30,9 +32,9 @@ const ContactForm = () => {
         name="amount"
         render={({ field }) => (
           <TextField
-          style={{
-            display:'none'
-          }}
+            style={{
+              display: 'none'
+            }}
             id="amount"
             variant="outlined"
             type={'number'}
@@ -47,19 +49,21 @@ const ContactForm = () => {
         control={control}
         name="customer_name"
         rules={{
-          required:"* First name is required"
+          required: "* First name is required"
         }}
         render={({ field }) => (
           <TextField
+            defaultValue={JSON.parse(localStorage.getItem('customer_details'))?.customer?.first_Name}
+            error={errors?.customer_name && true}
             id="customer_name"
-            label="Full Name"
+            label="Full Name *"
             variant="outlined"
             type={'text'}
             placeholder="Enter Your Name"
-            required
             fullWidth
             margin="normal"
             {...field}
+            helperText={errors?.customer_name?.message}
           />
         )}
       />
@@ -67,34 +71,38 @@ const ContactForm = () => {
         control={control}
         name="phone"
         rules={{
-          required:"* Phone number mustbe have 11 digit (require)",
-          minLength:11,
-          maxLength:11
+          required: "* Your phone number must be 11 digit (require)",
+          minLength: { value: 11, message: "Your phone number must be 11 digit" },
+          maxLength: { value: 11, message: "Your phone number must be 11 digit" }
         }}
         render={({ field }) => (
+
           <TextField
+            error={errors?.phone && true}
             id="phone-number"
-            label="Phone Number"
+            label="Phone Number *"
             variant="outlined"
-            type={'text'}
+            type={'number'}
             placeholder="Enter Your 11 Digit Phone Number"
             fullWidth
             margin="normal"
             {...field}
             helperText={errors?.phone?.message}
           />
+
         )}
       />
       <Controller
         control={control}
         name="address"
         rules={{
-          required:"* Please Enter Your Address (require)",
+          required: "* Please Enter Your Address (require)",
         }}
         render={({ field }) => (
           <TextField
+            error={errors?.address && true}
             id="address"
-            label="Address"
+            label="Address *"
             variant="outlined"
             type={'text'}
             placeholder="Enter Your Address"
@@ -109,15 +117,12 @@ const ContactForm = () => {
   );
 };
 const SecurityForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="remarks"
-        rules={{
-          required:"* Remarks is required"
-        }}
         render={({ field }) => (
           <TextField
             id="remarks"
@@ -126,7 +131,6 @@ const SecurityForm = () => {
             placeholder="remarks"
             type={'text'}
             fullWidth
-            required
             margin="normal"
             {...field}
           />
@@ -136,19 +140,20 @@ const SecurityForm = () => {
         control={control}
         name="table_number"
         rules={{
-          required:"* Table Number is required"
+          required: "* Table Number is required"
         }}
         render={({ field }) => (
           <TextField
+            error={errors?.table_number && true}
             id="table_number"
-            label="Table Number"
+            label="Table Number *"
             variant="outlined"
             placeholder="Table Number"
             type={'number'}
             fullWidth
             margin="normal"
             {...field}
-            helperText={errors?.password?.message}
+            helperText={errors?.table_number?.message}
           />
         )}
       />
@@ -156,29 +161,37 @@ const SecurityForm = () => {
         control={control}
         name="type"
         rules={{
-          required:"* Type is required"
+          required: "* Type is required"
         }}
         render={({ field }) => (
-          <TextField
-            id="type"
-            label="Type"
-            variant="outlined"
-            placeholder="Type"
-            type={'number'}
-            fullWidth
-            margin="normal"
-            {...field}
-            helperText={errors?.password?.message}
-          />
+          <>
+            <span>Type</span>
+            <Select
+              // error={errors?.type && true}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Type"
+              variant="outlined"
+              placeholder="Type"
+              type={'text'}
+              fullWidth
+              margin="normal"
+              {...field}
+              helperText={errors?.type?.message}
+            >
+              <MenuItem selected value={'Dine In'}>Dine In</MenuItem>
+              <MenuItem value={'Delivery'}>Delivery</MenuItem>
+              <MenuItem value={'Take Away'}>Take Away</MenuItem>
+            </Select>
+          </>
         )}
       />
-      
+
     </>
   );
 };
 
 function getStepContent(step) {
-  console.log(step);
   switch (step) {
     case 0:
       return <ContactForm />;
@@ -186,7 +199,7 @@ function getStepContent(step) {
       return <SecurityForm />;
     default:
       return "unknown step";
-  } 
+  }
 }
 
 const PlaceOrderLinearStepper = () => {
@@ -198,11 +211,11 @@ const PlaceOrderLinearStepper = () => {
       customer_name: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.first_Name,
       phone: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.phone,
       address: "",
-      
+
       remarks: "",
       table_number: "",
       type: "",
-      
+
     },
   });
   const [activeStep, setActiveStep] = useState(0);
@@ -213,6 +226,8 @@ const PlaceOrderLinearStepper = () => {
   const steps = getSteps();
 
 
+  const {restaurantId} = useParams()
+
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
   };
@@ -220,14 +235,17 @@ const PlaceOrderLinearStepper = () => {
   const handleNext = (data) => {
     console.log(data);
     if (activeStep == steps.length - 1) {
-      // customerRegister(data).then((res) => {
-        // setUser(res.data.user);
-        // setIsLoading(false);
-        // console.log(res);
-        // setActiveStep(activeStep + 1);
-        // setTimeout(() => history.push("/addrestaurent"), 2000);
-      // });
-    } else {
+      placeOrder(restaurantId,data)
+        .then((res) => {
+          console.log(res);
+          setIsLoading(false);
+          
+          // setActiveStep(activeStep + 1);
+          // setTimeout(() => history.push("/addrestaurent"), 2000);
+        }
+        );
+    }
+    else {
       setActiveStep(activeStep + 1);
       setSkippedSteps(
         skippedSteps.filter((skipItem) => skipItem !== activeStep),
@@ -241,10 +259,10 @@ const PlaceOrderLinearStepper = () => {
 
   return (
     <div style={{
-      display:'flex',
-  justifyContent:'center',
-  alignItems:'center',
-  flexDirection:'column'
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column'
     }}>
       <h1
         style={{
@@ -261,27 +279,32 @@ const PlaceOrderLinearStepper = () => {
         {steps.map((step, index) => {
           const labelProps = {};
           const stepProps = {};
-          
+
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
           return (
             <Step {...stepProps} key={index}>
-              <StepLabel style={{width:'150px'}} {...labelProps}>{step}</StepLabel>
+              <StepLabel style={{ width: '150px' }} {...labelProps}>{step}</StepLabel>
             </Step>
           );
         })}
       </Stepper>
+      {!(activeStep === steps.length) &&
         <span
-        style={{
-          fontWeight:'bold',
-          fontSize:'2rem',
-          color:'gray'
-        }}
-        >Total: £{JSON.parse(localStorage.getItem('order-details'))?.price}</span>
+          style={{
+            fontWeight: 'bold',
+            fontSize: '2rem',
+            color: 'gray'
+          }}
+        >Total: £ {JSON.parse(localStorage.getItem('order-details'))?.price ? JSON.parse(localStorage.getItem('order-details'))?.price : 0}</span>
+      }
+
       {activeStep === steps.length ? (
-        <Typography variant="h3" align="center">
-          Thank You
+        <Typography style={{
+          margin: '50px 0px'
+        }} variant="h2" align="center" >
+          Your order is taken successfully. ✅
         </Typography>
       ) : (
         <>
@@ -298,7 +321,7 @@ const PlaceOrderLinearStepper = () => {
                     marginBottom: "20px",
                   }}
                 >
-                  Go 
+                  Go
                   <NavLink
                     to={"/login"}
                     style={{
@@ -316,15 +339,15 @@ const PlaceOrderLinearStepper = () => {
                 >
                   back
                 </Button>
-                
+
                 <Button
-                disabled={isLoading?true:false}
+                  disabled={isLoading ? true : false}
                   className={classes.button}
                   variant="contained"
                   color="primary"
                   type="submit"
                 >
-                  {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
+                  {isLoading ? "..." : (activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>
             </form>

@@ -1,7 +1,7 @@
-import React from "react";
-import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import axios from "axios";
-import './app.css'
+import React from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import './app.css';
 // components
 import Layout from "./Layout";
 
@@ -10,15 +10,14 @@ import Error from "../pages/error";
 import Login from "../pages/login";
 
 // context
-import { useUserState } from "../context/UserContext";
-import AuthProvider, { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import AddRestaurentForm from "../pages/login/AddRestaurentForm";
-import UserMenu from "../pages/UserMenu/UserMenu";
-import ShowReviews from "../pages/showReviews/ShowReviews";
-import TabMenu from "../pages/TabMenu/TabMenu";
 import Registration from "../pages/login/Registration";
 import CustomerRegistration from "../pages/Review/CustomerRegistration";
 import PlaceOrderForm from "../pages/Review/PlaceOrderForm";
+import ShowReviews from "../pages/showReviews/ShowReviews";
+import TabMenu from "../pages/TabMenu/TabMenu";
+import UserMenu from "../pages/UserMenu/UserMenu";
 
 export default function App() {
   // global
@@ -38,11 +37,12 @@ export default function App() {
         <PublicRoute path="/login" component={Login} />
         <PublicRoute path="/registration" component={Registration} />
         <Route path="/usermenu/:id" component={UserMenu} />
+        <Route path="/customer_registration" component={CustomerRegistration} />
+            <Route path="/place_order/:restaurantId" component={PlaceOrderForm} />
         <Route path="/review/:id" component={ShowReviews} />
         <Route path="/tabmenu/:id" component={TabMenu} />
         <PublicRoute path="/addrestaurent" component={AddRestaurentForm} />
-        <Route path="/customer_registration" component={CustomerRegistration} />
-        <Route path="/place_order" component={PlaceOrderForm} />
+        
         <Route component={Error} />
       </Switch>
     </BrowserRouter>

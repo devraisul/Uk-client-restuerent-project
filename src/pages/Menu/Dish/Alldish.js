@@ -3,7 +3,7 @@ import { getdish } from '../../../Apis/dish';
 import Loading from '../../../components/Loading/Loading';
 import AlldishesUI from '../../ViewMenu/AlldishesUI';
 
-const Alldish = ({ menuId, menuName }) => {
+const Alldish = ({ isChangeMenu,menuId, menuName,restaurentId }) => {
   const [dishes, setDishes] = React.useState()
   const [loading, setLoading] = React.useState(false)
 
@@ -15,7 +15,8 @@ const Alldish = ({ menuId, menuName }) => {
         console.log({ res });
         setLoading(false)
       })
-  }, [menuId]);
+  }, [menuId,isChangeMenu]);
+  
   console.log(dishes);
   const [comp_update, set_comp_update] = React.useState(1);
   // if(update && comp_update%2!=0)

@@ -1,24 +1,17 @@
-import React, { useState } from "react";
 import {
-  Typography,
-  TextField,
-  Button,
-  Stepper,
-  Step,
-  StepLabel,
+  Button, Step,
+  StepLabel, Stepper, TextField, Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import {
-  useForm,
   Controller,
-  FormProvider,
-  useFormContext,
+  FormProvider, useForm, useFormContext
 } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
 // import { customerRegister, userRegister } from "../../Apis/Auth";
-import { useAuth } from "../../context/AuthContext";
 import { customerRegister } from "../../Apis/Auth";
-import { useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -154,17 +147,6 @@ const CustomerRegistartionLinearStepper = () => {
   const history = useHistory();
   const steps = getSteps();
 
-
-
-
-  useEffect(()=>{
-    if ((JSON.parse(localStorage.getItem('customer_details')).length > 0)) {
-      history.push('/place_order')
-    }
-  },[])
-
-
-
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
   };
@@ -174,6 +156,10 @@ const CustomerRegistartionLinearStepper = () => {
     if (activeStep == steps.length - 1) {
       customerRegister(data).then((res) => {
         setIsLoading(false);
+        localStorage.setItem('customer_details',JSON.stringify([{
+          customer:res.data.user,
+          customerToken:res.token
+        }]))
         if(res.token){
           setActiveStep(activeStep + 1);
           setTimeout(() => history.push("/place_order"), 1000);

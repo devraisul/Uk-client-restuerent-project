@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { adddish } from '../../../Apis/dish';
 
-const AddDish = ({ menuId, restaurentId, menuName }) => {
+const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
 // console.log({restaurentId,menuId });
 
   const [inputList, setInputList] = React.useState([{ 
@@ -22,7 +22,7 @@ const AddDish = ({ menuId, restaurentId, menuName }) => {
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
-    // console.log(inputList);
+    console.log(inputList);
   };
 
   // handle click event of the Add button
@@ -108,18 +108,20 @@ const AddDish = ({ menuId, restaurentId, menuName }) => {
       console.log(dishes)
       adddish(restaurentId, dishes)
         .then(res => {
-          console.log(res);
-          setInputList([{ 
-            name: "",
-            price:0, 
-            take_away: 0,
-            delivery: 0 ,
-            restaurant_id:restaurentId,
-            description:"",
-            ingredients:"",
-            calories:"",
-            menu_id :menuId
-        }])
+          if(res.data.length === 1){
+            setInputList([{ 
+              name: "",
+              price:0, 
+              take_away: 0,
+              delivery: 0 ,
+              restaurant_id:restaurentId,
+              description:"",
+              ingredients:"",
+              calories:"",
+              menu_id :menuId
+          }])
+          setIsChangeMenu(Math.random())
+          }
       })
     };
   };
@@ -137,7 +139,7 @@ const AddDish = ({ menuId, restaurentId, menuName }) => {
               <th>Ingredients</th>
               <th>Calories</th>
               <th>Price</th>
-              <th>Price</th>
+              <th>Delivery</th>
               <th>TakeAway Price</th>
               <th></th>
               <th></th>
@@ -162,6 +164,7 @@ const AddDish = ({ menuId, restaurentId, menuName }) => {
                   </td>
                   <td>
                     <textarea
+                    maxLength={255}
                       name="description"
                       placeholder="Enter Dish Description"
                       className="form-control form-control-lg"
@@ -172,7 +175,7 @@ const AddDish = ({ menuId, restaurentId, menuName }) => {
                   </td>
                   <td>
                     <textarea
-                    
+                    maxLength={255}
                       name="ingredients"
                       placeholder="Enter Ingredients"
                       value={x.ingredients}
