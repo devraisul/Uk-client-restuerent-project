@@ -85,71 +85,71 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
     setOpen2(true);
     openpopup(true);
   };
-  const trimString = (string, length = 15)=>(string.slice(0,string.length >= length - 3?length - 3:string.length).padEnd(string.length >= length - 3?length:string.length, '.'))
+  const trimString = (string, length = 15) => (string?.slice(0, string?.length >= length - 3 ? length - 3 : string?.length).padEnd(string?.length >= length - 3 ? length : string?.length, '.'))
 
 
   return (
     <Fragment>
       <div
         style={{
-          borderRadius:'10px',
-          position:'relative',
+          borderRadius: '10px',
+          position: 'relative',
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          height:'100%',
- 
+          height: '100%',
+
         }}
         className="grid-itemUM"
         onClick={(e) => handdeleClick(dishes?.id)}>
         <div style={{
-          width:'50%',
-        height:"100%",
-  
+          width: '50%',
+          height: "100%",
+
         }}>
-          <h3>{dishes?.name}</h3> 
+          <h3>{dishes?.name}</h3>
           <p style={{
-            fontSize:'0.8rem',
-            marginBottom:'10px',
-            color:'#555'
+            fontSize: '0.8rem',
+            marginBottom: '10px',
+            color: '#555'
           }}>{trimString(dishes?.description)}</p>
           <div className="divprice">
-            <p style={{fontSize:'1rem', fontWeight:'bold',color:'#999'}} className="DishPrice"> £ {dishes?.price} </p>{" "}
+            <p style={{ fontSize: '1rem', fontWeight: 'bold', color: '#999' }} className="DishPrice"> £ {dishes?.price} </p>{" "}
           </div>
         </div>
-        <div 
-        style={{
-          width:"50%",
- 
-          height:'100%'
-        }}
+        <div
+          style={{
+            width: "50%",
+
+            height: '100%'
+          }}
         >
           {dishes?.image ? (
             <Fragment style={{
-              width:'50%'
+              width: '50%'
             }}>
-            {console.log(dishes?.image)}
-            <img
-            style={{
-              objectFit:'cover',
-              width:'100%'
-            }}
-              height={'150'}
-              className="roundimgg"
-              src={`https://mughalsignandprint.co.uk/restaurant/${dishes?.image}`}
-              alt="user"
-              onClick={(e) => setOpen2(true)}
-            />
+              {console.log(dishes?.image)}
+              <img
+                style={{
+                  objectFit: 'cover',
+                  width: '100%'
+                }}
+                height={'150'}
+                className="roundimgg"
+                src={`https://mughalsignandprint.co.uk/restaurant/${dishes?.image}`}
+                alt="user"
+                onClick={(e) => setOpen2(true)}
+              />
             </Fragment>
-            
+
           ) : (
             <img
-            style={{
-              objectFit:'cover',
-              width:'100%'
-            }}
-            height={'150'}
+              style={{
+                objectFit: 'cover',
+                width: '100%'
+              }}
+              height={'150'}
               className="roundimgg"
               src={"https://i.postimg.cc/BQv5vFdv/no-pictures.png"}
               alt="user"
@@ -157,10 +157,10 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
             />
           )}
           <div style={{
-            position:'absolute',
-            top:0,
-            right:0,
-            height:'100%'
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            height: '100%'
           }} className="infoicon">
             <i className="fas fa-info"></i>
           </div>
@@ -176,7 +176,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
               alt={dishes?.name}
               src={`${dishes?.image ? `https://mughalsignandprint.co.uk/restaurant/${dishes?.image}` : "https://i.postimg.cc/BQv5vFdv/no-pictures.png"}`}
             />
-            <h1 style={{ textAlign: "center",margin:'0px 0px 10px 0px' }}>{dishes?.name}</h1>
+            <h1 style={{ textAlign: "center", margin: '0px 0px 10px 0px' }}>{dishes?.name}</h1>
 
             {dishVariations.length !== 0 ? (
               dishVariations.map((dishVariation, i) => (
@@ -195,7 +195,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}>
-                      <h1 style={{ width: '100%',textAlign:'left' }} className="btn btn-primary fs-5 mb-5">
+                      <h1 style={{ width: '100%', textAlign: 'left' }} className="btn btn-primary fs-5 mb-5">
                         {`Choose ${dishVariation.no_of_varation_allowed} ${dishVariation?.variation_type?.name} `}
                       </h1>
                     </div>
@@ -248,7 +248,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
               <div
                 // className="form-groupp"
                 style={{
-                  margin:"5px 0px",
+                  margin: "5px 0px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
