@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
-  var subtotal =0;
+  var subtotal = 0;
   const [amount, setAmount] = useState(200);
   const [cartItems, setCartItems] = useState([]);
   const [change, setChange] = useState(0);
@@ -24,7 +24,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     cartItems[index].quantity = quantity;
     localStorage.setItem("cart_items", JSON.stringify(cartItems));
     setChange(Math.random());
-  };      
+  };
 
   const deleteCartItem = (index) => {
     cartItems.splice(index, 1);
@@ -41,7 +41,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
 
   const onSubmit = () => {
     (JSON.parse(localStorage.getItem('customer_details')).length > 0) ?
-      history.push('/place_order')
+      history.push(`/place_order/${JSON.parse(localStorage.getItem('data'))?.restaurant[0]?.id}`)
       :
       history.push('/customer_registration')
   }
@@ -55,17 +55,35 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
           </Fragment>
         ) : (
           <Fragment>
-            <ul className="sidenavv__list">
+            <ul className="">
               {cartItems.map((cartItem, i) => (
                 <Fragment key={i}>
                   <li
-                    style={{ backgroundColor: "#eeeeee", marginBottom: 5 }}
+                    style={{ 
+                      backgroundColor: "#eeeeee", 
+                      marginBottom: 5 
+                    }}
                     className="sidenavv__list-item"
                   >
+                    <div style={{
+                      display: 'flex', 
+                      flexDirection: 'row',
+                      justifyContent:'start',
+                      alignItems:'center'
+                    }}>
+                      <img
+                        style={{
+                          width: '50px'
+                        }}
+                        src={cartItem?.image?`https://mughalsignandprint.co.uk/restaurant/${cartItem?.image}`:"https://i.postimg.cc/BQv5vFdv/no-pictures.png"} alt={cartItem.name} />
+                      <p style={{fontSize:'0.8rem', marginLeft:'5px'}} className="product-card-name"> {cartItem.name} </p>
+                    </div>
+
                     <div>
-                      <p className="product-card-name"> {cartItem.name} </p>
-                      <br />
-                      <p className="cart-subtotal-amount">
+                      <p style={{
+                        fontWeight:'bold',
+                        color:'#999'
+                      }} className="cart-subtotal-amount">
                         £
                         {
                           cartItem.variations.length > 0 ? cartItem.variations.map((variation) => (
@@ -74,7 +92,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                               {cartItem.price}
                             </>
                           ))
-                          :cartItem.price
+                            : cartItem.price
                         }
                       </p>
                     </div>

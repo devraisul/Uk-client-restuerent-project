@@ -1,9 +1,9 @@
 import axios from "axios";
 // Add variation type
 
-export const placeOrder = async (id, data) => {
+export const placeOrder = async (id,data) => {
   const userInfo = localStorage.getItem('data')
-  const jwt = JSON.parse(userInfo);
+  const jwt = JSON.parse(userInfo).token;
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -11,10 +11,11 @@ export const placeOrder = async (id, data) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  console.log(data);
-  await axios.post(`/api/variation/variation_type/multiple/${id}`, data, config)
+  // console.log(JSON.parse(localStorage.getItem('cart_items')));
+  data.dishes = JSON.parse(localStorage.getItem('cart_items'))
+  const addVariationResponse = await axios.post(`/api/order/${id}`, data, config)
     .then(res => {
-      addVariationResponse = res;
+      return res;
     })
     .catch(err => console.log(err));
   return addVariationResponse

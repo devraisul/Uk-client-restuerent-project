@@ -1,4 +1,4 @@
-import { CssBaseline, Container, Paper, Box } from "@material-ui/core";
+import { Box, Container, CssBaseline, Paper } from "@material-ui/core";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import PlaceOrderLinearStepper from "./PlaceOrderLinearStepper";
@@ -7,7 +7,7 @@ import PlaceOrderLinearStepper from "./PlaceOrderLinearStepper";
 export default function PlaceOrderForm() {
   const history = useHistory();
   useEffect(()=>{
-    if (!(JSON.parse(localStorage.getItem('customer_details')).length > 0)) {
+    if ((JSON.parse(localStorage.getItem('customer_details'))?.customerToken?.split('')?.length === 0)) {
       history.push('/customer_registration')
     }
   },[])

@@ -60,21 +60,16 @@ export const changePass = async () => {
 
 
 export const customerRegister = async (data) => {
-  console.log('from api',data);
-  let loginResponse;
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  await axios.post(`/api/owner/user/registration`, data, config)
+  console.log('from api req',data);
+  const resData = await axios.post(`/api/owner/user/registration`, data, config)
     .then(res => {
-      loginResponse = res.data;
-      window.localStorage.setItem('customer_details', JSON.stringify([{
-        customer: loginResponse.data.user,
-        customer_token:loginResponse.token
-      }]))
-      return loginResponse;
+      console.log('from api res',res.data);
+      return res.data;
     })
-  return loginResponse
+  return resData;
 }
