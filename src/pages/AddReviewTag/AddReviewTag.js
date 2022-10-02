@@ -1,56 +1,58 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@material-ui/core";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import ReactStars from "react-rating-stars-component";
-import { addReview, getRestaurentReview } from "../../Apis/Review";
+import { addReview, getReviewAll } from "../../Apis/Review";
 import { useAuth } from "../../context/AuthContext";
 
 const AddReviewTag = () => {
   const { user } = useAuth();
   const [rating, setRating] = useState(0);
-  const [reviewData, setReviewData] = useState()
+  const [reviewData, setReviewData] = useState([])
   const [rand, setRand] = useState(Math.random())
-  const id = user.restaurant[0].id;
+  const [formDefaultValue, setFormDefaultValue] = useState("")
+
+
   const ratingChanged = (newRating) => {
     setRating(newRating);
   };
 
   useEffect(() => {
-    getRestaurentReview()
+    const id = JSON.parse(localStorage.getItem('data'))?.restaurant[0]?.id
+    getReviewAll(id).then((res) => {
+      setReviewData(res?.data)
+    }).catch(err => {
+      console.log(err);
+    })
   }, [rand])
-  
+
   const handleReview = (e) => {
+    const id = JSON.parse(localStorage.getItem('data'))?.restaurant[0]?.id
     e.preventDefault();
     const data = {
-      reviewvalue: [{ tag: e.target.tag.value }],
+      question: formDefaultValue,
+      restaurant_id: id,
+      is_active: 1
     };
-    console.log(data);
-    addReview(id, rating, data).then((res) => {
+    console.log('data-->', data);
+    addReview(id, data).then((res) => {
       toast.success("Review Tag Added!");
-    }).then(()=>{
-        setRand(Math.random())
+      setFormDefaultValue("")
+    }).then(() => {
+      setRand(Math.random())
     });
   };
   return (
-    <div style={{ display: "flex", justifyContent: "center", flexDirection:'column'}}>
+    <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column' }}>
       <Toaster position="top-right" reverseOrder={false} />
       <div style={{
-        display:'flex',
-        flexDirection:'column',
-        justifyontent:'center',
-        alignItems:'center'
+        display: 'flex',
+        flexDirection: 'column',
+        justifyontent: 'center',
+        alignItems: 'center'
       }}>
-        <h1>Add Review Tag</h1>
-        <ReactStars
-          count={5}
-          onChange={ratingChanged}
-          size={50}
-          activeColor="#ffd700"
-        />
+        <h1 style={{ marginBottom: '20px' }}>Add Review Question</h1>
         <form onSubmit={handleReview}>
-          <TextField required name="tag" id="filled-basic" variant="filled" />
+          <TextField onChange={event => setFormDefaultValue(event.target.value)} value={formDefaultValue} required name="question" id="filled-basic" placeholder="Review Que" variant="filled" />
           <br />
           <div
             style={{
@@ -61,41 +63,120 @@ const AddReviewTag = () => {
           >
             <Button
               type="submit"
-              style={{ background: "#6600FF", color: "white" }}
-              variant="contained"
-            >
+              style={{ background: '#536DFE', color: "white", width: '100%', marginBottom: '50px' }}
+              variant="contained" >
               Submit
             </Button>
           </div>
         </form>
       </div>
-      <div
-        style={{
-          backgroundColor: "red",
-        }}
-      >
-        <Table className="mb-0">
-      <TableHead>
-        <TableRow>
-          <TableCell>Tag</TableCell>
-          <TableCell>Rating</TableCell>
-          <TableCell>Show</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {reviewData?.map((item, index) => (
-          <TableRow key={index}>
-            <TableCell className="pl-3 fw-normal">{item?.name}</TableCell>
-            <TableCell>{item?.description}</TableCell>
-            <TableCell>{''}</TableCell>
-            <TableCell>{''}</TableCell>
-            <TableCell>
-              {/* <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} /> */}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+      <div >
+        <h1 style={{
+          textAlign: 'center',
+          marginBottom: '20px'
+        }} >Your Question</h1>
+        <Table style={{
+          background: '#ccc',
+          textAlign: 'center'
+        }} className="mb-0"
+        >
+          <TableHead style={{
+            textAlign: 'center'
+          }}>
+            <TableRow style={{
+              background: '#536DFE'
+            }}>
+              <TableCell style={{
+                fontWeight: 'bold',
+                textAlign: 'center',
+                color: 'white',
+                borderBottom: '3px solid #fff'
+              }}>
+                No
+              </TableCell>
+              <TableCell style={{
+                fontWeight: 'bold',
+                textAlign: 'center',
+                color: 'white',
+                borderBottom: '3px solid #fff'
+              }}>
+                Question
+              </TableCell>
+              <TableCell style={{
+                fontWeight: 'bold',
+                textAlign: 'center',
+                color: 'white',
+                borderBottom: '3px solid #fff'
+              }}>
+                Status
+              </TableCell>
+              <TableCell style={{
+                fontWeight: 'bold',
+                textAlign: 'center',
+                color: 'white',
+                borderBottom: '3px solid #fff'
+              }}>
+                Options
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {reviewData?.map((item, index) => (
+              <TableRow style={{
+                textAlign: 'center',
+                background: '#AFBBFF',
+
+              }} key={index}>
+                <TableCell style={{
+                  textAlign: 'center',
+                  fontWeight: '600'
+                }}>
+                  {index}
+                </TableCell>
+                <TableCell style={{
+                  textAlign: 'center',
+                  fontWeight: '600'
+                }}>
+                  {item?.question}
+                </TableCell>
+                <TableCell style={{
+                  textAlign: 'center',
+                  fontWeight: '600'
+                }}>
+                  {item?.is_active ? 'Public' : 'Private'}
+                </TableCell>
+                <TableCell style={{
+                  textAlign: 'center',
+                  fontWeight: '600',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}>
+                  {
+                    item?.is_active ?
+
+                      <button onClick={()=>{}} style={{
+                        padding: "5px 10px",
+                        width: '100px',
+                        background: '#536DFE',
+                        margin: '0px 2px',
+                        borderRadius: '30px',
+                        color: 'white'
+                      }}>Hide</button>
+                      :
+                      <button onClick={()=>{}} style={{
+                        padding: "5px 10px",  
+                        width: '100px',
+                        background: '#536DFE',
+                        margin: '0px 2px',
+                        borderRadius: '30px',
+                        color: 'white'
+                      }}>Public</button>
+                  }
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

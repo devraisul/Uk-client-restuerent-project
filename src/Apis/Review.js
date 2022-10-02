@@ -1,26 +1,5 @@
 import axios from "axios";
 
-// Add Review
-export const addReview = async (id, rate, data) => {
-  let addReviewResponse;
-  const userInfo = localStorage.getItem("data");
-  const jwt = JSON.parse(userInfo);
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `Bearer ${jwt.token}`,
-    },
-  };
-  console.log("id:", id, "rate:", rate, "tag:", data);
-  await axios
-    .post(`/api/review/reviewvalue/${id}/${rate}`, data, config)
-    .then((res) => {
-      addReviewResponse = res;
-    })
-    .then((err) => console.log(err));
-  return addReviewResponse;
-};
 // /api/review/getvalues/1
 // Get Review
 export const getReview = async (id, fDate, sDate) => {
@@ -34,14 +13,14 @@ export const getReview = async (id, fDate, sDate) => {
       Authorization: `Bearer ${jwt.token}`,
     },
   };
-  await axios
-    .get(`api/review/getavg/review/${id}/${fDate}/${sDate}`, config)
+  return await axios
+    .get(`/api/review/getavg/review/${id}/${fDate}/${sDate}`, config)
     .then((res) => {
-      addReviewResponse = res.data;
+      return res.data;
     })
     .catch((err) => console.log(err));
-  return addReviewResponse;
 };
+
 // Get Review
 export const getReviewAll = async (id) => {
   let addReviewResponse;
@@ -54,8 +33,9 @@ export const getReviewAll = async (id) => {
       Authorization: `Bearer ${jwt.token}`,
     },
   };
+
   await axios
-    .get(`api/review/getreviewAll/${id}`, config)
+    .get(`/api/review-new/get/questions?restaurant_id=${id}`, config)
     .then((res) => {
       addReviewResponse = res.data;
       console.log(res);
@@ -76,7 +56,7 @@ export const getReviewRate = async (id, rate, start, end) => {
     },
   };
   await axios
-    .get(`api/review/getreview/${id}/${rate}/${start}/${end}`, config)
+    .get(`/api/review/getreview/${id}/${rate}/${start}/${end}`, config)
     .then((res) => {
       addReviewResponse = res.data;
     })
@@ -89,7 +69,6 @@ export const getRestaurentReview = async (id) => {
   const userInfo = localStorage.getItem("data");
   const jwt = JSON.parse(userInfo).token;
   const rastaurantId = JSON.parse(userInfo).restaurant[0].id;
-  console.log(rastaurantId);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -105,4 +84,38 @@ export const getRestaurentReview = async (id) => {
     })
     .catch((err) => console.log(err));
   return addReviewResponse;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add Review
+export const addReview = async (id,data) => {
+  const userInfo = localStorage.getItem("data");
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt.token}`,
+    },
+  };
+  console.log("from api", data);
+  return await axios
+    .post(`/api/review-new/create/questions`, data, config)
+    .then((res) => {
+      return res;
+    })
+    .then((err) => console.log(err));
 };

@@ -1,8 +1,8 @@
 import { Button, IconButton, TextField } from '@material-ui/core';
 import { Add, Delete } from '@material-ui/icons';
 import React, { Fragment, useState } from 'react';
-import { addMenu } from '../../../Apis/Menu';
 import toast, { Toaster } from 'react-hot-toast';
+import { addMenu } from '../../../Apis/Menu';
 
 
 //Add menu Form
@@ -39,22 +39,16 @@ const AddMenu = ({ id }) => {
       }
 
     }
-
-
-    if (x > 0) { toast.error(`${msg}`); }
-
-
-
-    else {
+    if (x > 0) { 
+      toast.error(`${msg}`); 
+  }else {
 
 
       setInputList([...inputList, { name: "", description: "" }]);
     }
 
   }
-
   const handledeleteClick = (i) => {
-
     const list2 = [...inputList];
     list2.splice(i, 1);
     setInputList(list2);
@@ -73,15 +67,12 @@ const AddMenu = ({ id }) => {
         x++;
         msg = msg + `Please add a Description for your menu at row no: ${i + 1}. `
         // setAlert(`Please add a Description for your menu at row no: ${i+1}`, 'danger');
-
       }
       if (inputList[i].name === '') {
         x++;
         msg = msg + `Please add the menu name at row no: ${i + 1}. `
         // setAlert(`Please add the menu name at row no: ${i+1}`, 'danger');
-
       }
-
     }
     if (x > 0) {
       toast.error(`${msg}`);
@@ -114,7 +105,6 @@ const AddMenu = ({ id }) => {
 
       <h1 className='large text-center text-primary'>ADD Menu</h1>
       <table className="fl-table">
-
         {/* <thead>
           <tr>
             <th width="10%">id</th>
@@ -123,7 +113,6 @@ const AddMenu = ({ id }) => {
             
           </tr>
         </thead> */}
-
         {inputList.map((x, i) => {
           return (
             <tbody>
