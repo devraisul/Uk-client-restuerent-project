@@ -208,7 +208,7 @@ function getStepContent(step) {
   }
 }
 
-const PlaceOrderLinearStepper = ({ sum }) => {
+const PlaceOrderLinearStepper = ({ sum, cartItem }) => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
@@ -241,7 +241,21 @@ const PlaceOrderLinearStepper = ({ sum }) => {
   const handleNext = (data) => {
     console.log(data);
     if (activeStep == steps.length - 1) {
-      placeOrder(restaurantId, data)
+      const dishe = cartItem.map(data => {
+        const dishes = {
+          "Dish_Price": data.price,
+          "qty": data.quantity,
+          "id": data.id,
+          "variation": data.variations
+        }
+        return dishes;
+      })
+      const order_data = {
+        ...data, dishe
+      }
+      console.log(order_data);
+
+      placeOrder(restaurantId, order_data)
         .then((res) => {
           console.log(res);
           setIsLoading(false);

@@ -68,6 +68,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
         </button>
         <PlaceOrderForm
           total={sum}
+          cartItem={cartItems}
         />
       </Popup>
       <Popup open={open2} closeOnDocumentClick onClose={closeModal2}>
