@@ -183,6 +183,12 @@ const SecurityForm = () => {
               <MenuItem value={'Delivery'}>Delivery</MenuItem>
               <MenuItem value={'Take Away'}>Take Away</MenuItem>
             </Select>
+            {/* <span>Type</span> */}
+            {/* <select name="" id="">
+              <option selected value={'Dine In'}>Dine In</option>
+              <option value={'Delivery'}>Delivery</option>
+              <option value={'Take Away'}>Take Away</option>
+            </select> */}
           </>
         )}
       />
@@ -202,11 +208,11 @@ function getStepContent(step) {
   }
 }
 
-const PlaceOrderLinearStepper = () => {
+const PlaceOrderLinearStepper = ({ sum }) => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
-      amount: JSON.parse(localStorage.getItem('order-details'))?.price,
+      amount: sum ? sum : 0,
 
       customer_name: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.first_Name,
       phone: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.phone,
@@ -226,7 +232,7 @@ const PlaceOrderLinearStepper = () => {
   const steps = getSteps();
 
 
-  const {restaurantId} = useParams()
+  const { restaurantId } = useParams()
 
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
@@ -235,11 +241,11 @@ const PlaceOrderLinearStepper = () => {
   const handleNext = (data) => {
     console.log(data);
     if (activeStep == steps.length - 1) {
-      placeOrder(restaurantId,data)
+      placeOrder(restaurantId, data)
         .then((res) => {
           console.log(res);
           setIsLoading(false);
-          
+
           // setActiveStep(activeStep + 1);
           // setTimeout(() => history.push("/addrestaurent"), 2000);
         }
@@ -297,7 +303,8 @@ const PlaceOrderLinearStepper = () => {
             fontSize: '2rem',
             color: 'gray'
           }}
-        >Total: £ {JSON.parse(localStorage.getItem('order-details'))?.price ? JSON.parse(localStorage.getItem('order-details'))?.price : 0}</span>
+        // >Total: £ {JSON.parse(localStorage.getItem('order-details'))?.price ? JSON.parse(localStorage.getItem('order-details'))?.price : 0}</span>
+        >Total: £ {sum ? sum : 0}</span>
       }
 
       {activeStep === steps.length ? (

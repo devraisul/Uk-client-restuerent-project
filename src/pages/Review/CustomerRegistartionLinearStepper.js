@@ -9,9 +9,11 @@ import {
   FormProvider, useForm, useFormContext
 } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
+import Popup from "reactjs-popup";
 // import { customerRegister, userRegister } from "../../Apis/Auth";
 import { customerRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
+import PlaceOrderForm from "./PlaceOrderForm";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -22,14 +24,14 @@ function getSteps() {
   return ["Contact information", "Security information"];
 }
 const ContactForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="first_Name"
         rules={{
-          required:"* First name is required"
+          required: "* First name is required"
         }}
         render={({ field }) => (
           <TextField
@@ -49,9 +51,9 @@ const ContactForm = () => {
         control={control}
         name="phone"
         rules={{
-          required:"* Phone number mustbe have 11 digit (require)",
-          minLength:11,
-          maxLength:11
+          required: "* Phone number mustbe have 11 digit (require)",
+          minLength: 11,
+          maxLength: 11
         }}
         render={({ field }) => (
           <TextField
@@ -71,14 +73,14 @@ const ContactForm = () => {
   );
 };
 const SecurityForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="email"
         rules={{
-          required:"* Email is required"
+          required: "* Email is required"
         }}
         render={({ field }) => (
           <TextField
@@ -98,8 +100,8 @@ const SecurityForm = () => {
         control={control}
         name="password"
         rules={{
-          required:"* Password must be minimum 6 digit required",
-          minLength:6
+          required: "* Password must be minimum 6 digit required",
+          minLength: 6
         }}
         render={({ field }) => (
           <TextField
@@ -115,7 +117,7 @@ const SecurityForm = () => {
           />
         )}
       />
-      
+
     </>
   );
 };
@@ -130,7 +132,9 @@ function getStepContent(step) {
       return "unknown step";
   }
 }
-const CustomerRegistartionLinearStepper = () => {
+const CustomerRegistartionLinearStepper = ({ sum }) => {
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
@@ -156,13 +160,14 @@ const CustomerRegistartionLinearStepper = () => {
     if (activeStep == steps.length - 1) {
       customerRegister(data).then((res) => {
         setIsLoading(false);
-        localStorage.setItem('customer_details',JSON.stringify([{
-          customer:res.data.user,
-          customerToken:res.token
+        localStorage.setItem('customer_details', JSON.stringify([{
+          customer: res.data.user,
+          customerToken: res.token
         }]))
-        if(res.token){
+        if (res.token) {
           setActiveStep(activeStep + 1);
-          setTimeout(() => history.push("/place_order"), 1000);
+          // setTimeout(() => history.push("/place_order"), 1000);
+          setTimeout(() => setOpen(true), 1000);
         }
       });
     } else {
@@ -179,11 +184,19 @@ const CustomerRegistartionLinearStepper = () => {
 
   return (
     <div style={{
-      display:'flex',
-  justifyContent:'center',
-  alignItems:'center',
-  flexDirection:'column'
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column'
     }}>
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <button className="close" onClick={(e) => setOpen(false)}>
+          &times;
+        </button>
+        <PlaceOrderForm
+          total={sum}
+        />
+      </Popup>
       <h1
         style={{
           textAlign: "center",
@@ -199,13 +212,13 @@ const CustomerRegistartionLinearStepper = () => {
         {steps.map((step, index) => {
           const labelProps = {};
           const stepProps = {};
-          
+
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
           return (
             <Step {...stepProps} key={index}>
-              <StepLabel style={{width:'150px'}} {...labelProps}>{step}</StepLabel>
+              <StepLabel style={{ width: '150px' }} {...labelProps}>{step}</StepLabel>
             </Step>
           );
         })}
@@ -248,15 +261,15 @@ const CustomerRegistartionLinearStepper = () => {
                 >
                   back
                 </Button>
-                
+
                 <Button
-                disabled={isLoading?true:false}
+                  disabled={isLoading ? true : false}
                   className={classes.button}
                   variant="contained"
                   color="primary"
                   type="submit"
                 >
-                  {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
+                  {isLoading ? "..." : (activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>
             </form>

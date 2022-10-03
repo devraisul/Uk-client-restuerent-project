@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import CustomerRegistartionLinearStepper from "./CustomerRegistartionLinearStepper";
 
-  
-export default function CustomerRegistration() {
+
+export default function CustomerRegistration({ total }) {
   const history = useHistory()
-  useEffect(()=>{
+  useEffect(() => {
     if ((JSON.parse(localStorage.getItem('customer_details'))?.customerToken?.split('')?.length > 0)) {
       history.push(`/place_order/${JSON.parse(localStorage.getItem('data'))?.restaurant[0]?.id}`)
     }
-  },[])
+  }, [])
   return (
     <>
       <CssBaseline />
@@ -19,12 +19,16 @@ export default function CustomerRegistration() {
           <div
             style={{
               padding: "0px 50px",
-              display:'flex',
-              justifyContent:'center',
-              alignItems:'center'
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: "100%",
+              height: "60vh"
             }}
           >
-            <CustomerRegistartionLinearStepper />
+            <CustomerRegistartionLinearStepper
+              sum={total}
+            />
           </div>
         </Paper>
       </Container>

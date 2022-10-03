@@ -1,14 +1,15 @@
 import axios from "axios";
 // Add variation type
 
-export const placeOrder = async (id,data) => {
-  const userInfo = localStorage.getItem('data')
-  const jwt = JSON.parse(userInfo).token;
+export const placeOrder = async (id, data) => {
+  const userInfo = localStorage.getItem('customer_details')
+  const jwt = JSON.parse(userInfo)[0]?.customerToken;
+  console.log(jwt);
   const config = {
     headers: {
       "Content-Type": "application/json",
       'Accept': 'application/json',
-      "Authorization": `Bearer ${jwt.token}`
+      "Authorization": `Bearer ${jwt}`
     },
   };
   // console.log(JSON.parse(localStorage.getItem('cart_items')));

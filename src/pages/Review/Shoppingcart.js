@@ -1,13 +1,20 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+import PlaceOrderForm from "./PlaceOrderForm";
+import CustomerRegistration from "./CustomerRegistration";
 
 const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   var subtotal = 0;
   const [amount, setAmount] = useState(200);
   const [cartItems, setCartItems] = useState([]);
   const [change, setChange] = useState(0);
-
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const closeModal = () => setOpen(false);
+  const closeModal2 = () => setOpen2(false);
   const { user, isAuthenticated } = useAuth();
 
   const history = useHistory()
@@ -41,9 +48,11 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
 
   const onSubmit = () => {
     (JSON.parse(localStorage.getItem('customer_details')).length > 0) ?
-      history.push(`/place_order/${JSON.parse(localStorage.getItem('data'))?.restaurant[0]?.id}`)
+      // history.push(`/place_order/${JSON.parse(localStorage.getItem('data'))?.restaurant[0]?.id}`)
+      setOpen(true)
       :
-      history.push('/customer_registration')
+      // history.push('/customer_registration')
+      setOpen2(true)
   }
   let sum = 0;
 
@@ -53,6 +62,22 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
   console.log(sum);
   return (
     <Fragment>
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <button className="close" onClick={(e) => setOpen(false)}>
+          &times;
+        </button>
+        <PlaceOrderForm
+          total={sum}
+        />
+      </Popup>
+      <Popup open={open2} closeOnDocumentClick onClose={closeModal2}>
+        <button className="close" onClick={(e) => setOpen2(false)}>
+          &times;
+        </button>
+        <CustomerRegistration
+          total={sum}
+        />
+      </Popup>
       <div>
         {cartItems.length === 0 ? (
           <Fragment>
@@ -182,7 +207,8 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                   </div> */}
                   <div className="totals-item totals-item-total">
                     <p className="cart-total">
-                      Total:<p className="em">(Incl.GST)</p>
+                      Total:
+                      {/* <p className="em">(Incl.GST)</p> */}
                     </p>
                     <p className="cart-total-amount">
                       £{sum}
@@ -191,12 +217,15 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                     </p>
                   </div>
                 </div>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => onSubmit()}
-                >
-                  Place order
-                </button>
+                <div style={{ display: 'flex', justifyContent: "center", marginTop: "50px" }}>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => onSubmit()}
+                    style={{ width: "100%" }}
+                  >
+                    Place order
+                  </button>
+                </div>
               </li>
             </ul>
           </Fragment>
