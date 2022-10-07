@@ -245,7 +245,7 @@ const CustomerRegistartionLinearStepper = ({ sum }) => {
                 >
                   Already have an accoun?
                   <NavLink
-                    to={"/login"}
+                    to={"/customerlogin"}
                     style={{
                       color: "#536dfe",
                     }}

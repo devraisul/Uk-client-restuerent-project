@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import PlaceOrderLinearStepper from "./PlaceOrderLinearStepper";
 
 
-export default function PlaceOrderForm({ total, cartItem }) {
+export default function PlaceOrderForm({ total, cartItem, setOpen }) {
   const history = useHistory();
   useEffect(() => {
     if ((JSON.parse(localStorage.getItem('customer_details'))?.customerToken?.split('')?.length === 0)) {
@@ -29,6 +29,7 @@ export default function PlaceOrderForm({ total, cartItem }) {
             <PlaceOrderLinearStepper
               sum={total}
               cartItem={cartItem}
+              setOpen={setOpen}
             />
           </div>
         </Paper>

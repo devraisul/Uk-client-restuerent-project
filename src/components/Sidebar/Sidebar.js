@@ -53,8 +53,8 @@ function Sidebar({ location }) {
     { id: 2, label: "Update Restaurent", link: "/app/updateRestaurent", icon: <TableIcon /> },
     {
       id: 3,
-      label: "Add Review Tag",
-      link: "/app/addReviewTag",
+      label: "Add Review",
+      link: "/app/addReview",
       icon: <RateReview />,
     },
     {

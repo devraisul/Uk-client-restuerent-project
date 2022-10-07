@@ -51,7 +51,7 @@ const Cart = ({ id, changeCartItems, setChangeCartItems }) => {
               <i className="fas fa-shopping-bag"></i>
               <h1 className='large text-primary'>Cart</h1>
             </div>
-            <Shoppingcart setChangeCartItems={setChangeCartItems} rand={rand} id={id} />
+            <Shoppingcart toggleMenu={toggleMenu} setChangeCartItems={setChangeCartItems} rand={rand} id={id} />
           </aside>
         </aside>
 

@@ -28,14 +28,14 @@ function getSteps() {
   return ["Basic information", "Contact information", "Security information"];
 }
 const BasicForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="first_Name"
         rules={{
-          required:"* First name is required"
+          required: "* First name is required"
         }}
         render={({ field }) => (
           <TextField
@@ -57,7 +57,7 @@ const BasicForm = () => {
         control={control}
         name="last_Name"
         rules={{
-          required:"* Last name is required"
+          required: "* Last name is required"
         }}
         render={({ field }) => (
           <TextField
@@ -79,14 +79,14 @@ const BasicForm = () => {
   );
 };
 const ContactForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="email"
         rules={{
-          required:"* Email is required"
+          required: "* Email is required"
         }}
         render={({ field }) => (
           <TextField
@@ -107,9 +107,9 @@ const ContactForm = () => {
         control={control}
         name="phone"
         rules={{
-          required:"* Phone number mustbe have 11 digit (require)",
-          minLength:11,
-          maxLength:11
+          required: "* Phone number mustbe have 11 digit (require)",
+          minLength: 11,
+          maxLength: 11
         }}
         render={({ field }) => (
           <TextField
@@ -128,14 +128,14 @@ const ContactForm = () => {
   );
 };
 const SecurityForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="password"
         rules={{
-          required:"* Password is required"
+          required: "* Password is required"
         }}
         render={({ field }) => (
           <TextField
@@ -169,7 +169,7 @@ const SecurityForm = () => {
           />
         )}
       />
-      
+
     </>
   );
 };
@@ -234,10 +234,10 @@ const RegistartionLinearStepper = () => {
 
   return (
     <div style={{
-      display:'flex',
-      justifyContent:'center',
-      alignItems:'center',
-      flexDirection:'column'
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column'
     }}>
       <h1
         style={{
@@ -253,14 +253,14 @@ const RegistartionLinearStepper = () => {
         {steps.map((step, index) => {
           const labelProps = {};
           const stepProps = {};
-          
+
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
           return (
             <Step {...stepProps} key={index}>
               <StepLabel style={{
-                width:'150px'
+                width: '150px'
               }} {...labelProps}>{step}</StepLabel>
             </Step>
           );
@@ -304,16 +304,16 @@ const RegistartionLinearStepper = () => {
                 >
                   back
                 </Button>
-                
+
                 <Button
-                disabled={isLoading?true:false}
+                  disabled={isLoading ? true : false}
                   className={classes.button}
                   variant="contained"
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
                 >
-                {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
+                  {isLoading ? "..." : (activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>
             </form>

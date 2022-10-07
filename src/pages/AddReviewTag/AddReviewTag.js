@@ -50,7 +50,7 @@ const AddReviewTag = () => {
         justifyontent: 'center',
         alignItems: 'center'
       }}>
-        <h1 style={{ marginBottom: '20px' }}>Add Review Question</h1>
+        {/* <h1 style={{ marginBottom: '20px' }}>Add Review Question</h1>
         <form onSubmit={handleReview}>
           <TextField onChange={event => setFormDefaultValue(event.target.value)} value={formDefaultValue} required name="question" id="filled-basic" placeholder="Review Que" variant="filled" />
           <br />
@@ -68,7 +68,7 @@ const AddReviewTag = () => {
               Submit
             </Button>
           </div>
-        </form>
+        </form> */}
       </div>
       <div >
         <h1 style={{
@@ -154,23 +154,23 @@ const AddReviewTag = () => {
                   {
                     item?.is_active ?
 
-                      <button onClick={()=>{}} style={{
+                      <button onClick={() => { }} style={{
                         padding: "5px 10px",
                         width: '100px',
                         background: '#536DFE',
                         margin: '0px 2px',
                         borderRadius: '30px',
                         color: 'white'
-                      }}>Hide</button>
+                      }}>Enable</button>
                       :
-                      <button onClick={()=>{}} style={{
-                        padding: "5px 10px",  
+                      <button onClick={() => { }} style={{
+                        padding: "5px 10px",
                         width: '100px',
                         background: '#536DFE',
                         margin: '0px 2px',
                         borderRadius: '30px',
                         color: 'white'
-                      }}>Public</button>
+                      }}>Disable</button>
                   }
                 </TableCell>
               </TableRow>

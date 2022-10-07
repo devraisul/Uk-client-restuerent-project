@@ -18,6 +18,8 @@ import PlaceOrderForm from "../pages/Review/PlaceOrderForm";
 import ShowReviews from "../pages/showReviews/ShowReviews";
 import TabMenu from "../pages/TabMenu/TabMenu";
 import UserMenu from "../pages/UserMenu/UserMenu";
+import UserOrder from "../pages/userOrder/UserOrder";
+import CustomerLogin from "./CustomerLogin/CustomerLogin";
 
 export default function App() {
   // global
@@ -35,14 +37,16 @@ export default function App() {
         />
         <PrivateRoute path="/app" component={Layout} />
         <PublicRoute path="/login" component={Login} />
+        <Route path="/customerlogin" component={CustomerLogin} />
         <PublicRoute path="/registration" component={Registration} />
         <Route path="/usermenu/:id" component={UserMenu} />
         <Route path="/customer_registration" component={CustomerRegistration} />
-            <Route path="/place_order/:restaurantId" component={PlaceOrderForm} />
+        <Route path="/place_order/:restaurantId" component={PlaceOrderForm} />
         <Route path="/review/:id" component={ShowReviews} />
         <Route path="/tabmenu/:id" component={TabMenu} />
+        <Route path="/order" component={UserOrder} />
         <PublicRoute path="/addrestaurent" component={AddRestaurentForm} />
-        
+
         <Route component={Error} />
       </Switch>
     </BrowserRouter>

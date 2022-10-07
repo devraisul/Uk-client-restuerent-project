@@ -1,7 +1,7 @@
 import axios from "axios";
 // Add variation type
 
-export const placeOrder = async (id, data) => {
+export const placeOrder = async (id, data, dishes) => {
   const userInfo = localStorage.getItem('customer_details')
   const jwt = JSON.parse(userInfo)[0]?.customerToken;
   console.log(jwt);
@@ -13,8 +13,12 @@ export const placeOrder = async (id, data) => {
     },
   };
   // console.log(JSON.parse(localStorage.getItem('cart_items')));
-  data.dishes = JSON.parse(localStorage.getItem('cart_items'))
-  const addVariationResponse = await axios.post(`/api/order/${id}`, data, config)
+  // data.dishes = JSON.parse(localStorage.getItem('cart_items'))
+  const orderData = {
+    ...data, dishes
+  }
+  console.log(orderData);
+  const addVariationResponse = await axios.post(`/api/order/${id}`, orderData, config)
     .then(res => {
       return res;
     })

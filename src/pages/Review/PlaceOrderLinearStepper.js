@@ -208,7 +208,7 @@ function getStepContent(step) {
   }
 }
 
-const PlaceOrderLinearStepper = ({ sum, cartItem }) => {
+const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen }) => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
@@ -232,8 +232,8 @@ const PlaceOrderLinearStepper = ({ sum, cartItem }) => {
   const steps = getSteps();
 
 
-  const { restaurantId } = useParams()
-
+  const { user } = useAuth()
+  console.log(user);
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
   };
@@ -241,27 +241,24 @@ const PlaceOrderLinearStepper = ({ sum, cartItem }) => {
   const handleNext = (data) => {
     console.log(data);
     if (activeStep == steps.length - 1) {
-      const dishe = cartItem.map(data => {
-        const dishes = {
+      const dishes = cartItem.map(data => {
+        const dishe = {
           "Dish_Price": data.price,
           "qty": data.quantity,
           "id": data.id,
           "variation": data.variations
         }
-        return dishes;
+        return dishe;
       })
-      const order_data = {
-        ...data, dishe
-      }
-      console.log(order_data);
 
-      placeOrder(restaurantId, order_data)
+      placeOrder(user?.restaurant[0]?.id, data, dishes)
         .then((res) => {
           console.log(res);
           setIsLoading(false);
 
-          // setActiveStep(activeStep + 1);
-          // setTimeout(() => history.push("/addrestaurent"), 2000);
+          setActiveStep(activeStep + 1);
+          localStorage.removeItem("cart_items")
+          setTimeout(() => setOpen(false), 2000);
         }
         );
     }

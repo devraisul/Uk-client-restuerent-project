@@ -6,7 +6,7 @@ import "reactjs-popup/dist/index.css";
 import PlaceOrderForm from "./PlaceOrderForm";
 import CustomerRegistration from "./CustomerRegistration";
 
-const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
+const Shoppingcart = ({ id, rand, setChangeCartItems, toggleMenu }) => {
   var subtotal = 0;
   const [amount, setAmount] = useState(200);
   const [cartItems, setCartItems] = useState([]);
@@ -60,6 +60,10 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
     sum += (cartItems[i].price * cartItems[i].quantity);
   }
   console.log(sum);
+  const handleSubmit = () => {
+    onSubmit()
+    toggleMenu()
+  }
   return (
     <Fragment>
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
@@ -69,6 +73,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
         <PlaceOrderForm
           total={sum}
           cartItem={cartItems}
+          setOpen={setOpen}
         />
       </Popup>
       <Popup open={open2} closeOnDocumentClick onClose={closeModal2}>
@@ -221,7 +226,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems }) => {
                 <div style={{ display: 'flex', justifyContent: "center", marginTop: "50px" }}>
                   <button
                     className="btn btn-primary"
-                    onClick={() => onSubmit()}
+                    onClick={handleSubmit}
                     style={{ width: "100%" }}
                   >
                     Place order
