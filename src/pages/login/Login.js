@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { NavLink, useHistory, withRouter } from "react-router-dom";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 // styles
 import useStyles from "./styles";
@@ -43,7 +44,7 @@ function Login(props) {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    console.log(data);
+    // console.log(data);
     userLogin(data)
       .then((res) => {
         setIsAuthenticated(true);
@@ -55,6 +56,15 @@ function Login(props) {
         setError(err?.message);
       });
   };
+
+  const handleShowPassword = () => {
+    const password = document.getElementById("password");
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  }
 
   return (
     <Container component={Box}>
@@ -101,22 +111,38 @@ function Login(props) {
                     fullWidth
                   />
 
-                  <TextField
-                    id="password"
-                    // InputProps={{
-                    //   classes: {
-                    //     // underline: classes.textFieldUnderline,
-                    //     input: classes.textField,
-                    //   },
-                    // }}
-                    variant="outlined"
-                    name="password"
-                    margin="normal"
-                    placeholder="Password"
-                    type="password"
-                    label="password"
-                    fullWidth
-                  />
+                  <div
+                    style={{
+                      position: "relative",
+                    }}
+                  >
+                    <TextField
+                      id="password"
+                      // InputProps={{
+                      //   classes: {
+                      //     // underline: classes.textFieldUnderline,
+                      //     input: classes.textField,
+                      //   },
+                      // }}
+                      variant="outlined"
+                      name="password"
+                      margin="normal"
+                      placeholder="Password"
+                      type="password"
+                      label="password"
+                      fullWidth
+                    />
+                      <VisibilityIcon
+                        style={{
+                          color: "#536dfe",
+                          cursor: "pointer",
+                          position: "absolute",
+                          top: "40%",
+                          left: "88%",
+                        }}
+                        onClick={handleShowPassword}
+                      />
+                  </div>
 
                   <div>
                     Don't have an accoun?
@@ -130,7 +156,24 @@ function Login(props) {
                       Create Account.
                     </NavLink>
                   </div>
-                  
+                  <div
+                    style={{
+                      marginTop: "10px",
+                      marginBottom: "-10px",
+                    }}
+                  >
+                    <NavLink
+                      to={"/forgot-password"}
+                      style={{
+                        color: "#536dfe",
+                        borderBottom: "1px solid #536dfe",
+                      }}
+                    >
+                      Don't remember your password?
+                    </NavLink>
+                  </div>
+                  {/* Don't remember your password? */}
+
                   <div className={classes.formButtons}>
                     {isLoading ? (
                       <CircularProgress

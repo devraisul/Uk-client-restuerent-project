@@ -20,6 +20,7 @@ import TabMenu from "../pages/TabMenu/TabMenu";
 import UserMenu from "../pages/UserMenu/UserMenu";
 import UserOrder from "../pages/userOrder/UserOrder";
 import CustomerLogin from "./CustomerLogin/CustomerLogin";
+import ForgotPassword from "../pages/login/ForgotPassword";
 
 export default function App() {
   // global
@@ -39,6 +40,8 @@ export default function App() {
         <PublicRoute path="/login" component={Login} />
         <Route path="/customerlogin" component={CustomerLogin} />
         <PublicRoute path="/registration" component={Registration} />
+        {/* forgot password */}
+        <PublicRoute path="/forgot-password" component={ForgotPassword} />
         <Route path="/usermenu/:id" component={UserMenu} />
         <Route path="/customer_registration" component={CustomerRegistration} />
         <Route path="/place_order/:restaurantId" component={PlaceOrderForm} />

@@ -17,6 +17,7 @@ import {
 import { NavLink, useHistory } from "react-router-dom";
 import { userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -128,6 +129,14 @@ const ContactForm = () => {
   );
 };
 const SecurityForm = () => {
+  const handleShowPassword = () => {
+    const password = document.getElementById("password");
+    if (password.type === "password") {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  };
   const { control, formState: { errors } } = useFormContext();
   return (
     <>
@@ -135,20 +144,36 @@ const SecurityForm = () => {
         control={control}
         name="password"
         rules={{
-          required: "* Password is required"
+          required: "* Password is required",
         }}
         render={({ field }) => (
-          <TextField
-            id="password"
-            label="Password"
-            variant="outlined"
-            placeholder="Password"
-            type={'password'}
-            fullWidth
-            margin="normal"
-            {...field}
-            helperText={errors?.password?.message}
-          />
+          <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <TextField
+              id="password"
+              label="Password"
+              variant="outlined"
+              placeholder="Password"
+              type={"password"}
+              fullWidth
+              margin="normal"
+              {...field}
+              helperText={errors?.password?.message}
+            />
+            <VisibilityIcon
+              onClick={handleShowPassword}
+              style={{
+                position: "absolute",
+                left: "93%",
+                top: "40%",
+                color: "#536dfe",
+                cursor: "pointer",
+              }}
+            />
+          </div>
         )}
       />
       <Controller
@@ -160,7 +185,7 @@ const SecurityForm = () => {
             label="Type"
             variant="outlined"
             placeholder="Owner"
-            type={'text'}
+            type={"text"}
             required
             disabled
             fullWidth
@@ -169,7 +194,6 @@ const SecurityForm = () => {
           />
         )}
       />
-
     </>
   );
 };
@@ -274,7 +298,9 @@ const RegistartionLinearStepper = () => {
       ) : (
         <>
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(handleNext)}>
+            <form onSubmit={methods.handleSubmit(handleNext)} style={{
+              width: '81%',
+            }}>
               {getStepContent(activeStep)}
               <div
                 style={{

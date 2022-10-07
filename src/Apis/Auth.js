@@ -51,8 +51,28 @@ export const changePass = async () => {
   return changePassResponse
 }
 
+// forgotPassword
 
+export const forgotPass = async (data) => {
+  let forgotPassResponse;
+  await axios.post(`/api/forgetpassword`, data)
+  .then((res) => {
+    forgotPassResponse = res;
+  });
+  return forgotPassResponse
+}
 
+// update password after forgot password
+
+export const updatePassAPI = async (token,data) => {
+  let updatePassResponse;
+  await axios
+    .patch(`/api/forgetpassword/reset/${token}`, data)
+    .then((res) => {
+      updatePassResponse = res;
+    });
+  return updatePassResponse
+}
 
 
 
