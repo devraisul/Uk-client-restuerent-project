@@ -35,7 +35,6 @@ export default function SidebarLink({
   var isLinkActive =
     link &&
     (location.pathname === link || location.pathname.indexOf(link) !== -1);
-
   if (type === "title")
     return (
       <Typography
@@ -48,7 +47,6 @@ export default function SidebarLink({
         }
       </Typography>
     );
-
   if (type === "divider") return <Divider className={classes.divider} />;
   if (link && link.includes('http')) {
     return (
