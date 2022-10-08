@@ -115,184 +115,183 @@ const AlldishesUI = ({ dishes,
 
   const trimString = (string, length = 15) => {
     return string
-    .slice(0,string.length >= length - 3 ? length - 3 : string.length)
-    .padEnd(string.length >= length - 3 ? length : string.length, 
-      '.')
-    }
+      .slice(0, string.length >= length - 3 ? length - 3 : string.length)
+      .padEnd(string.length >= length - 3 ? length : string.length,
+        '.')
+  }
   return (
     <Fragment>
       {editflag ? (
-      <tbody>
-        <tr>
-          <td>
-            <form className='form' >
-              <div className='form-groupnopadding'>
-                <input
-                  type='text'
-                  placeholder='Enter Restaurant Name'
-                  name='Name'
-                  value={Name}
-                  onChange={(e) => onChange(e)}
-                //required
-                />
-              </div>
-            </form>
-          </td>
-          <td>
-            <form className='form' >
-              <div className='form-groupnopadding'>
-                <input
-                  type='number'
-                  placeholder='Enter Restaurant Name'
-                  name='Price'
-                  value={Price}
-                  onChange={(e) => onChange(e)}
-                //required
-                />
-              </div>
-            </form>
-          </td>
-          <td>
-            <form className='form' >
-              <div className='form-groupnopadding'>
-                <input
-                  type='text'
-                  placeholder='Enter Restaurant Name'
-                  name='Description'
-                  value={Description}
-                  onChange={(e) => onChange(e)}
-                //required
-                />
-              </div>
-            </form>
-          </td>
-          <td>
-            <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
-              Upload Image
-            </button>
-            {//show upload image option on click
-              showuploader ? (
-                <Fragment>
-                  <div className='form-groupnopadding'>
-                    <input
-                      type='file'
-                      id='image'
-                      name='image'
-                      onChange={(e) => onFileChange(e)}
-                    />
-                  </div>
-                  <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
-                </Fragment>
-              ) : null}
-          </td>
-          <td>
-            <button className='btn btn-primary2' onClick={(e) => handleLinkClick(e)} disabled>
-              Link Variation
-            </button>
-            {//show upload image option on click
-              showlink ? (<Fragment>
-                <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
-                  <a className="close" onClick={(e) => (setOpen(false))}>
-                    &times;
-                  </a>
-                  <div className='padding20px'>
-                  </div>
-                </Popup>
-              </Fragment>) : null}
-          </td>
-          <td>{index}</td>
-          <td>
-            {variationData?.map((variation, i) => (<Fragment>
-              <button className='btn btn-primary2'>{variation?.description}</button>
-            </Fragment>))}
-          </td>
-          <td>
-            <div>
-              <button className='btn btn-primary2' onClick={(e) => onSubmit2(e)}>Update</button>
-            </div>
-          </td>
-          <td>
-            <i className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
-          </td>
-        </tr>
-      </tbody>) : (<tbody>
-        <tr>
-          <td>{index}</td>
-          <td>{dishes?.name}</td>
-          <td>
-            {dishes?.price} £
-          </td>
-          <td>{trimString(dishes?.description)}</td>
-          <td>
-            <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
-              Upload Image
-            </button>
-            {//show upload image option on click
-              showuploader ? (
-                <Fragment>
-                  <div className='form-groupnopaddingnopadding'>
-                    <input
-                      type='file'
-                      id='image'
-                      name='image'
-                      onChange={(e) => onFileChange(e)}
-                    />
-                  </div>
-                  <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
-                </Fragment>
-              ) : null}
-          </td>
-          <td>
-            <button className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
-              Link Variation
-            </button>
-            {//show upload image option on click
-              showlink ? (<Fragment>
-                <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
-                  <a className="close" onClick={(e) => (setOpen(false))}>
-                    &times;
-                  </a>
-                  <div className='padding20px'>
-                  </div>
-                  <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
-                </Popup>
-              </Fragment>) : null}
-          </td>
-          <td>
-            {variationData?.map((variation, i) => (<Fragment>
-              {/* <button className='btn btn-primary2' > {variation?.description} <i className="fas fa-times" onClick={(e) => onSubmit3(e, variation?.id)} ></i></button> */}
-              {<Fragment>
-                <Popup open={open2} closeOnDocumentClick onClose={(e) => (setOpen2(false))}>
-                  <a className="close" onClick={(e) => (setOpen2(false))}>
-                    &times;
-                  </a>
-                  <div className='padding20px'>
-                  </div>
-                  <form className='form' >
+        <tbody>
+          <tr>
+            <td>
+              <form className='form' >
+                <div className='form-groupnopadding'>
+                  <input
+                    type='text'
+                    placeholder='Enter Restaurant Name'
+                    name='Name'
+                    value={Name}
+                    onChange={(e) => onChange(e)}
+                  //required
+                  />
+                </div>
+              </form>
+            </td>
+            <td>
+              <form className='form' >
+                <div className='form-groupnopadding'>
+                  <input
+                    type='number'
+                    placeholder='Enter Restaurant Name'
+                    name='Price'
+                    value={Price}
+                    onChange={(e) => onChange(e)}
+                  //required
+                  />
+                </div>
+              </form>
+            </td>
+            <td>
+              <form className='form' >
+                <div className='form-groupnopadding'>
+                  <input
+                    type='text'
+                    placeholder='Enter Restaurant Name'
+                    name='Description'
+                    value={Description}
+                    onChange={(e) => onChange(e)}
+                  //required
+                  />
+                </div>
+              </form>
+            </td>
+            <td>
+              <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
+                Upload Image
+              </button>
+              {//show upload image option on click
+                showuploader ? (
+                  <Fragment>
                     <div className='form-groupnopadding'>
-                      <p>No of Variation Allowed</p>
                       <input
-                        type='text'
-                        placeholder='Enter Restaurant Name'
-                        name='va'
-                        value={variation.allowed}
-                        onChange={(e) => onChange(e)}
-                      //required
+                        type='file'
+                        id='image'
+                        name='image'
+                        onChange={(e) => onFileChange(e)}
                       />
                     </div>
-                  </form>
-                </Popup>
-              </Fragment>}
-            </Fragment>))}
-          </td>
-          <td style={{ cursor: "pointer" }}>
-            <i className="fas fa-pen" onClick={(e) => setseditflag(!editflag)}></i>
-          </td>
-          <td>
-            <i style={{ cursor: "pointer" }} className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
-          </td>
-        </tr>
-      </tbody>)}
+                    <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
+                  </Fragment>
+                ) : null}
+            </td>
+            <td>
+              <button className='btn btn-primary2' onClick={(e) => handleLinkClick(e)} disabled>
+                Link Variation
+              </button>
+              {//show upload image option on click
+                showlink ? (<Fragment>
+                  <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
+                    <a className="close" onClick={(e) => (setOpen(false))}>
+                      &times;
+                    </a>
+                    <div className='padding20px'>
+                    </div>
+                  </Popup>
+                </Fragment>) : null}
+            </td>
+            <td>{index}</td>
+            <td>
+              {variationData?.map((variation, i) => (<Fragment>
+                <button className='btn btn-primary2'>{variation?.description}</button>
+              </Fragment>))}
+            </td>
+            <td>
+              <div>
+                <button className='btn btn-primary2' onClick={(e) => onSubmit2(e)}>Update</button>
+              </div>
+            </td>
+            <td>
+              <i className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
+            </td>
+          </tr>
+        </tbody>) : (<tbody>
+          <tr>
+            <td>{index}</td>
+            <td>{dishes?.name}</td>
+            <td>£ {dishes?.price}</td>
+            <td>{trimString(dishes?.description)}</td>
+            <td>
+              <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
+                Upload Image
+              </button>
+              {//show upload image option on click
+                showuploader ? (
+                  <Fragment>
+                    <div className='form-groupnopaddingnopadding'>
+                      <input
+                        type='file'
+                        id='image'
+                        name='image'
+                        onChange={(e) => onFileChange(e)}
+                      />
+                    </div>
+                    <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
+                  </Fragment>
+                ) : null}
+            </td>
+            <td>
+              <button style={{
+                background: 'red'
+              }} className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
+                Link Variation
+              </button>
+              {//show upload image option on click
+                showlink ? (<Fragment>
+                  <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
+                    <a className="close" onClick={(e) => (setOpen(false))}>
+                      &times;
+                    </a>
+                    <div className='padding20px'>
+                    </div>
+                    <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
+                  </Popup>
+                </Fragment>) : null}
+            </td>
+            <td>
+              {variationData?.map((variation, i) => (<Fragment>
+                {<Fragment>
+                  <Popup open={open2} closeOnDocumentClick onClose={(e) => (setOpen2(false))}>
+                    <a className="close" onClick={(e) => (setOpen2(false))}>
+                      &times;
+                    </a>
+                    <div className='padding20px'>
+                    </div>
+                    <form className='form' >
+                      <div className='form-groupnopadding'>
+                        <p>No of Variation Allowed</p>
+                        <input
+                          type='text'
+                          placeholder='Enter Restaurant Name'
+                          name='va'
+                          value={variation.allowed}
+                          onChange={(e) => onChange(e)}
+                        //required
+                        />
+                      </div>
+                    </form>
+                  </Popup>
+                </Fragment>}
+              </Fragment>))}
+            </td>
+            <td style={{ cursor: "pointer" }}>
+              <i className="fas fa-pen" onClick={(e) => setseditflag(!editflag)}></i>
+            </td>
+            <td>
+              <i style={{ cursor: "pointer" }} className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
+            </td>
+          </tr>
+        </tbody>)}
     </Fragment>
   )
 };

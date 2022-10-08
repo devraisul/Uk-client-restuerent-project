@@ -1,6 +1,6 @@
-import React from "react";
 import { Box, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import React from "react";
 // import MUIDataTable from "mui-datatables";
 import QRCode from 'qrcode.react';
 // components
@@ -37,9 +37,13 @@ export default function Tables() {
   return (
     <>
       <PageTitle title="All Menus" />
-      <Grid container spacing={4}>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Widget title="Menu List" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
+          <Widget 
+          title="Menu List" 
+          upperTitle 
+          noBodyPadding
+          bodyClass={classes.tableOverflow}>
             <AllMenu
               id={user?.restaurant[0]?.id}
             />
