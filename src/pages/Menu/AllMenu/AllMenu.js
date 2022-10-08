@@ -16,41 +16,40 @@ const AllMenu = ({ id }) => {
       })
   }, [id])
 
+
+  // STYLES 
+  const Styles = {
+    constainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      padding: '20px 10px'
+    },
+    h1: {
+      color: '#0575B4'
+    },
+    tableHead: {
+      background: '#0575B4', border: 'none'
+    },
+  }
+
+
   return loading ? (
     <Loading />
   ) : (
     <Fragment>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        padding:'20px 10px'
-      }} >
-        <h1 style={{
-          color: '#0575B4'
-        }} className='large text-center'>All Menu</h1>
+      <div style={Styles.constainer} >
+        <h1 style={Styles.h1} className='large text-center'>All Menu</h1>
         <table className='servicesT'>
           <thead>
             <tr>
-              <th style={{
-                background: '#0575B4', border: 'none'
-              }} width="10%">#</th>
-              <th style={{
-                background: '#0575B4', border: 'none'
-              }} width="10%">Name</th>
-              <th style={{
-                background: '#0575B4', border: 'none'
-              }} width="30%">Description</th>
-              <th style={{
-                background: '#0575B4', border: 'none'
-              }} width="40%">Dishes</th>
-              <th style={{
-                background: '#0575B4', border: 'none'
-              }} width="5%">Total dishes</th>
-              <th style={{
-                background: '#0575B4', border: 'none'
-              }} width="5%">Edit</th>
+              <th style={Styles.tableHead} width="10%">#</th>
+              <th style={Styles.tableHead} width="10%">Name</th>
+              <th style={Styles.tableHead} width="30%">Description</th>
+              <th style={Styles.tableHead} width="40%">Dishes</th>
+              <th style={Styles.tableHead} width="5%">Total dishes</th>
+              <th style={Styles.tableHead} width="5%">Edit</th>
             </tr>
           </thead>
           {!menus?.length ? (<Fragment>

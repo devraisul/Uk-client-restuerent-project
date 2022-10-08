@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { BiEdit } from 'react-icons/bi';
+import { IoFastFoodOutline } from 'react-icons/io5';
+import { TbArrowBack, TbLayoutDashboard } from 'react-icons/tb';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AddDish from './Dish/AddDish';
 import Alldish from './Dish/Alldish';
-
 const DishHandle = () => {
   const { user } = useAuth()
   const [showaddmenu, setshowaddmenu] = React.useState(false);
@@ -25,25 +28,55 @@ const DishHandle = () => {
     setshowaddmenu(false)
     seteditall(false)
   }
-
+const buttonStyle = {
+  textAlign:'center',
+  width:'170px',
+  background: '#0575B4',
+  color: '#fff',
+  display:'flex',
+  alignItems:'center',
+  justifyContent:'center',
+  textAlign:'left'
+}
+const buttonIcon = {
+  fontSize:'1.5rem',
+  margin:'0px 10px 0px 0px'
+}
   return (
     <Fragment>
       <div>
-        <div className='btn-center'>
-          <button className='large btn btn-primary' onClick={(e) => onshowmenu(e)}>
-            <i className="fas fa-plus"></i> Add Dish
+        <div style={{
+          display:'flex',
+          justifyContent:'center'
+        }}>
+          <button className='large btn'
+            style={buttonStyle}
+            onClick={(e) => onshowmenu(e)}>
+            <AiOutlinePlus style={buttonIcon} /> Add Dish
           </button>
-          <button className='large btn btn-primary' onClick={(e) => onAllmenu(e)}>
-            All dishes
+          <button
+            style={buttonStyle}
+            className='large btn' onClick={(e) => onAllmenu(e)}>
+            <IoFastFoodOutline style={buttonIcon} /> All dishes
           </button>
-          <button className='large btn btn-primary' onClick={(e) => oneditall(e)}>
-            {!editall ? (<Fragment><i className="fas fa-edit"></i> Edit All</Fragment>) : ('Back to dishes')}
+          <button
+            style={buttonStyle}
+            className='large btn' onClick={(e) => oneditall(e)}>
+            {!editall ? (
+              <Fragment>
+                <BiEdit style={buttonIcon} /> Edit All
+              </Fragment>
+            ) : ('Back to dishes')}
           </button>
-          <Link className='large btn btn-primary' to={`/dashboard/${user.restaurant[0].id}`}>
-            Back to dashboard
+          <Link
+            style={buttonStyle}
+            className='large btn' to={`/dashboard/${user.restaurant[0].id}`}>
+            <TbLayoutDashboard style={buttonIcon} /> Go to dashboard
           </Link>
-          <Link className='large btn btn-primary' to={`/addmenu/${user.restaurant[0].id}`}>
-            Back to Menu
+          <Link
+            style={buttonStyle}
+            className='large btn' to={`/app/menu`}>
+            <TbArrowBack style={buttonIcon} /> Back to Menu
           </Link>
         </div>
       </div>
@@ -53,7 +86,6 @@ const DishHandle = () => {
         :
         ('')
       }
-      {/* {editall ? (<Editdish id={user?.restaurant[0]?.Key_ID} rid={user.restaurant[0].id} />) : ('')} */}
       {showallmenu ? (
         <Alldish isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
       )

@@ -119,12 +119,46 @@ const AlldishesUI = ({ dishes,
       .padEnd(string.length >= length - 3 ? length : string.length,
         '.')
   }
+
+
+
+
+  // STYLES 
+  const Styles = {
+    uploadImageButtonContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: '100%'
+    },
+    variationButtonContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: '100%'
+    },
+    variationButton:{
+      display: 'block',
+      cursor: 'pointer',
+      textAlign: 'center',
+      color: '#fff',
+      background: '#0575B4',
+      padding: '15px 5px',
+
+      borderRadius: '8px',
+      fontSize: '0.9rem',
+      fontWeight: 'bold',
+      width: '140px',
+    }
+  }
   return (
     <Fragment>
       {editflag ? (
         <tbody>
           <tr>
-            <td>
+            <td >
               <form className='form' >
                 <div className='form-groupnopadding'>
                   <input
@@ -215,14 +249,15 @@ const AlldishesUI = ({ dishes,
               <i className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
             </td>
           </tr>
-        </tbody>) : (<tbody>
+        </tbody>) : (
+        <tbody>
           <tr>
-            <td>{index}</td>
-            <td>{dishes?.name}</td>
-            <td>£ {dishes?.price}</td>
-            <td>{trimString(dishes?.description)}</td>
-            <td>
-              <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
+            <td width="5%">{index}</td>
+            <td width="5%">{dishes?.name}</td>
+            <td width="5%">£ {dishes?.price}</td>
+            <td width="10%">{trimString(dishes?.description)}</td>
+            <td width="30%">
+              <button  className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
                 Upload Image
               </button>
               {//show upload image option on click
@@ -240,10 +275,8 @@ const AlldishesUI = ({ dishes,
                   </Fragment>
                 ) : null}
             </td>
-            <td>
-              <button style={{
-                background: 'red'
-              }} className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
+            <td  style={Styles.variationButtonContainer} width="30%">
+              <button style={Styles.variationButton} className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
                 Link Variation
               </button>
               {//show upload image option on click
@@ -258,7 +291,7 @@ const AlldishesUI = ({ dishes,
                   </Popup>
                 </Fragment>) : null}
             </td>
-            <td>
+            <td width="10%">
               {variationData?.map((variation, i) => (<Fragment>
                 {<Fragment>
                   <Popup open={open2} closeOnDocumentClick onClose={(e) => (setOpen2(false))}>
@@ -282,16 +315,16 @@ const AlldishesUI = ({ dishes,
                     </form>
                   </Popup>
                 </Fragment>}
-              </Fragment>))}
+              </Fragment>))
+              }
             </td>
-            <td style={{ cursor: "pointer" }}>
-              <i className="fas fa-pen" onClick={(e) => setseditflag(!editflag)}></i>
-            </td>
-            <td>
+            <td width="5%">
+              <i style={{ cursor: "pointer" }} className="fas fa-pen" onClick={(e) => setseditflag(!editflag)}></i>
               <i style={{ cursor: "pointer" }} className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
             </td>
           </tr>
-        </tbody>)}
+        </tbody>
+      )}
     </Fragment>
   )
 };
