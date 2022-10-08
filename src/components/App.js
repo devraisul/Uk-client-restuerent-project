@@ -12,6 +12,7 @@ import Login from "../pages/login";
 // context
 import { useAuth } from "../context/AuthContext";
 import AddRestaurentForm from "../pages/login/AddRestaurentForm";
+import ForgotPassword from "../pages/login/ForgotPassword";
 import Registration from "../pages/login/Registration";
 import CustomerRegistration from "../pages/Review/CustomerRegistration";
 import PlaceOrderForm from "../pages/Review/PlaceOrderForm";
@@ -20,7 +21,6 @@ import TabMenu from "../pages/TabMenu/TabMenu";
 import UserMenu from "../pages/UserMenu/UserMenu";
 import UserOrder from "../pages/userOrder/UserOrder";
 import CustomerLogin from "./CustomerLogin/CustomerLogin";
-import ForgotPassword from "../pages/login/ForgotPassword";
 
 export default function App() {
   // global

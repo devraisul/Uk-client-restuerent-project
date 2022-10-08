@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Collapse,
   Divider,
@@ -6,11 +5,12 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import { Inbox as InboxIcon } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 import classnames from "classnames";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // styles
 import useStyles from "./styles";
@@ -43,7 +43,9 @@ export default function SidebarLink({
           [classes.linkTextHidden]: !isSidebarOpened,
         })}
       >
-        {label}
+        {
+        label
+        }
       </Typography>
     );
 
@@ -111,7 +113,7 @@ export default function SidebarLink({
               [classes.linkTextHidden]: !isSidebarOpened,
             }),
           }}
-          primary={label}
+          primary={`${label}`}
         />
       </ListItem>
     );

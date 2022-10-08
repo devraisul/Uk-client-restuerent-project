@@ -20,7 +20,6 @@ import Tables from "../../pages/tables";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
-import AddReviewTag from "../../pages/AddReviewTag/AddReviewTag";
 import Addveriation from "../../pages/Addvariation/Addveriation";
 import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatisfaction";
 import DishHandle from "../../pages/Menu/DishHandle";
@@ -49,17 +48,11 @@ function Layout(props) {
           <div className={classes.fakeToolbar} />
           <Switch>
             <Route path="/app/dashboard" component={Tables} />
-            {/* <Route path="/app/typography" component={Typography} /> */}
             <Route path="/app/menu" component={MenuHandle} />
             <Route path="/app/add-dish/:menuName/:restaurentId/:menuId" component={DishHandle} />
 
-
-        
-
-
-
             {/* <Route path="/app/tables" component={Dashboard} /> */}
-            <Route path="/app/addReviewTag" component={AddReviewTag} />
+            <Route path="/app/addReviewTag" component={Addveriation} />
             <Route path="/app/variation" component={Addveriation} />
             <Route path="/app/reviews" component={CustomerSatisfaction} />
             <Route path="/app/show-reviews" component={ShowReviews} />

@@ -1,25 +1,17 @@
-import React, {  useState } from "react";
 import {
-  Grid,
-  CircularProgress,
-  Typography,
-  Button,
-  TextField,
-  Fade,
-  Container,
-  Paper,
-  Box,
+  Box, Button, CircularProgress, Container, Fade, Grid, Paper, TextField, Typography
 } from "@material-ui/core";
-import {withRouter } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 
 
 // styles
 import useStyles from "./styles";
 
 // context
-import { forgotPass, updatePassAPI, } from "../../Apis/Auth";
 import toast, { Toaster } from "react-hot-toast";
+import { forgotPass, updatePassAPI } from "../../Apis/Auth";
 
 function ForgotPassword(props) {
   var classes = useStyles();
@@ -45,10 +37,11 @@ function ForgotPassword(props) {
     
     forgotPass(data)
       .then((res) => {
-          setUpdatePass(true);
+        setUpdatePass(true);
         setPasswordToken(res?.data?.token);
         setChangeButton(!changeButton);
         setIsLoading(false);
+        setError("")
       })
       .catch((err) => {
         setIsLoading(false);
