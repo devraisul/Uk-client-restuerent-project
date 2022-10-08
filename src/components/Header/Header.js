@@ -1,19 +1,16 @@
-import React, { useState } from "react";
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
+  AppBar, IconButton,
   InputBase,
   Menu,
-  MenuItem,
+  MenuItem, Toolbar
 } from "@material-ui/core";
 import {
-  Menu as MenuIcon,
+  ArrowBack as ArrowBackIcon, Menu as MenuIcon,
   Person as AccountIcon,
-  Search as SearchIcon,
-  ArrowBack as ArrowBackIcon,
+  Search as SearchIcon
 } from "@material-ui/icons";
 import classNames from "classnames";
+import React, { useState } from "react";
 
 // styles
 import useStyles from "./styles";
@@ -22,12 +19,10 @@ import useStyles from "./styles";
 import { Typography } from "../Wrappers";
 
 // context
-import {
-  useLayoutState,
-  useLayoutDispatch,
-  toggleSidebar,
-} from "../../context/LayoutContext";
 import { useAuth } from "../../context/AuthContext";
+import {
+  toggleSidebar, useLayoutDispatch, useLayoutState
+} from "../../context/LayoutContext";
 
 
 export default function Header(props) {
@@ -41,7 +36,9 @@ export default function Header(props) {
   var [isSearchOpen, setSearchOpen] = useState(false);
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar position="fixed" style={{
+      background:"#0575B4"
+    }} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <IconButton
           color="inherit"
