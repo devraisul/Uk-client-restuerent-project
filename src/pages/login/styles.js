@@ -130,7 +130,7 @@ export default makeStyles(theme => ({
   },
   formButtons: {
     width: "100%",
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(3),
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",

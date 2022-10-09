@@ -1,4 +1,4 @@
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@material-ui/core";
+import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { addReview, getReviewAll } from "../../Apis/Review";
@@ -44,13 +44,13 @@ const AddReviewTag = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column' }}>
       <Toaster position="top-right" reverseOrder={false} />
-      <div style={{
+      {/* <div style={{
         display: 'flex',
         flexDirection: 'column',
         justifyontent: 'center',
         alignItems: 'center'
       }}>
-        {/* <h1 style={{ marginBottom: '20px' }}>Add Review Question</h1>
+        <h1 style={{ marginBottom: '20px' }}>Add Review Question</h1>
         <form onSubmit={handleReview}>
           <TextField onChange={event => setFormDefaultValue(event.target.value)} value={formDefaultValue} required name="question" id="filled-basic" placeholder="Review Que" variant="filled" />
           <br />
@@ -68,8 +68,8 @@ const AddReviewTag = () => {
               Submit
             </Button>
           </div>
-        </form> */}
-      </div>
+        </form>
+      </div> */}
       <div >
         <h1 style={{
           textAlign: 'center',
@@ -154,23 +154,23 @@ const AddReviewTag = () => {
                   {
                     item?.is_active ?
 
-                      <button onClick={() => { }} style={{
+                      <button onClick={()=>{}} style={{
                         padding: "5px 10px",
                         width: '100px',
                         background: '#536DFE',
                         margin: '0px 2px',
                         borderRadius: '30px',
                         color: 'white'
-                      }}>Enable</button>
+                      }}>Hide</button>
                       :
-                      <button onClick={() => { }} style={{
-                        padding: "5px 10px",
+                      <button onClick={()=>{}} style={{
+                        padding: "5px 10px",  
                         width: '100px',
                         background: '#536DFE',
                         margin: '0px 2px',
                         borderRadius: '30px',
                         color: 'white'
-                      }}>Disable</button>
+                      }}>Public</button>
                   }
                 </TableCell>
               </TableRow>

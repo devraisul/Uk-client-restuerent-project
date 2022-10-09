@@ -1,41 +1,26 @@
-import React, { useState } from "react";
 import {
-  Grid,
-  CircularProgress,
-  Typography,
-  Button,
-  Tabs,
-  Tab,
-  TextField,
-  Fade,
-  CssBaseline,
-  Container,
-  Paper,
-  Box,
+  Box, Button, CircularProgress, Container, Fade, Grid, Paper, TextField, Typography
 } from "@material-ui/core";
+import React, { useState } from "react";
+import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
 import { NavLink, useHistory, withRouter } from "react-router-dom";
-import toast, { ToastBar, Toaster } from "react-hot-toast";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-
 // styles
 import useStyles from "./styles";
 
 // context
-import { useUserDispatch, loginUser } from "../../context/UserContext";
-import { userLogin, userRegister } from "../../Apis/Auth";
+import { userLogin } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
 
 function Login(props) {
   var classes = useStyles();
-
   // global
   const { setIsAuthenticated, setUser } = useAuth();
-
   // local
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
   var [activeTabId, setActiveTabId] = useState(0);
   let history = useHistory();
+  const [passRevil, setPassRevil] = useState(false)
 
   const hadleLogin = (e) => {
     e.preventDefault();
@@ -58,11 +43,14 @@ function Login(props) {
   };
 
   const handleShowPassword = () => {
+
     const password = document.getElementById("password");
     if (password.type === "password") {
       password.type = "text";
+      setPassRevil(true)
     } else {
       password.type = "password";
+      setPassRevil(false)
     }
   }
 
@@ -89,19 +77,13 @@ function Login(props) {
                     style={{
                       textAlign: "center",
                       fontWeight: "bold",
-                      color: "#536dfe",
+                      color: "#0575B4",
                     }}
                   >
                     Login
                   </h1>
                   <TextField
                     id="email"
-                    // InputProps={{
-                    //   classes: {
-                    //     // underline: classes.textFieldUnderline,
-                    //     input: classes.textField,
-                    //   },
-                    // }}
                     name="email"
                     margin="normal"
                     variant="outlined"
@@ -118,12 +100,6 @@ function Login(props) {
                   >
                     <TextField
                       id="password"
-                      // InputProps={{
-                      //   classes: {
-                      //     // underline: classes.textFieldUnderline,
-                      //     input: classes.textField,
-                      //   },
-                      // }}
                       variant="outlined"
                       name="password"
                       margin="normal"
@@ -132,29 +108,29 @@ function Login(props) {
                       label="password"
                       fullWidth
                     />
-                      <VisibilityIcon
-                        style={{
-                          color: "#536dfe",
-                          cursor: "pointer",
-                          position: "absolute",
-                          top: "40%",
-                          left: "88%",
-                        }}
-                        onClick={handleShowPassword}
-                      />
-                  </div>
-
-                  <div>
-                    Don't have an accoun?
-                    <NavLink
-                      to={"/registration"}
+                    {!passRevil?(<RiEyeCloseLine
                       style={{
-                        color: "#536dfe",
+                        color: "#0575B4",
+                        cursor: "pointer",
+                        position: "absolute",
+                        top: "45%",
+                        right: "5%",
+                        fontSize:'1.3rem'
                       }}
-                    >
-                      {" "}
-                      Create Account.
-                    </NavLink>
+                      onClick={handleShowPassword}
+                    />):(
+                      <RiEyeLine
+                      style={{
+                        color: "#0575B4",
+                        cursor: "pointer",
+                        position: "absolute",
+                        top: "45%",
+                        right: "5%",
+                        fontSize:'1.3rem'
+                      }}
+                      onClick={handleShowPassword}
+                    />
+                    )}
                   </div>
                   <div
                     style={{
@@ -165,14 +141,13 @@ function Login(props) {
                     <NavLink
                       to={"/forgot-password"}
                       style={{
-                        color: "#536dfe",
-                        borderBottom: "1px solid #536dfe",
+                        color: "#0575B4",
+                        borderBottom: "1px solid #0575B4",
                       }}
                     >
                       Don't remember your password?
                     </NavLink>
                   </div>
-                  {/* Don't remember your password? */}
 
                   <div className={classes.formButtons}>
                     {isLoading ? (
@@ -191,6 +166,22 @@ function Login(props) {
                         Login
                       </Button>
                     )}
+                  </div>
+                  <div style={{
+                    textAlign:'center',
+                    marginTop:'15px'
+                  }}>
+                    Don't have an accoun?
+                    <NavLink
+                      to={"/registration"}
+                      style={{
+                        color: "#0575B4",
+                        
+                      }}
+                    >
+                      {" "}
+                      Create Account.
+                    </NavLink>
                   </div>
                 </form>
               </React.Fragment>
