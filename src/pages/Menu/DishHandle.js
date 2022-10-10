@@ -36,7 +36,7 @@ const buttonStyle = {
   display:'flex',
   alignItems:'center',
   justifyContent:'center',
-  textAlign:'left'
+  textAlign:'left',
 }
 const buttonIcon = {
   fontSize:'1.5rem',

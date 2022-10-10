@@ -12,10 +12,10 @@ const Alldish = ({ isChangeMenu, menuId, menuName, restaurentId }) => {
     getdish(menuId)
       .then(res => {
         setDishes(res);
-        console.log({ res });
+        console.log({ res:isChangeMenu });
         setLoading(false)
       })
-  }, [menuId, isChangeMenu]);
+  }, [isChangeMenu]);
 
   console.log(dishes);
   const [comp_update, set_comp_update] = React.useState(1);
@@ -86,14 +86,7 @@ const Alldish = ({ isChangeMenu, menuId, menuName, restaurentId }) => {
             <Fragment>
               <tbody>
                 <tr>
-                  <td  width="5%">None </td>
-                  <td  width="10%">None</td>
-                  <td  width="10%">None</td>
-                  <td  width="10%">None</td>
-                  <td  width="10%">None</td>
-                  <td  width="40%">None</td>
-                  <td  width="10%">None</td>
-                  <td  width="5%">None</td>
+                  <td style={{fontSize:'2rem'}} colSpan={8}>No dish found!</td>
                 </tr>
               </tbody>
             </Fragment>

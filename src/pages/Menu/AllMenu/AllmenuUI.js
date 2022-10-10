@@ -1,31 +1,45 @@
 import React, { Fragment } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { AiFillEdit } from 'react-icons/ai';
+import { FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { Editmenusingle } from '../../../Apis/Menu';
+import { deleteMenu, editMenuSingle } from '../../../Apis/Menu';
 
-const AllmenuUI = ({ menus, index, id }) => {
+const AllmenuUI = ({ menus, index, Mid, setChangeHappend }) => {
   const [formData, setFormData] = React.useState({
-    Name: menus?.name,
-    Description: menus?.description,
-    Mid: menus?.id
+    name: menus?.name,
+    description: menus?.description,
+    id: menus?.id
   });
   const [editflag, setseditflag] = React.useState(false);
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  const { Name, Description, Mid } = formData;
+  const { name, description, id } = formData;
 
 
   const onSubmit2 = async (e) => {
     e.preventDefault();
     setseditflag(!editflag)
-    Editmenusingle(formData)
+    editMenuSingle(formData)
       .then(res => {
-        console.log(res);
-        toast.success("Menu Update Successfully");
+        if (res.data.id) {
+          toast.success("Menu Update Successfully");
+          setChangeHappend(Math.random())
+        }
+
       })
     console.log(index + 1)
   };
+  const handleDeleteMenu = (Mid) => {
+    deleteMenu(Mid).then((res) => {
 
+      if (res.data.message === 'ok') {
+        setChangeHappend(Math.random())
+      }
+
+
+    })
+  }
   return (
     <Fragment>
       <Toaster
@@ -44,9 +58,9 @@ const AllmenuUI = ({ menus, index, id }) => {
                   <div className='form-groupnopadding'>
                     <input
                       type='text'
-                      placeholder='Enter  Name'
-                      name='Name'
-                      value={Name}
+                      placeholder='Enter Name'
+                      name='name'
+                      value={name}
                       onChange={(e) => onChange(e)}
                     //required
                     />
@@ -59,8 +73,8 @@ const AllmenuUI = ({ menus, index, id }) => {
                     <input
                       type='text'
                       placeholder='Enter Name'
-                      name='Description'
-                      value={Description}
+                      name='description'
+                      value={description}
                       onChange={(e) => onChange(e)}
                     //required
                     />
@@ -78,7 +92,7 @@ const AllmenuUI = ({ menus, index, id }) => {
               >
                 {menus?.name === 'Deals' ? (
                   <Fragment>
-                    <Link to={`/add-deal/${id}/${menus?.id}`} style={{
+                    <Link to={`/add-deal/${Mid}/${menus?.id}`} style={{
                       cursor: 'pointer',
                       textAlign: 'center',
                       color: '#fff',
@@ -201,7 +215,11 @@ const AllmenuUI = ({ menus, index, id }) => {
                 </Link>
               </td>
               <td width="5%">
-                <i className="fas fa-pen" onClick={(e) => setseditflag(!editflag)}></i>
+                <div>
+                  <AiFillEdit style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} onClick={(e) => setseditflag(!editflag)}></AiFillEdit>
+                  <FiTrash2 style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} onClick={(e) => handleDeleteMenu(menus?.id)}></FiTrash2>
+                </div>
+
               </td>
             </tr>
           </tbody>

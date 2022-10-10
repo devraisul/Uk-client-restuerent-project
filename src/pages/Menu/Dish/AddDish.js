@@ -1,21 +1,22 @@
+import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { adddish } from '../../../Apis/dish';
 
 const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
-// console.log({restaurentId,menuId });
+  // console.log({restaurentId,menuId });
 
-  const [inputList, setInputList] = React.useState([{ 
+  const [inputList, setInputList] = React.useState([{
     name: "",
-    price: 0, 
+    price: 0,
     take_away: 0,
-    delivery: 0 ,
+    delivery: 0,
     restaurant_id: restaurentId,
-    description:"",
-    ingredients:"",
-    calories:"",
-    menu_id : menuId
-}]);
-  
+    description: "",
+    ingredients: "",
+    calories: "",
+    menu_id: menuId
+  }]);
+
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -42,18 +43,18 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
     }
     if (x > 0) {
       alert(`${msg}`, 'danger');
-    }else {
+    } else {
       //send the data to API
-      setInputList([...inputList, { 
+      setInputList([...inputList, {
         name: "",
-        price:0, 
+        price: 0,
         take_away: 0,
-        delivery: 0 ,
-        restaurant_id:restaurentId,
-        description:"",
-        ingredients:"",
-        calories:"",
-        menu_id :menuId
+        delivery: 0,
+        restaurant_id: restaurentId,
+        description: "",
+        ingredients: "",
+        calories: "",
+        menu_id: menuId
       }]);
     };
   };
@@ -102,34 +103,44 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
 
     if (x > 0) {
       alert(`${msg}`, 'danger');
-    }else {
+    } else {
       //send the data to API
       let dishes = inputList
-      console.log(dishes)
       adddish(restaurentId, dishes)
         .then(res => {
-          if(res.data.length === 1){
-            setInputList([{ 
+          if (res.data.length === 1) {
+            setInputList([{
               name: "",
-              price:0, 
+              price: 0,
               take_away: 0,
-              delivery: 0 ,
-              restaurant_id:restaurentId,
-              description:"",
-              ingredients:"",
-              calories:"",
-              menu_id :menuId
-          }])
-          setIsChangeMenu(Math.random())
+              delivery: 0,
+              restaurant_id: restaurentId,
+              description: "",
+              ingredients: "",
+              calories: "",
+              menu_id: menuId
+            }])
+            setIsChangeMenu(Math.random())
           }
-      })
+        })
     };
   };
-
+  const buttonStyle = {
+    textAlign: 'center',
+    width: '170px',
+    background: '#0575B4',
+    color: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
   return (
     <div>
       <div className='table-wrapper'>
-        <h1 className='large text-center text-primary'>ADD Dish for {menuName} Menu</h1>
+        <h1 style={{
+          color: '#0575B4',
+          marginBottom: '10px'
+        }}>ADD Dish for {menuName} Menu</h1>
         <table className="fl-table">
           <thead>
             <tr>
@@ -164,7 +175,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
                   </td>
                   <td>
                     <textarea
-                    maxLength={255}
+                      maxLength={255}
                       name="description"
                       placeholder="Enter Dish Description"
                       className="form-control form-control-lg"
@@ -175,7 +186,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
                   </td>
                   <td>
                     <textarea
-                    maxLength={255}
+                      maxLength={255}
                       name="ingredients"
                       placeholder="Enter Ingredients"
                       value={x.ingredients}
@@ -230,29 +241,32 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
                   <td>
                     {
                       i > 0 ? (
-                      <i className="fas fa-trash-alt largei" onClick={(e) => handledeleteClick(i)}></i>
+                        <i className="fas fa-trash-alt largei" onClick={(e) => handledeleteClick(i)}></i>
                       ) : ('')
                     }
                   </td>
                   <td>
                     {
-                      inputList[i].name || inputList[i].description === !'' ? 
-                      <Fragment> 
-                        {
-                          inputList.length - 1 === i && 
-                          <button className='btn btn-primary2' onClick={(e) => handleAddClick(i)}> Add More</button>}
-                        </Fragment> : 
+                      inputList[i].name || inputList[i].description === !'' ?
+                        <Fragment>
+                          {
+                            inputList.length - 1 === i &&
+                            <button className='btn btn-primary2' onClick={(e) => handleAddClick(i)}> Add More</button>}
+                        </Fragment> :
                         <Fragment>
                           <button className='btn btn-primary2' disabled  > Add More</button>
                         </Fragment>
-                      }
+                    }
                   </td>
                 </tr>
               </tbody>
             );
           })}
-          <button className='btn btn-primary-submit' onClick={(e) => onSubmit(e)}>Submit</button>
         </table>
+        <div style={{ marginTop: "50px", display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', }}>
+          <Button style={{ background: "#0575B4", width: '200px', color: "white" }} variant="contained" onClick={(e) => onSubmit(e)}>Submit</Button>
+
+        </div>
       </div>
     </div>
   );

@@ -39,9 +39,9 @@ const AddMenu = ({ id }) => {
       }
 
     }
-    if (x > 0) { 
-      toast.error(`${msg}`); 
-  }else {
+    if (x > 0) {
+      toast.error(`${msg}`);
+    } else {
 
 
       setInputList([...inputList, { name: "", description: "" }]);
@@ -103,16 +103,10 @@ const AddMenu = ({ id }) => {
         reverseOrder={false}
       />
 
-      <h1 className='large text-center text-primary'>ADD Menu</h1>
+      <h1 style={{
+        color: '#0575B4'
+      }}>ADD Menu</h1>
       <table className="fl-table">
-        {/* <thead>
-          <tr>
-            <th width="10%">id</th>
-            <th>Menu Name</th>
-            <th>Menu Description</th>
-            
-          </tr>
-        </thead> */}
         {inputList.map((x, i) => {
           return (
             <tbody>
@@ -154,8 +148,8 @@ const AddMenu = ({ id }) => {
           );
         })}
       </table>
-      <div style={{ marginLeft: "200px", marginTop: "50px" }}>
-        <Button style={{ background: "#6600FF", color: "white" }} variant="contained" onClick={(e) => onSubmit(e)}>Submit</Button>
+      <div style={{ marginTop: "50px", }}>
+        <Button style={{ background: "#0575B4",width:'200px', color: "white" }} variant="contained" onClick={(e) => onSubmit(e)}>Submit</Button>
       </div>
     </div>
 

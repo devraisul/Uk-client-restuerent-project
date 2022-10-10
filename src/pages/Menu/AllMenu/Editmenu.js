@@ -57,67 +57,59 @@ const Editmenu = ({ id }) => {
     <Loading />
   ) : (
     <div className='table-wrapper'>
-      {inputList?.length === 0 ? (<p>Add Menu first to Edit!</p>) : (<Fragment><h1 className='large text-center text-primary'>Edit Dish</h1>  <table className="fl-table">
-        <thead>
-          <tr>
-            <th width="50px">#</th>
-            <th>Menu Name</th>
-            <th>Menu_Description</th>
+      {inputList?.length === 0 ? (<p>Add Menu first to Edit!</p>) : (
+        <Fragment>
+          <h1 className='large text-center text-primary'>Edit Dish</h1>
+          <table className="fl-table">
+            <thead>
+              <tr>
+                <th width="50px">#</th>
+                <th>Menu Name</th>
+                <th>Menu_Description</th>
+                <th></th>
+              </tr>
+            </thead>
 
-            <th></th>
-          </tr>
-        </thead>
-
-        {inputList === undefined ? '' : (
-          inputList?.map((x, i) => {
-            return (
-
-
-
-              <tbody>
-                <tr>
-                  <td>
-                    {i + 1}
-                  </td>
-                  <td>
-                    <input
-                      type='text'
-                      name="Menu_Name"
-                      placeholder="Enter Menu Name"
-                      value={x?.Menu_Name}
-                      className="form-control form-control-lg"
-                      //set the changes in the inital state
-                      onChange={e => handleInputChange(e, i)}
-                      required
-                    />
-
-                  </td>
-                  <td>
-
-
-                    <textarea
-
-                      name="Menu_Description"
-                      placeholder="Enter Menu Description"
-                      value={x?.Menu_Description}
-                      //set the changes in the inital state
-                      className="form-control form-control-lg"
-                      onChange={e => handleInputChange(e, i)}
-                      required
-                    />
-                  </td>
-                </tr>
-              </tbody>
-
-
-            );
-          }))}
-
-        <button className='btn btn-primary-submit' onClick={(e) => onSubmit(e)}>Save changes</button>
-
-      </table></Fragment>)}
+            {inputList === undefined ? '' : (
+              inputList?.map((x, i) => {
+                return (
+                  <tbody>
+                    <tr>
+                      <td>
+                        {i + 1}
+                      </td>
+                      <td>
+                        <input
+                          type='text'
+                          name="Menu_Name"
+                          placeholder="Enter Menu Name"
+                          value={x?.Menu_Name}
+                          className="form-control form-control-lg"
+                          //set the changes in the inital state
+                          onChange={e => handleInputChange(e, i)}
+                          required
+                        />
+                      </td>
+                      <td>
+                        <textarea
+                          name="Menu_Description"
+                          placeholder="Enter Menu Description"
+                          value={x?.Menu_Description}
+                          //set the changes in the inital state
+                          className="form-control form-control-lg"
+                          onChange={e => handleInputChange(e, i)}
+                          required
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                );
+              }))}
+            <button className='btn btn-primary-submit' onClick={(e) => onSubmit(e)}>Save changes</button>
+          </table>
+        </Fragment>
+      )}
     </div>
-
   );
 };
 

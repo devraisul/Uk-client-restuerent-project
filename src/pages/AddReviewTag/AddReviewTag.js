@@ -73,7 +73,8 @@ const AddReviewTag = () => {
       <div >
         <h1 style={{
           textAlign: 'center',
-          marginBottom: '20px'
+          marginBottom: '20px',
+          color:'#0575B4'
         }} >Your Question</h1>
         <Table style={{
           background: '#ccc',
@@ -84,13 +85,13 @@ const AddReviewTag = () => {
             textAlign: 'center'
           }}>
             <TableRow style={{
-              background: '#536DFE'
+              background: '#0575B4'
             }}>
               <TableCell style={{
                 fontWeight: 'bold',
                 textAlign: 'center',
                 color: 'white',
-                borderBottom: '3px solid #fff'
+                borderBottom: '3px solid #ccc'
               }}>
                 No
               </TableCell>
@@ -98,7 +99,7 @@ const AddReviewTag = () => {
                 fontWeight: 'bold',
                 textAlign: 'center',
                 color: 'white',
-                borderBottom: '3px solid #fff'
+                borderBottom: '3px solid #ccc'
               }}>
                 Question
               </TableCell>
@@ -106,7 +107,7 @@ const AddReviewTag = () => {
                 fontWeight: 'bold',
                 textAlign: 'center',
                 color: 'white',
-                borderBottom: '3px solid #fff'
+                borderBottom: '3px solid #ccc'
               }}>
                 Status
               </TableCell>
@@ -114,7 +115,7 @@ const AddReviewTag = () => {
                 fontWeight: 'bold',
                 textAlign: 'center',
                 color: 'white',
-                borderBottom: '3px solid #fff'
+                borderBottom: '3px solid #ccc'
               }}>
                 Options
               </TableCell>
@@ -124,53 +125,73 @@ const AddReviewTag = () => {
             {reviewData?.map((item, index) => (
               <TableRow style={{
                 textAlign: 'center',
-                background: '#AFBBFF',
+                background: '#fff',
 
               }} key={index}>
                 <TableCell style={{
                   textAlign: 'center',
-                  fontWeight: '600'
+                  fontWeight: '600',
+                  border: "1px solid #ccc"
                 }}>
                   {index}
                 </TableCell>
                 <TableCell style={{
                   textAlign: 'center',
-                  fontWeight: '600'
+                  fontWeight: '600',
+                  border: "1px solid #ccc"
                 }}>
                   {item?.question}
                 </TableCell>
                 <TableCell style={{
                   textAlign: 'center',
-                  fontWeight: '600'
+                  fontWeight: '600',
+                  border: "1px solid #ccc"
                 }}>
                   {item?.is_active ? 'Public' : 'Private'}
                 </TableCell>
                 <TableCell style={{
                   textAlign: 'center',
                   fontWeight: '600',
-                  display: 'flex',
-                  justifyContent: 'center'
+
+                  border: "1px solid #ccc",
                 }}>
                   {
                     item?.is_active ?
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}>
+                        <button onClick={() => { }} style={{
+                          padding: "5px 10px",
+                          width: '100px',
+                          background: '#0575B4',
+                          margin: '0px 2px',
+                          borderRadius: '30px',
+                          color: 'white',
+                          textAlign: 'center'
+                        }}>
+                          Hide
+                        </button>
+                      </div>
 
-                      <button onClick={()=>{}} style={{
-                        padding: "5px 10px",
-                        width: '100px',
-                        background: '#536DFE',
-                        margin: '0px 2px',
-                        borderRadius: '30px',
-                        color: 'white'
-                      }}>Hide</button>
+
                       :
-                      <button onClick={()=>{}} style={{
-                        padding: "5px 10px",  
-                        width: '100px',
-                        background: '#536DFE',
-                        margin: '0px 2px',
-                        borderRadius: '30px',
-                        color: 'white'
-                      }}>Public</button>
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}>
+                        <button onClick={() => { }} style={{
+                          padding: "5px 10px",
+                          width: '100px',
+                          background: '#0575B4',
+                          margin: '0px 2px',
+                          borderRadius: '30px',
+                          color: 'white'
+                        }}>
+                          Public
+                        </button>
+                      </div>
+
                   }
                 </TableCell>
               </TableRow>

@@ -4908,7 +4908,7 @@ px
   height: 200px;
   width: 200px;
   border-radius: 50%;
-  border: 5px dashed #f5882f;
+  border: 5px dashed #0575b4;
   animation: loading 3s infinite ease-in-out;
 }
 @keyframes loading {
@@ -4920,5 +4920,11 @@ px
   }
   100% {
     transform: rotate(0deg);
+  }
+}
+
+@media only screen and (max-width: 690px) {
+  .menuNav {
+    display: none;
   }
 }
