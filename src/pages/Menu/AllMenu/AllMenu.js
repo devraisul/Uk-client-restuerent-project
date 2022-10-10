@@ -3,7 +3,7 @@ import { getMenu } from '../../../Apis/Menu';
 import Loading from '../../../components/Loading/Loading';
 import AllmenuUI from './AllmenuUI';
 
-const AllMenu = ({ id }) => {
+const AllMenu = ({ id,changeMonitor }) => {
   const [menus, setMenus] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [changeHappend, setChangeHappend] = useState(Math.random())
@@ -14,7 +14,7 @@ const AllMenu = ({ id }) => {
         setMenus(res);
         setLoading(false)
       })
-  }, [id,changeHappend])
+  }, [id,changeHappend,changeMonitor])
 
 
   // STYLES 

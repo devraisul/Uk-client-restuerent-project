@@ -63,7 +63,6 @@
         "Authorization": `Bearer ${jwt.token}`
       },
     };
-    console.log(data);
     await axios.patch(`/api/menu/Edit/multiple`, data, config)
       .then(res => {
         addMenuResponse = res;
