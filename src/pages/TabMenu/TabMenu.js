@@ -132,8 +132,7 @@ const TabMenu = () => {
             // all menu
             menus?.map((menus) => (
               <Fragment key={menus.id}>
-                <a
-                  style={{ cursor: "pointer" }}
+                <a style={{ cursor: "pointer" }}
                   onClick={(e) => onClick(e, menus.id, menus.name)}
                 >
                   {menus.name}

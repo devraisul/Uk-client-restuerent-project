@@ -7,47 +7,48 @@ import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AddDish from './Dish/AddDish';
 import Alldish from './Dish/Alldish';
+import EditAllDish from './Dish/EditAllDish';
 const DishHandle = () => {
   const { user } = useAuth()
-  const [showaddmenu, setshowaddmenu] = React.useState(false);
-  const [showallmenu, setshowallmenu] = React.useState(true);
+  const [showAddMenu, setShowAddMenu] = React.useState(false);
+  const [showAllMenu, setShowAllMenu] = React.useState(true);
   const [isChangeMenu, setIsChangeMenu] = React.useState(Math.random());
-  const [editall, seteditall] = React.useState(false);
+  const [editAll, setEditAll] = React.useState(false);
   const params = useParams()
 
   const onshowmenu = (e) => {
-    setshowaddmenu(!showaddmenu)
-    seteditall(false)
+    setShowAddMenu(!showAddMenu)
+    setEditAll(false)
   };
 
-  const oneditall = (e) => {
-    setshowaddmenu(false)
-    seteditall(!editall)
+  const onEditAll = (e) => {
+    setShowAddMenu(false)
+    setEditAll(!editAll)
   };
   const onAllmenu = (e) => {
-    setshowaddmenu(false)
-    seteditall(false)
+    setShowAddMenu(false)
+    setEditAll(false)
   }
-const buttonStyle = {
-  textAlign:'center',
-  width:'170px',
-  background: '#0575B4',
-  color: '#fff',
-  display:'flex',
-  alignItems:'center',
-  justifyContent:'center',
-  textAlign:'left',
-}
-const buttonIcon = {
-  fontSize:'1.5rem',
-  margin:'0px 10px 0px 0px'
-}
+  const buttonStyle = {
+    textAlign: 'center',
+    width: '170px',
+    background: '#0575B4',
+    color: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'left',
+  }
+  const buttonIcon = {
+    fontSize: '1.5rem',
+    margin: '0px 10px 0px 0px'
+  }
   return (
     <Fragment>
       <div>
         <div style={{
-          display:'flex',
-          justifyContent:'center'
+          display: 'flex',
+          justifyContent: 'center'
         }}>
           <button className='large btn'
             style={buttonStyle}
@@ -61,8 +62,8 @@ const buttonIcon = {
           </button>
           <button
             style={buttonStyle}
-            className='large btn' onClick={(e) => oneditall(e)}>
-            {!editall ? (
+            className='large btn' onClick={(e) => onEditAll(e)}>
+            {!editAll ? (
               <Fragment>
                 <BiEdit style={buttonIcon} /> Edit All
               </Fragment>
@@ -80,17 +81,16 @@ const buttonIcon = {
           </Link>
         </div>
       </div>
-      {showaddmenu ? (
-        <AddDish setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
-      )
-        :
-        ('')
+      {
+        showAddMenu && (
+          <AddDish setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
+        )
       }
-      {showallmenu ? (
-        <Alldish isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
-      )
-        :
-        ('')
+      {editAll && <EditAllDish  />}
+      {
+        showAllMenu && (
+          <Alldish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
+        )
       }
     </Fragment>
   );

@@ -76,82 +76,67 @@ const LinkVariation = ({ rid, id }) => {
         x++;
         msg = msg + `Please Select Type. `
       }
-
-
-
     }
     if (x > 0) {
       alert(`${msg}`, 'danger');
     }
     else {
-
       //send the data to API
       let varation = inputList
       alert('Variation LInked', 'success');
       Variationlink(varation, id)
     }
-
   };
-
+  
   return loading ? (
     <Loading />
   ) : (
     <div className='containerLBB'>
-      {variations?.x?.length === 0 ? (<Fragment>
-        <div className='form'>Add Some Variations First To Continue!
-          <Link to={`/AddVariationtype/${rid}`} className='btn btn-primary-submit'>
-            Variations
-          </Link>
-        </div>
-      </Fragment>) : (
+      {variations?.x?.length === 0 ? (
+        <Fragment>
+          <div className='form'>Add Some Variations First To Continue!
+            <Link to={`/AddVariationtype/${rid}`} className='btn btn-primary-submit'>
+              Variations
+            </Link>
+          </div>
+        </Fragment>
+      ) : (
         <div>
-
           {inputList?.map((x, i) => {
             return (
               <div className='form'>
-
                 <p>no: {i + 1}</p>
-
                 <div className='form-group'>
-
                   <select name='Type' value={x?.Type}
                     onChange={e => handleInputChange(e, i)}>
                     <option value='0'>* Select a type</option>
                     {variations?.map((item, i) => {
-
                       return (
-
                         <option value={item?.name} >{item?.name}</option>
                       )
                     })}
-
                   </select>
                 </div>
-
                 <div className='form-group'>
-
                   <select type='number' name='no_of_varation_allowed' value={x?.no_of_varation_allowed}
                     onChange={e => handleInputChange(e, i)}>
                     <option value='0'>* Select No of Variation Allowed</option>
-                    {loading_count ? (<option>loading....</option>) : (<Fragment>{variations_count?.results?.map((item, i) => {
-
-                      return (
-                        <option value={i + 1} >{i + 1}</option>
-                      )
-                    })}</Fragment>)}
-
+                    {loading_count ? (<option>loading....</option>) : (
+                      <Fragment>{variations_count?.results?.map((item, i) => {
+                        return (
+                          <option value={i + 1} >{i + 1}</option>
+                        )
+                      })}</Fragment>
+                    )}
                   </select>
-
                 </div>
-
-
               </div>
-
             );
           })}
-
-          <button className='btn btn-primary-submit' onClick={(e) => onSubmit(e)}>Submit</button>
-
+          <button style={{
+            background: '#0575B4',
+            color: 'white'
+          }} className='btn' onClick={(e) => onSubmit(e)}>Submit</button>
         </div>)}
     </div>
 

@@ -72,35 +72,33 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
     let msg = ''
     //validation if all the feilds are filled when submit button is clicked
     for (i = 0; i < inputList.length; i++) {
-
-      if (inputList[i].Dish_Name === '') {
+      if (inputList[i].name === '') {
         x++;
         msg = msg + `Please add a Dish Name at row no: ${i + 1}. `
       }
 
-      if (inputList[i].Dish_Description === '') {
+      if (inputList[i].description === '') {
         x++;
         msg = msg + `Please add a Dish Description at row no: ${i + 1}. `
       }
 
-      if (inputList[i].Dish_Price === '') {
+      if (inputList[i].price === '') {
         x++;
         msg = msg + `Please add a Dish Price at row no: ${i + 1}. `
       }
 
-      if (inputList[i].TakeAway === '') {
+      if (inputList[i].take_away === '') {
         const list = [...inputList];
         list[i]['TakeAway'] = inputList[i].Dish_Price;
         setInputList(list);
       }
 
-      if (inputList[i].Delivery === '') {
+      if (inputList[i].delivery === '') {
         const list = [...inputList];
         list[i]['Delivery'] = inputList[i].Dish_Price;
         setInputList(list);
       }
     }
-
     if (x > 0) {
       alert(`${msg}`, 'danger');
     } else {

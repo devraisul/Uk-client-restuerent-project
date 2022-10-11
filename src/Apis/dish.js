@@ -66,7 +66,7 @@ export const getdish = async (id) => {
   return getDishResponse
 }
 // Add Dish Image
-export const addDishImage = async (id) => {
+export const addDishImage = async (id,data) => {
   let getaddDishImage;
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
@@ -77,8 +77,11 @@ export const addDishImage = async (id) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.post(`/api/dishes/uploadimage/${id}`, config)
+  await axios.post(`/api/dishes/uploadimage/${id}`,data, config)
     .then(res => {
+      console.log('====================================');
+      console.log(res);
+      console.log('====================================');
       getaddDishImage = res;
     })
     .catch(err => {
@@ -129,4 +132,25 @@ export const getuserdeal = async () => {
       console.log(err);
     })
   return getaddDishImage
+}
+
+// DELETE Dish 
+export const deleteDish = async (id) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+   const result = await axios.delete(`/api/dishes/${id}`, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  return result
 }

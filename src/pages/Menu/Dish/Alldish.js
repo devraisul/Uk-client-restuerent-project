@@ -3,7 +3,7 @@ import { getdish } from '../../../Apis/dish';
 import Loading from '../../../components/Loading/Loading';
 import AlldishesUI from '../../ViewMenu/AlldishesUI';
 
-const Alldish = ({ isChangeMenu, menuId, menuName, restaurentId }) => {
+const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId }) => {
   const [dishes, setDishes] = React.useState()
   const [loading, setLoading] = React.useState(false)
 
@@ -38,7 +38,7 @@ const Alldish = ({ isChangeMenu, menuId, menuName, restaurentId }) => {
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'column',
-      padding: '20px 10px'
+      padding: '20px 5px',
     },
     h1: {
       color: '#0575B4'
@@ -67,7 +67,7 @@ const Alldish = ({ isChangeMenu, menuId, menuName, restaurentId }) => {
     <Loading />
   ) : (
     <Fragment>
-      <div style={Styles.constainer} className='table-wrapper'>
+      <div style={Styles.constainer} >
         <h1 style={{color:'#0575B4'}} className='large text-center'>{menuName} Dishes</h1>
         <table className='servicesT'>
           <tbody>
@@ -77,9 +77,9 @@ const Alldish = ({ isChangeMenu, menuId, menuName, restaurentId }) => {
               <th style={Styles.tableHead} width="5%">Price</th>
               <th style={Styles.tableHead} width="10%">Description</th>
               <th style={Styles.tableHead} width="30%">Upload Image</th>
-              <th style={Styles.tableHead} width="30%">Link Variation</th>
+              {/* <th style={Styles.tableHead} width="30%">Link Variation</th> */}
               <th style={Styles.tableHead} width="10%">Linked Variations</th>
-              <th style={Styles.tableHead} width="5%"></th>
+              <th style={Styles.tableHead} width="5%">Edit</th>
             </tr>
           </tbody>
           {!dishes?.length ? (
@@ -94,6 +94,7 @@ const Alldish = ({ isChangeMenu, menuId, menuName, restaurentId }) => {
             <Fragment>
               {dishes?.map((dishes, i) => (
                 <AlldishesUI
+                setIsChangeMenu={setIsChangeMenu}
                   key={dishes?.ressult_id}
                   dishes={dishes}
                   id={dishes?.restaurant_id}

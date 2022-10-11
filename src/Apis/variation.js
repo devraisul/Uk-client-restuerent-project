@@ -12,9 +12,12 @@ export const addVariation = async (id, data) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  console.log(data);
+  // console.log(data);
   await axios.post(`/api/variation/variation_type/multiple/${id}`, data, config)
     .then(res => {
+      console.log('====================================');
+      console.log(res);
+      console.log('====================================');
       addVariationResponse = res;
     })
     .catch(err => console.log(err));
@@ -58,8 +61,8 @@ export const delVariation = async (id) => {
     .catch(err => console.log(err));
   return delVariationResponse
 }
-// add linkVariation
 
+// add linkVariation
 export const Variationlink = async (id, varation) => {
   let addVariationResponse;
   const userInfo = localStorage.getItem('data')
@@ -79,8 +82,8 @@ export const Variationlink = async (id, varation) => {
     .catch(err => console.log(err));
   return addVariationResponse
 }
-// get getvariation Type
 
+// get getvariation Type
 export const gettype = async (id, did) => {
   let addVariationResponse;
   const userInfo = localStorage.getItem('data')
@@ -100,8 +103,8 @@ export const gettype = async (id, did) => {
     .catch(err => console.log(err));
   return addVariationResponse
 }
-// get getvariation Type
 
+// get getvariation Type
 export const gettypecount = async (id) => {
   let addVariationResponse;
   const userInfo = localStorage.getItem('data')
@@ -120,11 +123,6 @@ export const gettypecount = async (id) => {
     .catch(err => console.log(err));
   return addVariationResponse
 }
-
-
-
-
-
 
 export const getVariationByDishId = async (id) => {
   let addVariationResponse;

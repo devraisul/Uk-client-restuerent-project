@@ -12,6 +12,7 @@ import Login from "../pages/login";
 // context
 import { useAuth } from "../context/AuthContext";
 import AddRestaurentForm from "../pages/login/AddRestaurentForm";
+import EnterPassword from "../pages/login/EnterPassword";
 import ForgotPassword from "../pages/login/ForgotPassword";
 import Registration from "../pages/login/Registration";
 import CustomerRegistration from "../pages/Review/CustomerRegistration";
@@ -42,6 +43,7 @@ export default function App() {
         <PublicRoute path="/registration" component={Registration} />
         {/* forgot password */}
         <PublicRoute path="/forgot-password" component={ForgotPassword} />
+        <PublicRoute path="/fotget-password/:token" component={EnterPassword} />
         <Route path="/usermenu/:id" component={UserMenu} />
         <Route path="/customer_registration" component={CustomerRegistration} />
         <Route path="/place_order/:restaurantId" component={PlaceOrderForm} />

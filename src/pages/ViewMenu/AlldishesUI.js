@@ -1,13 +1,18 @@
 import React, { Fragment, useState } from 'react';
+import { AiFillEdit } from 'react-icons/ai';
+import { BiLink } from 'react-icons/bi';
+import { FiLoader, FiSave, FiTrash2, FiUploadCloud } from 'react-icons/fi';
+import { IoCloudDoneOutline } from 'react-icons/io5';
 // import configData from "../../config.json";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { addDishImage, deleteDish } from '../../Apis/dish';
 import { getVariation } from '../../Apis/variation';
 import { useAuth } from '../../context/AuthContext';
 import LinkVariation from './linkvariationform';
 //all dishes show UI in owner dashboard
 const AlldishesUI = ({ dishes,
-  menuId, index, id }) => {
+  menuId, index, id, setIsChangeMenu }) => {
   const [showuploader, setsshowuploader] = useState(false);
   const [showlink, setsshowlink] = useState(false);
   const [editflag, setseditflag] = useState(false);
@@ -18,6 +23,9 @@ const AlldishesUI = ({ dishes,
   const [dishimage, setimage] = useState();
   const { user } = useAuth();
   const [variationData, setVariationData] = useState([])
+  const [isUploaded, setIsUploaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState("")
   React.useEffect(() => {
     getVariation(user.restaurant[0].id)
       .then(res => {
@@ -74,12 +82,8 @@ const AlldishesUI = ({ dishes,
 
   const onSubmit2 = async (e) => {
     e.preventDefault();
+    setIsChangeMenu(Math.random())
     setseditflag(!editflag)
-    // Editdishsingle(formData)
-
-    // window.location.reload(false)
-
-
   };
 
   const onSubmit3 = async (e, id) => {
@@ -87,26 +91,35 @@ const AlldishesUI = ({ dishes,
     // unlink(id, dishes?.id)
 
     // window.location.reload(false)
-
-
   };
 
-  const onSubmit4 = async (e) => {
+  const handleDeleteDish = async (e) => {
     e.preventDefault();
-
-    // await deletedish(dishes?.id)
-    // window.location.reload(false)
-
-
+    deleteDish(dishes?.id).then(res => {
+      if (res.data.message === "ok") {
+        setIsChangeMenu(Math.random())
+      }
+    })
   };
   //submit the image to API
   const onSubmit = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
     const Data = new FormData();
-    console.log(dishimage)
     if (dishimage !== undefined) {
       Data.append('image', dishimage, dishimage.name);
-      // addimage(Data, dishes?.id)
+      addDishImage(dishes?.id, Data).then((res) => {
+        if (res.data) {
+          setErrors("")
+          setIsUploaded(true)
+          setIsLoading(false)
+          setTimeout(() => { setsshowuploader(true) }, 200)
+        }
+      })
+    }
+    if (dishimage === undefined) {
+      setIsLoading(false)
+      setErrors("Please add an image")
     }
   };
 
@@ -139,7 +152,7 @@ const AlldishesUI = ({ dishes,
       width: '100%',
       height: '100%'
     },
-    variationButton:{
+    variationButton: {
       display: 'block',
       cursor: 'pointer',
       textAlign: 'center',
@@ -158,10 +171,19 @@ const AlldishesUI = ({ dishes,
       {editflag ? (
         <tbody>
           <tr>
-            <td >
+            <td width="2%" >
+              {index}
+            </td>
+            <td width="15%">
+
+              {/* NAME  */}
               <form className='form' >
                 <div className='form-groupnopadding'>
                   <input
+                    style={{
+                      outline: 'none',
+                      fontSize: '0.8rem'
+                    }}
                     type='text'
                     placeholder='Enter Restaurant Name'
                     name='Name'
@@ -171,13 +193,19 @@ const AlldishesUI = ({ dishes,
                   />
                 </div>
               </form>
+
             </td>
-            <td>
+            <td width="14%">
+              {/* PRICE  */}
               <form className='form' >
                 <div className='form-groupnopadding'>
                   <input
+                    style={{
+                      outline: 'none',
+                      fontSize: '0.8rem',
+                    }}
                     type='number'
-                    placeholder='Enter Restaurant Name'
+                    placeholder='Enter Price'
                     name='Price'
                     value={Price}
                     onChange={(e) => onChange(e)}
@@ -186,12 +214,16 @@ const AlldishesUI = ({ dishes,
                 </div>
               </form>
             </td>
-            <td>
+            <td width="22%">
               <form className='form' >
                 <div className='form-groupnopadding'>
                   <input
+                    style={{
+                      outline: 'none',
+                      fontSize: '0.8rem'
+                    }}
                     type='text'
-                    placeholder='Enter Restaurant Name'
+                    placeholder='Enter Description'
                     name='Description'
                     value={Description}
                     onChange={(e) => onChange(e)}
@@ -200,26 +232,49 @@ const AlldishesUI = ({ dishes,
                 </div>
               </form>
             </td>
-            <td>
-              <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
-                Upload Image
-              </button>
-              {//show upload image option on click
-                showuploader ? (
-                  <Fragment>
-                    <div className='form-groupnopadding'>
-                      <input
-                        type='file'
-                        id='image'
-                        name='image'
-                        onChange={(e) => onFileChange(e)}
-                      />
+            <td width="5%">
+              {
+                isUploaded ?
+                  <>
+                    <div>
+                      <IoCloudDoneOutline style={{ fontSize: "1.4rem", color: 'green' }} />
                     </div>
-                    <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
-                  </Fragment>
-                ) : null}
+                  </>
+                  :
+                  <>
+
+                    <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2' onClick={(e) => handleAddClick(e)}
+                    >
+                      {isLoading ? <FiLoader style={{ fontSize: "1.4rem" }} color='white' /> : <FiUploadCloud color='white' style={{ fontSize: "1.4rem" }} />}
+                    </button>
+                    {//show upload image option on click
+                      showuploader ? (
+                        <div style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          flexDirection: 'column'
+                        }}>
+                          {/* <div className='form-groupnopadding'> */}
+                          <input
+                            required
+                            type='file'
+                            id='image'
+                            name='image'
+                            onChange={(e) => onFileChange(e)}
+                          />
+                          {/* </div> */}
+                          <div style={{ display: 'flex', flexDirection: 'column', width: '70%', justifyContent: 'center', alignItems: 'center' }}>
+                            {errors && <span style={{ background: '#ffcccc', color: '#ff0000', padding: '2px 5px', borderRadius: '10px', marginTop: '5px' }} >{errors && errors}</span>}
+                            <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
+                          </div>
+                        </div>
+                      ) : null}
+                  </>
+              }
+
             </td>
-            <td>
+            {/* <td width="30%">
               <button className='btn btn-primary2' onClick={(e) => handleLinkClick(e)} disabled>
                 Link Variation
               </button>
@@ -233,50 +288,91 @@ const AlldishesUI = ({ dishes,
                     </div>
                   </Popup>
                 </Fragment>) : null}
+            </td> */}
+            <td width="15%">
+
+
+
+
+
+
+              <button title='Link Variation' className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
+                <BiLink />
+              </button>
+              {
+                //show upload image option on click
+                showlink ? (<Fragment>
+                  <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
+                    <button style={{color:'#0575B4'}} className="close" onClick={(e) => (setOpen(false))}>
+                      &times;
+                    </button>
+                    <div className='padding20px'>
+                    </div>
+                    <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
+                  </Popup>
+                </Fragment>) : null}
+
+
+
+              {/* {variationData?.map((variation, i) => (
+                <Fragment>
+                  <button className='btn btn-primary2'>{variation?.description}</button>
+                </Fragment>
+              ))} */}
             </td>
-            <td>{index}</td>
-            <td>
-              {variationData?.map((variation, i) => (<Fragment>
-                <button className='btn btn-primary2'>{variation?.description}</button>
-              </Fragment>))}
-            </td>
-            <td>
+            <td width="2%">
               <div>
-                <button className='btn btn-primary2' onClick={(e) => onSubmit2(e)}>Update</button>
+                <button title='update' className='btn btn-primary2' onClick={(e) => onSubmit2(e)}><FiSave /></button>
               </div>
-            </td>
-            <td>
-              <i className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
             </td>
           </tr>
         </tbody>) : (
         <tbody>
           <tr>
             <td width="5%">{index}</td>
-            <td width="5%">{dishes?.name}</td>
-            <td width="5%">£ {dishes?.price}</td>
-            <td width="10%">{trimString(dishes?.description)}</td>
-            <td width="30%">
-              <button  className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
-                Upload Image
-              </button>
-              {//show upload image option on click
-                showuploader ? (
-                  <Fragment>
-                    <div className='form-groupnopaddingnopadding'>
-                      <input
-                        type='file'
-                        id='image'
-                        name='image'
-                        onChange={(e) => onFileChange(e)}
-                      />
-                    </div>
-                    <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
-                  </Fragment>
-                ) : null}
+            <td width="15%">{dishes?.name}</td>
+            <td width="10%">£ {dishes?.price}</td>
+            <td width="15%">{trimString(dishes?.description)}</td>
+            <td style={{ padding: '0' }} width="30%">
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                {(dishes?.image) ? (
+                  <img
+                    style={{
+                      objectFit: 'cover',
+                      height: '100px'
+                    }}
+                    height={'100px'}
+                    className="roundimgg"
+                    src={`https://mughalsignandprint.co.uk/restaurant/${dishes?.image}`}
+                    alt={`${dishes?.name}`}
+                    onClick={(e) => setOpen2(true)}
+                  />
+                ) : (dishes?.image)}
+              </div>
+              {/* <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
+                  Upload Image
+                </button>
+                {//show upload image option on click
+                  showuploader ? (
+                    <Fragment>
+                      <div className='form-groupnopaddingnopadding'>
+                        <input
+                          type='file'
+                          id='image'
+                          name='image'
+                          onChange={(e) => onFileChange(e)}
+                        />
+                      </div>
+                      <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
+                    </Fragment>
+                  ) : null} */}
             </td>
-            <td  style={Styles.variationButtonContainer} width="30%">
-              <button style={Styles.variationButton} className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
+            {/* <td width="15%" style={Styles.variationButtonContainer}> */}
+            {/* <button style={Styles.variationButton} className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
                 Link Variation
               </button>
               {//show upload image option on click
@@ -290,7 +386,7 @@ const AlldishesUI = ({ dishes,
                     <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
                   </Popup>
                 </Fragment>) : null}
-            </td>
+            </td> */}
             <td width="10%">
               {variationData?.map((variation, i) => (<Fragment>
                 {<Fragment>
@@ -319,8 +415,11 @@ const AlldishesUI = ({ dishes,
               }
             </td>
             <td width="5%">
-              <i style={{ cursor: "pointer" }} className="fas fa-pen" onClick={(e) => setseditflag(!editflag)}></i>
-              <i style={{ cursor: "pointer" }} className="fas fa-times" onClick={(e) => onSubmit4(e)}></i>
+              <div>
+                <AiFillEdit style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} onClick={(e) => setseditflag(!editflag)}></AiFillEdit>
+                <FiTrash2 style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} onClick={(e) => handleDeleteDish(e)}></FiTrash2>
+              </div>
+
             </td>
           </tr>
         </tbody>
