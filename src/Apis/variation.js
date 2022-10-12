@@ -1,6 +1,62 @@
 import axios from "axios";
-// Add variation type
 
+
+export const addSingleDishVaiation = async (data) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  // console.log(data);
+  const result = await axios.post(`/api/variation/dish_variation`, data, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
+}
+export const getVariationByRestaurantIdAndDishId = async (dis_id) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  const result = await axios.get(`/api/variation/dish_variation/${dis_id}`, config)
+    .then(res => {
+      console.log(res);
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
+}
+const getVariationByRestId = async (data) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  // console.log(data);
+  const result = await axios.post(`/api/variation/dish_variation`, data, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
+}
+
+// Add variation type
 export const addVariation = async (id, data) => {
   let addVariationResponse;
   const userInfo = localStorage.getItem('data')
@@ -98,6 +154,9 @@ export const gettype = async (id, did) => {
   console.log(id, did);
   await axios.get(`/api/variation/${id}/${did}`, config)
     .then(res => {
+      console.log('====================================');
+      console.log('FROM API-->',res);
+      console.log('====================================');
       addVariationResponse = res.data;
     })
     .catch(err => console.log(err));

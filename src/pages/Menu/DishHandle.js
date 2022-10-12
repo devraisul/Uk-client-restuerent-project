@@ -19,16 +19,27 @@ const DishHandle = () => {
   const onshowmenu = (e) => {
     setShowAddMenu(!showAddMenu)
     setEditAll(false)
+    setShowAllMenu(false)
   };
 
   const onEditAll = (e) => {
     setShowAddMenu(false)
-    setEditAll(!editAll)
+    setShowAllMenu(false)
+    setEditAll(true)
   };
+  const offEditAll = (e) => {
+    setShowAddMenu(false)
+    setShowAllMenu(true)
+    setEditAll(false)
+  };
+
   const onAllmenu = (e) => {
     setShowAddMenu(false)
+    setShowAllMenu(true)
     setEditAll(false)
   }
+
+
   const buttonStyle = {
     textAlign: 'center',
     width: '170px',
@@ -62,7 +73,7 @@ const DishHandle = () => {
           </button>
           <button
             style={buttonStyle}
-            className='large btn' onClick={(e) => onEditAll(e)}>
+            className='large btn' onClick={(e) => editAll ? offEditAll(e) : onEditAll(e)}>
             {!editAll ? (
               <Fragment>
                 <BiEdit style={buttonIcon} /> Edit All
@@ -81,17 +92,15 @@ const DishHandle = () => {
           </Link>
         </div>
       </div>
-      {
-        showAddMenu && (
-          <AddDish setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
-        )
-      }
-      {editAll && <EditAllDish  />}
-      {
-        showAllMenu && (
-          <Alldish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
-        )
-      }
+
+      {showAddMenu && <AddDish setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
+
+
+      {editAll && <EditAllDish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
+
+
+      {showAllMenu && <Alldish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
+      
     </Fragment>
   );
 };

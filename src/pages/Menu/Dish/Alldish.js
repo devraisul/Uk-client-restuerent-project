@@ -28,9 +28,6 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId 
   }
 
 
-
-
-
   // STYLES 
   const Styles = {
     constainer: {
@@ -61,7 +58,6 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId 
       height: '100%'
     }
   }
-
 
   return loading ? (
     <Loading />

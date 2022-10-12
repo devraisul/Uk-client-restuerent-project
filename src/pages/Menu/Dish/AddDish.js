@@ -1,10 +1,11 @@
 import { Button } from '@material-ui/core';
 import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import { adddish } from '../../../Apis/dish';
 
 const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
   // console.log({restaurentId,menuId });
-
+  const history = useHistory();
   const [inputList, setInputList] = React.useState([{
     name: "",
     price: 0,
@@ -106,7 +107,9 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu }) => {
       let dishes = inputList
       adddish(restaurentId, dishes)
         .then(res => {
-          if (res.data.length === 1) {
+          if (res.data.length > 0) {
+            
+            history.goBack()
             setInputList([{
               name: "",
               price: 0,

@@ -32,12 +32,9 @@ const AllmenuUI = ({ menus, index, Mid, setChangeHappend }) => {
   };
   const handleDeleteMenu = (Mid) => {
     deleteMenu(Mid).then((res) => {
-
       if (res.data.message === 'ok') {
         setChangeHappend(Math.random())
       }
-
-
     })
   }
   return (
@@ -219,7 +216,6 @@ const AllmenuUI = ({ menus, index, Mid, setChangeHappend }) => {
                   <AiFillEdit style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} onClick={(e) => setseditflag(!editflag)}></AiFillEdit>
                   <FiTrash2 style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} onClick={(e) => handleDeleteMenu(menus?.id)}></FiTrash2>
                 </div>
-
               </td>
             </tr>
           </tbody>

@@ -7,14 +7,14 @@ import { IoCloudDoneOutline } from 'react-icons/io5';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { addDishImage, deleteDish } from '../../Apis/dish';
-import { getVariation } from '../../Apis/variation';
+import { getVariationByRestaurantIdAndDishId } from '../../Apis/variation';
 import { useAuth } from '../../context/AuthContext';
 import LinkVariation from './linkvariationform';
 //all dishes show UI in owner dashboard
 const AlldishesUI = ({ dishes,
   menuId, index, id, setIsChangeMenu }) => {
   const [showuploader, setsshowuploader] = useState(false);
-  const [showlink, setsshowlink] = useState(false);
+  const [showLink, setShowLink] = useState(false);
   const [editflag, setseditflag] = useState(false);
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
@@ -26,13 +26,13 @@ const AlldishesUI = ({ dishes,
   const [isUploaded, setIsUploaded] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState("")
+
   React.useEffect(() => {
-    getVariation(user.restaurant[0].id)
-      .then(res => {
-        console.log(res?.data);
-        setVariationData(res?.data);
-      })
-  }, [])
+    getVariationByRestaurantIdAndDishId(dishes?.id).then(res => {
+      setVariationData(res?.data);
+    })
+  }, [user])
+
   const [formData, setFormData] = useState({
     Did: dishes?.id,
     Name: dishes?.name,
@@ -42,11 +42,9 @@ const AlldishesUI = ({ dishes,
   const { Did, Name, Price, Description } = formData;
   //set uploaded image in state
   const onFileChange = (e) => {
-
     setimage(
       e.target.files[0]);
   };
-
   // show upload option
   const handleAddClick = () => {
     if (showuploader) {
@@ -56,43 +54,37 @@ const AlldishesUI = ({ dishes,
       setsshowuploader(true)
     }
   }
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const handleLinkClick = () => {
-    if (showlink) {
-      setsshowlink(false)
+    if (showLink) {
+      setShowLink(false)
       setOpen(false)
     }
     else {
-      setsshowlink(true)
+      setShowLink(true)
       setOpen(true)
     }
   }
-
   const handlepopup = () => {
-    if (showlink) {
-      setsshowlink(false)
+    if (showLink) {
+      setShowLink(false)
       setOpen(false)
     }
     else {
-      setsshowlink(true)
+      setShowLink(true)
       setOpen(true)
     }
   }
-
   const onSubmit2 = async (e) => {
     e.preventDefault();
     setIsChangeMenu(Math.random())
     setseditflag(!editflag)
   };
-
   const onSubmit3 = async (e, id) => {
     e.preventDefault();
     // unlink(id, dishes?.id)
-
     // window.location.reload(false)
   };
-
   const handleDeleteDish = async (e) => {
     e.preventDefault();
     deleteDish(dishes?.id).then(res => {
@@ -122,20 +114,12 @@ const AlldishesUI = ({ dishes,
       setErrors("Please add an image")
     }
   };
-
-
-
-
   const trimString = (string, length = 15) => {
     return string
       .slice(0, string.length >= length - 3 ? length - 3 : string.length)
       .padEnd(string.length >= length - 3 ? length : string.length,
         '.')
   }
-
-
-
-
   // STYLES 
   const Styles = {
     uploadImageButtonContainer: {
@@ -166,6 +150,7 @@ const AlldishesUI = ({ dishes,
       width: '140px',
     }
   }
+
   return (
     <Fragment>
       {editflag ? (
@@ -243,10 +228,12 @@ const AlldishesUI = ({ dishes,
                   :
                   <>
 
-                    <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2' onClick={(e) => handleAddClick(e)}
+                    {!showuploader&&<button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2' onClick={(e) => handleAddClick(e)}
                     >
                       {isLoading ? <FiLoader style={{ fontSize: "1.4rem" }} color='white' /> : <FiUploadCloud color='white' style={{ fontSize: "1.4rem" }} />}
                     </button>
+}
+
                     {//show upload image option on click
                       showuploader ? (
                         <div style={{
@@ -274,36 +261,16 @@ const AlldishesUI = ({ dishes,
               }
 
             </td>
-            {/* <td width="30%">
-              <button className='btn btn-primary2' onClick={(e) => handleLinkClick(e)} disabled>
-                Link Variation
-              </button>
-              {//show upload image option on click
-                showlink ? (<Fragment>
-                  <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
-                    <a className="close" onClick={(e) => (setOpen(false))}>
-                      &times;
-                    </a>
-                    <div className='padding20px'>
-                    </div>
-                  </Popup>
-                </Fragment>) : null}
-            </td> */}
+
             <td width="15%">
-
-
-
-
-
-
               <button title='Link Variation' className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
                 <BiLink />
               </button>
               {
                 //show upload image option on click
-                showlink ? (<Fragment>
+                showLink ? (<Fragment>
                   <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
-                    <button style={{color:'#0575B4'}} className="close" onClick={(e) => (setOpen(false))}>
+                    <button style={{ color: '#0575B4' }} className="close" onClick={(e) => (setOpen(false))}>
                       &times;
                     </button>
                     <div className='padding20px'>
@@ -311,8 +278,6 @@ const AlldishesUI = ({ dishes,
                     <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
                   </Popup>
                 </Fragment>) : null}
-
-
 
               {/* {variationData?.map((variation, i) => (
                 <Fragment>
@@ -326,7 +291,8 @@ const AlldishesUI = ({ dishes,
               </div>
             </td>
           </tr>
-        </tbody>) : (
+        </tbody>
+      ) : (
         <tbody>
           <tr>
             <td width="5%">{index}</td>
@@ -371,53 +337,17 @@ const AlldishesUI = ({ dishes,
                     </Fragment>
                   ) : null} */}
             </td>
-            {/* <td width="15%" style={Styles.variationButtonContainer}> */}
-            {/* <button style={Styles.variationButton} className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
-                Link Variation
-              </button>
-              {//show upload image option on click
-                showlink ? (<Fragment>
-                  <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
-                    <a className="close" onClick={(e) => (setOpen(false))}>
-                      &times;
-                    </a>
-                    <div className='padding20px'>
-                    </div>
-                    <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
-                  </Popup>
-                </Fragment>) : null}
-            </td> */}
             <td width="10%">
-              {variationData?.map((variation, i) => (<Fragment>
-                {<Fragment>
-                  <Popup open={open2} closeOnDocumentClick onClose={(e) => (setOpen2(false))}>
-                    <a className="close" onClick={(e) => (setOpen2(false))}>
-                      &times;
-                    </a>
-                    <div className='padding20px'>
-                    </div>
-                    <form className='form' >
-                      <div className='form-groupnopadding'>
-                        <p>No of Variation Allowed</p>
-                        <input
-                          type='text'
-                          placeholder='Enter Restaurant Name'
-                          name='va'
-                          value={variation.allowed}
-                          onChange={(e) => onChange(e)}
-                        //required
-                        />
-                      </div>
-                    </form>
-                  </Popup>
-                </Fragment>}
-              </Fragment>))
-              }
+              <ul>
+                {variationData?.map((variation, i) => (
+                  <li style={{ padding: '1px 4px', background: '#ccc', margin: '1px 0px', borderRadius: '30px' }}>{variation?.variation_type?.name}</li>
+                ))}
+              </ul>
             </td>
             <td width="5%">
               <div>
-                <AiFillEdit style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} onClick={(e) => setseditflag(!editflag)}></AiFillEdit>
-                <FiTrash2 style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} onClick={(e) => handleDeleteDish(e)}></FiTrash2>
+                <AiFillEdit title='edit' style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} onClick={(e) => setseditflag(!editflag)}></AiFillEdit>
+                <FiTrash2 title='delete' style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} onClick={(e) => handleDeleteDish(e)}></FiTrash2>
               </div>
 
             </td>

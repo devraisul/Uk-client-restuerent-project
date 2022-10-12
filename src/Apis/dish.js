@@ -77,6 +77,7 @@ export const addDishImage = async (id,data) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
+  console.log('from api-->',{id,data});
   await axios.post(`/api/dishes/uploadimage/${id}`,data, config)
     .then(res => {
       console.log('====================================');

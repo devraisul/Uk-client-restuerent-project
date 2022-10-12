@@ -1,14 +1,9 @@
 import {
-  Table,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
+  Table, TableBody,
+  TableCell, TableHead, TableRow
 } from "@material-ui/core";
 import { Delete, Edit } from "@material-ui/icons";
-import React from 'react';
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 import { getVariation } from "../../Apis/variation";
 import { useAuth } from "../../context/AuthContext";
 
@@ -20,7 +15,7 @@ const AllVariation = () => {
       .then(res => {
         setVariationData(res.data);
       })
-  })
+  },[])
   return (
     <>
       <Table className="mb-0">

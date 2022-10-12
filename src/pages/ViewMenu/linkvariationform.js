@@ -1,24 +1,26 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { AiOutlineFileDone } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { gettype, gettypecount, Variationlink } from '../../Apis/variation';
+import { addSingleDishVaiation, gettypecount, getVariation } from '../../Apis/variation';
 import Loading from '../../components/Loading/Loading';
+import { useAuth } from '../../context/AuthContext';
 import './viewMenu.css';
 //Add dish Form
 const LinkVariation = ({ rid, id }) => {
-
-  const [variations, setVaration] = useState()
+  const user = useAuth()
+  const [variations, setVaration] = useState([])
   const [loading, setLoading] = useState(false)
   const [loading_count, setLoading_count] = useState(false)
   const [variations_count, setVariations_count] = useState()
+  const [isSubmited, setIsSubmited] = useState(false)
   useEffect(() => {
     setLoading(true)
-    gettype(rid, id)
-      .then(res => {
-        setVaration(res)
-        setLoading(false)
-      })
-  }, [id, rid]);
-  const [inputList, setInputList] = useState([{ no_of_varation_allowed: "", typeID: "", Type: "" }]);
+    getVariation(user?.user?.restaurant[0]?.id).then(res => {
+      setVaration(res.data)
+      setLoading(false)
+    })
+  }, [rid]);
+  const [inputList, setInputList] = useState([{ no_of_varation_allowed: "", type_id: "" }]);
 
 
   // handle input change
@@ -26,7 +28,7 @@ const LinkVariation = ({ rid, id }) => {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
-    if (name === 'Type') {
+    if (name === 'type_id') {
       handleInputChangeType(e, index, value)
     }
     setInputList(list);
@@ -38,7 +40,7 @@ const LinkVariation = ({ rid, id }) => {
     console.log(x);
 
     const list = [...inputList];
-    list[index]['typeID'] = x[0].varation_type_id;
+    // list[index]['typeID'] = x[0].varation_type_id;
     setInputList(list);
     gettypecount(x[0].id)
       .then(res => {
@@ -48,22 +50,17 @@ const LinkVariation = ({ rid, id }) => {
   };
   // handle click event of the Add button
   const handleAddClick = (i) => {
-
-
-
-
     if (inputList[i].Price !== "") {
-
-      setInputList([...inputList, { no_of_varation_allowed: "", typeID: "", Type: "" }]);
+      setInputList([...inputList, { no_of_varation_allowed: "", type_id: "" }]);
     }
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-
     let x = 0;
     let msg = ''
     let i = 0;
-    console.log(inputList)
+    inputList[0].dish_id = id;
+
     //validation if all the feilds are filled when submit button is clicked
     for (i = 0; i < inputList.length; i++) {
       if (inputList[i].no_of_varation_allowed === '') {
@@ -71,7 +68,7 @@ const LinkVariation = ({ rid, id }) => {
         x++;
         msg = msg + `Please select no of Variation Allowed. `
       }
-      if (inputList[i].Type === '') {
+      if (inputList[i].type_id === '') {
 
         x++;
         msg = msg + `Please Select Type. `
@@ -81,13 +78,16 @@ const LinkVariation = ({ rid, id }) => {
       alert(`${msg}`, 'danger');
     }
     else {
-      //send the data to API
-      let varation = inputList
-      alert('Variation LInked', 'success');
-      Variationlink(varation, id)
+      console.log('variation-->', inputList[0]);
+      // alert('Variation LInked', 'success');
+      addSingleDishVaiation(inputList[0]).then((res) => {
+        if (res?.data?.id) {
+          setIsSubmited(true)
+        }
+      })
     }
   };
-  
+
   return loading ? (
     <Loading />
   ) : (
@@ -104,40 +104,90 @@ const LinkVariation = ({ rid, id }) => {
         <div>
           {inputList?.map((x, i) => {
             return (
-              <div className='form'>
-                <p>no: {i + 1}</p>
-                <div className='form-group'>
-                  <select name='Type' value={x?.Type}
-                    onChange={e => handleInputChange(e, i)}>
-                    <option value='0'>* Select a type</option>
-                    {variations?.map((item, i) => {
-                      return (
-                        <option value={item?.name} >{item?.name}</option>
-                      )
-                    })}
-                  </select>
-                </div>
-                <div className='form-group'>
-                  <select type='number' name='no_of_varation_allowed' value={x?.no_of_varation_allowed}
-                    onChange={e => handleInputChange(e, i)}>
-                    <option value='0'>* Select No of Variation Allowed</option>
-                    {loading_count ? (<option>loading....</option>) : (
-                      <Fragment>{variations_count?.results?.map((item, i) => {
-                        return (
-                          <option value={i + 1} >{i + 1}</option>
-                        )
-                      })}</Fragment>
-                    )}
-                  </select>
-                </div>
-              </div>
+              <>
+                {
+                  isSubmited ?
+                    <div style={{
+                      width:'100%',
+                      height:'200px',
+                      display:'flex',
+                      justifyContent:'center',
+                      alignItems:'center',
+                      flexDirection:'column'
+                      
+                    }}>
+                      <div style={{
+                        width:'100px',
+                        height:'100px',
+                        padding:'10px',
+                        background:'#00ff00',
+                        borderRadius:'30px',
+                        display:'flex',
+                        alignItems:'center',
+                        justifyContent:'center'
+                      }}>
+                        <AiOutlineFileDone style={{
+                        fontSize:'2.5rem',
+                        color:'white'
+                      }} />
+                      </div>
+                      
+                      <h2>
+                        Added Successfully
+                      </h2>
+                      
+                    </div> :
+
+                    <div className='form'>
+                      <p>no: {i + 1}</p>
+                      <div className='form-group'>
+                        <select name='type_id' value={x?.type_id}
+                          onChange={e => handleInputChange(e, i)}>
+                          <option value='0'>* Select a type</option>
+                          {variations?.map((item, i) => {
+                            return (
+
+                              <option value={item?.id} >{item?.name}</option>
+
+                            )
+                          })}
+                        </select>
+                      </div>
+                      <div className='form-group'>
+                        <select type='number' name='no_of_varation_allowed' value={x?.no_of_varation_allowed}
+                          onChange={e => handleInputChange(e, i)}>
+                          <option value='0'>* Select No of Variation Allowed</option>
+                          <option value={1} >1</option>
+                          <option value={2} >2</option>
+                          <option value={3} >3</option>
+                          <option value={4} >4</option>
+                          <option value={5} >5</option>
+                          {/* {loading_count ? (
+                      <option>loading....</option>
+                    ) : (
+                      <Fragment>
+                        {variations_count?.results?.map((item, i) => {
+                          return (
+                            <option value={i + 1} >{i + 1}</option>
+                          )
+                        })}
+                      </Fragment>
+                    )} */}
+                        </select>
+                      </div>
+                    </div>
+                }
+              </>
             );
           })}
-          <button style={{
+          {!isSubmited&&<button style={{
             background: '#0575B4',
             color: 'white'
-          }} className='btn' onClick={(e) => onSubmit(e)}>Submit</button>
-        </div>)}
+          }} className='btn' onClick={(e) => onSubmit(e)}>
+            Submit
+          </button>}
+        </div>
+      )}
     </div>
 
   );

@@ -1,9 +1,9 @@
 import { Button, IconButton, TextField } from '@material-ui/core';
 import { Add, Delete } from '@material-ui/icons';
 import React, { Fragment } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { addVariation } from '../../Apis/variation';
 import { useAuth } from '../../context/AuthContext';
-import toast, { Toaster } from 'react-hot-toast';
 import AllVariation from './AllVariation';
 
 const Addveriation = () => {
@@ -148,18 +148,33 @@ const Addveriation = () => {
                       id="outlined-basic" label="Menu Description" variant="outlined" />
                   </td>
 
-                  <td>{i > 0 ? (<IconButton style={{ marginTop: "15px", marginRight: "15px" }} onClick={(e) => handledeleteClick(i)} aria-label="delete">
-                    <Delete />
-                  </IconButton>) : ('')}</td>
                   <td>
-                    {inputList[i].name || inputList[i].description === !'' ? <Fragment> {inputList.length - 1 === i && <Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" onClick={(e) => handleAddClick(i)}><Add />Add More</Button>}</Fragment> : <Fragment><Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" disabled><Add />Add More</Button></Fragment>}
+                    {i > 0 ? (
+                      <IconButton style={{ marginTop: "15px", marginRight: "15px" }} onClick={(e) => handledeleteClick(i)} aria-label="delete">
+                        <Delete />
+                      </IconButton>
+                    ) : ('')
+                    }
                   </td>
-
-
-
+                  <td>
+                    {
+                      inputList[i].name || inputList[i].description === !'' ?
+                        <Fragment>
+                          {inputList.length - 1 === i &&
+                            <Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" onClick={(e) => handleAddClick(i)}>
+                              <Add />Add More
+                            </Button>
+                          }
+                        </Fragment> :
+                        <Fragment>
+                          <Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" disabled>
+                            <Add />Add More
+                          </Button>
+                        </Fragment>
+                    }
+                  </td>
                 </tr>
               </tbody>
-
             );
           })}
         </table>
