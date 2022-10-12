@@ -228,12 +228,16 @@ const AlldishesUI = ({ dishes,
                   :
                   <>
 
-                    {!showuploader&&<button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2' onClick={(e) => handleAddClick(e)}
+                    {!showuploader && <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2' onClick={(e) => handleAddClick(e)}
                     >
-                      {isLoading ? <FiLoader style={{ fontSize: "1.4rem" }} color='white' /> : <FiUploadCloud color='white' style={{ fontSize: "1.4rem" }} />}
+                      <FiUploadCloud color='white' style={{ fontSize: "1.4rem" }} />
                     </button>
-}
-
+                    }
+                    {isLoading &&
+                      <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2'>
+                        <FiLoader style={{ fontSize: "1.4rem" }} color='white' />
+                      </button>
+                    }
                     {//show upload image option on click
                       showuploader ? (
                         <div style={{

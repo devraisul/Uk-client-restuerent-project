@@ -17,7 +17,6 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId 
       })
   }, [isChangeMenu]);
 
-  console.log(dishes);
   const [comp_update, set_comp_update] = React.useState(1);
   // if(update && comp_update%2!=0)
   if (comp_update % 2 != 0) {
