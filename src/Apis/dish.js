@@ -134,7 +134,27 @@ export const getuserdeal = async () => {
     })
   return getaddDishImage
 }
-
+// UPDATE DISH
+export const updateSingleDish = async (data) => {
+  
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+   const result = await axios.patch(`/api/dishes/Updatedish`,data, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  return result
+}
 // DELETE Dish 
 export const deleteDish = async (id) => {
   const userInfo = localStorage.getItem('data')

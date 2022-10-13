@@ -1,18 +1,16 @@
 import React, { Fragment, useState } from 'react';
-import { AiFillEdit } from 'react-icons/ai';
-import { BiLink } from 'react-icons/bi';
+import { AiFillEdit, AiOutlinePlus } from 'react-icons/ai';
 import { FiLoader, FiSave, FiTrash2, FiUploadCloud } from 'react-icons/fi';
 import { IoCloudDoneOutline } from 'react-icons/io5';
 // import configData from "../../config.json";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { addDishImage, deleteDish } from '../../Apis/dish';
+import { addDishImage, deleteDish, updateSingleDish } from '../../Apis/dish';
 import { getVariationByRestaurantIdAndDishId } from '../../Apis/variation';
 import { useAuth } from '../../context/AuthContext';
-import LinkVariation from './linkvariationform';
+import LinkVariation from './LinkVariation';
 //all dishes show UI in owner dashboard
-const AlldishesUI = ({ dishes,
-  menuId, index, id, setIsChangeMenu }) => {
+const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
   const [showuploader, setsshowuploader] = useState(false);
   const [showLink, setShowLink] = useState(false);
   const [editflag, setseditflag] = useState(false);
@@ -26,20 +24,21 @@ const AlldishesUI = ({ dishes,
   const [isUploaded, setIsUploaded] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState("")
+  const [isVariationChanged, setIsVariationChanged] = useState(Math.random())
 
   React.useEffect(() => {
     getVariationByRestaurantIdAndDishId(dishes?.id).then(res => {
       setVariationData(res?.data);
     })
-  }, [user])
+  }, [user, isVariationChanged])
 
   const [formData, setFormData] = useState({
-    Did: dishes?.id,
-    Name: dishes?.name,
-    Price: dishes?.price,
-    Description: dishes?.description,
+    id: dishes?.id,
+    name: dishes?.name,
+    price: dishes?.price,
+    description: dishes?.description,
   });
-  const { Did, Name, Price, Description } = formData;
+  const { id, name, price, description } = formData;
   //set uploaded image in state
   const onFileChange = (e) => {
     setimage(
@@ -75,10 +74,14 @@ const AlldishesUI = ({ dishes,
       setOpen(true)
     }
   }
-  const onSubmit2 = async (e) => {
+  const handleSaveDish = async (e) => {
     e.preventDefault();
-    setIsChangeMenu(Math.random())
-    setseditflag(!editflag)
+    updateSingleDish(formData).then(res=>{
+      if(res.data.id){
+        setIsChangeMenu(Math.random())
+        setseditflag(!editflag)
+      }
+    })
   };
   const onSubmit3 = async (e, id) => {
     e.preventDefault();
@@ -171,8 +174,8 @@ const AlldishesUI = ({ dishes,
                     }}
                     type='text'
                     placeholder='Enter Restaurant Name'
-                    name='Name'
-                    value={Name}
+                    name='name'
+                    value={name}
                     onChange={(e) => onChange(e)}
                   //required
                   />
@@ -191,8 +194,8 @@ const AlldishesUI = ({ dishes,
                     }}
                     type='number'
                     placeholder='Enter Price'
-                    name='Price'
-                    value={Price}
+                    name='price'
+                    value={price}
                     onChange={(e) => onChange(e)}
                   //required
                   />
@@ -209,8 +212,8 @@ const AlldishesUI = ({ dishes,
                     }}
                     type='text'
                     placeholder='Enter Description'
-                    name='Description'
-                    value={Description}
+                    name='description'
+                    value={description}
                     onChange={(e) => onChange(e)}
                   //required
                   />
@@ -218,80 +221,114 @@ const AlldishesUI = ({ dishes,
               </form>
             </td>
             <td width="5%">
-              {
-                isUploaded ?
-                  <>
-                    <div>
-                      <IoCloudDoneOutline style={{ fontSize: "1.4rem", color: 'green' }} />
-                    </div>
-                  </>
-                  :
-                  <>
-
-                    {!showuploader && <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2' onClick={(e) => handleAddClick(e)}
-                    >
+              {isUploaded ?
+                <>
+                  <div>
+                    <IoCloudDoneOutline style={{ fontSize: "1.4rem", color: 'green' }} />
+                  </div>
+                </>
+                :
+                <>
+                  {
+                    !showuploader &&
+                    <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2' onClick={(e) => handleAddClick(e)} >
                       <FiUploadCloud color='white' style={{ fontSize: "1.4rem" }} />
                     </button>
-                    }
-                    {isLoading &&
-                      <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2'>
-                        <FiLoader style={{ fontSize: "1.4rem" }} color='white' />
-                      </button>
-                    }
-                    {//show upload image option on click
-                      showuploader ? (
-                        <div style={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          flexDirection: 'column'
-                        }}>
-                          {/* <div className='form-groupnopadding'> */}
-                          <input
-                            required
-                            type='file'
-                            id='image'
-                            name='image'
-                            onChange={(e) => onFileChange(e)}
-                          />
-                          {/* </div> */}
-                          <div style={{ display: 'flex', flexDirection: 'column', width: '70%', justifyContent: 'center', alignItems: 'center' }}>
-                            {errors && <span style={{ background: '#ffcccc', color: '#ff0000', padding: '2px 5px', borderRadius: '10px', marginTop: '5px' }} >{errors && errors}</span>}
-                            <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
-                          </div>
-                        </div>
-                      ) : null}
-                  </>
-              }
-
-            </td>
-
-            <td width="15%">
-              <button title='Link Variation' className='btn btn-primary2' onClick={(e) => handleLinkClick(e)}>
-                <BiLink />
-              </button>
-              {
-                //show upload image option on click
-                showLink ? (<Fragment>
-                  <Popup open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
-                    <button style={{ color: '#0575B4' }} className="close" onClick={(e) => (setOpen(false))}>
-                      &times;
+                  }
+                  {isLoading &&
+                    <button title='upload image' style={{ background: '#0575B4' }} className='btn btn-primary2'>
+                      <FiLoader style={{ fontSize: "1.4rem" }} color='white' />
                     </button>
-                    <div className='padding20px'>
-                    </div>
-                    <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
-                  </Popup>
-                </Fragment>) : null}
-
-              {/* {variationData?.map((variation, i) => (
-                <Fragment>
-                  <button className='btn btn-primary2'>{variation?.description}</button>
-                </Fragment>
-              ))} */}
+                  }
+                  {
+                    //show upload image option on click
+                    showuploader ? (
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'column'
+                      }}>
+                        <input
+                          required
+                          type='file'
+                          id='image'
+                          name='image'
+                          onChange={(e) => onFileChange(e)}
+                        />
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '70%', justifyContent: 'center', alignItems: 'center' }}>
+                          {
+                            errors && <span style={{ background: '#ffcccc', color: '#ff0000', padding: '2px 5px', borderRadius: '10px', marginTop: '5px' }} >
+                              {errors && errors}
+                            </span>
+                          }
+                          <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
+                        </div>
+                      </div>
+                    ) : null}
+                </>
+              }
+            </td>
+            <td width="15%">
+              <div>
+                <ul>
+                  {
+                    variationData?.map((variation, i) => (
+                      <li key={i} style={{
+                        padding: '1px 4px',
+                        background: '#0575B4',
+                        color: '#ffffff',
+                        margin: '1px 0px',
+                        borderRadius: '30px',
+                        justifyContent: 'space-between',
+                        display: 'flex'
+                      }}>
+                      
+                        <span style={{ width: '20%' }} >{i + 1}</span>
+                        <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name}</span>
+                        {/* <span style={{ width: '20%' }} >{variation.no_of_varation_allowed}</span> */}
+                      </li>
+                    ))
+                  }
+                </ul>
+                <button title='Link Variation' style={{
+                  textAlign: 'center',
+                  width: '100%'
+                }} onClick={(e) => handleLinkClick(e)}>
+                  <AiOutlinePlus style={{
+                    height: '25px',
+                    width: '25px',
+                    background: '#0575B4',
+                    padding: '5px',
+                    borderRadius: '50%',
+                    fontSize: '2rem',
+                    color: '#fff',
+                    marginTop: '10px',
+                    fontWeight:'bold'
+                  }} />
+                </button>
+                {
+                  //show upload image option on click
+                  showLink && (
+                    <Fragment>
+                      <Popup style={{ borderRadius: '30px' }} open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
+                        <button style={{ color: '#0575B4', marginRight: '15px' }} className="close" onClick={(e) => {
+                          setOpen(false)
+                          setIsVariationChanged(Math.random())
+                        }}>
+                          &times;
+                        </button>
+                        <div className='padding20px'>
+                        </div>
+                        <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
+                      </Popup>
+                    </Fragment>
+                  )}
+              </div>
             </td>
             <td width="2%">
               <div>
-                <button title='update' className='btn btn-primary2' onClick={(e) => onSubmit2(e)}><FiSave /></button>
+                <button title='update' className='btn btn-primary2' onClick={(e) => handleSaveDish(e)}><FiSave /></button>
               </div>
             </td>
           </tr>
@@ -342,11 +379,61 @@ const AlldishesUI = ({ dishes,
                   ) : null} */}
             </td>
             <td width="10%">
-              <ul>
-                {variationData?.map((variation, i) => (
-                  <li style={{ padding: '1px 4px', background: '#ccc', margin: '1px 0px', borderRadius: '30px' }}>{variation?.variation_type?.name}</li>
-                ))}
-              </ul>
+              <div>
+                <ul>
+                  {
+                    variationData?.map((variation, i) => (
+                      <li key={i} style={{
+                        padding: '1px 4px',
+                        background: '#0575B4',
+                        color: '#ffffff',
+                        margin: '1px 0px',
+                        borderRadius: '30px',
+                        justifyContent: 'space-between',
+                        display: 'flex'
+                      }}>
+                      
+                        <span style={{ width: '20%' }} >{i + 1}</span>
+                        <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name}</span>
+                        {/* <span style={{ width: '20%' }} >{variation.no_of_varation_allowed}</span> */}
+                      </li>
+                    ))
+                  }
+                </ul>
+                <button title='Link Variation' style={{
+                  textAlign: 'center',
+                  width: '100%'
+                }} onClick={(e) => handleLinkClick(e)}>
+                  <AiOutlinePlus style={{
+                    height: '25px',
+                    width: '25px',
+                    background: '#0575B4',
+                    padding: '5px',
+                    borderRadius: '50%',
+                    fontSize: '2rem',
+                    color: '#fff',
+                    marginTop: '10px',
+                    fontWeight:'bold'
+                  }} />
+                </button>
+                {
+                  //show upload image option on click
+                  showLink && (
+                    <Fragment>
+                      <Popup style={{ borderRadius: '30px' }} open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
+                        <button style={{ color: '#0575B4', marginRight: '15px' }} className="close" onClick={(e) => {
+                          setOpen(false)
+                          setIsVariationChanged(Math.random())
+                        }}>
+                          &times;
+                        </button>
+                        <div className='padding20px'>
+                        </div>
+                        <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
+                      </Popup>
+                    </Fragment>
+                  )}
+              </div>
             </td>
             <td width="5%">
               <div>

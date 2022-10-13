@@ -30,7 +30,7 @@ const ViewMenu = () => {
             <AlldishesUI
               key={dishes.ressult_id}
               dishes={dishes}
-              id={user.restaurant[0].id}
+              rid={user.restaurant[0].id}
 
             />
           ))}

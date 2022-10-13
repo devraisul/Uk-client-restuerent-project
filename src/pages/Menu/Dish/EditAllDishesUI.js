@@ -6,7 +6,7 @@ import Popup from 'reactjs-popup';
 import { addDishImage, deleteDish } from '../../../Apis/dish';
 import { getVariation } from '../../../Apis/variation';
 import { useAuth } from '../../../context/AuthContext';
-import LinkVariation from '../../ViewMenu/linkvariationform';
+import LinkVariation from '../../ViewMenu/LinkVariation';
 // import { BiLink } from 'react-icons/bi';
 // import { FiLoader, FiSave, FiUploadCloud } from 'react-icons/fi';
 // import { IoCloudDoneOutline } from 'react-icons/io5';

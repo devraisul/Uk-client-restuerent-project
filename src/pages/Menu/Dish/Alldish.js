@@ -12,7 +12,6 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId 
     getdish(menuId)
       .then(res => {
         setDishes(res);
-        console.log({ res:isChangeMenu });
         setLoading(false)
       })
   }, [isChangeMenu]);
@@ -92,7 +91,7 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId 
                 setIsChangeMenu={setIsChangeMenu}
                   key={dishes?.ressult_id}
                   dishes={dishes}
-                  id={dishes?.restaurant_id}
+                  rid={dishes?.restaurant_id}
                   index={i + 1}
                 />
               ))}

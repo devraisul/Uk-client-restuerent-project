@@ -78,8 +78,6 @@ const LinkVariation = ({ rid, id }) => {
       alert(`${msg}`, 'danger');
     }
     else {
-      console.log('variation-->', inputList[0]);
-      // alert('Variation LInked', 'success');
       addSingleDishVaiation(inputList[0]).then((res) => {
         if (res?.data?.id) {
           setIsSubmited(true)
@@ -113,14 +111,14 @@ const LinkVariation = ({ rid, id }) => {
                       display:'flex',
                       justifyContent:'center',
                       alignItems:'center',
-                      flexDirection:'column'
-                      
+                      flexDirection:'column',
+                      marginLeft:'10px'
                     }}>
                       <div style={{
                         width:'100px',
                         height:'100px',
                         padding:'10px',
-                        background:'#00ff00',
+                        background:'#0575B4',
                         borderRadius:'30px',
                         display:'flex',
                         alignItems:'center',
@@ -131,15 +129,12 @@ const LinkVariation = ({ rid, id }) => {
                         color:'white'
                       }} />
                       </div>
-                      
-                      <h2>
+                      <h2 style={{marginTop:"20px"}}>
                         Added Successfully
                       </h2>
-                      
                     </div> :
 
                     <div className='form'>
-                      <p>no: {i + 1}</p>
                       <div className='form-group'>
                         <select name='type_id' value={x?.type_id}
                           onChange={e => handleInputChange(e, i)}>
