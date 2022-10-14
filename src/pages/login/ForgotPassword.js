@@ -1,47 +1,38 @@
 import {
   Box, Button, CircularProgress, Container, Fade, Grid, Paper, TextField, Typography
 } from "@material-ui/core";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { NavLink, useHistory, withRouter } from "react-router-dom";
 
 
 // styles
 import useStyles from "./styles";
 
 // context
-import toast, { Toaster } from "react-hot-toast";
-import { forgotPass, updatePassAPI } from "../../Apis/Auth";
+import { Toaster } from "react-hot-toast";
+import { BiArrowBack } from "react-icons/bi";
+import { forgotPass } from "../../Apis/Auth";
 
 function ForgotPassword(props) {
   var classes = useStyles();
-
-
-
   // local
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
-  const [updatePass, setUpdatePass] = useState(false);
-  const [newPassword, setNewPassword] = useState("");
-  const[passwordToken, setPasswordToken] = useState("");
-  const [changeButton, setChangeButton] = useState(false);
 
-
-
+  const history = useHistory()
   const hadleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true);
     const data = {
       email: e.target.email.value,
     };
-    
     forgotPass(data)
       .then((res) => {
-        setUpdatePass(true);
-        setPasswordToken(res?.data?.token);
-        setChangeButton(!changeButton);
-        setIsLoading(false);
+        if(res.data.message){
+          setIsLoading(false);
+          history.push('/forgot-password-email-send')
         setError("")
+        }
       })
       .catch((err) => {
         setIsLoading(false);
@@ -49,46 +40,15 @@ function ForgotPassword(props) {
       });
   };
 
-  const handleUpdatePass = () => {
-   if(newPassword.length < 6){
-    setError("Password must be at least 6 characters");
-   }
-    else{
-         setIsLoading(true);
-         const newData = {
-           password: newPassword,
-         };
-         updatePassAPI(passwordToken, newData)
-           .then((res) => {
-           toast.success(res?.data?.message);
-            //  alert(res?.data?.message);
-             setIsLoading(false);
-              // make a settime out here
-            setTimeout(() => {
-                props.history.push("/login");
-              }, 2000);
-           })
-           .catch((err) => {
-             setIsLoading(false);
-             setError(err?.message);
-           });;
-    }
-  }
-
-  const handleShowPassword = () => {
-    const password = document.getElementById("password");
-    if (password.type === "password") {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
-  };
   return (
     <Container component={Box}>
       <Toaster position="top-right" reverseOrder={false} />
       <Grid className={classes.container}>
         <Paper component={Box} p={3}>
           <div>
+          <NavLink style={{fontSize:'1.5rem',color:'#0575B4'}} to={'/login'}>
+              <BiArrowBack />
+            </NavLink>
             <div className={classes.form}>
               <React.Fragment>
                 {error && (
@@ -107,12 +67,11 @@ function ForgotPassword(props) {
                     style={{
                       textAlign: "center",
                       fontWeight: "bold",
-                      color: "#536dfe",
+                      color: "#0575B4",
                     }}
                   >
                     Forgot Password?
                   </h1>
-                  {!updatePass ? (
                     <TextField
                       id="email"
                       name="email"
@@ -123,39 +82,7 @@ function ForgotPassword(props) {
                       label="email"
                       fullWidth
                     />
-                  ) : (
-                    <div
-                      style={{
-                        position: "relative",
-                      }}
-                    >
-                      <TextField
-                        id="password"
-                        name="password"
-                        margin="normal"
-                        variant="outlined"
-                        placeholder="Type New Password"
-                        type="password"
-                        label="password"
-                        fullWidth
-                        onChange={(e) => setNewPassword(e.target.value)}
-                      />
-                      <VisibilityIcon
-                        style={{
-                          color: "#536dfe",
-                          cursor: "pointer",
-                          position: "absolute",
-                          top: "40%",
-                          left: "88%",
-                        }}
-                        onClick={handleShowPassword}
-                      />
-                    </div>
-                  )}
-
                   {/* Don't remember your password? */}
-
-                  {!changeButton ? (
                     <div
                       className={classes.formButtons}
                       style={{
@@ -179,31 +106,6 @@ function ForgotPassword(props) {
                         </Button>
                       )}
                     </div>
-                  ) : (
-                    <div
-                      className={classes.formButtons}
-                      style={{
-                        marginTop: "15px",
-                      }}
-                    >
-                      {isLoading ? (
-                        <CircularProgress
-                          size={26}
-                          className={classes.loginLoader}
-                        />
-                      ) : (
-                        <Button
-                          onClick={handleUpdatePass}
-                          variant="contained"
-                          color="primary"
-                          size="large"
-                          fullWidth
-                        >
-                          Change Password
-                        </Button>
-                      )}
-                    </div>
-                  )}
                 </form>
               </React.Fragment>
             </div>

@@ -31,12 +31,6 @@ const Alldishes = ({ id, setChangeCartItems }) => {
             ))}
           </div>
         </React.Fragment>)}
-
-
-
-
-
-
     </React.Fragment>
   );
 };

@@ -7,7 +7,6 @@ import { getVariationByDishId } from "../../Apis/variation";
 
 //all dishes show UI in owner dashboard
 const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
-
   // const { addproduct, adduserdealproduct } = useAuth();
   // const [DishIDcheck, setDishIDcheck] = useState(false);
   const [count, setcount] = useState(1);
@@ -129,7 +128,9 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
             <Fragment style={{
               width: '50%'
             }}>
-              {console.log(dishes?.image)}
+           {
+//               console.log(dishes?.image)
+           }
               <img
                 style={{
                   objectFit: 'cover',

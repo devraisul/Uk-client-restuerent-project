@@ -79,7 +79,6 @@ const MenuHandle = () => {
           </Link>
         </div>
       </div>
-
       {showaddmenu ? (<AddMenu id={user.restaurant[0].id} />) : ('')}
       {editall ? (<Editmenu seteditall={seteditall} setChangeMonitor={setChangeMonitor} id={user.restaurant[0].id} />) : ('')}
       {showallmenu ? (<AllMenu changeMonitor={changeMonitor} id={user.restaurant[0].id} />) : ('')}
