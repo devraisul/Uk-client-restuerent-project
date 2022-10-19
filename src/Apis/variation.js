@@ -19,7 +19,7 @@ export const addSingleDishVaiation = async (data) => {
     .catch(err => console.log(err));
   return result
 }
-export const getVariationByRestaurantIdAndDishId = async (dis_id) => {
+export const getVariationByRestaurantIdAndDishId = async (dish_id) => {
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {
@@ -29,13 +29,14 @@ export const getVariationByRestaurantIdAndDishId = async (dis_id) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  const result = await axios.get(`/api/variation/dish_variation/${dis_id}`, config)
+  const result = await axios.get(`/api/variation/dish_variation/${dish_id}`, config)
     .then(res => {
       return res;
     })
     .catch(err => console.log(err));
   return result
 }
+
 const getVariationByRestId = async (data) => {
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);

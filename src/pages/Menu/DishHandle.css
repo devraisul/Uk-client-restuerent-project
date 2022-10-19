@@ -1,0 +1,12 @@
+.popup-content {
+  width: 500px !important;
+  margin-top: 100px !important;
+  padding: 20px;
+  height: 500px !important;
+  border-radius: 10px;
+  position: relative;
+  overflow-y: scroll;
+}
+.popup-content::-webkit-scrollbar {
+  display: none;
+}

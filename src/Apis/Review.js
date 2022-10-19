@@ -21,6 +21,10 @@ export const getReview = async (id, fDate, sDate) => {
     .catch((err) => console.log(err));
 };
 
+
+
+
+
 // Get Review
 export const getReviewAll = async (id) => {
   let addReviewResponse;
@@ -33,7 +37,9 @@ export const getReviewAll = async (id) => {
       Authorization: `Bearer ${jwt.token}`,
     },
   };
-
+console.log('====================================');
+console.log(id);
+console.log('====================================');
   await axios
     .get(`/api/review-new/get/questions?restaurant_id=${id}`, config)
     .then((res) => {
@@ -43,6 +49,11 @@ export const getReviewAll = async (id) => {
     .catch((err) => console.log(err));
   return addReviewResponse;
 };
+
+
+
+
+
 
 export const getReviewRate = async (id, rate, start, end) => {
   let addReviewResponse;

@@ -92,8 +92,8 @@ export const addDishImage = async (id,data) => {
 }
 
 // Add Dish 
-export const adddish = async (menuId, data) => {
-  let getaddDishImage;
+export const addDishes = async (restId, data) => {
+
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {
@@ -103,15 +103,15 @@ export const adddish = async (menuId, data) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  console.log(data);
-  await axios.post(`/api/dishes/multiple/${menuId}`, { dishes: data }, config)
+  console.log({ dishes: [data] });
+  const result = await axios.post(`/api/dishes/multiple/${restId}`, { dishes: [data] }, config)
     .then(res => {
-      getaddDishImage = res;
+      return res;
     })
     .catch(err => {
       console.log(err);
     })
-  return getaddDishImage
+  return result
 }
 // Add Dish 
 export const getuserdeal = async () => {

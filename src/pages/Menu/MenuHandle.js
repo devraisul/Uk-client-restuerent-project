@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { BiEdit } from 'react-icons/bi';
-import { IoFastFoodOutline } from 'react-icons/io5';
+import { BiEdit, BiFoodMenu } from 'react-icons/bi';
 import { TbLayoutDashboard } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -37,21 +36,21 @@ const MenuHandle = () => {
           display: 'flex',
           justifyContent: 'space-evenly'
         }} className='btn-center'>
-          <button style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onshowmenu(e)}>
+          <button title='Add Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onshowmenu(e)}>
             <AiOutlinePlus style={{ fontSize: '1.5rem' }} />
             <span style={{ marginLeft: '10px' }} className="menuNav">
               Add Menu
             </span>
           </button>
-          <button style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onAllmenu(e)}>
-            <IoFastFoodOutline style={{ fontSize: '1.5rem' }} />
+          <button title='All Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onAllmenu(e)}>
+            <BiFoodMenu style={{ fontSize: '1.5rem' }} />
             <span style={{
               marginLeft: '10px'
             }} className="menuNav">
               All Menu
             </span>
           </button>
-          <button style={{
+          <button title='Edit All' style={{
             display: 'flex',
             alignItems: 'center',
             background: '#0575B4',
@@ -66,7 +65,7 @@ const MenuHandle = () => {
               Edit All
             </span>
           </button>
-          <Link style={{
+          <Link title='Back to dashboard' style={{
             display: 'flex',
             alignItems: 'center',
             background: '#0575B4',
@@ -74,7 +73,7 @@ const MenuHandle = () => {
           }} className='large btn' to={`/app/dashboard`}>
             <TbLayoutDashboard style={{ fontSize: '1.5rem' }} />
             <span style={{ marginLeft: '10px' }} className="menuNav">
-              Back to  dashboard
+              Back to dashboard
             </span>
           </Link>
         </div>

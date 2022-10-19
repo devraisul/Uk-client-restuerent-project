@@ -1,25 +1,32 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiEdit } from 'react-icons/bi';
+import { BsArrowReturnLeft } from 'react-icons/bs';
 import { IoFastFoodOutline } from 'react-icons/io5';
-import { TbArrowBack, TbLayoutDashboard } from 'react-icons/tb';
+import { MdOutlineRestaurantMenu } from 'react-icons/md';
+import { TbLayoutDashboard } from 'react-icons/tb';
 import { Link, useParams } from 'react-router-dom';
+import Popup from 'reactjs-popup';
 import { useAuth } from '../../context/AuthContext';
 import AddDish from './Dish/AddDish';
 import Alldish from './Dish/Alldish';
 import EditAllDish from './Dish/EditAllDish';
+import './DishHandle.css';
 const DishHandle = () => {
   const { user } = useAuth()
-  const [showAddMenu, setShowAddMenu] = React.useState(false);
-  const [showAllMenu, setShowAllMenu] = React.useState(true);
-  const [isChangeMenu, setIsChangeMenu] = React.useState(Math.random());
-  const [editAll, setEditAll] = React.useState(false);
+  const [showAddMenu, setShowAddMenu] = useState(false);
+  const [showAllMenu, setShowAllMenu] = useState(true);
+  const [isChangeMenu, setIsChangeMenu] = useState(Math.random());
+  const [editAll, setEditAll] = useState(false);
   const params = useParams()
 
-  const onshowmenu = (e) => {
-    setShowAddMenu(!showAddMenu)
-    setEditAll(false)
-    setShowAllMenu(false)
+
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
+
+
+  const handleAddDish = (e) => {
+    setOpen(true)
   };
 
   const onEditAll = (e) => {
@@ -32,75 +39,135 @@ const DishHandle = () => {
     setShowAllMenu(true)
     setEditAll(false)
   };
-
-  const onAllmenu = (e) => {
+  const handleViewAllDishes = (e) => {
     setShowAddMenu(false)
     setShowAllMenu(true)
     setEditAll(false)
   }
 
-
-  const buttonStyle = {
-    textAlign: 'center',
-    width: '170px',
-    background: '#0575B4',
-    color: '#fff',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'left',
-  }
-  const buttonIcon = {
-    fontSize: '1.5rem',
-    margin: '0px 10px 0px 0px'
-  }
   return (
     <Fragment>
       <div>
         <div style={{
           display: 'flex',
-          justifyContent: 'center'
-        }}>
-          <button className='large btn'
-            style={buttonStyle}
-            onClick={(e) => onshowmenu(e)}>
-            <AiOutlinePlus style={buttonIcon} /> Add Dish
+          justifyContent: 'space-evenly'
+        }} className='btn-center'>
+          <button
+            title='Add Dish'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#0575B4',
+              color: '#fff'
+            }}
+            className='large btn' onClick={(e) => handleAddDish(e)}>
+            <AiOutlinePlus style={{ fontSize: '1.5rem' }} />
+            <span style={{ marginLeft: '10px' }} className="menuNav">
+              Add Dish
+            </span>
+          </button>
+
+          <button
+            title='All Dishes'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#0575B4',
+              color: '#fff'
+            }}
+            className='large btn' onClick={(e) => handleViewAllDishes(e)}>
+            <IoFastFoodOutline style={{ fontSize: '1.5rem' }} />
+            <span style={{
+              marginLeft: '10px'
+            }} className="menuNav">
+              All Dishes
+            </span>
           </button>
           <button
-            style={buttonStyle}
-            className='large btn' onClick={(e) => onAllmenu(e)}>
-            <IoFastFoodOutline style={buttonIcon} /> All dishes
-          </button>
-          <button
-            style={buttonStyle}
-            className='large btn' onClick={(e) => editAll ? offEditAll(e) : onEditAll(e)}>
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#0575B4',
+              color: '#fff'
+            }}
+            className='large btn'
+            onClick={(e) => editAll ? offEditAll(e) : onEditAll(e)}
+          >
             {!editAll ? (
-              <Fragment>
-                <BiEdit style={buttonIcon} /> Edit All
-              </Fragment>
-            ) : ('Back to dishes')}
+              <>
+                <BiEdit
+                  title='Edit All'
+                  style={{
+                    fontSize: '1.5rem'
+                  }} />
+                <span style={{
+                  marginLeft: '10px'
+                }} className="menuNav">
+                  Edit All
+                </span>
+              </>
+            ) : (
+              <>
+                <BsArrowReturnLeft
+                  title='Back'
+                  style={{
+                    fontSize: '1.5rem'
+                  }} />
+                <span style={{
+                  marginLeft: '10px'
+                }} className="menuNav">
+                  Back
+                </span>
+              </>
+            )}
           </button>
           <Link
-            style={buttonStyle}
-            className='large btn' to={`/dashboard/${user.restaurant[0].id}`}>
-            <TbLayoutDashboard style={buttonIcon} /> Go to dashboard
+            title='Back to Menu'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#0575B4',
+              color: '#fff'
+            }}
+            className='large btn' to={`/app/menu`}>
+            <MdOutlineRestaurantMenu style={{ fontSize: '1.5rem' }} />
+            <span style={{ marginLeft: '10px' }} className="menuNav">
+              Back to Menu
+            </span>
           </Link>
           <Link
-            style={buttonStyle}
-            className='large btn' to={`/app/menu`}>
-            <TbArrowBack style={buttonIcon} /> Back to Menu
+            title='Back to dashboard'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#0575B4',
+              color: '#fff'
+            }}
+            className='large btn' to={`/app/dashboard`}>
+            <TbLayoutDashboard style={{ fontSize: '1.5rem' }} />
+            <span style={{ marginLeft: '10px' }} className="menuNav">
+              Back to dashboard
+            </span>
           </Link>
         </div>
       </div>
 
-      {showAddMenu && <AddDish setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
+      {/* {showAddMenu &&  */}
+      <div>
+        <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+          <AddDish closeModal={closeModal} setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
+        </Popup>
+      </div>
+
+
+      {/* } */}
 
 
       {editAll && <EditAllDish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
 
 
       {showAllMenu && <Alldish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
-      
+
     </Fragment>
   );
 };

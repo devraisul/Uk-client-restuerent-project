@@ -1,42 +1,23 @@
-import React, { useState, useEffect } from "react";
 import { Drawer, IconButton, List } from "@material-ui/core";
 import {
-  Home as HomeIcon,
-  NotificationsNone as NotificationsIcon,
-  FormatSize as TypographyIcon,
-  FilterNone as UIElementsIcon,
-  BorderAll as TableIcon,
-  QuestionAnswer as SupportIcon,
-  LibraryBooks as LibraryIcon,
-  HelpOutline as FAQIcon,
-  ArrowBack as ArrowBackIcon,
-  MenuBook,
-  RateReview,
-  BorderOuter,
-  Visibility,
-  RestaurantMenu,
-  Web,
-  LockSharp,
-  SentimentSatisfied,
+  ArrowBack as ArrowBackIcon, BorderAll as TableIcon, BorderOuter, Home as HomeIcon, LockSharp, RateReview, RestaurantMenu, SentimentSatisfied, Web
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
-import { withRouter } from "react-router-dom";
 import classNames from "classnames";
-
+import React, { useEffect, useState } from "react";
+import { MdBookmarkBorder, MdReviews } from 'react-icons/md';
+import { withRouter } from "react-router-dom";
 // styles
 import useStyles from "./styles";
 
 // components
 import SidebarLink from "./components/SidebarLink/SidebarLink";
-import Dot from "./components/Dot";
 
 // context
-import {
-  useLayoutState,
-  useLayoutDispatch,
-  toggleSidebar,
-} from "../../context/LayoutContext";
 import { useAuth } from "../../context/AuthContext";
+import {
+  toggleSidebar, useLayoutDispatch, useLayoutState
+} from "../../context/LayoutContext";
 
 
 
@@ -67,13 +48,13 @@ function Sidebar({ location }) {
       id: 5,
       label: "Show Reviews",
       link: "/app/show-reviews",
-      icon: <Visibility />,
+      icon: <MdReviews  style={{fontSize:'1.5rem'}} />,
     },
     {
       id: 6,
-      label: "View Menus",
-      link: `/app/view-menu/${user?.restaurant[0]?.Key_ID}/${user?.restaurant[0]?.id}`,
-      icon: <MenuBook />,
+      label: "All Orders",
+      link: `/app/all-orders/${user?.restaurant[0]?.Key_ID}/${user?.restaurant[0]?.id}`,
+      icon: <MdBookmarkBorder style={{fontSize:'1.5rem'}} />,
     },
     {
       id: 7,

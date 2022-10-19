@@ -25,10 +25,10 @@ import Addveriation from "../../pages/Addvariation/Addveriation";
 import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatisfaction";
 import DishHandle from "../../pages/Menu/DishHandle";
 import MenuHandle from "../../pages/Menu/MenuHandle";
+import AllOrders from "../../pages/Orders/AllOrders";
 import ChangePass from "../../pages/ResetPass/ChangePass";
 import ShowReviews from "../../pages/showReviews/ShowReviews";
 import UpdateRestaurent from "../../pages/UpdateRestaurent/UpdateRestaurent";
-import ViewMenu from "../../pages/ViewMenu/ViewMenu";
 function Layout(props) {
   var classes = useStyles();
 
@@ -52,7 +52,7 @@ function Layout(props) {
             <Route path="/app/variation" component={Addveriation} />
             <Route path="/app/reviews" component={CustomerSatisfaction} />
             <Route path="/app/show-reviews" component={ShowReviews} />
-            <Route path="/app/view-menu/:keyId/" component={ViewMenu} />
+            <Route path="/app/all-orders/:keyId/" component={AllOrders} />
             <Route path="/app/changepassword" component={ChangePass} />
             <Route path="/app/updateRestaurent" component={UpdateRestaurent} />
           </Switch>

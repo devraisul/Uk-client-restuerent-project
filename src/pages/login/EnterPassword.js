@@ -20,18 +20,25 @@ export default function EnterPassword() {
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
   const [newPassword, setNewPassword] = useState("");
+  const [newCPassword, setNewCPassword] = useState("");
   const [passRevil, setPassRevil] = useState(false)
+  const [cpassRevil, setCPassRevil] = useState(false)
   const history = useHistory()
   useEffect(() => {
-    console.log(newPassword);
-  }, [newPassword])
-  
+    console.log({newPassword,newCPassword});
+    setError("");
+  }, [newPassword,newCPassword])
+
   const handleUpdatePass = () => {
     setIsLoading(true)
     if (newPassword.length < 6) {
+      setIsLoading(false)
       setError("Password must be at least 6 characters");
     }
-    else {
+    else if (newCPassword !== newPassword) {
+      setIsLoading(false)
+      setError("Password not matched!");
+    } else {
       setIsLoading(true);
       const newData = {
         password: newPassword,
@@ -64,6 +71,17 @@ export default function EnterPassword() {
       setPassRevil(false)
     }
   };
+  const handleShowCPassword = () => {
+    const password = document.getElementById("cpassword");
+
+    if (password.type === "password") {
+      password.type = "text";
+      setCPassRevil(true)
+    } else {
+      password.type = "password";
+      setCPassRevil(false)
+    }
+  };
 
   return (
     <Container component={Box}>
@@ -73,17 +91,7 @@ export default function EnterPassword() {
           <div>
             <div className={classes.form}>
               <React.Fragment>
-                {error && (
-                  <Fade in={error}>
-                    <Typography
-                      color="secondary"
-                      className={classes.errorMessage}
-                    >
-                      *** There is Something wrong with your account ***
-                    </Typography>
-                  </Fade>
-                )}
-
+            
                 <form>
                   <h1
                     style={{
@@ -92,7 +100,7 @@ export default function EnterPassword() {
                       color: "#0575B4",
                     }}
                   >
-                    Forgot Password?
+                    Change password
                   </h1>
                   <div
                     style={{
@@ -134,6 +142,56 @@ export default function EnterPassword() {
                       />
                     )}
                   </div>
+                  <div
+                    style={{
+                      position: "relative",
+                    }} >
+                    <TextField
+                      id="cpassword"
+                      name="cpassword"
+                      margin="normal"
+                      variant="outlined"
+                      placeholder="Confirm password"
+                      type="password"
+                      label="cpassword"
+                      fullWidth
+                      onChange={(e) => setNewCPassword(e.target.value)}
+                    />
+
+                    {!cpassRevil ? (<RiEyeCloseLine
+                      style={{
+                        color: "#0575B4",
+                        cursor: "pointer",
+                        position: "absolute",
+                        top: "45%",
+                        right: "5%",
+                        fontSize: '1.3rem'
+                      }}
+                      onClick={handleShowCPassword}
+                    />) : (
+                      <RiEyeLine
+                        style={{
+                          color: "#0575B4",
+                          cursor: "pointer",
+                          position: "absolute",
+                          top: "45%",
+                          right: "5%",
+                          fontSize: '1.3rem'
+                        }}
+                        onClick={handleShowCPassword}
+                      />
+                    )}
+                  </div>
+                  {error && (
+                  <Fade in={error}>
+                    <Typography
+                      color="secondary"
+                      style={{fontSize:'0.8rem'}}
+                    >
+                      {`* ${error}`}
+                    </Typography>
+                  </Fade>
+                )}
                   <div
                     className={classes.formButtons}
                     style={{

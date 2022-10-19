@@ -15,7 +15,7 @@ export default function Loading() {
         top:'50%',
         left:'50%',
         transform:'translate(-50%,-50%)',
-        color:'#f5882f',
+        color:'#0575B4',
         fontSize:'1.2rem',
         fontWeight:'bold'
       }}>Loading..</span>

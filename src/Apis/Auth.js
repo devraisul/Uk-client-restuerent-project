@@ -33,7 +33,7 @@ export const userRegister = async (data) => {
 
 // changePassword
 
-export const changePass = async () => {
+export const changePass = async (data) => {
   let changePassResponse;
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
@@ -44,8 +44,9 @@ export const changePass = async () => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.patch(`/api/forgetpassword/changepassword`, config)
+  await axios.patch(`/api/forgetpassword/changepassword`,data, config)
     .then(res => {
+      
       changePassResponse = res;
     })
   return changePassResponse

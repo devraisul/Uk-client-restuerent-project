@@ -336,7 +336,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
       ) : (
         <tbody>
           <tr>
-            <td width="5%">{index}</td>
+            <td width="5%">{dishes?.id}</td>
             <td width="15%">{dishes?.name}</td>
             <td width="10%">£ {dishes?.price}</td>
             <td width="15%">{trimString(dishes?.description)}</td>

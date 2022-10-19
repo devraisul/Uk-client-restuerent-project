@@ -156,7 +156,6 @@ const CustomerRegistartionLinearStepper = ({ sum }) => {
   };
 
   const handleNext = (data) => {
-    console.log(data);
     if (activeStep == steps.length - 1) {
       customerRegister(data).then((res) => {
         setIsLoading(false);
@@ -258,10 +257,7 @@ const CustomerRegistartionLinearStepper = ({ sum }) => {
                   className={classes.button}
                   disabled={activeStep === 0}
                   onClick={handleBack}
-                >
-                  back
-                </Button>
-
+                >back</Button>
                 <Button
                   disabled={isLoading ? true : false}
                   className={classes.button}

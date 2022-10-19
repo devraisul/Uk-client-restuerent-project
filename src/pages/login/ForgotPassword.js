@@ -45,11 +45,11 @@ function ForgotPassword(props) {
       <Toaster position="top-right" reverseOrder={false} />
       <Grid className={classes.container}>
         <Paper component={Box} p={3}>
-          <div>
+          <div style={{width:'400px'}}>
           <NavLink style={{fontSize:'1.5rem',color:'#0575B4'}} to={'/login'}>
               <BiArrowBack />
             </NavLink>
-            <div className={classes.form}>
+            <div style={{width:'100%'}} className={classes.form}>
               <React.Fragment>
                 {error && (
                   <Fade in={error}>
@@ -65,13 +65,16 @@ function ForgotPassword(props) {
                 <form onSubmit={hadleLogin}>
                   <h1
                     style={{
-                      textAlign: "center",
+                      textAlign: "left",
                       fontWeight: "bold",
                       color: "#0575B4",
+                      fontSize:'1.9rem',
+                      margin:'10px 0px'
                     }}
                   >
-                    Forgot Password?
+                   Forgotten your password?
                   </h1>
+                  <p style={{marginBottom:'20px'}}>Don't worry, just enter your registered email address and we'll send you a link to reset your password</p>
                     <TextField
                       id="email"
                       name="email"
@@ -81,6 +84,7 @@ function ForgotPassword(props) {
                       type="email"
                       label="email"
                       fullWidth
+                      required
                     />
                   {/* Don't remember your password? */}
                     <div

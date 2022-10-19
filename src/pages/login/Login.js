@@ -3,7 +3,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
-import { NavLink, useHistory, withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 // styles
 import useStyles from "./styles";
 
@@ -13,14 +13,11 @@ import { useAuth } from "../../context/AuthContext";
 
 function Login(props) {
   var classes = useStyles();
-  // global
   const { setIsAuthenticated, setUser } = useAuth();
-  // local
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
-  var [activeTabId, setActiveTabId] = useState(0);
-  let history = useHistory();
   const [passRevil, setPassRevil] = useState(false)
+
 
   const hadleLogin = (e) => {
     e.preventDefault();
@@ -38,7 +35,7 @@ function Login(props) {
       })
       .catch((err) => {
         setIsLoading(false);
-        setError(err?.message);
+        setError("Email or password incorrect!");
       });
   };
 
@@ -61,17 +58,7 @@ function Login(props) {
           <div>
             <div className={classes.form}>
               <React.Fragment>
-                {error && (
-                  <Fade in={error}>
-                    <Typography
-                      color="secondary"
-                      className={classes.errorMessage}
-                    >
-                      ***Your email or password is incorrect.***
-                    </Typography>
-                  </Fade>
-                )}
-
+                
                 <form onSubmit={hadleLogin}>
                   <h1
                     style={{
@@ -148,7 +135,16 @@ function Login(props) {
                       Don't remember your password?
                     </NavLink>
                   </div>
-
+                  {error && (
+                  <Fade in={error}>
+                    <Typography
+                      color="secondary"
+                      style={{fontSize:'0.8rem',marginTop:'20px'}}
+                    >
+                      {`* ${error}`}
+                    </Typography>
+                  </Fade>
+                )}
                   <div className={classes.formButtons}>
                     {isLoading ? (
                       <CircularProgress

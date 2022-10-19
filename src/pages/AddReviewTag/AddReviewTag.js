@@ -74,7 +74,7 @@ const AddReviewTag = () => {
         <h1 style={{
           textAlign: 'center',
           marginBottom: '20px',
-          color:'#0575B4'
+          color: '#0575B4'
         }} >Your Question</h1>
         <Table style={{
           background: '#ccc',
