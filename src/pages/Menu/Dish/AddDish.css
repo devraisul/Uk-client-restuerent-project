@@ -93,7 +93,16 @@
   font-weight: bold;
   color: #fff;
   background: #0575b4;
+  margin-top: 20px;
 }
 .submitButton:hover {
   background: #197db7;
+}
+.selectVariations {
+  width: 100% !important;
+  height: 40px;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  border-radius: 30px;
+  padding: 0px 10px;
 }

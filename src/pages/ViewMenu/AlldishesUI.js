@@ -440,7 +440,6 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                 <AiFillEdit title='edit' style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} onClick={(e) => setseditflag(!editflag)}></AiFillEdit>
                 <FiTrash2 title='delete' style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} onClick={(e) => handleDeleteDish(e)}></FiTrash2>
               </div>
-
             </td>
           </tr>
         </tbody>
