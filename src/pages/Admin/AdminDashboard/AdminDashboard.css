@@ -1,0 +1,18 @@
+.graphContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.138);
+}
+.graphContainer h2 {
+  margin: 20px 0px;
+}
+.counterSec {
+  margin-top: 50px;
+}
+.counterSec h2 {
+  color: rgb(181, 181, 181);
+  margin-bottom: 10px;
+}

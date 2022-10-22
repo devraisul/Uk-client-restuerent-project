@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Paper } from "@material-ui/core";
+import { Box, Container, CssBaseline } from "@material-ui/core";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import CustomerRegistartionLinearStepper from "./CustomerRegistartionLinearStepper";
@@ -15,7 +15,7 @@ export default function CustomerRegistration({ total }) {
     <>
       <CssBaseline />
       <Container component={Box} p={10}>
-        <Paper component={Box} p={4}>
+        
           <div
             style={{
               padding: "0px 50px",
@@ -30,7 +30,7 @@ export default function CustomerRegistration({ total }) {
               sum={total}
             />
           </div>
-        </Paper>
+        
       </Container>
     </>
   )

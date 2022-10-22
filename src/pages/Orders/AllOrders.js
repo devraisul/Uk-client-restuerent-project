@@ -133,9 +133,9 @@ Row.propTypes = {
     }).isRequired,
 };
 const TYPES = [
-    'Take Away',
+    // 'Take Away',
     'Dine In',
-    'Delivery',
+    // 'Delivery',
 ]
 const STATUS = [
     'Processing',

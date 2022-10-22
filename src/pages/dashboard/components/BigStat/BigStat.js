@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Grid, Select, MenuItem, Input } from "@material-ui/core";
-import { ArrowForward as ArrowForwardIcon } from "@material-ui/icons";
+import { Input, MenuItem, Select } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
-import { BarChart, Bar } from "recharts";
-import classnames from "classnames";
+import React, { useState } from "react";
+import { Bar, BarChart } from "recharts";
 
 // styles
 import useStyles from "./styles";
@@ -65,7 +63,7 @@ export default function BigStat(props) {
           />
         </BarChart>
       </div>
-      <div className={classes.bottomStatsContainer}>
+      {/* <div className={classes.bottomStatsContainer}>
         <div className={classnames(classes.statCell, classes.borderRight)}>
           <Grid container alignItems="center">
             <Typography variant="h6">{registrations[value].value}</Typography>
@@ -107,7 +105,7 @@ export default function BigStat(props) {
             Views
           </Typography>
         </div>
-      </div>
+      </div> */}
     </Widget>
   );
 }

@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Shoppingcart from './Shoppingcart';
-import './review.css'
-import { addproduct } from '../../Apis/shoppingcart';
 import { useAuth } from '../../context/AuthContext';
+import './review.css';
+import Shoppingcart from './Shoppingcart';
 const Cart = ({ id, changeCartItems, setChangeCartItems }) => {
   const { product } = useAuth()
   const [count, setcount] = useState([])
@@ -34,8 +33,6 @@ const Cart = ({ id, changeCartItems, setChangeCartItems }) => {
           <i className='fa fa-shopping-cart'></i>
           <span className='products-count'>{count ? count?.length : 0}</span>
         </div>
-
-
 
         <aside className='sidenavv' id='navbarr2'>
           <aside>

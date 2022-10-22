@@ -26,8 +26,9 @@ import CustomerLogin from "./CustomerLogin/CustomerLogin";
 
 export default function App() {
   // global
-  var { isAuthenticated } = useAuth();
+  var { isAuthenticated,user } = useAuth();
   axios.defaults.baseURL = `https://mughalsignandprint.co.uk/restaurant`;
+  
   return (
     <BrowserRouter>
       <Switch>
@@ -38,6 +39,7 @@ export default function App() {
           path="/app"
           render={() => <Redirect to="/app/dashboard" />}
         />
+        
         <PrivateRoute path="/app" component={Layout} />
         <PublicRoute path="/login" component={Login} />
         <Route path="/customerlogin" component={CustomerLogin} />

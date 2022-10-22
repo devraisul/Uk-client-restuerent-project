@@ -1,38 +1,15 @@
-import React, { useState } from "react";
-import {
-  Grid,
-  LinearProgress,
-  Select,
-  OutlinedInput,
-  MenuItem,
-  Button
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
-import {
-  ResponsiveContainer,
-  ComposedChart,
-  AreaChart,
-  LineChart,
-  Line,
-  Area,
-  PieChart,
-  Pie,
-  Cell,
-  YAxis,
-  XAxis,
-} from "recharts";
+import React, { useState } from "react";
 
 // styles
 import useStyles from "./styles";
 
 // components
-import mock from "./mock";
-import Widget from "../../components/Widget";
 import PageTitle from "../../components/PageTitle";
-import { Typography } from "../../components/Wrappers";
-import Dot from "../../components/Sidebar/components/Dot";
-import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
+import mock2 from "./mock2";
+// import mock2 from "./mock";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -51,15 +28,17 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle title="Dashboard" button={<Button
-      variant="contained"
-      size="medium"
-      color="secondary"
-    >
-        Latest Reports
-    </Button>} />
+      <PageTitle title="Dashboard"
+      //   button={<Button
+      //   variant="contained"
+      //   size="medium"
+      //   color="secondary"
+      // >
+      //     Latest Reports
+      // </Button>}
+      />
       <Grid container spacing={4}>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        {/* <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Visits Today"
             upperTitle
@@ -406,22 +385,15 @@ export default function Dashboard(props) {
               </ComposedChart>
             </ResponsiveContainer>
           </Widget>
-        </Grid>
-        {mock.bigStat.map(stat => (
+        </Grid> */}
+        {mock2.bigStat.map(stat => (
           <Grid item md={4} sm={6} xs={12} key={stat.product}>
+      
             <BigStat {...stat} />
           </Grid>
         ))}
-        <Grid item xs={12}>
-          <Widget
-            title="Support Requests"
-            upperTitle
-            noBodyPadding
-            bodyClass={classes.tableWidget}
-          >
-            <Table data={mock.table} />
-          </Widget>
-        </Grid>
+        
+       
       </Grid>
     </>
   );

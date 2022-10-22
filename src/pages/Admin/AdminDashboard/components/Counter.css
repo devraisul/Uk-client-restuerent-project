@@ -1,0 +1,33 @@
+.counterContainer {
+  padding: 20px;
+}
+.counterTitle {
+  font-size: 1.3rem;
+  color: rgb(185, 185, 185);
+}
+.counterDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 10px;
+}
+.counterNumber {
+  font-size: 3rem;
+  color: #0575b4;
+}
+.growth {
+  display: flex;
+  flex-direction: column;
+}
+.negativeGrowth {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  color: rgb(252, 0, 0);
+}
+.possitiveGrowth {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  color: rgb(32, 255, 36);
+}

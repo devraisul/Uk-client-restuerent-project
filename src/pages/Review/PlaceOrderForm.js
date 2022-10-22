@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Paper } from "@material-ui/core";
+import { Box, Container, CssBaseline } from "@material-ui/core";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import PlaceOrderLinearStepper from "./PlaceOrderLinearStepper";
@@ -15,7 +15,7 @@ export default function PlaceOrderForm({ total, cartItem, setOpen }) {
     <>
       <CssBaseline />
       <Container component={Box} p={10}>
-        <Paper component={Box} p={4}>
+        
           <div
             style={{
               padding: "0px 50px",
@@ -32,7 +32,7 @@ export default function PlaceOrderForm({ total, cartItem, setOpen }) {
               setOpen={setOpen}
             />
           </div>
-        </Paper>
+    
       </Container>
     </>
   )

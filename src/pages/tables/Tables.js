@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 export default function Tables() {
   const { user } = useAuth();
   const classes = useStyles();
-  // console.log(user);
+
   return (
     <>
       <PageTitle title="All Menus" />

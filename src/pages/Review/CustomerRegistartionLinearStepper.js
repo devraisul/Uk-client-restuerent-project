@@ -199,7 +199,7 @@ const CustomerRegistartionLinearStepper = ({ sum }) => {
       <h1
         style={{
           textAlign: "center",
-          color: "#536dfe",
+          color: "#0575B4",
           marginBottom: "20px",
           fontWeight: "bold",
         }}

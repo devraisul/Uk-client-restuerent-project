@@ -38,7 +38,7 @@ export const editRestaurent = async (id, data) => {
   return editRestaurentResponse
 }
 
-// get Restaurent
+// get Restaurent by ID
 export const getRestaurent = async (id) => {
   let addRestaurentResponse;
   const userInfo = localStorage.getItem('data')
@@ -56,4 +56,23 @@ export const getRestaurent = async (id) => {
     })
     .catch(err => console.log(err))
   return addRestaurentResponse
+}
+
+// GET ALL RESTAURANT 
+export const getAllRestaurent = async () => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  const result = await axios.get(`/api/restaurant`, config)
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => console.log(err))
+  return result
 }

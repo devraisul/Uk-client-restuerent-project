@@ -1,5 +1,5 @@
 import {
-  Button, MenuItem, Select, Step,
+  Button, Step,
   StepLabel, Stepper, TextField, Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +8,7 @@ import {
   Controller,
   FormProvider, useForm, useFormContext
 } from "react-hook-form";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { placeOrder } from "../../Apis/placeOrder";
 // import { customerRegister, userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
@@ -157,42 +157,6 @@ const SecurityForm = () => {
           />
         )}
       />
-      <Controller
-        control={control}
-        name="type"
-        rules={{
-          required: "* Type is required"
-        }}
-        render={({ field }) => (
-          <>
-            <span>Type</span>
-            <Select
-              // error={errors?.type && true}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Type"
-              variant="outlined"
-              placeholder="Type"
-              type={'text'}
-              fullWidth
-              margin="normal"
-              {...field}
-              helperText={errors?.type?.message}
-            >
-              <MenuItem selected value={'Dine In'}>Dine In</MenuItem>
-              <MenuItem value={'Delivery'}>Delivery</MenuItem>
-              <MenuItem value={'Take Away'}>Take Away</MenuItem>
-            </Select>
-            {/* <span>Type</span> */}
-            {/* <select name="" id="">
-              <option selected value={'Dine In'}>Dine In</option>
-              <option value={'Delivery'}>Delivery</option>
-              <option value={'Take Away'}>Take Away</option>
-            </select> */}
-          </>
-        )}
-      />
-
     </>
   );
 };
@@ -213,14 +177,13 @@ const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen }) => {
   const methods = useForm({
     defaultValues: {
       amount: sum ? sum : 0,
-
       customer_name: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.first_Name,
       phone: JSON.parse(localStorage.getItem('customer_details'))[0]?.customer?.phone,
       address: "",
 
       remarks: "",
       table_number: "",
-      type: "",
+      type: "Dine in",
 
     },
   });
@@ -284,7 +247,7 @@ const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen }) => {
       <h1
         style={{
           textAlign: "center",
-          color: "#536dfe",
+          color: "#0575B4",
           marginBottom: "20px",
           fontWeight: "bold",
         }}

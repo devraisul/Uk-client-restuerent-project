@@ -276,6 +276,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
 
           </form>
         </Popup>
+        
       </div>
     </Fragment>
   );

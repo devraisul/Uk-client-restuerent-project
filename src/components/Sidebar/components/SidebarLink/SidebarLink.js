@@ -98,6 +98,7 @@ export default function SidebarLink({
         disableRipple
       >
         <ListItemIcon
+        title={label}
           className={classnames(classes.linkIcon, {
             [classes.linkIconActive]: isLinkActive,
           })}
@@ -105,6 +106,7 @@ export default function SidebarLink({
           {nested ? <Dot color={isLinkActive && "primary"} /> : icon}
         </ListItemIcon>
         <ListItemText
+        title={label}
           classes={{
             primary: classnames(classes.linkText, {
               [classes.linkTextActive]: isLinkActive,

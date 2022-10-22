@@ -40,7 +40,7 @@ export default makeStyles(theme => ({
     fontSize: 16,
   },
   linkTextActive: {
-    color: theme.palette.text.primary,
+    color: "#0575B4",
   },
   linkTextHidden: {
     opacity: 0,
