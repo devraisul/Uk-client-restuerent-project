@@ -9,6 +9,7 @@ import { addMenu } from '../../../Apis/Menu';
 const AddMenu = ({ id }) => {
   console.log(id);
   const [inputList, setInputList] = useState([{ name: "", description: "" }]);
+
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -35,18 +36,13 @@ const AddMenu = ({ id }) => {
         x++;
         msg = msg + `Please add the menu name at row no: ${i + 1}. `
         // setAlert(`Please add the menu name at row no: ${i+1}`, 'danger');
-
       }
-
     }
     if (x > 0) {
       toast.error(`${msg}`);
     } else {
-
-
       setInputList([...inputList, { name: "", description: "" }]);
     }
-
   }
   const handledeleteClick = (i) => {
     const list2 = [...inputList];

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { AiFillEdit, AiOutlinePlus } from 'react-icons/ai';
+import { AiFillEdit } from 'react-icons/ai';
 import { FiLoader, FiSave, FiTrash2, FiUploadCloud } from 'react-icons/fi';
 import { IoCloudDoneOutline } from 'react-icons/io5';
 // import configData from "../../config.json";
@@ -76,8 +76,8 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
   }
   const handleSaveDish = async (e) => {
     e.preventDefault();
-    updateSingleDish(formData).then(res=>{
-      if(res.data.id){
+    updateSingleDish(formData).then(res => {
+      if (res.data.id) {
         setIsChangeMenu(Math.random())
         setseditflag(!editflag)
       }
@@ -283,7 +283,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                         justifyContent: 'space-between',
                         display: 'flex'
                       }}>
-                      
+
                         <span style={{ width: '20%' }} >{i + 1}</span>
                         <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name}</span>
                         {/* <span style={{ width: '20%' }} >{variation.no_of_varation_allowed}</span> */}
@@ -291,10 +291,13 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                     ))
                   }
                 </ul>
-                <button title='Link Variation' style={{
-                  textAlign: 'center',
-                  width: '100%'
-                }} onClick={(e) => handleLinkClick(e)}>
+                {/* <button
+                  title='Link Variation'
+                  style={{
+                    textAlign: 'center',
+                    width: '100%'
+                  }}
+                  onClick={(e) => handleLinkClick(e)} >
                   <AiOutlinePlus style={{
                     height: '25px',
                     width: '25px',
@@ -304,9 +307,9 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                     fontSize: '2rem',
                     color: '#fff',
                     marginTop: '10px',
-                    fontWeight:'bold'
+                    fontWeight: 'bold'
                   }} />
-                </button>
+                </button> */}
                 {
                   //show upload image option on click
                   showLink && (
@@ -392,7 +395,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                         justifyContent: 'space-between',
                         display: 'flex'
                       }}>
-                      
+
                         <span style={{ width: '20%' }} >{i + 1}</span>
                         <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name}</span>
                         {/* <span style={{ width: '20%' }} >{variation.no_of_varation_allowed}</span> */}
@@ -400,7 +403,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                     ))
                   }
                 </ul>
-                <button title='Link Variation' style={{
+                {/* <button title='Link Variation' style={{
                   textAlign: 'center',
                   width: '100%'
                 }} onClick={(e) => handleLinkClick(e)}>
@@ -413,9 +416,9 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                     fontSize: '2rem',
                     color: '#fff',
                     marginTop: '10px',
-                    fontWeight:'bold'
+                    fontWeight: 'bold'
                   }} />
-                </button>
+                </button> */}
                 {
                   //show upload image option on click
                   showLink && (

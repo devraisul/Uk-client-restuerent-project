@@ -1,0 +1,47 @@
+.userDetailsContainer {
+  position: relative;
+}
+.userId {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #0575b4;
+  width: 50px;
+  height: 20px;
+  border-radius: 30px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+.detailsMainContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.avatar {
+  margin-bottom: 15px;
+  border: 2px dashed #0575b4;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.name {
+  color: #0575b4;
+  font-size: 1.5rem;
+}
+.email,
+.phone,
+.address {
+  color: rgb(160, 160, 160) !important;
+}
+.scence {
+  background-color: #0575b4;
+  color: #fff;
+  padding: 5px 10px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+}

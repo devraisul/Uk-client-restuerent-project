@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import PlaceOrderForm from "./PlaceOrderForm";
+import { useAuth } from "../../context/AuthContext";
 import CustomerRegistration from "./CustomerRegistration";
+import PlaceOrderForm from "./PlaceOrderForm";
 
 const Shoppingcart = ({ id, rand, setChangeCartItems, toggleMenu }) => {
   var subtotal = 0;
@@ -59,7 +59,6 @@ const Shoppingcart = ({ id, rand, setChangeCartItems, toggleMenu }) => {
   for (let i = 0; i < cartItems.length; i++) {
     sum += (cartItems[i].price * cartItems[i].quantity);
   }
-  console.log(sum);
   const handleSubmit = () => {
     onSubmit()
     toggleMenu()
@@ -217,7 +216,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems, toggleMenu }) => {
                       {/* <p className="em">(Incl.GST)</p> */}
                     </p>
                     <p className="cart-total-amount">
-                      £{sum}
+                      £ {sum}
                       {/* £{subtotal + 3.6 + 5.0} */}
                       {""}
                     </p>

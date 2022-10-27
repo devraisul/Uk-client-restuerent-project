@@ -24,7 +24,6 @@ function getSteps() {
 }
 const ContactForm = () => {
   const { control, formState: { errors } } = useFormContext();
-  console.log(errors?.phone)
   return (
     <>
       <Controller
@@ -196,13 +195,11 @@ const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen }) => {
 
 
   const { user } = useAuth()
-  console.log(user);
   const isStepSkipped = (step) => {
     return skippedSteps.includes(step);
   };
 
   const handleNext = (data) => {
-    console.log(data);
     if (activeStep == steps.length - 1) {
       const dishes = cartItem.map(data => {
         const dishe = {

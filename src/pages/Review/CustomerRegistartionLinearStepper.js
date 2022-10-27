@@ -155,8 +155,11 @@ const CustomerRegistartionLinearStepper = ({ sum }) => {
     return skippedSteps.includes(step);
   };
 
-  const handleNext = (data) => {
+  const handleNext = async (data) => {
     if (activeStep == steps.length - 1) {
+      console.log('====================================');
+      console.log(data);
+      console.log('====================================');
       customerRegister(data).then((res) => {
         setIsLoading(false);
         localStorage.setItem('customer_details', JSON.stringify([{

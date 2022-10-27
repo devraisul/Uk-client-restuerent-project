@@ -21,6 +21,30 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
   const [variations, setVariations] = useState([])
 
 
+  const [vtype, setVtype] = useState({})
+  const [vAllowed, setVAllowed] = useState({})
+
+  const handleVariation = (e) => {
+    const {name,value} = e.target
+    console.log({name,value});
+    if (name === "no_of_varation_allowed") {
+      setVAllowed({name:value})
+    }else{
+      setVtype({name:value})
+    }
+  }
+  const addVariationHandle = () => {
+
+  }
+useEffect(()=>{
+  console.log('====================================');
+  console.log({vtype});
+  console.log('====================================');
+  console.log('====================================');
+  console.log({vAllowed});
+  console.log('====================================');
+},[vAllowed,vtype])
+
   // TOGGOLE BETWEEN TABS FUNCTIONS 
   const shitToDetailsTab = () => {
     setOnDetailsTab(true)
@@ -43,9 +67,12 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
   const onSubmit = data => {
     console.log({ data });
     setIsLoading(true)
-    const variationsData = {};
+    const variationsData = [];
+
     variationsData.type_id = (data?.type_id !== "0") ? data?.type_id : null
+
     variationsData.no_of_varation_allowed = (data?.no_of_varation_allowed !== "0") ? data?.no_of_varation_allowed : null
+
 
     const dishData = {};
     dishData.calories = data?.calories
@@ -110,6 +137,9 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
       setVariations(res.data)
     })
   }, [user]);
+
+
+
 
   return (
     <>
@@ -229,8 +259,11 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
             {/* VARIATION TAB  */}
             <div style={{ display: `${onVariationTab ? "block" : "none"}` }} className='container' >
               <h1>Add Variations</h1>
+              <div>
+                <button onClick={addVariationHandle}>Add More</button>
+              </div>
               <div className='addDishForm'>
-                <select className='selectVariations' {...register("type_id")}>
+                <select name='type_id' onChange={(e) => { handleVariation(e) }} className='selectVariations'>
                   <option value={0}>* Select a type</option>
                   {variations?.map((item, i) => {
                     return (
@@ -238,7 +271,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
                     )
                   })}
                 </select>
-                <select className='selectVariations' {...register('no_of_varation_allowed')}>
+                <select name='no_of_varation_allowed' onChange={(e) => { handleVariation(e) }} className='selectVariations'>
                   <option value={0}>* Select No of Variation Allowed</option>
                   <option value={1} >1</option>
                   <option value={2} >2</option>

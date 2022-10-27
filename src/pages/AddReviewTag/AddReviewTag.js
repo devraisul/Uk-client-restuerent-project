@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
+import { Table, TableBody, TableCell, TableHead, TableRow,Button,TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { addReview, getReviewAll } from "../../Apis/Review";
@@ -44,7 +44,7 @@ const AddReviewTag = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column' }}>
       <Toaster position="top-right" reverseOrder={false} />
-      {/* <div style={{
+      <div style={{
         display: 'flex',
         flexDirection: 'column',
         justifyontent: 'center',
@@ -69,7 +69,7 @@ const AddReviewTag = () => {
             </Button>
           </div>
         </form>
-      </div> */}
+      </div>
       <div >
         <h1 style={{
           textAlign: 'center',

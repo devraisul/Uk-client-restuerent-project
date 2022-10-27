@@ -1,29 +1,19 @@
-import React, { useState } from "react";
 import {
-  Grid,
-  CircularProgress,
-  Typography,
-  Button,
-  Tabs,
-  Tab,
-  TextField,
-  Fade,
-  CssBaseline,
-  Container,
-  Paper,
-  Box,
+  Box, Button, CircularProgress, Container, Fade, Grid, Paper, TextField, Typography
 } from "@material-ui/core";
-import { NavLink, useHistory, withRouter } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 
 // styles
-import useStyles from "./styles";
-import { useAuth } from "../../context/AuthContext";
 import { userLogin } from "../../Apis/Auth";
+import { useAuth } from "../../context/AuthContext";
+import useStyles from "./styles";
 
 
 function CustomerLogin(props) {
+  const {user} = useAuth()
   var classes = useStyles();
-
+  const locaction = useLocation()
   // global
   const { setIsAuthenticated, setUser } = useAuth();
 
@@ -43,7 +33,9 @@ function CustomerLogin(props) {
     console.log(data);
     userLogin(data)
       .then((res) => {
-        localStorage.setItem("customer_details", res.data)
+        console.log(res);
+        localStorage.setItem("customer_details", JSON.stringify([res]));
+        locaction.push(`/tabmenu/${user?.restaurant[0]?.Key_ID}?id=${user?.restaurant[0]?.id}`)
       })
       .catch((err) => {
         setIsLoading(false);

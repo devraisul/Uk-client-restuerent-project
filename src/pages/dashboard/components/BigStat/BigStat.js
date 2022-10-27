@@ -11,7 +11,7 @@ import Widget from "../../../../components/Widget";
 import { Typography } from "../../../../components/Wrappers";
 
 export default function BigStat(props) {
-  var { product, total, color, registrations, bounce } = props;
+  var { product, total, color, } = props;
   var classes = useStyles();
   var theme = useTheme();
 
@@ -23,7 +23,6 @@ export default function BigStat(props) {
       header={
         <div className={classes.title}>
           <Typography variant="h5">{product}</Typography>
-
           <Select
             value={value}
             onChange={e => setValue(e.target.value)}
@@ -63,49 +62,6 @@ export default function BigStat(props) {
           />
         </BarChart>
       </div>
-      {/* <div className={classes.bottomStatsContainer}>
-        <div className={classnames(classes.statCell, classes.borderRight)}>
-          <Grid container alignItems="center">
-            <Typography variant="h6">{registrations[value].value}</Typography>
-            <ArrowForwardIcon
-              className={classnames(classes.profitArrow, {
-                [!registrations[value].profit]: classes.profitArrowDanger,
-              })}
-            />
-          </Grid>
-          <Typography size="sm" color="text" colorBrightness="secondary">
-            Registrations
-          </Typography>
-        </div>
-        <div className={classes.statCell}>
-          <Grid container alignItems="center">
-            <Typography variant="h6">{bounce[value].value}%</Typography>
-            <ArrowForwardIcon
-              className={classnames(classes.profitArrow, {
-                [!registrations[value].profit]: classes.profitArrowDanger,
-              })}
-            />
-          </Grid>
-          <Typography size="sm" color="text" colorBrightness="secondary">
-            Bounce Rate
-          </Typography>
-        </div>
-        <div className={classnames(classes.statCell, classes.borderRight)}>
-          <Grid container alignItems="center">
-            <Typography variant="h6">
-              {registrations[value].value * 10}
-            </Typography>
-            <ArrowForwardIcon
-              className={classnames(classes.profitArrow, {
-                [classes.profitArrowDanger]: !registrations[value].profit,
-              })}
-            />
-          </Grid>
-          <Typography size="sm" color="text" colorBrightness="secondary">
-            Views
-          </Typography>
-        </div>
-      </div> */}
     </Widget>
   );
 }
@@ -113,7 +69,5 @@ export default function BigStat(props) {
 // #######################################################################
 
 function getRandomData() {
-  return Array(7)
-    .fill()
-    .map(() => ({ value: Math.floor(Math.random() * 10) + 1 }));
+  return Array(7).fill().map(() => ({ value: Math.floor(Math.random() * 10) + 1 }));
 }

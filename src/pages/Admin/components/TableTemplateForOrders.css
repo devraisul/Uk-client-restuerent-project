@@ -1,0 +1,84 @@
+.statusPending {
+  color: rgb(255, 162, 0);
+  border-radius: 30px;
+  padding: 0px 10px;
+  display: block;
+  text-align: center;
+  background-color: rgba(255, 226, 172, 0.956);
+}
+.dishDetailsContainer {
+  height: 100%;
+  position: relative;
+}
+.optionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.optionsContainer button {
+  margin-right: 5px;
+  font-size: 1.3rem;
+}
+
+.detailsContainer {
+  display: flex;
+}
+
+.detailsContainer div {
+  width: 50%;
+  padding: 2px 10px;
+}
+
+.detailsContainer div:nth-child(1) {
+  border-right: 1px dashed rgb(53, 157, 255);
+}
+
+.qoutation {
+  font-weight: bold;
+  color: #3f88b3 !important;
+  margin-left: 0px !important;
+}
+.qoutation ~ span {
+  color: rgb(138, 138, 138);
+  margin-left: 5px;
+}
+.detailsStatusPending {
+  padding: 2px 15px;
+  border-radius: 30px;
+  background-color: #ffe3b0;
+  color: #ffa25b !important;
+}
+.dishes {
+  padding: 5px 10px;
+  border-top: 1px dashed rgb(53, 157, 255);
+}
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  justify-content: center;
+  position: absolute;
+  padding: absolute;
+  bottom: 0;
+}
+.buttonContainer button {
+  padding: 5px 10px;
+  width: 100px;
+  border-radius: 5px;
+  color: #fff;
+  margin: 0 30px;
+  transition: all 0.5s;
+}
+.buttonContainer button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px 2px rgb(154, 154, 154);
+}
+.buttonContainer button:nth-child(1) {
+  background-color: #0575b4;
+}
+.buttonContainer button:nth-child(2) {
+  background-color: #03bd28;
+}
+.buttonContainer button:nth-child(3) {
+  background-color: #b4053f;
+}

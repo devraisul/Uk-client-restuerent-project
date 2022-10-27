@@ -91,6 +91,8 @@ export const customerRegister = async (data) => {
     .then(res => {
       console.log('from api res',res.data);
       return res.data;
+    }).catch(err=>{
+      console.log('API_ERROR : ',err);
     })
   return resData;
 }

@@ -16,6 +16,7 @@ import EmailSended from "../pages/login/EmailSended";
 import EnterPassword from "../pages/login/EnterPassword";
 import ForgotPassword from "../pages/login/ForgotPassword";
 import Registration from "../pages/login/Registration";
+import Ratting from "../pages/Ratting/Ratting";
 import CustomerRegistration from "../pages/Review/CustomerRegistration";
 import PlaceOrderForm from "../pages/Review/PlaceOrderForm";
 import ShowReviews from "../pages/showReviews/ShowReviews";
@@ -52,6 +53,7 @@ export default function App() {
         <Route path="/customer_registration" component={CustomerRegistration} />
         <Route path="/place_order/:restaurantId" component={PlaceOrderForm} />
         <Route path="/review/:id" component={ShowReviews} />
+        <Route path="/rating/:rest_key/1" component={Ratting} />
         <Route path="/tabmenu/:id" component={TabMenu} />
         <Route path="/order" component={UserOrder} />
         <PublicRoute path="/addrestaurent" component={AddRestaurentForm} />

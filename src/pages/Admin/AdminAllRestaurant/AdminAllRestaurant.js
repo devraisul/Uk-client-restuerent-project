@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { MdDomainDisabled, MdOutlineDomainDisabled } from 'react-icons/md';
 import { TbBuildingStore } from 'react-icons/tb';
 import { getAllRestaurent } from '../../../Apis/Restaurent';
-import TableTemplate from '../components/TableTemplate';
+import TableTemplateForRestaurants from '../components/TableTemplateForRestaurants';
 import './AdminAllRestaurant.css';
 
 export default function AdminAllRestaurant() {
     // ALL STATES 
     const [restaurantTab, setRestaurantTab] = useState('allTab')
     const [restaurants, setRestaurants] = useState([])
-
+    const [restaurantDataChanged, setRestaurantDataChanged] = useState(Math.random())
 
     // BUTTON HANDLE FUNCTIONS 
     const handleGoToAllRestTab = () => {
@@ -24,14 +24,16 @@ export default function AdminAllRestaurant() {
     }
 
 
+
     useEffect(() => {
+        // GET ALL RESTAURANTS 
         getAllRestaurent().then(res => {
             setRestaurants(res.restaurant);
         }).catch(err => {
             console.log(err);
         })
-        
-    }, [restaurantTab])
+        console.log({restaurants});
+    }, [restaurantTab,restaurantDataChanged])
 
 
     return (
@@ -86,7 +88,8 @@ export default function AdminAllRestaurant() {
                     {restaurantTab === 'disabledTab' && 'Disabled Restaurants'}
                 </h1>
 
-                <TableTemplate
+                <TableTemplateForRestaurants
+                setRestaurantDataChanged={setRestaurantDataChanged}
                     columns={[
                         { id: 'id', label: 'ID', minWidth: 170 },
                         { id: 'Name', label: 'Name', minWidth: 170 },
@@ -94,7 +97,7 @@ export default function AdminAllRestaurant() {
                         { id: 'Status', label: 'Status', minWidth: 170 },
                     ]}
                     rows={
-                        (restaurantTab === 'allTab' && restaurants.filter(res=> res.Status === 'Inactive')) || 
+                        (restaurantTab === 'allTab' && restaurants) || 
                         (restaurantTab === 'enabledTab' && restaurants.filter(res=> res.Status === 'Active')) ||
                         (restaurantTab === 'disabledTab' && restaurants.filter(res=> res.Status === 'Inactive'))
                     }

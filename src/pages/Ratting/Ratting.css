@@ -1,0 +1,23 @@
+.rattingContainer {
+  padding: 10px;
+}
+.ratingQuestionsContainer {
+  padding: 50px;
+}
+.question {
+  padding: 10px;
+  border: 3px solid #0575b4;
+  border-radius: 10px;
+  margin: 5px 0px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.popupContainer {
+  padding: 0px 10px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
