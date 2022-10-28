@@ -1,14 +1,12 @@
 import { Button } from '@material-ui/core';
 import * as React from 'react';
-import { useState } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
-import { useHistory } from 'react-router-dom';
-import Popup from 'reactjs-popup';
 
 import Rating from '@mui/material/Rating';
 import { styled } from '@mui/material/styles';
 
-import { Star, StarBorderOutlined } from '@material-ui/icons';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import TableTemplateForRatingQuestions from './components/TableTemplateForRatingQuestions';
 import './Ratting.css';
 
@@ -21,56 +19,46 @@ const StyledRating = styled(Rating)({
         color: '#ffc14d',
     },
 });
+
+
 export default function Ratting() {
-    const [ratingValue, setRatingValue] = useState(0)
-    const [SingleRattingId, setSingleRattingId] = useState('')
-    const [isSubmitedSuccessfully, setIsSubmitedSuccessfully] = useState(false)
-
-
-    const [open, setOpen] = useState(false);
-    const closeModal = () => setOpen(false);
-
+    const [questions, setQuestions] = useState([
+        { id: 1, question: 'Rate delivery service.', rating: '0', tag: [] },
+        { id: 2, question: 'Rate decoration', rating: '0', tag: [] },
+        { id: 3, question: 'Rate welcome drinks', rating: '0', tag: []},
+        { id: 4, question: 'Rate drinks', rating: '0', tag: [] },
+        { id: 5, question: 'Rate dishes', rating: '0', tag: [] },
+        { id: 6, question: `Rate wayter's behaviour`, rating: '0', tag: [] },
+    ])
+    const [tags, setTags] = useState([
+        {id:'1',name:'Bad food'},
+        {id:'2',name:'Tangy'},
+        {id:'3',name:'Broken'},
+        {id:'4',name:'Bad service'},
+        {id:'5',name:'Unhealthy food'}, 
+        {id:'6',name:'Unhealthy environment'},
+        {id:'7',name:'Tasteless food'},
+        {id:'8',name:'Good decoration'},
+        {id:'9',name:'Good food'}, 
+        {id:'10',name:'Good behaviour'}, 
+        {id:'11',name:'Bad decoratin'},
+        {id:'12',name:'Excelant behaviour'}, 
+        {id:'13',name:'Mindblowing decoration'}
+    ])
+    useEffect(()=>{
+        console.log('====================================');
+        console.log(questions);
+        console.log('====================================');
+    },[questions])
     const history = useHistory()
 
 
     const handleGoBack = () => {
         history.goBack()
     }
-    const handleOpenStarMadal = (id) => {
-        setSingleRattingId(id)
-        setOpen(true)
-    }
-    const handleSubmit = () => {
-        setIsSubmitedSuccessfully(true)
-        setTimeout(() => {
-            setOpen(false)
-            setIsSubmitedSuccessfully(false)
-        }, 2000);
-    }
     return (
         <div className='rattingContainer'>
-            <Popup open={open} closeOnDocumentClick onClose={closeModal}>
 
-                {isSubmitedSuccessfully ?
-                    <div className='popupContainer'>
-                        <h2>Rating Submited Successfully ✅</h2>
-                    </div>
-                    :
-                    <div className='popupContainer'>
-                        <h2 style={{ textAlign: 'center', marginBottom: '50px' }}>Give your star.</h2>
-                        <StyledRating
-                            style={{
-                                marginBottom: '50px'
-                            }}
-                            name="customRatting"
-                            defaultValue={0}
-                            icon={<Star style={{ fontSize: '5rem' }} />}
-                            emptyIcon={<StarBorderOutlined style={{ fontSize: '5rem' }} />}
-                        />
-                        <Button onClick={handleSubmit} style={{ background: '#0575B4', color: '#fff', fontWeight: 'bold' }}>Submit</Button>
-                    </div>}
-
-            </Popup>
             <div className="nav">
                 <ul>
                     <li><Button style={{ color: '#0575B4', fontWeight: 'bold' }} onClick={handleGoBack}><IoArrowBack style={{ marginRight: '5px' }} /> Go Back</Button></li>
@@ -80,10 +68,13 @@ export default function Ratting() {
             <div className="ratingQuestionsContainer">
                 <TableTemplateForRatingQuestions
                     columns={[
-                        { id: 'question', label: 'Question', minWidth: 170 },
-                        { id: 'rating', label: 'Your Rating', minWidth: 50 },
+                        { id: 'question', label: 'Question', minWidth: 370 },
+                        { id: 'rating', label: 'Your Rating', minWidth: 5 },
+                        { id: 'tag', label: 'Tag', minWidth: 5 },
                     ]}
-                    rows={[{ question: 'lorem', rating: '0' }]}
+                    setQuestions={setQuestions}
+                    tags={tags}
+                    rows={questions}
                 />
             </div>
         </div>

@@ -21,10 +21,10 @@ const Alldishes = ({ id, setChangeCartItems }) => {
       {dishes.length === 0 ? (<p>No dish Added Yet!</p>) : (
         <React.Fragment>
           <div className="grid-containerUM">
-            {dishes.map((dishes) => (
+            {dishes.map((dishes,i) => (
               <BuyDishes
                 setChangeCartItems={setChangeCartItems}
-                key={dishes.restaurant_id}
+                key={i}
                 dishes={dishes}
                 id={id}
               />

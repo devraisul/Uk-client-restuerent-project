@@ -32,6 +32,9 @@ export default function AdminOrders() {
         // GET ALL ORDERS
         getAllOrers().then(res => {
             setOrders(res?.data);
+            console.log('====================================');
+            console.log(res?.data);
+            console.log('====================================');
         }).catch(err => {
             console.log(err);
         })

@@ -164,7 +164,60 @@ export default function TableTemplateForOrders({ columns, rows, setOrderDataChan
                                 </div>
                             </div>
                             <div className='dishes'>
-                                <h3>Dishes: </h3>
+                                <h3 style={{ marginBottom: '10px' }}>Dishes: </h3>
+                                <TableContainer className='orderTable' >
+                                    <Table sx={{ minWidth: 150 }} stickyHeader aria-label="sticky table">
+                                        <TableHead >
+                                            <TableRow >
+                                                <TableCell
+                                                    style={{
+                                                        color: '#fff',
+                                                        background: '#0575B4'
+                                                    }}>Name</TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        color: '#fff',
+                                                        background: '#0575B4'
+                                                    }}
+                                                    align="left">Image</TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        color: '#fff',
+                                                        background: '#0575B4'
+                                                    }}
+                                                    align="left">Price</TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        color: '#fff',
+                                                        background: '#0575B4'
+                                                    }}
+                                                    align="left">Quantity</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {
+                                                singleOrder?.detail.map(order =>
+                                                    order?.dish.map(row =>
+                                                        <TableRow
+                                                            key={row.name}
+                                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                        >
+                                                            <TableCell component="th" scope="row">
+                                                                {row?.name}
+                                                            </TableCell>
+                                                            <TableCell align="left">
+                                                                <img className='dishImage' src={`https://mughalsignandprint.co.uk/restaurant/${row?.image}`} alt={row?.name} />
+                                                            </TableCell>
+                                                            <TableCell align="left">{row?.price}</TableCell>
+                                                            <TableCell align="left">{order?.qty}</TableCell>
+                                                        </TableRow>
+                                                    )
+                                                )
+                                            }
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+
                             </div>
                             <div className='buttonContainer'>
                                 <button>Take</button>

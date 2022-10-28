@@ -70,6 +70,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems, toggleMenu }) => {
           &times;
         </button>
         <PlaceOrderForm
+          setChangeCartItems={setChangeCartItems}
           total={sum}
           cartItem={cartItems}
           setOpen={setOpen}
@@ -111,7 +112,7 @@ const Shoppingcart = ({ id, rand, setChangeCartItems, toggleMenu }) => {
                           width: '50px'
                         }}
                         src={cartItem?.image ? `https://mughalsignandprint.co.uk/restaurant/${cartItem?.image}` : "https://i.postimg.cc/BQv5vFdv/no-pictures.png"} alt={cartItem.name} />
-                      <p style={{ fontSize: '0.8rem', marginLeft: '5px' }} className="product-card-name"> {cartItem.name} </p>
+                      <p style={{ fontSize: '1.2rem', marginLeft: '5px' }} className="product-card-name"> {cartItem.name} </p>
                     </div>
 
                     <div>

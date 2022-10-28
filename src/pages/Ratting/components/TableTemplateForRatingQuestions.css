@@ -1,0 +1,34 @@
+.popupContainerMain {
+  display: flex;
+  flex-direction: column;
+}
+.gapStar {
+  color: #aaa;
+  font-size: 2rem;
+}
+.fillStar {
+  color: rgb(255, 174, 1);
+  font-size: 2rem;
+}
+.formStarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.stars {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.ratingTag {
+  min-height: 200px;
+  margin-bottom: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+.tagName {
+  vertical-align: center !important;
+  margin: 5px 5px !important;
+  border: 2px solid #4f9ac5 !important;
+}

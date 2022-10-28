@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const placeOrder = async (rest_id, data, dishes) => {
   const userInfo = localStorage.getItem('customer_details')
-  const jwt = JSON.parse(userInfo)[0]?.customerToken;
+  const jwt = JSON.parse(userInfo)[0]?.token;
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -12,36 +12,29 @@ export const placeOrder = async (rest_id, data, dishes) => {
     },
   };
   //======================= DONE =======================
-  console.log(JSON.parse(localStorage.getItem('cart_items')));
   data.dishes = JSON.parse(localStorage.getItem('cart_items'))
-  // const orderData = {
-  //   ...data, dishes
-  // }
-  //======================= DONE =======================
 
-
-
-// ============ TEST ==================
-const orderData = {
-  ...data, dishes:[]
-}
-data.dishes.map(dish=>{
-  orderData.dishes.push({
-    id:dish.id,
-    Dish_Price:dish.price,
-    qty:dish.quantity,
-    variation:[]
+  // ============ TEST ==================
+  const orderData = {
+    ...data, dishes: []
+  }
+  data.dishes.map(dish => {
+    orderData.dishes.push({
+      id: dish.id,
+      qty: dish.quantity,
+      variation: []
+    })
   })
-})
-data.dishes?.variations?.map(variation=>{
-  orderData.dishes.variation.push({
-    id: variation.id
+  data.dishes?.variations?.map(variation => {
+    orderData.dishes.variation.push({
+      id: variation.id
+    })
   })
-})
 
-// ============ TEST ==================
+  // ============ TEST ==================
 
   console.log(orderData);
+
   const addVariationResponse = await axios.post(`/api/order/${rest_id}`, orderData, config)
     .then(res => {
       return res;

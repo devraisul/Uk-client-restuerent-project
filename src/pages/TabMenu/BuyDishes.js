@@ -125,12 +125,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
           }}
         >
           {dishes?.image ? (
-            <Fragment style={{
-              width: '50%'
-            }}>
-           {
-//               console.log(dishes?.image)
-           }
+            <Fragment>
               <img
                 style={{
                   objectFit: 'cover',
@@ -172,12 +167,26 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
             <button className="close" onClick={(e) => setOpen2(false)}>
               &times;
             </button>
-            <img
-              height={200}
-              alt={dishes?.name}
-              src={`${dishes?.image ? `https://mughalsignandprint.co.uk/restaurant/${dishes?.image}` : "https://i.postimg.cc/BQv5vFdv/no-pictures.png"}`}
-            />
+            <div style={{
+              display:'flex',
+              width:'100%',
+              justifyContent:'center',
+              alignItems:'center'
+            }}>
+              <img
+                style={{
+                  width: '200px',
+                  height: 'auto',
+                  objectFit: 'contain'
+                }}
+                alt={dishes?.name}
+                src={`${dishes?.image ? `https://mughalsignandprint.co.uk/restaurant/${dishes?.image}` : "https://i.postimg.cc/BQv5vFdv/no-pictures.png"}`}
+              />
+            </div>
+
             <h1 style={{ textAlign: "center", margin: '0px 0px 10px 0px' }}>{dishes?.name}</h1>
+            <p style={{padding:'1px 10px',fontWeight:'bold'}}>Description: </p>
+            <p style={{padding:'5px 10px'}}>{dishes?.description}</p>
 
             {dishVariations.length !== 0 ? (
               dishVariations.map((dishVariation, i) => (
@@ -276,7 +285,7 @@ const BuyDishes = ({ dishes, id, setChangeCartItems }) => {
 
           </form>
         </Popup>
-        
+
       </div>
     </Fragment>
   );

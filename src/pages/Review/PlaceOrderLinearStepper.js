@@ -171,7 +171,7 @@ function getStepContent(step) {
   }
 }
 
-const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen }) => {
+const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen, setChangeCartItems }) => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
@@ -203,24 +203,30 @@ const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen }) => {
     if (activeStep == steps.length - 1) {
       const dishes = cartItem.map(data => {
         const dishe = {
-          "Dish_Price": data.price,
-          "qty": data.quantity,
-          "id": data.id,
-          "variation": data.variations
+          "Dish_Price": data?.price,
+          "qty": data?.quantity,
+          "id": data?.id,
+          "variation": data?.variations
         }
         return dishe;
       })
 
       placeOrder(user?.restaurant[0]?.id, data, dishes)
         .then((res) => {
-          console.log(res);
-          setIsLoading(false);
+          if (res?.data?.message === 'order inserted') {
+            setIsLoading(false);
 
-          setActiveStep(activeStep + 1);
-          localStorage.removeItem("cart_items")
-          setTimeout(() => setOpen(false), 2000);
+            setActiveStep(activeStep + 1);
+            localStorage.removeItem("cart_items")
+            setChangeCartItems(Math.random())
+            setTimeout(() => setOpen(false), 2000);
+          } else {
+            alert('Order not submited! Something was wrong.')
+          }
         }
-        );
+        ).catch(err => {
+          alert(err)
+        })
     }
     else {
       setActiveStep(activeStep + 1);

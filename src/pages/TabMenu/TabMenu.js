@@ -130,8 +130,8 @@ const TabMenu = () => {
           <a onClick={(e) => onClickk(e)}> ALL</a>
           {
             // all menu
-            menus?.map((menus) => (
-              <Fragment key={menus.id}>
+            menus?.map((menus,i) => (
+              <Fragment key={i}>
                 <a style={{ cursor: "pointer" }}
                   onClick={(e) => onClick(e, menus.id, menus.name)}
                 >
@@ -175,8 +175,8 @@ const TabMenu = () => {
                                 {" "}
                                 {
                                   //get dishes of a selected menu
-                                  aLL_dishes?.map((ALL_dishes) => (
-                                    <Fragment key={ALL_dishes.id}>
+                                  aLL_dishes?.map((ALL_dishes,i) => (
+                                    <Fragment key={i}>
                                       {/* {console.log(ALL_dishes.id)} */}
                                       <BuyDishes
                                         setChangeCartItems={setChangeCartItems}
@@ -195,7 +195,7 @@ const TabMenu = () => {
                         </div>
 
                         {menus?.map((menus, i) => (
-                          <Fragment>
+                          <Fragment key={i}>
                             <div className="tabA">
                               <label
                                 className="tabA-label"
