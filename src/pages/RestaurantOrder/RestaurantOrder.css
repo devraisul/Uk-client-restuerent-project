@@ -1,0 +1,31 @@
+.singleColumn {
+  overflow-y: scroll;
+  height: 73vh;
+}
+.singleColumn::-webkit-scrollbar {
+  display: none;
+}
+
+.menuCardButton {
+  width: 90% !important;
+  background-color: #71bcfa !important;
+  color: #fff !important;
+  margin: 5px 0px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  height: 100px !important;
+}
+.menuCardButton2 {
+  height: 50px !important;
+  width: 100% !important;
+  background-color: #f34d4d !important;
+  color: #fff !important;
+  margin: 5px 0px !important;
+}
+.columnTitle {
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 20px;
+}

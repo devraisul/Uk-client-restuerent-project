@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiEdit } from 'react-icons/bi';
 import { BsArrowReturnLeft } from 'react-icons/bs';
@@ -10,7 +10,7 @@ import Popup from 'reactjs-popup';
 import { useAuth } from '../../context/AuthContext';
 import AddDish from './Dish/AddDish';
 import Alldish from './Dish/Alldish';
-import EditAllDish from './Dish/EditAllDish';
+import EditDish from './Dish/EditDish';
 import './DishHandle.css';
 const DishHandle = () => {
   const { user } = useAuth()
@@ -22,11 +22,19 @@ const DishHandle = () => {
 
 
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const closeEditModal = () => setOpenEdit(false);
   const closeModal = () => setOpen(false);
 
 
+  const [singleDishId, setSingleDishId] = useState()
+
   const handleAddDish = (e) => {
     setOpen(true)
+  };
+  const handleEditDish = (dish_id) => {
+    setSingleDishId(dish_id)
+    setOpenEdit(true)
   };
 
   const onEditAll = (e) => {
@@ -44,6 +52,12 @@ const DishHandle = () => {
     setShowAllMenu(true)
     setEditAll(false)
   }
+
+
+
+  useEffect(()=>{
+
+  },[singleDishId])
 
   return (
     <Fragment>
@@ -159,14 +173,27 @@ const DishHandle = () => {
         </Popup>
       </div>
 
+      <div>
+        <Popup open={openEdit} closeOnDocumentClick onClose={closeEditModal}>
+          <EditDish singleDishId={singleDishId} closeEditModal={closeEditModal} setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
+        </Popup>
+      </div>
+
 
       {/* } */}
 
 
-      {editAll && <EditAllDish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
+      {/* {editAll && <EditAllDish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />} */}
 
 
-      {showAllMenu && <Alldish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
+      {showAllMenu && <Alldish
+        handleEditDish={handleEditDish}
+        setIsChangeMenu={setIsChangeMenu}
+        isChangeMenu={isChangeMenu}
+        menuId={params.menuId}
+        restaurentId={params.restaurentId}
+        menuName={params.menuName}
+      />}
 
     </Fragment>
   );

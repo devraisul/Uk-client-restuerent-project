@@ -3,7 +3,7 @@ import { getdish } from '../../../Apis/dish';
 import Loading from '../../../components/Loading/Loading';
 import AlldishesUI from '../../ViewMenu/AlldishesUI';
 
-const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId }) => {
+const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,handleEditDish }) => {
   const [dishes, setDishes] = React.useState()
   const [loading, setLoading] = React.useState(false)
 
@@ -88,6 +88,7 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId 
             <Fragment>
               {dishes?.map((dishes, i) => (
                 <AlldishesUI
+                handleEditDish={handleEditDish}
                 setIsChangeMenu={setIsChangeMenu}
                   key={dishes?.ressult_id}
                   dishes={dishes}

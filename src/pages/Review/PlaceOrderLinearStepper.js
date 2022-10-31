@@ -215,7 +215,6 @@ const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen, setChangeCartItems })
         .then((res) => {
           if (res?.data?.message === 'order inserted') {
             setIsLoading(false);
-
             setActiveStep(activeStep + 1);
             localStorage.removeItem("cart_items")
             setChangeCartItems(Math.random())
@@ -309,7 +308,7 @@ const PlaceOrderLinearStepper = ({ sum, cartItem, setOpen, setChangeCartItems })
                   <NavLink
                     to={"/login"}
                     style={{
-                      color: "#536dfe",
+                      color: "#0575B4",
                     }}
                   >
                     {" "}

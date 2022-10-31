@@ -5,7 +5,6 @@ import { BsCardChecklist } from 'react-icons/bs';
 import { CgCalendarToday } from 'react-icons/cg';
 import { getAllOrers } from '../../../Apis/Admin/Orders';
 import TableTemplateForOrders from '../components/TableTemplateForOrders';
-import './AdminOrders.css';
 
 export default function AdminOrders() {
     // ALL STATES 

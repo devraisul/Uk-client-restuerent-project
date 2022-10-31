@@ -157,18 +157,14 @@ const CustomerRegistartionLinearStepper = ({ sum }) => {
 
   const handleNext = async (data) => {
     if (activeStep == steps.length - 1) {
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
       customerRegister(data).then((res) => {
         setIsLoading(false);
-        localStorage.setItem('customer_details', JSON.stringify([{
-          customer: res.data.user,
-          customerToken: res.token
-        }]))
         if (res.token) {
+          localStorage.setItem('customer_details', JSON.stringify([{
+            customer: res.data.user,
+            customerToken: res.token
+          }]))
           setActiveStep(activeStep + 1);
-          // setTimeout(() => history.push("/place_order"), 1000);
           setTimeout(() => setOpen(true), 1000);
         }
       });
@@ -249,7 +245,7 @@ const CustomerRegistartionLinearStepper = ({ sum }) => {
                   <NavLink
                     to={"/customerlogin"}
                     style={{
-                      color: "#536dfe",
+                      color: "#0575B4",
                     }}
                   >
                     {" "}

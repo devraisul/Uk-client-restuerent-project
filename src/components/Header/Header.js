@@ -1,5 +1,5 @@
 import {
-  AppBar, IconButton,
+  AppBar, Button, IconButton,
   InputBase,
   Menu,
   MenuItem, Toolbar
@@ -11,6 +11,10 @@ import {
 } from "@material-ui/icons";
 import classNames from "classnames";
 import React, { useState } from "react";
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { GoPackage } from 'react-icons/go';
+import { IoFastFoodOutline } from 'react-icons/io5';
+import { RiEBike2Line } from 'react-icons/ri';
 
 // styles
 import useStyles from "./styles";
@@ -19,6 +23,8 @@ import useStyles from "./styles";
 import { Typography } from "../Wrappers";
 
 // context
+import { useHistory } from "react-router-dom";
+import Popup from "reactjs-popup";
 import { useAuth } from "../../context/AuthContext";
 import {
   toggleSidebar, useLayoutDispatch, useLayoutState
@@ -26,6 +32,12 @@ import {
 
 
 export default function Header(props) {
+  const history = useHistory()
+  // FOR POPUP 
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
+
+
   var classes = useStyles();
   const { user, logout } = useAuth()
 
@@ -35,10 +47,80 @@ export default function Header(props) {
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
 
+
+  const handlePopup = () => {
+    setOpen(true)
+  }
   return (
     <AppBar position="fixed" style={{
-      background:"#0575B4"
+      background: "#0575B4"
     }} className={classes.appBar}>
+
+      {/* ORDER POPUP  */}
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <div style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%'
+        }}>
+          <Button
+            onClick={() => {
+              history.push('/app/add-order/eat_in')
+              setOpen(false)
+            }}
+            style={{
+              fontSize: '2rem',
+              width: '90%',
+              margin: '10px 0px',
+              borderRadius: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'start',
+              color:'#0575B4'
+            }}>
+            <IoFastFoodOutline style={{ marginRight: '30px' }} /> Eat In
+          </Button>
+          <Button
+            onClick={() => {
+              history.push('/app/add-order/delivery')
+              setOpen(false)
+            }}
+            style={{
+              fontSize: '2rem',
+              width: '90%',
+              margin: '10px 0px',
+              borderRadius: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'start',
+              color:'#0575B4'
+            }}>
+            <RiEBike2Line style={{ marginRight: '30px' }} /> Delivery
+          </Button>
+          <Button
+            onClick={() => {
+              history.push('/app/add-order/take_away')
+              setOpen(false)
+            }}
+            style={{
+              fontSize: '2rem',
+              width: '90%',
+              margin: '10px 0px',
+              borderRadius: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'start',
+              color:'#0575B4'
+            }}>
+            <GoPackage style={{ marginRight: '30px' }} /> Take Away
+          </Button>
+        </div>
+      </Popup>
+
+
       <Toolbar className={classes.toolbar}>
         <IconButton
           color="inherit"
@@ -93,6 +175,22 @@ export default function Header(props) {
             }}
           />
         </div>
+
+        <Button
+          onClick={handlePopup}
+          style={{
+            color: '#5CA5CE',
+            margin: '0 10px 0 20px',
+            fontWeight: 'bold'
+          }}>
+          <AiOutlinePlusCircle
+            style={{
+              marginRight: '5px',
+              fontSize: '2rem'
+            }} />
+          Add Order
+        </Button>
+
         <IconButton
           aria-haspopup="true"
           color="inherit"
@@ -113,7 +211,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              {user?.first_Name}{user?.last_Name}
+              {user?.first_Name} {user?.last_Name}
             </Typography>
           </div>
           <MenuItem

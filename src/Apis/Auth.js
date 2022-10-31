@@ -76,10 +76,6 @@ export const updatePassAPI = async (token,data) => {
 }
 
 
-
-
-
-
 export const customerRegister = async (data) => {
   const config = {
     headers: {
@@ -95,4 +91,21 @@ export const customerRegister = async (data) => {
       console.log('API_ERROR : ',err);
     })
   return resData;
+}
+
+
+
+
+
+// CUSTOMER login response
+export const customerLogin = async (data) => {
+  const result = await axios.post(`/api/auth`, data)
+    .then(res => {
+        window.localStorage.setItem('customer_details', JSON.stringify([{
+          customer: res.data.user,
+          customerToken: res.token
+        }]))
+      return res.data;
+    })
+  return result
 }

@@ -10,7 +10,7 @@ import { getVariationByRestaurantIdAndDishId } from '../../Apis/variation';
 import { useAuth } from '../../context/AuthContext';
 import LinkVariation from './LinkVariation';
 //all dishes show UI in owner dashboard
-const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
+const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDish }) => {
   const [showuploader, setsshowuploader] = useState(false);
   const [showLink, setShowLink] = useState(false);
   const [editflag, setseditflag] = useState(false);
@@ -403,45 +403,35 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu }) => {
                     ))
                   }
                 </ul>
-                {/* <button title='Link Variation' style={{
-                  textAlign: 'center',
-                  width: '100%'
-                }} onClick={(e) => handleLinkClick(e)}>
-                  <AiOutlinePlus style={{
-                    height: '25px',
-                    width: '25px',
-                    background: '#0575B4',
-                    padding: '5px',
-                    borderRadius: '50%',
-                    fontSize: '2rem',
-                    color: '#fff',
-                    marginTop: '10px',
-                    fontWeight: 'bold'
-                  }} />
-                </button> */}
-                {
-                  //show upload image option on click
-                  showLink && (
-                    <Fragment>
-                      <Popup style={{ borderRadius: '30px' }} open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
-                        <button style={{ color: '#0575B4', marginRight: '15px' }} className="close" onClick={(e) => {
-                          setOpen(false)
-                          setIsVariationChanged(Math.random())
-                        }}>
-                          &times;
-                        </button>
-                        <div className='padding20px'>
-                        </div>
-                        <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
-                      </Popup>
-                    </Fragment>
-                  )}
+                {showLink && (
+                  <Fragment>
+                    <Popup style={{ borderRadius: '30px' }} open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
+                      <button style={{ color: '#0575B4', marginRight: '15px' }} className="close" onClick={(e) => {
+                        setOpen(false)
+                        setIsVariationChanged(Math.random())
+                      }}>
+                        &times;
+                      </button>
+                      <div className='padding20px'>
+                      </div>
+                      <LinkVariation id={dishes?.id} rid={dishes?.restaurant_id} />
+                    </Popup>
+                  </Fragment>
+                )}
               </div>
             </td>
             <td width="5%">
               <div>
-                <AiFillEdit title='edit' style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} onClick={(e) => setseditflag(!editflag)}></AiFillEdit>
-                <FiTrash2 title='delete' style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} onClick={(e) => handleDeleteDish(e)}></FiTrash2>
+                <AiFillEdit 
+                title='edit' 
+                style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} 
+                onClick={(e) => handleEditDish(dishes?.id)}
+                ></AiFillEdit>
+                <FiTrash2 
+                title='delete' 
+                style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} 
+                onClick={(e) => handleDeleteDish(e)}
+                ></FiTrash2>
               </div>
             </td>
           </tr>

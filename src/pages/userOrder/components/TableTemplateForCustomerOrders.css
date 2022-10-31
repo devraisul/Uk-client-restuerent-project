@@ -53,16 +53,15 @@
   border-top: 1px dashed rgb(53, 157, 255);
 }
 .buttonContainer {
-  background-color: #03bd28;
   display: flex;
   width: 100%;
   justify-content: space-between;
   justify-content: center;
-  position: relative;
+  position: absolute;
+  padding: absolute;
+  bottom: 0;
 }
 .buttonContainer button {
-  bottom: -2;
-  position: absolute;
   padding: 5px 10px;
   width: 100px;
   border-radius: 5px;
@@ -75,14 +74,12 @@
   box-shadow: 0 0 15px 2px rgb(154, 154, 154);
 }
 .buttonContainer button:nth-child(1) {
-  left: 0;
   background-color: #0575b4;
 }
 .buttonContainer button:nth-child(2) {
   background-color: #03bd28;
 }
 .buttonContainer button:nth-child(3) {
-  right: 0;
   background-color: #b4053f;
 }
 .dishImage {
@@ -92,7 +89,7 @@
 }
 .orderTable {
   border-radius: 10px;
-  height: 200px;
+  height: 230px;
   scrollbar-width: none;
   box-shadow: 0 0 5px rgba(58, 58, 58, 0.353);
 }

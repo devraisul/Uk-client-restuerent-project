@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 
 // styles
-import { userLogin } from "../../Apis/Auth";
+import { customerLogin } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
 import useStyles from "./styles";
 
@@ -31,7 +31,7 @@ function CustomerLogin(props) {
       password: e.target.password.value,
     };
     console.log(data);
-    userLogin(data)
+    customerLogin(data)
       .then((res) => {
         console.log(res);
         localStorage.setItem("customer_details", JSON.stringify([res]));

@@ -21,10 +21,8 @@ export const getDish = async (id) => {
     })
   return getDishResponse
 }
-
-// Get AllDish
-export const getAllDish = async (id) => {
-  let getDishResponse;
+// Get Dish By ID
+export const getDishById = async (id) => {
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {
@@ -34,36 +32,50 @@ export const getAllDish = async (id) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.get(`/api/dishes/All/dishes/${id}`, config)
+  const result = await axios.get(`/api/dishes/getdealsdishes/${id}`, config)
     .then(res => {
-      getDishResponse = res.data;
+      return res.data;
     })
     .catch(err => {
       console.log(err);
     })
-  return getDishResponse
+  return result
+}
+
+// Get AllDish
+export const getAllDish = async (Rid) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+    },
+  };
+  const result = await axios.get(`/api/dishes/All/dishes/${Rid}`, config)
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  return result
 }
 
 // Get Dish
-export const getdish = async (id) => {
-  let getDishResponse;
-  const userInfo = localStorage.getItem('data')
-  const jwt = JSON.parse(userInfo);
+export const getdish = async (Rid) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
       'Accept': 'application/json',
-      "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.get(`/api/dishes/${id}`, config)
+  const result = await axios.get(`/api/dishes/${Rid}`,config)
     .then(res => {
-      getDishResponse = res.data;
+      return res.data;
     })
     .catch(err => {
       console.log(err);
     })
-  return getDishResponse
+  return result
 }
 // Add Dish Image
 export const addDishImage = async (id,data) => {

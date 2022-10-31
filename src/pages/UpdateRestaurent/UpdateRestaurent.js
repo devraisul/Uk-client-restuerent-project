@@ -1,12 +1,11 @@
-import { Button } from '@material-ui/core';
-import { TextField } from '@material-ui/core';
-import React, { Fragment, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Button, TextField } from '@material-ui/core';
+import React, { Fragment, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import SearchBox from 'tomtom-react-searchbox';
 import { editRestaurent } from '../../Apis/Restaurent';
+import ImageComing from '../../assets/image-coming-soon.png';
 import { useAuth } from '../../context/AuthContext';
-import './updateRestaurent.css'
-import toast, { Toaster } from 'react-hot-toast';
+import './updateRestaurent.css';
 //Edit restaurant by owner Form
 const UpdateRestaurent = () => {
   const { user } = useAuth()
@@ -64,67 +63,68 @@ const UpdateRestaurent = () => {
         reverseOrder={false}
       />
       <div className='container'>
-        <div className='card'>
-          {!user.restaurant[0].Logo ? (
-            "Don't Have image"
-          ) : (<img
-            // className='roundimgE2'
+        <h1 style={{ margin: '0',fontSize:'2rem',color:'#aaa' }} className='large'>Edit Restaurant</h1>
+        {!user.restaurant[0].Logo ? (
+          <img
+            style={{ margin: '30px 0px' }}
+            className="centerImage2"
+            src={ImageComing}
+            alt='Logo'
+          />
+        ) : (
+          <img
+            style={{ margin: '30px 0px' }}
             src={user.restaurant[0].Logo}
             alt='Logo'
-          />)}
-          <h1 className='large text-primary'>Edit Restaurant</h1>
-          <form onSubmit={(e) => onSubmit(e)}>
-            <div className='form-group'>
-              <TextField
-                id="filled-basic"
-                label="Enter Restaurant Name"
-                variant="filled"
-                type='text'
-                placeholder='Enter Restaurant Name'
-                name='Name'
-                value={Name}
-                onChange={(e) => onChange(e)}
-                style={{ paddingTop: '15px',width:'100%' }}
+          />
+        )}
 
-              />
-            </div>
-            <div className='form-group'>
-              <p>Address: {Address}</p>
+        <form style={{width:'500px'}} onSubmit={(e) => onSubmit(e)}>
+          <div style={{ marginBottom: '10px' }} className='form-group'>
+            <TextField
+              id="filled-basic"
+              label="Enter Restaurant Name"
+              variant="outlined"
+              type='text'
+              placeholder='Enter Restaurant Name'
+              name='Name'
+              value={Name}
+              onChange={(e) => onChange(e)}
+              style={{ width: '100%' }}
 
-            </div>
-            <div className='form-group'>
-              <p>Enter Address to Update</p>
-              <SearchBox
-                onResultChoose={(result) => fetchdistance(result)}
-                style={{ paddingTop: '15px',width:'100%' }}
-                searchOptions={{
-                  key: 'l2nwZ2J9wGbTZRb9C8OyAzv7pv0E30iY',
-                  language: 'en-Gb',
-                  countrySet: 'GB',
-                  limit: 5,
-                  typeahead: true
-                }}
-              />
-            </div>
-            <div className='form-group'>
-              <p>Enter PostCode</p>
-              <TextField
-                id="filled-basic"
-                label="Enter PostCode"
-                variant="filled"
-                type='text'
-                placeholder='Enter PostCode'
-                name='PostCode'
-                value={PostCode}
-                onChange={(e) => onChange(e)}
-                style={{ paddingTop: '15px',width:'100%' }}
-              />
-              {/* <input
-               
-              required
-              /> */}
-            </div>
-            {/* <div className='form-group'>
+            />
+          </div>
+          <div className='form-group' style={{ margin: '10px 0px' }}>
+            <p style={{ fontSize: '1rem' }}>Address: {Address}</p>
+          </div>
+          <div className='form-group'>
+            <p>Enter Address to Update</p>
+            <SearchBox
+              onResultChoose={(result) => fetchdistance(result)}
+              style={{ paddingTop: '15px', width: '100%' }}
+              searchOptions={{
+                key: 'l2nwZ2J9wGbTZRb9C8OyAzv7pv0E30iY',
+                language: 'en-Gb',
+                countrySet: 'GB',
+                limit: 5,
+                typeahead: true
+              }}
+            />
+          </div>
+          <div style={{ marginTop: '20px' }} className='form-group'>
+            <TextField
+              id="filled-basic"
+              label="Enter PostCode"
+              variant="outlined"
+              type='text'
+              placeholder='Enter PostCode'
+              name='PostCode'
+              value={PostCode}
+              onChange={(e) => onChange(e)}
+              style={{ width: '100%' }}
+            />
+          </div>
+          {/* <div className='form-group'>
               <p>Select Menu View Layout:</p>
               <label className="radio-img">
                 <input type="radio" name="Layout" value="cards" onChange={(e) => onChange(e)} checked={Layout === 'cards' ? (true) : (false)} />
@@ -138,36 +138,32 @@ const UpdateRestaurent = () => {
               </label>
             </div> */}
 
-            <div className='form-group'>
-              <p>Choose Logo to Update:</p>
-            </div>
+          <div style={{ marginTop: '10px' }} className='form-group'>
+            <p>Choose Logo to Update:</p>
+          </div>
+          <div className='form-group'>
+            <input
+              type='file'
+              id='image'
+              name='image'
+              style={{ width: "100%" }}
+              onChange={(e) => onFileChange(e)}
+            />
 
-            <div className='form-group'>
-
-              <input
-                type='file'
-                id='image'
-                name='image'
-                style={{ width: "100%" }}
-
-                onChange={(e) => onFileChange(e)}
-              />
-
-            </div>
-            <div className='centerbtn' style={{ marginTop: "50px" }}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                size="large"
-                fullWidth
-                style={{ width: "100%" }}
-              >
-                Save Changes
-              </Button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div className='centerbtn' style={{ marginTop: "20px" }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+              fullWidth
+              style={{ width: "100%" }}
+            >
+              Save Changes
+            </Button>
+          </div>
+        </form>
       </div>
     </Fragment>
   );

@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { MdDomainDisabled, MdOutlineDomainDisabled } from 'react-icons/md';
+import { MdDomain, MdOutlineDomainDisabled } from 'react-icons/md';
 import { TbBuildingStore } from 'react-icons/tb';
 import { getAllRestaurent } from '../../../Apis/Restaurent';
 import TableTemplateForRestaurants from '../components/TableTemplateForRestaurants';
@@ -58,7 +58,7 @@ export default function AdminAllRestaurant() {
                         color: `${restaurantTab === "enabledTab" ? '#fff' : "#000"}`
                     }}
                     onClick={handleGoToEnabledRestTab}>
-                    <MdDomainDisabled style={{
+                    <MdDomain style={{
                         color: `${restaurantTab === "enabledTab" ? '#fff' : "#000"}`,
                         fontSize: '1.2rem',
                         marginRight: '10px'

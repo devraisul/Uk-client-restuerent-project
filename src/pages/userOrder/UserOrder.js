@@ -1,54 +1,103 @@
-import React from 'react';
-import { Fragment } from 'react';
-import { getCustOrer } from '../../Apis/Order';
+import { Button } from '@material-ui/core';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { BsCardChecklist } from 'react-icons/bs';
+import { CgCalendarToday } from 'react-icons/cg';
+import { useHistory, useParams } from 'react-router-dom';
+import { getCustomerOrder } from '../../Apis/Order';
+import TableTemplateForCustomerOrders from './components/TableTemplateForCustomerOrders';
+import './UserOrder.css';
 
-const UserOrder = () => {
-  const [order, setOrder] = React.useState([])
-  React.useEffect(() => {
-    getCustOrer()
-      .then(res => {
-        setOrder(res.data);
-      })
-  }, [])
-  return (
-    <div className='table-wrapper'>
-      <h1 className='large text-center text-primary'>Your Order</h1>
-      <table className='servicesT'>
+export default function AdminOrders() {
+  const {customer_id} = useParams()
+    // ALL STATES 
+    const [ordersTab, setOrdersTab] = useState('allTab')
+    const [orders, setOrders] = useState([])
+    const [autoUpdate, setAutoUpdate] = useState(Math.random())
+    const [orderDataChanged, setOrderDataChanged] = useState(Math.random())
 
-        <tbody>
-          <tr>
-            <th width="10%">#</th>
-            <th width="10%">Amount</th>
-            <th width="10%">Type</th>
-            {/* <th width="20%">View dishes</th>
-            <th width="20%">Total dishes</th> */}
-          </tr>
-        </tbody>
-        {!order?.length ? (<Fragment>
-          <tbody>
-            <tr>
-              <td>No data </td>
-            </tr>
-          </tbody>
-        </Fragment>
-        ) : (
-          <Fragment>{order?.map((menus, i) => (
+    // BUTTON HANDLE FUNCTIONS 
+    const handleGoToAllOrdersTab = () => {
+        setOrdersTab('allTab')
+    }
+    const handleGoToTodaysOrdersTab = () => {
+        setOrdersTab('todaysOrderTab')
+    }
 
-            menus?.detail?.map(data => (
-              <tbody>
-                <tr>
-                  <td>{i + 1} </td>
-                  <td>{menus?.amount} </td>
-                  <td>{data?.type}</td>
-                </tr>
-              </tbody>
-            ))
+    useEffect(() => {
+        setInterval(() => {
+            setAutoUpdate(Math.random())
+        }, 60000)
+    }, [])
 
+    useEffect(() => {
+        // GET ALL ORDERS
+        getCustomerOrder(customer_id).then(res => {
+            setOrders(res?.data.reverse());
+        }).catch(err => {
+            console.log(err);
+        })
+    }, [ordersTab, autoUpdate, orderDataChanged])
 
-          ))}</Fragment>)}
-      </table>
-    </div>
-  );
-};
+const history = useHistory()
+    return (
+        <div className='orderCustomerOrderContainer'>
+          <Button className='goBackButton' onClick={()=>history.goBack()}>Go Back</Button>
+            {/* TAB BUTTONS  */}
+            <div className='pageTitle'>
+              <h4>Your Orders</h4>
+            </div>
+            <div className="navButtonsContainer">
+                <Button
+                    style={{
+                        background: `${ordersTab === "allTab" ? '#0575B4' : "rgb(218, 218, 218)"}`,
+                        color: `${ordersTab === "allTab" ? '#fff' : "#000"}`
+                    }}
+                    onClick={handleGoToAllOrdersTab}>
+                    <BsCardChecklist style={{
+                        color: `${ordersTab === "allTab" ? '#fff' : "#000"}`,
+                        fontSize: '1.2rem',
+                        marginRight: '10px'
+                    }} /> All Orders
+                </Button>
+                <Button
+                    style={{
+                        background: `${ordersTab === "todaysOrderTab" ? '#0575B4' : "rgb(218, 218, 218)"}`,
+                        color: `${ordersTab === "todaysOrderTab" ? '#fff' : "#000"}`
+                    }}
+                    onClick={handleGoToTodaysOrdersTab}>
+                    <CgCalendarToday style={{
+                        color: `${ordersTab === "todaysOrderTab" ? '#fff' : "#000"}`,
+                        fontSize: '1.2rem',
+                        marginRight: '10px'
+                    }} />
+                    Todays Orders
+                </Button>
+            </div>
 
-export default UserOrder;
+            {/* TABLE CONTAINER  */}
+            <div className="ListContainer">
+                <h1>
+                    {ordersTab === 'allTab' && 'All Orders'}
+                    {ordersTab === 'todaysOrderTab' && `Today's Orders`}
+                </h1>
+
+                <TableTemplateForCustomerOrders
+                setOrderDataChanged={setOrderDataChanged}
+                    columns={[
+                        { id: 'id', label: 'ID', minWidth: 10 },
+                        { id: 'created_at', label: 'Time', minWidth: 10 },
+                        { id: 'customer_name', label: 'Customer Name', minWidth: 170 },
+                        { id: 'status', label: 'Status', minWidth: 50 },
+                        { id: 'table_number', label: 'Table No', minWidth: 50 },
+                        { id: 'amount', label: 'Amount', minWidth: 50 },
+                    ]}
+                    rows={
+                        (ordersTab === 'allTab' && orders) ||
+                        (ordersTab === 'todaysOrderTab' && orders.filter(res => moment(res.created_at).format('L') === moment(new Date()).format('L')))
+                    }
+                />
+            </div>
+        </div>
+    )
+}

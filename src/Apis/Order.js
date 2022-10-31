@@ -1,25 +1,23 @@
 import axios from "axios";
 
-export const getCustOrer = async () => {
-  let addMenuResponse;
+export const getCustomerOrder = async (customer_id) => {
   const userInfo = localStorage.getItem('customer_details')
-  const jwt = JSON.parse(userInfo);
+  const jwt = JSON.parse(userInfo)[0].customerToken;
   const config = {
     headers: {
       "Content-Type": "application/json",
       'Accept': 'application/json',
-      "Authorization": `Bearer ${jwt[0].customerToken}`
+      "Authorization": `Bearer ${jwt}`
     },
   };
-  // await axios.get(`/api/order/getorderby/customerid/${jwt[0].customer.id}`, config)
-  await axios.get(`/api/order/getorderby/customerid/40}`, config)
+  const result = await axios.get(`/api/order/getorderby/customerid/${customer_id}`, config)
     .then(res => {
-      addMenuResponse = res;
+      return res;
     })
-  return addMenuResponse
+  return result
 }
 
-export const getAllOrerByRestID= async () => {
+export const getAllOrerByRestID = async () => {
   let addMenuResponse;
   const userInfo = localStorage.getItem('customer_details')
   const jwt = JSON.parse(userInfo);

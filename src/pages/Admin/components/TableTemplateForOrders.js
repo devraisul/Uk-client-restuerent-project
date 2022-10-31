@@ -2,7 +2,6 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePag
 import moment from 'moment';
 import React, { useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
-import { BiEdit } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import Popup from 'reactjs-popup';
 import { deleteOrerById, getOrerByOrderId } from '../../../Apis/Admin/Orders';
@@ -164,7 +163,7 @@ export default function TableTemplateForOrders({ columns, rows, setOrderDataChan
                                 </div>
                             </div>
                             <div className='dishes'>
-                                <h3 style={{ marginBottom: '10px' }}>Dishes: </h3>
+                                <h3 style={{ marginBottom: '5px' }}>Dishes: </h3>
                                 <TableContainer className='orderTable' >
                                     <Table sx={{ minWidth: 150 }} stickyHeader aria-label="sticky table">
                                         <TableHead >
@@ -293,9 +292,15 @@ export default function TableTemplateForOrders({ columns, rows, setOrderDataChan
                                         <TableCell style={{ textAlign: 'center' }}>
 
                                             <div className='optionsContainer'>
-                                                <button onClick={() => { handleOrderView(row?.id) }} title='View Details' ><AiOutlineEye style={{ color: '' }} /></button>
-                                                <button onClick={() => { handleOrderEdit(row?.id) }} title='Edit'><BiEdit style={{ color: '#0575B4' }} /></button>
-                                                <button onClick={() => { handleOrderDelete(row?.id) }} title='Delete'><MdDelete style={{ color: '#ff0000' }} /></button>
+                                                <button onClick={() => { handleOrderView(row?.id) }} title='View Details' >
+                                                    <AiOutlineEye style={{ color: '' }} />
+                                                </button>
+                                                {/* <button onClick={() => { handleOrderEdit(row?.id) }} title='Edit'>
+                                                    <BiEdit style={{ color: '#0575B4' }} />
+                                                </button> */}
+                                                <button onClick={() => { handleOrderDelete(row?.id) }} title='Delete'>
+                                                    <MdDelete style={{ color: '#ff0000' }} />
+                                                </button>
                                             </div>
                                         </TableCell>
                                     </TableRow>

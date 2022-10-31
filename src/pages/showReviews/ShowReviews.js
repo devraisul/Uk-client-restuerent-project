@@ -59,9 +59,7 @@ const ShowReviews = () => {
               <div className="clip-star"></div>
               <div className="clip-star"></div>
               <div className="clip-star"></div>
-
             </div>
-
           </div>
           <div className="columnReview2" >
             <div className="w3-light-grey">
@@ -69,7 +67,6 @@ const ShowReviews = () => {
             </div><br></br>
           </div>
         </div>
-
         <div className="rowReview">
           <div className="columnReview">
             <div className="stars" onClick={() => changeGradeIndex(4)}>
@@ -78,9 +75,7 @@ const ShowReviews = () => {
               <div className="clip-star"></div>
               <div className="clip-star"></div>
               <div className="clip-star2"></div>
-
             </div>
-
           </div>
           <div className="columnReview2" >
             <div className="w3-light-grey">
@@ -88,7 +83,6 @@ const ShowReviews = () => {
             </div><br></br>
           </div>
         </div>
-
         <div className="rowReview">
           <div className="columnReview">
             <div className="stars" onClick={() => changeGradeIndex(3)}>
@@ -97,9 +91,7 @@ const ShowReviews = () => {
               <div className="clip-star"></div>
               <div className="clip-star2"></div>
               <div className="clip-star2"></div>
-
             </div>
-
           </div>
           <div className="columnReview2" >
             <div className="w3-light-grey">
@@ -115,9 +107,7 @@ const ShowReviews = () => {
               <div className="clip-star2"></div>
               <div className="clip-star2"></div>
               <div className="clip-star2"></div>
-
             </div>
-
           </div>
           <div className="columnReview2" >
             <div className="w3-light-grey">
@@ -133,9 +123,7 @@ const ShowReviews = () => {
               <div className="clip-star2"></div>
               <div className="clip-star2"></div>
               <div className="clip-star2"></div>
-
             </div>
-
           </div>
           <div className="columnReview2" >
             <div className="w3-light-grey">
@@ -144,34 +132,37 @@ const ShowReviews = () => {
           </div>
         </div>
 
-
-
         <h1 className="result">{!gradeIndex ? (<Fragment>All Star Review </Fragment>) : (<Fragment>{gradeIndex + 1} Star Review </Fragment>)} </h1>
+        {
+          reviews === null ? ('loading...') : (
+            <Fragment>{reviews && reviews.map((x, index) => (
+              <Fragment>
+                <div className='cardReview2'>
+                  <div className="stars">
+                    {
+                      GRADES.map((grade, index) => (
 
-        {reviews === null ? ('loading...') : (<Fragment>{reviews && reviews.map((x, index) => (<Fragment>
-          <div className='cardReview2'>
-            <div className="stars">
-              {
-                GRADES.map((grade, index) => (
-
-                  <Star
-                    index={index}
-                    key={grade}
-                    style={x.rate - 1 >= index ? activeStar : {}}
-                  />
-                ))
-              }
-            </div>
-            <div className="starsT">
-              {x.value.map((v) => (<div id="ck-buttonR">
-                <label>
-                  <input type="checkbox" value="1" />
-                  <span>{v}</span>
-                </label>
-              </div>))}
-            </div>
-          </div>
-        </Fragment>))}</Fragment>)}
+                        <Star
+                          index={index}
+                          key={grade}
+                          style={x.rate - 1 >= index ? activeStar : {}}
+                        />
+                      ))
+                    }
+                  </div>
+                  <div className="starsT">
+                    {x.value.map((v) => (<div id="ck-buttonR">
+                      <label>
+                        <input type="checkbox" value="1" />
+                        <span>{v}</span>
+                      </label>
+                    </div>))}
+                  </div>
+                </div>
+              </Fragment>))
+            }
+            </Fragment>)
+        }
 
 
 

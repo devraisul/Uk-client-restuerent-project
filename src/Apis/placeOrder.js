@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const placeOrder = async (rest_id, data, dishes) => {
   const userInfo = localStorage.getItem('customer_details')
-  const jwt = JSON.parse(userInfo)[0]?.token;
+  const jwt = JSON.parse(userInfo)[0]?.customerToken;
   const config = {
     headers: {
       "Content-Type": "application/json",

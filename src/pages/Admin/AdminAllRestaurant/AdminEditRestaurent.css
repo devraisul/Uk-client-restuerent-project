@@ -1,0 +1,7 @@
+.goBackBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0575b4;
+  font-weight: 700;
+}

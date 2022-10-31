@@ -55,7 +55,7 @@ export default function App() {
         <Route path="/review/:id" component={ShowReviews} />
         <Route path="/rating/:rest_key/1" component={Ratting} />
         <Route path="/tabmenu/:id" component={TabMenu} />
-        <Route path="/order" component={UserOrder} />
+        <Route path="/customerOrder/:customer_id" component={UserOrder} />
         <PublicRoute path="/addrestaurent" component={AddRestaurentForm} />
 
         <Route component={Error} />
