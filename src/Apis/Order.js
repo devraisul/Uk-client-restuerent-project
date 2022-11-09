@@ -36,3 +36,21 @@ export const getAllOrerByRestID = async () => {
   return addMenuResponse
 }
 
+export const addOrder = async (rest_id, data) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo)?.token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt}`
+    },
+  };
+ 
+  const result = await axios.post(`/api/order/${rest_id}`, data, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
+}

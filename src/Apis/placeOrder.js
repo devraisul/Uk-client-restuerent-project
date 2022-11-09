@@ -1,6 +1,7 @@
 import axios from "axios";
 // Add variation type
 
+
 export const placeOrder = async (rest_id, data, dishes) => {
   const userInfo = localStorage.getItem('customer_details')
   const jwt = JSON.parse(userInfo)[0]?.customerToken;

@@ -23,6 +23,7 @@ export const getDish = async (id) => {
 }
 // Get Dish By ID
 export const getDishById = async (id) => {
+  
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {

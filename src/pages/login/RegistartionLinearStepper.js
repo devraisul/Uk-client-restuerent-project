@@ -1,23 +1,17 @@
-import React, { useState } from "react";
 import {
-  Typography,
-  TextField,
-  Button,
-  Stepper,
-  Step,
-  StepLabel,
+  Button, Step,
+  StepLabel, Stepper, TextField, Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import React, { useState } from "react";
 import {
-  useForm,
   Controller,
-  FormProvider,
-  useFormContext,
+  FormProvider, useForm, useFormContext
 } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
 import { userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -112,17 +106,25 @@ const ContactForm = () => {
           minLength: 11,
           maxLength: 11
         }}
+
         render={({ field }) => (
-          <TextField
-            id="phone-number"
-            label="Phone Number"
-            variant="outlined"
-            type={'text'}
-            placeholder="Enter Your 11 Digit Phone Number"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
+          <>
+            {console.log(errors)}
+            <TextField
+              id="phone-number"
+              label="Phone Number"
+              variant="outlined"
+              type='number'
+              placeholder="Enter Your 11 Digit Phone Number"
+              fullWidth
+              margin="normal"
+              {...field}
+              helperText={
+                (errors?.phone?.type === 'maxLength'&& '* Phone number mustbe have 11 digit (require)')||
+                (errors?.phone?.type === 'minLength'&& '* Phone number mustbe have 11 digit (require)')
+              }
+            />
+          </>
         )}
       />
     </>
@@ -266,7 +268,7 @@ const RegistartionLinearStepper = () => {
       <h1
         style={{
           textAlign: "center",
-          color: "#536dfe",
+          color: "#0575B4",
           marginBottom: "20px",
           fontWeight: "bold",
         }}

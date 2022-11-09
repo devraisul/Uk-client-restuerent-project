@@ -34,7 +34,9 @@ export default function AdminAllCustomers() {
   return (
     <div className="ListContainer">
       <div className='searchContainer'>
-        <div><input onChange={(e) => { handleSearchInput(e) }} type="text" placeholder='Search by customer name' /></div>
+        <div>
+          <input onChange={(e) => { handleSearchInput(e) }} type="text" placeholder='Search by customer name' />
+        </div>
       </div>
       <h1>All Customers</h1>
 

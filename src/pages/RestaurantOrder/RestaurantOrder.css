@@ -1,6 +1,12 @@
 .singleColumn {
+  position: relative;
   overflow-y: scroll;
-  height: 73vh;
+  border-right: 1px solid rgb(213, 213, 213);
+  padding: 0 10px;
+  height: 80vh;
+}
+.mainColumnContainer {
+  padding-left: 15px;
 }
 .singleColumn::-webkit-scrollbar {
   display: none;
@@ -8,14 +14,14 @@
 
 .menuCardButton {
   width: 90% !important;
-  background-color: #71bcfa !important;
+  background-color: #0a6ebf !important;
   color: #fff !important;
-  margin: 5px 0px !important;
   display: flex !important;
   justify-content: center !important;
+  margin: 5px 0px !important;
   align-items: center !important;
   flex-direction: column !important;
-  height: 100px !important;
+  height: 90px !important;
 }
 .menuCardButton2 {
   height: 50px !important;

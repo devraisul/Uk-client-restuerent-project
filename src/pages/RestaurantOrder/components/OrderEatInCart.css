@@ -1,0 +1,271 @@
+.cartGridContainer {
+  width: 100%;
+}
+.cartIndicator {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.indicatorContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.indicatorContainer div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+  background-color: rgb(170, 234, 255);
+  padding: 10px 10px;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 2px 3px 5px rgb(135, 135, 135);
+}
+.indicatorContainer h3 {
+  margin: 10px 0px;
+}
+.cartAvailableIndicator,
+.cartSelectedIndicator,
+.cartBookedIndicator {
+  display: block;
+  width: 30px;
+  height: 20px;
+}
+.cartAvailableIndicator {
+  background-color: rgb(187, 187, 187);
+}
+.cartSelectedIndicator {
+  background-color: rgb(114, 255, 75);
+}
+.cartBookedIndicator {
+  background-color: rgb(255, 132, 132);
+}
+.OrderTable {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 150px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px !important;
+}
+
+.OrderSelectedTable {
+  background-color: #84d2ff;
+  padding: 10px 10px;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cartContainerMain {
+  width: 100%;
+  padding: 10px 10px;
+}
+.cartEmpty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  height: 30vh;
+}
+.calcContainer {
+  display: flex;
+}
+.calcDetail {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+.calcTotal,
+.calcBalance {
+  padding: 20px 10px;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+.calcTotal {
+  background-color: #0575b4;
+  color: #fff;
+  font-weight: bold;
+}
+.calcBalance {
+  background-color: #009e52;
+  color: #fff;
+}
+.OrderPaymentButton {
+  margin: 0px 10px !important;
+  width: 100% !important;
+  margin-top: 10px !important;
+  padding: 10px 10px !important;
+  font-size: 1.2rem !important;
+  color: rgb(255, 255, 255) !important;
+  background-color: #009e52 !important;
+  font-weight: bold !important;
+}
+.OrderPaymentButton:hover {
+  background-color: #006c38 !important;
+}
+.OrderCartButton {
+  margin-top: 10px !important;
+  padding: 10px 20px !important;
+  font-size: 1rem !important;
+  color: rgb(255, 255, 255) !important;
+  background-color: #0575b4 !important;
+  font-weight: bold !important;
+  margin: 0px 1px !important;
+}
+.OrderCartButton:hover {
+  background-color: #005282 !important;
+}
+.cartList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 0px 5px;
+}
+.cartList::-webkit-scrollbar {
+  display: none;
+}
+.OrderCartCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+
+  box-shadow: 1px 1px 5px rgb(201, 201, 201);
+}
+.OrderCartCard div {
+  display: flex;
+  align-items: center;
+}
+.OrderCartCard div img {
+  width: 50px;
+  height: auto;
+  margin-right: 20px;
+}
+.OrderCartCard button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.OrderCartButtonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.OrderPaymentSpliterContainer {
+  width: 100%;
+  padding: 50px 0px;
+}
+.OrderSpliterControler {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px 10px;
+
+  box-shadow: 1px 1px 5px #ddd;
+  border-radius: 10px;
+}
+.OrderSpliterControler div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.OrderSpliterControler span {
+  font-size: 1rem;
+}
+.OrderSpliterControler div button {
+  background-color: #005282;
+  color: #fff;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.OrderNumber {
+  font-size: 2rem !important;
+  margin: 0px 20px;
+}
+.OrderPaymentSplitDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid #b6b6b6;
+  padding: 10px 0px;
+}
+.OrderPaymentSplitCard {
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100% !important;
+  height: 30px;
+  margin: 10px 0px;
+}
+.OrderChargeButton {
+  padding: 5px 20px;
+  margin-left: 10px;
+  border-radius: 7px;
+  color: #005282;
+  background-color: #9adaff !important;
+}
+.OrderEatInInput {
+  width: 100%;
+  margin: 5px 0px;
+  border: 1px solid rgb(87, 190, 255);
+  outline: none;
+  padding: 20px 10px;
+  border-radius: 10px;
+}
+.OrderEatInInput:focus {
+  box-shadow: none !important;
+}
+.OrderEatInInputLabel {
+  color: rgb(87, 190, 255);
+  margin-left: 5px;
+  font-size: 0.7rem;
+}
+
+.OrderRecieptContainer {
+  overflow-y: scroll;
+  width: 100%;
+  height: 50vh;
+  margin-bottom: 10px;
+}
+.OrderRecieptContainer::-webkit-scrollbar {
+  display: none;
+}
+.OrderRecipetButton {
+  margin: 0px 10px !important;
+  width: 100% !important;
+  margin-top: 10px !important;
+  padding: 10px 10px !important;
+  font-size: 1.2rem !important;
+  color: rgb(255, 255, 255) !important;
+  background-color: #009e52 !important;
+  font-weight: bold !important;
+}
+.OrderRecipetButton:hover {
+  background-color: #006c38 !important;
+}

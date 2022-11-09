@@ -4933,3 +4933,55 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.calcScreen {
+  height: 3.3rem;
+  padding: 0px 10px;
+  margin-bottom: 3rem;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
+.calcwrapper {
+  background: #bde7ff;
+  width: 20rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 9px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.calcButtonBox {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.calcButton {
+  background: #e9f0f4;
+  height: 3.5rem;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #242424;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.calcButton:hover {
+  border: 2px dotted #242424;
+}
+
+.equals {
+  background: #4bd086;
+  grid-column: 3/5;
+}
+
+.opt {
+  background: #f79505;
+}
+#phone-number-helper-text {
+  color: #ff0000;
+}

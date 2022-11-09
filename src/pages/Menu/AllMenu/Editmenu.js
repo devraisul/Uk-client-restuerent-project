@@ -7,6 +7,7 @@ const Editmenu = ({ id, setChangeMonitor,seteditall }) => {
   const [menus, setMenus] = useState([])
   const [loading, setLoading] = React.useState(false);
   const [inputList, setInputList] = useState([{ name: "", description: "", id: "", Totaldishes: "" }]);
+  
   React.useEffect(() => {
     setLoading(true)
     getMenu(id)

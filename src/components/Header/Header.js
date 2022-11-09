@@ -17,6 +17,7 @@ import { IoFastFoodOutline } from 'react-icons/io5';
 import { RiEBike2Line } from 'react-icons/ri';
 
 // styles
+import './Header.css';
 import useStyles from "./styles";
 
 // components
@@ -58,29 +59,15 @@ export default function Header(props) {
 
       {/* ORDER POPUP  */}
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-        <div style={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%'
-        }}>
+        <div className="popupContainer">
+          <h1 style={{ textAlign: 'center', marginBottom: '50px', color: '#aaa' }}>Choice Your Order Type</h1>
           <Button
             onClick={() => {
               history.push('/app/add-order/eat_in')
               setOpen(false)
             }}
-            style={{
-              fontSize: '2rem',
-              width: '90%',
-              margin: '10px 0px',
-              borderRadius: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'start',
-              color:'#0575B4'
-            }}>
+            className='AdminOrderButton'
+          >
             <IoFastFoodOutline style={{ marginRight: '30px' }} /> Eat In
           </Button>
           <Button
@@ -88,16 +75,8 @@ export default function Header(props) {
               history.push('/app/add-order/delivery')
               setOpen(false)
             }}
-            style={{
-              fontSize: '2rem',
-              width: '90%',
-              margin: '10px 0px',
-              borderRadius: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'start',
-              color:'#0575B4'
-            }}>
+            className='AdminOrderButton'
+          >
             <RiEBike2Line style={{ marginRight: '30px' }} /> Delivery
           </Button>
           <Button
@@ -105,16 +84,8 @@ export default function Header(props) {
               history.push('/app/add-order/take_away')
               setOpen(false)
             }}
-            style={{
-              fontSize: '2rem',
-              width: '90%',
-              margin: '10px 0px',
-              borderRadius: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'start',
-              color:'#0575B4'
-            }}>
+            className='AdminOrderButton'
+          >
             <GoPackage style={{ marginRight: '30px' }} /> Take Away
           </Button>
         </div>

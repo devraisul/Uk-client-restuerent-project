@@ -1,0 +1,25 @@
+.popupContainer {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.AdminOrderButton {
+  font-size: 2rem !important;
+  width: 90% !important;
+  margin: 10px 0px !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: start !important;
+  color: #fff !important;
+  padding: 0px 50px !important;
+  background-color: #0575b4 !important;
+}
+
+.AdminOrderButton:hover {
+  background-color: #52a7d8 !important;
+}

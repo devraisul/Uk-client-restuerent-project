@@ -1,0 +1,14 @@
+.takeAwayInput {
+  width: 100%;
+  margin: 5px 0px;
+  border: 1px solid rgb(87, 190, 255);
+  outline: none;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+.takeAwayInput:focus {
+  box-shadow: none !important;
+}
+.orderCart {
+  border-top: 1px solid rgb(226, 226, 226);
+}

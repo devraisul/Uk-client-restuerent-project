@@ -1,0 +1,23 @@
+.navContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+.navButton {
+  display: flex !important;
+  align-items: center !important;
+  background: #0575b4 !important;
+  color: #fff !important;
+  padding: 10px 20px !important;
+}
+.navIcon {
+  font-size: 1.5rem;
+}
+.menuNav {
+  margin-left: 10px;
+}
+@media only screen and (max-width: 690px) {
+  .menuNav {
+    display: none !important;
+  }
+}
