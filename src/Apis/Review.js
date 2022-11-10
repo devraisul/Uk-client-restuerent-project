@@ -165,7 +165,7 @@ export const postTag = async (data) => {
 
   return result;
 }
-export const getAllTag = async (restaurant_id, page_no) => {
+export const getAllTag = async (restaurant_id) => {
   const userInfo = localStorage.getItem("data");
   const jwt = JSON.parse(userInfo).token;
 
@@ -258,6 +258,27 @@ export const editSingleStar = async (data) => {
 }
 
 
+
+
+
+
+// LINK ALL 
+export const linkReview = async (data) => {
+  const userInfo = localStorage.getItem("data");
+  const jwt = JSON.parse(userInfo).token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  };
+  const result = await axios.post(`/api/review-new/owner/create/questions`, data, config).then((res) => {
+    return res;
+  }).catch((err) => console.log(err));
+
+  return result;
+}
 
 
 

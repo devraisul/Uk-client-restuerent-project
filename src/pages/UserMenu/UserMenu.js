@@ -24,7 +24,6 @@ const UserMenu = () => {
     setLoading(true)
     getRestaurentByIdForCustomer(id)
       .then(res => {
-        console.log(res);
         setRestaurant(res.restaurant);
         setIsRestaurantNotFound(false)
         setLoading(false)
@@ -35,6 +34,7 @@ const UserMenu = () => {
         }
       })
   }, [id]);
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

@@ -110,7 +110,6 @@ const AddReviewTag = () => {
   }, [isTagUpdated, isTabChanged])
 
 
-
   // ADD QUESTION
   const onSubmitAddQuestion = (data) => {
     const id = JSON.parse(localStorage.getItem('data'))?.restaurant[0]?.id
@@ -189,6 +188,7 @@ const AddReviewTag = () => {
         <EditQuestion
           editQuestion={editQuestion}
           setEditQuestion={setEditQuestion}
+          setPopupIsOpend={setPopupIsOpend}
         />
       </Popup>
 

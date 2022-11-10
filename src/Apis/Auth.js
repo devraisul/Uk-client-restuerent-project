@@ -16,11 +16,6 @@ export const userLogin = async (data) => {
 export const userRegister = async (data) => {
   console.log('from api',data);
   let loginResponse;
-  // const config = {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // };
   await axios.post(`/api/owner`, data)
     .then(res => {
       console.log('response',res);

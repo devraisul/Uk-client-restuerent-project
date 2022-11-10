@@ -171,7 +171,7 @@ const SecurityForm = () => {
                 position: "absolute",
                 left: "93%",
                 top: "40%",
-                color: "#536dfe",
+                color: "#0575B4",
                 cursor: "pointer",
               }}
             />
@@ -318,7 +318,8 @@ const RegistartionLinearStepper = () => {
                   <NavLink
                     to={"/login"}
                     style={{
-                      color: "#536dfe",
+                      color: "#0575B4",
+                      fontWeight:'bold'
                     }}
                   >
                     {" "}
