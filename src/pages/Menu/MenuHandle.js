@@ -9,23 +9,23 @@ import AllMenu from './AllMenu/AllMenu';
 import Editmenu from './AllMenu/Editmenu';
 const MenuHandle = () => {
   const { user } = useAuth()
-  const [showaddmenu, setshowaddmenu] = useState(false);
-  const [editall, seteditall] = useState(false);
-  const [showallmenu, setshowallmenu] = useState(true);
+  const [showAddMenu, setShowAddMenu] = useState(false);
+  const [editAll, setEditAll] = useState(false);
+  const [showAllMenu, setShowAllMenu] = useState(true);
   const [changeMonitor, setChangeMonitor] = useState(Math.random())
-  const onshowmenu = (e) => {
-    setshowaddmenu(!showaddmenu)
-    seteditall(false)
-  };
-  const oneditall = (e) => {
-    setshowaddmenu(false)
-    seteditall(!editall)
 
+  const onAddMenu = (e) => {
+    setShowAddMenu(!showAddMenu)
+    setEditAll(false)
+  };
+  const onEditAll = (e) => {
+    setShowAddMenu(false)
+    setEditAll(!editAll)
   };
 
-  const onAllmenu = (e) => {
-    setshowaddmenu(false)
-    seteditall(false)
+  const onAllMenu = (e) => {
+    setShowAddMenu(false)
+    setEditAll(false)
   }
 
   //show all menu
@@ -36,13 +36,13 @@ const MenuHandle = () => {
           display: 'flex',
           justifyContent: 'space-evenly'
         }} className='btn-center'>
-          <button title='Add Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onshowmenu(e)}>
+          <button title='Add Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onAddMenu(e)}>
             <AiOutlinePlus style={{ fontSize: '1.5rem' }} />
             <span style={{ marginLeft: '10px' }} className="menuNav">
               Add Menu
             </span>
           </button>
-          <button title='All Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onAllmenu(e)}>
+          <button title='All Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onAllMenu(e)}>
             <BiFoodMenu style={{ fontSize: '1.5rem' }} />
             <span style={{
               marginLeft: '10px'
@@ -55,7 +55,7 @@ const MenuHandle = () => {
             alignItems: 'center',
             background: '#0575B4',
             color: '#fff'
-          }} className='large btn' onClick={(e) => oneditall(e)}>
+          }} className='large btn' onClick={(e) => onEditAll(e)}>
             <BiEdit style={{
               fontSize: '1.5rem'
             }} />
@@ -78,9 +78,9 @@ const MenuHandle = () => {
           </Link>
         </div>
       </div>
-      {showaddmenu ? (<AddMenu id={user.restaurant[0].id} />) : ('')}
-      {editall ? (<Editmenu seteditall={seteditall} setChangeMonitor={setChangeMonitor} id={user.restaurant[0].id} />) : ('')}
-      {showallmenu ? (<AllMenu changeMonitor={changeMonitor} id={user.restaurant[0].id} />) : ('')}
+      {showAddMenu ? (<AddMenu onAllMenu={onAllMenu} setChangeMonitor={setChangeMonitor} id={user.restaurant[0].id} />) : ('')}
+      {editAll ? (<Editmenu setEditAll={setEditAll} setChangeMonitor={setChangeMonitor} id={user.restaurant[0].id} />) : ('')}
+      {showAllMenu ? (<AllMenu changeMonitor={changeMonitor} id={user.restaurant[0].id} />) : ('')}
     </Fragment>
   );
 };

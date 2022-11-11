@@ -6,7 +6,8 @@ import AllmenuUI from './AllmenuUI';
 const AllMenu = ({ id,changeMonitor }) => {
   const [menus, setMenus] = React.useState();
   const [loading, setLoading] = React.useState(false);
-  const [changeHappend, setChangeHappend] = useState(Math.random())
+  const [changeHappend, setChangeHappend] = useState(Math.random());
+  
   React.useEffect(() => {
     setLoading(true)
     getMenu(id)

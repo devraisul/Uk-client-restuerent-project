@@ -33,6 +33,7 @@ const AllmenuUI = ({ menus, index, Mid, setChangeHappend }) => {
   const handleDeleteMenu = (Mid) => {
     deleteMenu(Mid).then((res) => {
       if (res.data.message === 'ok') {
+        toast.error('Dish Deleted Successfully!')
         setChangeHappend(Math.random())
       }
     })

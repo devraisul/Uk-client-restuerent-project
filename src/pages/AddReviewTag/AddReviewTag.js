@@ -380,9 +380,9 @@ const AddReviewTag = () => {
                             {index + 1}
                           </TableCell>
                           <TableCell style={{
-                            textAlign: 'center',
+                            textAlign: 'left',
                             fontWeight: '600',
-                            border: "1px solid #ccc"
+                            border: "1px solid #ccc",
                           }}>
                             {
                               item?.question

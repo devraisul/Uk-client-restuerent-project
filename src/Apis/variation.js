@@ -155,7 +155,7 @@ export const gettype = async (id, did) => {
   await axios.get(`/api/variation/${id}/${did}`, config)
     .then(res => {
       console.log('====================================');
-      console.log('FROM API-->',res);
+      console.log('FROM API-->', res);
       console.log('====================================');
       addVariationResponse = res.data;
     })
@@ -200,4 +200,51 @@ export const getVariationByDishId = async (id) => {
     })
     .catch(err => console.log(err));
   return addVariationResponse
+}
+
+
+
+
+
+
+
+
+
+// ================================================== 
+
+// CREATE MULTIPLE VARIATION
+export const addMultipleVariation = async (data) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo).token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt}`
+    },
+  };
+  const result = await axios.post(`api/variation/multiple/varations`, data, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
+}
+// UPDATE VARIATION TYPE 
+export const updateVariationType = async (data) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo).token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt}`
+    },
+  };
+  const result = await axios.patch(`/api/variation/variationtype`, data, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
 }

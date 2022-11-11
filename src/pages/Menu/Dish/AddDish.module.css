@@ -79,6 +79,14 @@
   background-color: #0575b4;
   color: #fff;
 }
+.buttonsContainer {
+  margin-bottom: 15px;
+}
+.tabButton {
+  margin-right: 5px;
+  border-radius: 0px !important;
+  border-bottom: 1px solid #0575b4 !important;
+}
 .imageUpPlaceholder {
   width: 100px;
   margin-bottom: 10px;

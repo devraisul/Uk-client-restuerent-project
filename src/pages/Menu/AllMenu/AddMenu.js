@@ -6,7 +6,7 @@ import { addMenu } from '../../../Apis/Menu';
 
 
 //Add menu Form
-const AddMenu = ({ id }) => {
+const AddMenu = ({ id,setChangeMonitor,onAllMenu }) => {
   console.log(id);
   const [inputList, setInputList] = useState([{ name: "", description: "" }]);
 
@@ -17,8 +17,6 @@ const AddMenu = ({ id }) => {
     list[index][name] = value;
     setInputList(list);
   };
-
-
 
   // handle click event of the Add button
   const handleAddClick = (y) => {
@@ -44,12 +42,12 @@ const AddMenu = ({ id }) => {
       setInputList([...inputList, { name: "", description: "" }]);
     }
   }
+
   const handledeleteClick = (i) => {
     const list2 = [...inputList];
     list2.splice(i, 1);
     setInputList(list2);
   };
-
 
   //validation of Result and submit to API
   const onSubmit = async (e) => {
@@ -78,27 +76,27 @@ const AddMenu = ({ id }) => {
       const makeMenu = {
         "menu": menu
       }
-      console.log(makeMenu);
       addMenu(id, makeMenu)
         .then(
           res => {
             console.log(res);
             toast.success("Menu Added Successfully");
             setInputList([{ Menu_Name: "", Menu_Description: "" }])
+            setChangeMonitor(Math.random())
+            onAllMenu()
             e.target.reset()
           }
         )
 
     };
   };
-  return (
 
+  return (
     <div className='table-wrapper'>
       <Toaster
         position="top-right"
         reverseOrder={false}
       />
-
       <h1 style={{
         color: '#0575B4'
       }}>ADD Menu</h1>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiEdit } from 'react-icons/bi';
 import { BsArrowReturnLeft } from 'react-icons/bs';
@@ -20,13 +20,10 @@ const DishHandle = () => {
   const [editAll, setEditAll] = useState(false);
   const params = useParams()
 
-
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const closeEditModal = () => setOpenEdit(false);
   const closeModal = () => setOpen(false);
-
-
   const [singleDishId, setSingleDishId] = useState()
 
   const handleAddDish = (e) => {
@@ -54,14 +51,10 @@ const DishHandle = () => {
   }
 
 
-
-  useEffect(()=>{
-
-  },[singleDishId])
-
   return (
     <Fragment>
       <div>
+        {/* NAVIGATION BUTTONS  */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-evenly'

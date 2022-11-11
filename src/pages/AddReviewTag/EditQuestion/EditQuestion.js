@@ -32,6 +32,17 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
     const [isQuestionLoading, setIsQuestionLoading] = useState(true)
     const [isSubmissionLoading, setIsSubmissionLoading] = useState(false)
 
+    // ERRORS 
+    const [errors, setErrors] = useState({
+        star1: '',
+        star2: '',
+        star3: '',
+        star4: '',
+        star5: '',
+    })
+
+    // SUBMISSION TRIGER 
+    const [isSubmited, setIsSubmited] = useState(false)
 
     // GET ALL STAR'S TAGS 
     const handleChangeForStar1 = (selectedOption) => {
@@ -41,7 +52,14 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                 return { tag_id: singleTag?.value }
             })
         });
-
+        setIsSubmited(false)
+        setErrors({
+            star1: '',
+            star2: '',
+            star3: '',
+            star4: '',
+            star5: '',
+        })
     }
     const handleChangeForStar2 = (selectedOption) => {
         setStar2({
@@ -50,6 +68,14 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                 return { tag_id: singleTag?.value }
             })
         });
+        setIsSubmited(false)
+        setErrors({
+            star1: '',
+            star2: '',
+            star3: '',
+            star4: '',
+            star5: '',
+        })
     }
     const handleChangeForStar3 = (selectedOption) => {
         setStar3({
@@ -58,6 +84,14 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                 return { tag_id: singleTag?.value }
             })
         });
+        setIsSubmited(false)
+        setErrors({
+            star1: '',
+            star2: '',
+            star3: '',
+            star4: '',
+            star5: '',
+        })
     }
     const handleChangeForStar4 = (selectedOption) => {
         setStar4({
@@ -66,6 +100,14 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                 return { tag_id: singleTag?.value }
             })
         });
+        setIsSubmited(false)
+        setErrors({
+            star1: '',
+            star2: '',
+            star3: '',
+            star4: '',
+            star5: '',
+        })
     }
     const handleChangeForStar5 = (selectedOption) => {
         setStar5({
@@ -74,6 +116,14 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                 return { tag_id: singleTag?.value }
             })
         });
+        setIsSubmited(false)
+        setErrors({
+            star1: '',
+            star2: '',
+            star3: '',
+            star4: '',
+            star5: '',
+        })
     }
 
 
@@ -94,6 +144,18 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
             }).catch(err => console.log(err))
     }, [editQuestion])
 
+    useEffect(() => {
+        if (isSubmited) {
+            setErrors({
+                star1: star1 !== undefined ? '' : '* At least one tag have to select!',
+                star2: star2 !== undefined ? '' : '* At least one tag have to select!',
+                star3: star3 !== undefined ? '' : '* At least one tag have to select!',
+                star4: star4 !== undefined ? '' : '* At least one tag have to select!',
+                star5: star5 !== undefined ? '' : '* At least one tag have to select!',
+            })
+        }
+    }, [isSubmited])
+
 
     // MAKE CUSTOM OBJECT FROM  ALL TAGS
     var option = allTags.map((res) => {
@@ -107,7 +169,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
 
     // UPDATE BUTTON HANDLER 
     const handleSubmit = () => {
-        setIsSubmissionLoading(true)
+        setIsSubmited(true)
         const questionData = {
             id: singleQuestion?.id,
             question: questionDetails,
@@ -125,21 +187,22 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
         star4 !== undefined && linkData.stars.push(star4);
         star5 !== undefined && linkData.stars.push(star5);
 
-        console.log(linkData);
-        editSingleQuestion(questionData).then(res => {
-            if (res?.data?.id) {
-                linkReview(linkData).then(res => {
-                    if (res?.data?.message) {
-                        toast.success("Question Updated Successfully!")
-                        setTimeout(() => {
-                            setPopupIsOpend(false)
-                        }, 1000);
-                        setIsSubmissionLoading(false)
-                    }
-                }).catch(err => console.log(err))
-            }
-        }).catch(err => console.log(err))
-
+        if ((star1 !== undefined) && (star2 !== undefined) && (star3 !== undefined) && (star4 !== undefined) && (star5 !== undefined)) {
+            setIsSubmissionLoading(true)
+            editSingleQuestion(questionData).then(res => {
+                if (res?.data?.id) {
+                    linkReview(linkData).then(res => {
+                        if (res?.data?.message) {
+                            toast.success("Question Updated Successfully!")
+                            setTimeout(() => {
+                                setPopupIsOpend(false)
+                            }, 1000);
+                            setIsSubmissionLoading(false)
+                        }
+                    }).catch(err => console.log(err))
+                }
+            }).catch(err => console.log(err))
+        }
     }
 
     return (
@@ -167,9 +230,11 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                         <div className={styles.questionPopupTableRowContainer}>
                             <div className={styles.questionPopupLeft}>Status</div>
                             <div className={styles.questionPopupRight}>
+
                                 <Select
+                                    required
                                     onChange={(e) => setQuestionStatus(e.value)}
-                                    name='star1'
+                                    name='status'
                                     isSearchable
                                     styles={{ outline: 'none' }}
                                     components={animatedComponents}
@@ -191,8 +256,10 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                         <div className={styles.questionPopupTableRowContainer}>
                             <div className={styles.questionPopupLeft}>⭐</div>
                             <div className={styles.questionPopupRight}>
+                                <span className={styles.errorMessage}>{errors.star1 !== '' && errors.star1}</span>
                                 {option.length === 0 ? 'loading...' :
                                     <Select
+                                        required
                                         onChange={handleChangeForStar1}
                                         styles={{ outline: 'none' }}
                                         components={animatedComponents}
@@ -205,8 +272,10 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                         <div className={styles.questionPopupTableRowContainer}>
                             <div className={styles.questionPopupLeft}>⭐⭐</div>
                             <div className={styles.questionPopupRight}>
+                                <span className={styles.errorMessage}>{errors.star2 !== '' && errors.star2}</span>
                                 {option.length === 0 ? 'loading...' :
                                     <Select
+                                        required
                                         onChange={handleChangeForStar2}
                                         styles={{ outline: 'none' }}
                                         components={animatedComponents}
@@ -219,8 +288,10 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                         <div className={styles.questionPopupTableRowContainer}>
                             <div className={styles.questionPopupLeft}>⭐⭐⭐</div>
                             <div className={styles.questionPopupRight}>
+                                <span className={styles.errorMessage}>{errors.star3 !== '' && errors.star3}</span>
                                 {option.length === 0 ? 'loading...' :
                                     <Select
+                                        required
                                         onChange={handleChangeForStar3}
                                         styles={{ outline: 'none' }}
                                         components={animatedComponents}
@@ -233,8 +304,10 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                         <div className={styles.questionPopupTableRowContainer}>
                             <div className={styles.questionPopupLeft}>⭐⭐⭐⭐</div>
                             <div className={styles.questionPopupRight}>
+                                <span className={styles.errorMessage}>{errors.star4 !== '' && errors.star4}</span>
                                 {option.length === 0 ? 'loading...' :
                                     <Select
+                                        required
                                         onChange={handleChangeForStar4}
                                         styles={{ outline: 'none' }}
                                         components={animatedComponents}
@@ -247,8 +320,10 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                         <div className={styles.questionPopupTableRowContainer}>
                             <div className={styles.questionPopupLeft}>⭐⭐⭐⭐⭐</div>
                             <div className={styles.questionPopupRight}>
+                                <span className={styles.errorMessage}>{errors.star5 !== '' && errors.star5}</span>
                                 {option.length === 0 ? 'loading...' :
                                     <Select
+                                        required
                                         onChange={handleChangeForStar5}
                                         styles={{ outline: 'none' }}
                                         components={animatedComponents}
@@ -258,7 +333,6 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                 }
                             </div>
                         </div>
-
                     </div>
                 </div>
             }

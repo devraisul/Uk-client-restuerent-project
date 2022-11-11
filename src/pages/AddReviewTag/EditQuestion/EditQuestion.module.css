@@ -50,3 +50,8 @@
 .submitButton:hover {
   background-color: #01517f !important;
 }
+.errorMessage {
+  font-size: 0.8rem;
+  font-weight: 100;
+  color: red;
+}

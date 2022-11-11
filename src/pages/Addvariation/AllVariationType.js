@@ -9,7 +9,7 @@ import { FiSave } from "react-icons/fi";
 import { getVariation, updateVariationType } from "../../Apis/variation";
 import { useAuth } from "../../context/AuthContext";
 
-const AllVariation = ({ setIsChangeDetect }) => {
+const AllVariationType = ({ setIsChangeDetect }) => {
   const { user } = useAuth();
   const [variationData, setVariationData] = useState([])
 
@@ -73,6 +73,7 @@ const AllVariation = ({ setIsChangeDetect }) => {
             <TableCell style={{ color: '#fff' }}>#</TableCell>
             <TableCell style={{ color: '#fff' }}>Name</TableCell>
             <TableCell style={{ color: '#fff' }}>Description</TableCell>
+            <TableCell style={{ color: '#fff' }}>Variations</TableCell>
             <TableCell style={{ color: '#fff', textAlign: 'left' }}>Options</TableCell>
           </TableRow>
         </TableHead>
@@ -82,7 +83,7 @@ const AllVariation = ({ setIsChangeDetect }) => {
               <TableCell className="pl-3 fw-normal">{index + 1}</TableCell>
               <TableCell className="pl-3 fw-normal">
                 <input style={{
-                  fontSize:"1rem",
+                  fontSize: "1rem",
                   padding: '5px 10px',
                   outline: 'none',
                   border: 'none',
@@ -98,7 +99,7 @@ const AllVariation = ({ setIsChangeDetect }) => {
               </TableCell>
               <TableCell>
                 <input style={{
-                  fontSize:"1rem",
+                  fontSize: "1rem",
                   padding: '5px 10px',
                   outline: 'none',
                   border: 'none',
@@ -113,14 +114,27 @@ const AllVariation = ({ setIsChangeDetect }) => {
                 />
               </TableCell>
               <TableCell>
+                {item.variation.length > 0
+                  ?
+                  <ol type='disk'>
+                    {item?.variation.map(variation => (
+                      <li>{variation?.name}</li>
+                    ))}
+                  </ol>
+
+                  :
+                  <span>N/A</span>
+                }
+              </TableCell>
+              <TableCell>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                   {(editMode.mode === false || editMode.id !== item.id) &&
                     <>
                       <button
-                        style={{ cursor: 'pointer',width:'100%' }}
+                        style={{ cursor: 'pointer', width: '100%' }}
                         onClick={() => handleGoToEditMode(item)}
                         title="Edit">
-                        <Edit style={{ color: 'green',textAlign:'right' }} />
+                        <Edit style={{ color: 'green', textAlign: 'right' }} />
                       </button>
 
                       {/* <button title="Delete" >
@@ -144,4 +158,4 @@ const AllVariation = ({ setIsChangeDetect }) => {
   );
 };
 
-export default AllVariation;
+export default AllVariationType;
