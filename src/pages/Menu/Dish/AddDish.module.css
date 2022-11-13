@@ -108,9 +108,84 @@
 }
 .selectVariations {
   width: 100% !important;
-  height: 40px;
-  font-size: 1.2rem;
-  margin-top: 10px;
+  height: 20px;
+  font-size: 1rem;
   border-radius: 30px;
+  padding: 0px 7px;
+}
+.selectVariationContainerMain {
   padding: 0px 10px;
+  overflow-y: scroll;
+  height: 45vh;
+}
+.selectVariationContainerMain::-webkit-scrollbar {
+  display: none;
+}
+.selectVariationContainer {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 2px 2px 5px rgb(219, 219, 219);
+  padding: 25px 10px 10px 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+.selectVariationAddMoreButtonContainer {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.addActionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #5392b7;
+  border-radius: 5px;
+  padding: 2px 2px;
+}
+.deleteActionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #ff2b52;
+  border-radius: 5px;
+  padding: 2px 2px;
+}
+.incrementButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.incBtn {
+  width: 20px;
+  height: 20px;
+  background-color: green;
+  color: #fff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.counter {
+  height: 30px;
+  width: 30px;
+  margin: 0px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.deccBtn {
+  width: 20px;
+  height: 20px;
+  background-color: #ff2b52;
+  color: #fff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

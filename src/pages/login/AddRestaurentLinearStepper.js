@@ -1,21 +1,14 @@
-import React, { useState } from "react";
 import {
-  Typography,
-  TextField,
-  Button,
-  Stepper,
-  Step,
-  StepLabel,
-  Checkbox,
+  Button, Checkbox, Step,
+  StepLabel, Stepper, TextField
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import {
-  useForm,
   Controller,
-  FormProvider,
-  useFormContext,
+  FormProvider, useForm, useFormContext
 } from "react-hook-form";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { addRestaurent } from "../../Apis/Restaurent";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,14 +27,14 @@ function getSteps() {
 }
 
 const BasicForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="Name"
         rules={{
-          required:"* Name is required"
+          required: "* Name is required"
         }}
         render={({ field }) => (
           <TextField
@@ -79,14 +72,14 @@ const BasicForm = () => {
   );
 };
 const ContactForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="EmailAddress"
         rules={{
-          required:"* Email is required"
+          required: "* Email is required"
         }}
         render={({ field }) => (
           <TextField
@@ -108,11 +101,11 @@ const ContactForm = () => {
         control={control}
         name="PhoneNumber"
         rules={{
-          required:"* Phone number mustbe have 11 digit (require)",
-          minLength:11,
-          maxLength:11
+          required: "* Phone number mustbe have 11 digit (require)",
+          minLength: 11,
+          maxLength: 11
         }}
-        render={({ field,formState:{errors} }) => (
+        render={({ field, formState: { errors } }) => (
           <TextField
             type={"number"}
             id="phone-number"
@@ -131,14 +124,14 @@ const ContactForm = () => {
   );
 };
 const AboutForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="Address"
         rules={{
-          required:'* Adress is required'
+          required: '* Adress is required'
         }}
         render={({ field }) => (
           <TextField
@@ -158,7 +151,7 @@ const AboutForm = () => {
         control={control}
         name="PostCode"
         rules={{
-          required:"* Postcode is required"
+          required: "* Postcode is required"
         }}
         render={({ field }) => (
           <TextField
@@ -178,14 +171,14 @@ const AboutForm = () => {
   );
 };
 const WebsiteForm = () => {
-  const { control,formState:{errors} } = useFormContext();
+  const { control, formState: { errors } } = useFormContext();
   return (
     <>
       <Controller
         control={control}
         name="Webpage"
         rules={{
-          required:"* Webpage is required"
+          required: "* Webpage is required"
         }}
         render={({ field }) => (
           <TextField
@@ -205,7 +198,7 @@ const WebsiteForm = () => {
         control={control}
         name="homeText"
         rules={{
-          required:"* Home text is required"
+          required: "* Home text is required"
         }}
         render={({ field }) => (
           <TextField
@@ -238,26 +231,26 @@ const WebsiteForm = () => {
           />
         )}
       />
-<div>
-<Controller
-        control={control}
-        name="enable_question"
-        render={({ field }) => (
-          <Checkbox
-            color="primary"
-            type={"checkbox"}
-            id="enable_question"
-            label="enable_question"
-            variant="outlined"
-            placeholder="Enter Your question"
-            // margin="normal"
-            {...field}
-          />
-        )}
-      />
-      <lable htmlFor='enable_question'>Enable Question</lable>
-</div>
-      
+      <div>
+        <Controller
+          control={control}
+          name="enable_question"
+          render={({ field }) => (
+            <Checkbox
+              color="primary"
+              type={"checkbox"}
+              id="enable_question"
+              label="enable_question"
+              variant="outlined"
+              placeholder="Enter Your question"
+              // margin="normal"
+              {...field}
+            />
+          )}
+        />
+        <lable htmlFor='enable_question'>Enable Question</lable>
+      </div>
+
     </>
   );
 };
@@ -326,31 +319,22 @@ const AddRestaurentLinearStepper = () => {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  // const handleSkip = () => {
-  //   if (!isStepSkipped(activeStep)) {
-  //     setSkippedSteps([...skippedSteps, activeStep]);
-  //   }
-  //   setActiveStep(activeStep + 1);
-  // };
 
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
   return (
-    <div style={{
-      display:'flex',
-      justifyContent:'center',
-      alignItems:'center',
-      flexDirection:'column'
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+      }}>
       <h1
         style={{
           textAlign: "center",
-          color: "#536dfe",
+          color: "#0575B4",
           marginBottom: "20px",
           fontWeight: "bold",
-        }}
-      >
+        }}>
         Create Restaurent
       </h1>
 
@@ -358,7 +342,7 @@ const AddRestaurentLinearStepper = () => {
         {steps.map((step, index) => {
           const labelProps = {};
           const stepProps = {};
-          
+
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
@@ -372,14 +356,14 @@ const AddRestaurentLinearStepper = () => {
 
       {activeStep === steps.length ? (
         <h1 style={{
-          textAlign:'center',
-          fontWeight:'bold',
-          fontSize:'15px'
+          textAlign: 'center',
+          fontWeight: 'bold',
+          fontSize: '15px'
 
         }}>
           <span style={{
-            fontSize:'25px'
-          }}>Congratulations!</span> <br/>
+            fontSize: '25px'
+          }}>Congratulations!</span> <br />
           your Restaurent is added succesfully.
         </h1>
       ) : (
@@ -392,7 +376,7 @@ const AddRestaurentLinearStepper = () => {
                   marginTop: "20px",
                 }}
               >
-                
+
                 <Button
                   className={classes.button}
                   disabled={activeStep === 0}
@@ -401,14 +385,14 @@ const AddRestaurentLinearStepper = () => {
                   back
                 </Button>
                 <Button
-                disabled={isLoading?true:false}
+                  disabled={isLoading ? true : false}
                   className={classes.button}
                   variant="contained"
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
                 >
-                  {isLoading?"...":(activeStep === steps.length - 1 ? "Finish" : "Next")}
+                  {isLoading ? "..." : (activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>
             </form>

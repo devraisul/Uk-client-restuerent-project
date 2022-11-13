@@ -93,9 +93,6 @@ export const addDishImage = async (id,data) => {
   console.log('from api-->',{id,data});
   await axios.post(`/api/dishes/uploadimage/${id}`,data, config)
     .then(res => {
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
       getaddDishImage = res;
     })
     .catch(err => {

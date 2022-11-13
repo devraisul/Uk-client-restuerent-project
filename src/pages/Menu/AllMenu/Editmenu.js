@@ -38,6 +38,7 @@ const Editmenu = ({ id, setChangeMonitor,seteditall }) => {
     list[index][name] = value;
     setInputList(list);
   };
+  
   //submit the data to API
   const onSubmit = async (e) => {
     e.preventDefault();

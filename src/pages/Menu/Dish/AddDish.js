@@ -1,15 +1,22 @@
 import { Button } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { Toaster } from 'react-hot-toast';
 import { addDishes, addDishImage } from '../../../Apis/dish';
-import { addSingleDishVaiation, getVariation } from '../../../Apis/variation';
+import { getVariation, Variationlink } from '../../../Apis/variation';
 import { useAuth } from '../../../context/AuthContext';
 import styles from './AddDish.module.css';
 const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }) => {
   const user = useAuth()
 
+  const refCheckBox = useRef()
+
+  const [isChecked, setIsChecked] = useState([])
+
   const [imageUrl, setImageUrl] = useState('')
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, reset, control, handleSubmit, formState: { errors } } = useForm();
+  const { fields, append, remove } = useFieldArray({ name: 'food', control })
   const [isLoading, setIsLoading] = useState(false)
   const [submittedSuccessfully, setSubmittedSuccessfully] = useState(false)
 
@@ -20,29 +27,17 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
 
   // VARIATION DATA 
   const [variations, setVariations] = useState([])
-  const [vtype, setVtype] = useState({})
-  const [vAllowed, setVAllowed] = useState({})
+  const [inputList, setInputList] = React.useState([{ no_of_varation_allowed: 0, type_id: 0 }]);
 
 
-  const handleVariation = (e) => {
-    const { name, value } = e.target
-    console.log({ name, value });
-    if (name === "no_of_varation_allowed") {
-      setVAllowed({ name: value })
-    } else {
-      setVtype({ name: value })
-    }
-  }
-  const addVariationHandle = () => {
-  }
-  useEffect(() => {
-    console.log('====================================');
-    console.log({ vtype });
-    console.log('====================================');
-    console.log('====================================');
-    console.log({ vAllowed });
-    console.log('====================================');
-  }, [vAllowed, vtype])
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
 
   // TOGGOLE BETWEEN TABS FUNCTIONS 
   const shitToDetailsTab = () => {
@@ -62,14 +57,8 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
   }
 
   // HANDLE FORM SUBMISSION 
-  const onSubmit = data => {
-    console.log({ data });
+  const onSubmit = (data, e) => {
     setIsLoading(true)
-    const variationsData = [];
-
-    variationsData.type_id = (data?.type_id !== "0") ? data?.type_id : null
-    variationsData.no_of_varation_allowed = (data?.no_of_varation_allowed !== "0") ? data?.no_of_varation_allowed : null
-
 
     const dishData = {};
     dishData.calories = data?.calories
@@ -83,60 +72,92 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
     dishData.menu_id = menuId
 
 
+
     addDishes(restaurentId, dishData).then(res => {
-      if (res.data.length > 0) {
+
+      if (!isChecked.length > 0) {
+        if (res.data.length > 0) {
+          console.log(res.data[0]);
+          var Data = new FormData()
+          if (data?.image[0] !== undefined) {
+            Data.append('image', data?.image[0], data?.image[0].name);
+            addDishImage(res.data[0]?.id, Data).then((resImg) => {
+              if (resImg.data) {
+                setIsLoading(false)
+                setSubmittedSuccessfully(true);
+                setTimeout(() => {
+                  setIsChangeMenu(Math.random())
+                  closeModal()
+                }, 2000);
+              }
+            })
+          }
+        }
+      } else {
         var Data = new FormData()
         if (data?.image[0] !== undefined) {
           Data.append('image', data?.image[0], data?.image[0].name);
-          addDishImage(res.data[0]?.id, Data).then((res) => {
-            if (res.data) {
-              closeModal()
+          addDishImage(res.data[0]?.id, Data).then((resImg) => {
+            if (resImg.data) {
+              Variationlink(res.data[0].id, {
+                varation: isChecked
+              }).then((res) => {
+                if (res?.data.length > 0) {
+                  setIsLoading(false)
+                  setSubmittedSuccessfully(true);
+                  setTimeout(() => {
+                    setIsChangeMenu(Math.random())
+                    closeModal()
+                  }, 2000);
+                }
+              })
             }
           })
         }
-        if ((variationsData?.no_of_varation_allowed !== null) && (variationsData?.type_id !== null)) {
-          variationsData.dish_id = res.data[0]?.id;
-          addSingleDishVaiation(variationsData).then((res) => {
-            if (res?.data?.id) {
-              setIsLoading(false)
-              setSubmittedSuccessfully(true);
-              setTimeout(() => {
-                setIsChangeMenu(Math.random())
-                closeModal()
-              }, 2000);
-            }
-          })
-        } else {
-          setIsLoading(false)
-          setSubmittedSuccessfully(true);
-          setTimeout(() => {
-            setIsChangeMenu(Math.random())
-            closeModal()
-          }, 2000);
-        }
+
       }
+
     })
   };
 
-  // HANDLE FORM VALIDATIONS 
-  useEffect(() => {
-    console.log(errors);
-    if (Object.keys(errors).length > 0) {
-      setOnDetailsTab(true)
-      setOnInformationTab(false)
-      setOnVariationTab(false)
-    }
-  }, [errors])
 
   // GET VARIATIONS 
   useEffect(() => {
     getVariation(user?.user?.restaurant[0]?.id).then(res => {
-      setVariations(res.data)
+      setVariations(res?.data.map(v => {
+        return { type_id: parseInt(v.id), name: v.name, no_of_varation_allowed: 0 }
+      }))
     })
   }, [user]);
 
+  const handleAllowedVariation = (e, vId) => {
+    const { name, value } = e.target
+    variations.map(variation => {
+      if (variation.type_id === parseInt(vId)) {
+        variation.no_of_varation_allowed = value
+      }
+    })
+  }
+
+  const handleCkeckBox = (e, allowed) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setIsChecked([...isChecked, { type_id: parseInt(value), no_of_varation_allowed: parseInt(allowed) }]);
+    } else {
+      setIsChecked(isChecked.filter(e => e.type_id !== value))
+    }
+  }
+
+  useEffect(() => {
+    console.log(isChecked);
+  }, [isChecked])
   return (
     <>
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
+
       {submittedSuccessfully ?
         (
           <div className={styles.SubmitedMessage}>
@@ -184,7 +205,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
 
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* DETAILS TAB  */}
-              <div style={{ display: `${onDetailsTab ? "block" : "none"}` }} className='container' >
+              <div style={{ display: `${onDetailsTab ? "block" : "none"}` }} className={styles.container} >
                 <h1>Add Dish</h1>
                 <div className={styles.addDishForm}>
                   <div className={styles.inputWrapper}>
@@ -192,19 +213,19 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
                     <input type="text" placeholder="Dish name" id='DishName' {...register("DishName", { required: true })} />
                   </div>
                   <div className={styles.inputWrapper} >
-                    <label htmlFor="description">Description <span className='errorMsg'>{errors?.description && "Description is required! "}</span></label>
+                    <label htmlFor="description">Description <span className={styles.errorMsg}>{errors?.description && "Description is required! "}</span></label>
                     <input type="text" placeholder="description" id='description' {...register("description", { required: true })} />
                   </div>
                   <div className={styles.inputWrapper} >
-                    <label htmlFor="price">Price <span className='errorMsg'>{errors?.price && "Price is required! "}</span></label>
+                    <label htmlFor="price">Price <span className={styles.errorMsg}>{errors?.price && "Price is required! "}</span></label>
                     <input type="number" defaultValue={0} placeholder="price" id='price' {...register("price", { required: false })} />
                   </div>
                   <div className={styles.inputWrapper} >
-                    <label htmlFor="take_away">Delivery <span className='reqMessage'>(optional) </span></label>
+                    <label htmlFor="take_away">Delivery <span className={styles.reqMessage}>(optional) </span></label>
                     <input type="number" placeholder="delivery" id='delivery' {...register("delivery", { required: false })} />
                   </div>
                   <div className={styles.inputWrapper} >
-                    <label htmlFor="take_away">Take Away <span className='reqMessage'>(optional) </span></label>
+                    <label htmlFor="take_away">Take Away <span className={styles.reqMessage}>(optional) </span></label>
                     <input type="number" placeholder="take_away" id='take_away' {...register("take_away", { required: false })} />
                   </div>
                   <div className={styles.inputWrapper} >
@@ -254,36 +275,53 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
                 </div>
               </div>
 
+
               {/* VARIATION TAB  */}
               <div style={{ display: `${onVariationTab ? "block" : "none"}` }} className={styles.container}  >
                 <h1>Add Variations</h1>
-                <div>
-                  <button onClick={addVariationHandle}>Add More</button>
-                </div>
-                <div className='addDishForm'>
-                  <select name='type_id' onChange={(e) => { handleVariation(e) }} className={styles.selectVariations} >
-                    <option value={0}>* Select a type</option>
-                    {variations?.map((item, i) => {
-                      return (
-                        <option key={i} value={item?.id} >{item?.name}</option>
-                      )
-                    })}
-                  </select>
-                  <select name='no_of_varation_allowed' onChange={(e) => { handleVariation(e) }} className={styles.selectVariations} >
-                    <option value={0}>* Select No of Variation Allowed</option>
-                    <option value={1} >1</option>
-                    <option value={2} >2</option>
-                    <option value={3} >3</option>
-                    <option value={4} >4</option>
-                    <option value={5} >5</option>
-                  </select>
-                </div>
+
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell width="2%">Linked</TableCell>
+                      <TableCell width="59%">Variation Type</TableCell>
+                      <TableCell width="39%">Allowed</TableCell>
+                    </TableRow>
+                  </TableHead>
+
+                  <TableBody>
+                    {variations.map((variation, index) => (
+                      <TableRow key={index}>
+                        <TableCell>
+                          <input
+                            ref={refCheckBox}
+                            value={variation?.type_id}
+                            checked={variation.isChecked}
+                            onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed) }} type="checkbox"
+                            name="" />
+                        </TableCell>
+                        <TableCell>{variation?.name}</TableCell>
+                        <TableCell>
+
+                          <select name='no_of_varation_allowed' onChange={(e) => { handleAllowedVariation(e, variation.type_id) }} className={styles.selectVariations} >
+                            <option value={0}>* Select No of Variation Allowed</option>
+                            <option value={1} >1</option>
+                            <option value={2} >2</option>
+                            <option value={3} >3</option>
+                            <option value={4} >4</option>
+                            <option value={5} >5</option>
+                          </select>
+
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
-              {isLoading ? <div className='loading'>Loading ...</div> :
+              {isLoading ? <div className={styles.loading}>Loading ...</div> :
                 <input className={styles.submitButton} type="submit" />}
             </form>
-
-          </div>)
+          </div >)
       }
     </>
   );
