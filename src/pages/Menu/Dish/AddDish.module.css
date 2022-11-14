@@ -1,3 +1,11 @@
+.containerOfForm {
+  position: relative;
+  height: 350px;
+  overflow-y: scroll;
+}
+.containerOfForm::-webkit-scrollbar {
+  display: none;
+}
 .SubmitedMessage {
   width: 100%;
   height: 100%;
@@ -15,15 +23,22 @@
   font-weight: bold;
 }
 .loading {
-  width: 100%;
-  height: 50px;
-  background-color: #5392b7;
-  color: white;
   display: flex;
-  font-weight: bold;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 50;
+  left: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  border: 1px solid white;
   border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background: #00598d;
+  margin-top: 20px;
 }
 .addDishForm {
   display: flex;
@@ -92,6 +107,12 @@
   margin-bottom: 10px;
 }
 .submitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 50;
+  left: 0;
   cursor: pointer;
   width: 100%;
   height: 50px;
