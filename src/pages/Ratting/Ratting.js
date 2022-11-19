@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getReviewAll } from '../../Apis/Review';
 import TableTemplateForRatingQuestions from './components/TableTemplateForRatingQuestions';
 import './Ratting.css';
 
@@ -49,6 +50,9 @@ export default function Ratting() {
         console.log('====================================');
         console.log(questions);
         console.log('====================================');
+        getReviewAll().then(res=>{
+            
+        })
     },[questions])
     const history = useHistory()
 

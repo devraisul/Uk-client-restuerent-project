@@ -7,12 +7,12 @@ import toast, { Toaster } from "react-hot-toast";
 import { AiFillTag } from 'react-icons/ai';
 import { BiMemoryCard } from 'react-icons/bi';
 import { BsPatchQuestionFill } from 'react-icons/bs';
-import { MdOutlineSwapVert } from 'react-icons/md';
 import { NavLink } from "react-router-dom";
 
 import Popup from "reactjs-popup";
 import { addReview, editSingleQuestion, editSingleTag, getAllTag, getReviewAll, postTag } from "../../Apis/Review";
 import Loading from '../../components/Loading/Loading';
+import AddQuestion from "./AddQuestion/AddQuestion";
 
 import styles from './AddReviewTag.module.css';
 import EditQuestion from "./EditQuestion/EditQuestion";
@@ -28,6 +28,7 @@ const AddReviewTag = () => {
 
   // REVIEW DATAS 
   const [allQuestion, setAllQuestion] = useState([])
+  const [allQuestionsWithTags, setAllQuestionsWithTags] = useState({})
   const [singleQuestion, setSingleQuestion] = useState()
   const [allTag, setAllTag] = useState([])
 
@@ -41,6 +42,7 @@ const AddReviewTag = () => {
 
   // POPUP 
   const [popupIsOpend, setPopupIsOpend] = useState(false)
+  const [addPopupIsOpend, setAddPopupIsOpend] = useState(false)
 
   // LOADINGS 
   const [isLoadingQuestion, setIsLoadingQuestion] = useState(true)
@@ -56,7 +58,8 @@ const AddReviewTag = () => {
   const [editQuestion, setEditQuestion] = useState({
     mode: false,
     id: '',
-    question: ''
+    question: '',
+    serial: ''
   })
   const [editTag, setEditTag] = useState({
     mode: false,
@@ -87,24 +90,26 @@ const AddReviewTag = () => {
     getReviewAll(restaurant_id)
       .then((res) => {
         setAllQuestion(res?.data)
+        setAllQuestionsWithTags(res)
         setIsLoadingQuestion(false)
       }).catch(err => {
         console.log(err);
       })
   }, [isQuestionUpdated, isTabChanged])
+
   // EDIT QUESTION 
   useEffect(() => {
     editQuestion?.mode && setPopupIsOpend(true)
     !editQuestion?.mode && setPopupIsOpend(false)
   }, [editQuestion])
-  
+
   // GET TAGS  
   useEffect(() => {
     const page_no = 1
     setIsLoadingTag(true)
     getAllTag(restaurant_id, page_no)
       .then(res => {
-        setAllTag(res?.data?.data);
+        setAllTag(res?.data);
         setIsLoadingTag(false)
       }).catch(err => console.log(err))
   }, [isTagUpdated, isTabChanged])
@@ -183,15 +188,23 @@ const AddReviewTag = () => {
   return (
     <>
 
+      {/* Add POPUP  */}
+      <Popup open={addPopupIsOpend} closeOnDocumentClick onClose={() => { setAddPopupIsOpend(false) }} >
+        <AddQuestion
+          setAddPopupIsOpend={setAddPopupIsOpend}
+          setIsQuestionUpdated={setIsQuestionUpdated}
+        />
+      </Popup>
       {/* EDIT POPUP  */}
       <Popup open={popupIsOpend} closeOnDocumentClick onClose={() => { setPopupIsOpend(false) }} >
         <EditQuestion
+          allQuestionStars={allQuestionsWithTags[editQuestion?.serial]}
           editQuestion={editQuestion}
           setEditQuestion={setEditQuestion}
           setPopupIsOpend={setPopupIsOpend}
+          setIsQuestionUpdated={setIsQuestionUpdated}
         />
       </Popup>
-
 
       <Toaster position="top-right" reverseOrder={false} />
 
@@ -204,7 +217,7 @@ const AddReviewTag = () => {
               className={`large btn ${styles.navButton}`}
               onClick={onQuestionTab}>
               <BsPatchQuestionFill className={styles.navIcon} />
-              <span className="menuNav">
+              <span className={styles.menuNav}>
                 Questions
               </span>
             </button>
@@ -215,11 +228,7 @@ const AddReviewTag = () => {
             >
               <AiFillTag className={styles.navIcon} />
               <span
-                style={{
-                  marginLeft: '10px'
-                }}
-                className={styles.menuNav}
-              >
+                className={styles.menuNav} >
                 Tags
               </span>
             </button>
@@ -227,8 +236,7 @@ const AddReviewTag = () => {
             <NavLink
               to={'/app/app/dashboard'}
               title='Back to dashboard'
-              className={`large btn ${styles.navButton}`}
-            >
+              className={`large btn ${styles.navButton}`} >
               <Dashboard className={styles.navIcon} />
               <span className={styles.menuNav} >
                 Dashboard
@@ -298,16 +306,11 @@ const AddReviewTag = () => {
                 {/* ADD QUESTION BUTTON  */}
                 <>
                   {
-                    !addMode ?
-                      <button onClick={() => setAddMode(true)} title='All Menu' className={`large btn ${styles.navButton}`} >
-                        <Add className={styles.navIcon} />
-                        <span className={styles.menuNav} > Add Question </span>
-                      </button>
-                      :
-                      <button onClick={() => setAddMode(false)} title='All Menu' className={`large btn ${styles.navButton}`} >
-                        <CloseOutlined className={styles.navIcon} />
-                        <span className={styles.menuNav} > Close </span>
-                      </button>
+                    !addPopupIsOpend &&
+                    <button onClick={() => setAddPopupIsOpend(true)} title='All Menu' className={`large btn ${styles.navButton}`} >
+                      <Add className={styles.navIcon} />
+                      <span className={styles.menuNav} > Add Question </span>
+                    </button>
                   }
                 </>
 
@@ -399,7 +402,7 @@ const AddReviewTag = () => {
                               alignItems: 'center'
                             }}>
                               {item?.is_active ? 'Public' : 'Private'}
-                              <button
+                              {/* <button
                                 title={!item?.is_active ? 'Change To Public' : 'Change To Private'}
                                 onClick={() => { handleQuestionUpdate(item?.id, item?.is_active, restaurant_id, item?.question) }}
                                 style={{
@@ -416,7 +419,7 @@ const AddReviewTag = () => {
                                   color: '#fff'
                                 }} >
                                 <MdOutlineSwapVert />
-                              </button>
+                              </button> */}
                             </div>
 
                           </TableCell>
@@ -436,7 +439,8 @@ const AddReviewTag = () => {
                                   setEditQuestion({
                                     mode: true,
                                     id: item?.id,
-                                    question: item?.question
+                                    question: item?.question,
+                                    serial: index
                                   });
                                   setPopupIsOpend(true)
                                 }}
@@ -524,8 +528,7 @@ const AddReviewTag = () => {
                       justifyContent: 'center',
                       alignItems: 'center'
                     }}
-                    onSubmit={handleSubmit(onSubmitAddTag)}
-                  >
+                    onSubmit={handleSubmit(onSubmitAddTag)} >
                     <TextField
                       style={{
                         width: '300px',
@@ -537,8 +540,7 @@ const AddReviewTag = () => {
                       label="Review Tag"
                       placeholder="Review Tag"
                       variant="outlined"
-                      {...register("tag")}
-                    />
+                      {...register("tag")} />
 
                     <Button
                       type="submit"
@@ -572,8 +574,7 @@ const AddReviewTag = () => {
                     right: 0,
                     top: 0
                   }}
-                    onClick={() => setAddMode(true)}
-                  >
+                    onClick={() => setAddMode(true)} >
                     <Add /> Add Tag
                   </Button>
                 }
@@ -593,14 +594,15 @@ const AddReviewTag = () => {
 
                 {isLoadingTag ? <Loading />
                   :
-                  <Table style={{
-                    background: '#ccc',
-                    textAlign: 'center'
-                  }} className="mb-0"
-                  >
-                    <TableHead style={{
+                  <Table
+                    style={{
+                      background: '#ccc',
                       textAlign: 'center'
-                    }}>
+                    }} className="mb-0" >
+                    <TableHead
+                      style={{
+                        textAlign: 'center'
+                      }}>
                       <TableRow style={{
                         background: '#0575B4'
                       }}>

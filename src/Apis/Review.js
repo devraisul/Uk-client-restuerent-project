@@ -87,6 +87,24 @@ export const addReview = async (id, data) => {
 
 
 // QUESTION
+export const postReviewQuestion = async () => {
+  const userInfo = localStorage.getItem("data");
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt.token}`,
+    },
+  };
+  
+  const result = await axios.post(`/api/review-new/create/questions`, config)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log(err));
+  return result;
+};
 export const getReviewAll = async (id) => {
   const userInfo = localStorage.getItem("data");
   const jwt = JSON.parse(userInfo);
@@ -99,6 +117,24 @@ export const getReviewAll = async (id) => {
   };
   const result = await axios
     .get(`/api/review-new/get/questions?restaurant_id=${id}`, config)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log(err));
+  return result;
+};
+export const getReviewAllWithLinkedTags = async (id) => {
+  const userInfo = localStorage.getItem("data");
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt.token}`,
+    },
+  };
+  const result = await axios
+    .get(`/api/review-new/get/questions-all?restaurant_id=${id}`, config)
     .then((res) => {
       return res.data;
     })
@@ -123,7 +159,6 @@ export const getSingleQuestion = async (id) => {
 
   return result;
 }
-
 export const editSingleQuestion = async (data) => {
   const userInfo = localStorage.getItem("data");
   const jwt = JSON.parse(userInfo).token;
