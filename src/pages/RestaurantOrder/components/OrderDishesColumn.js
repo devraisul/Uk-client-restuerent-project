@@ -1,11 +1,10 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, Typography } from '@material-ui/core';
-import React, { useContext } from 'react';
-import { BiMinus, BiPlus } from 'react-icons/bi';
-import { MdExpandMore } from 'react-icons/md';
+import { Button, Grid } from '@material-ui/core';
+import React, { useContext, useState } from 'react';
 import Popup from 'reactjs-popup';
 import { AdminOrderContext } from '../context/AdminOrderContext';
 import OrderDishCard from './OrderDishCard';
-import './OrderDishesColumn.css';
+
+import styles from './OrderDishesColumn.module.css';
 import OrderEmpty from './OrderEmpty';
 import OrderLoading from './OrderLoading';
 import OrderSearch from './OrderSearch';
@@ -24,10 +23,11 @@ export default function OrderDishesColumn() {
         addToCartWithVariation,
         handleRemoveVariation
 
-    } = useContext(AdminOrderContext)
+    } = useContext(AdminOrderContext);
+    const [isPopupOpened, setIsPopupOpened] = useState(false)
 
     return (
-        <Grid className='singleColumn' item xs={2} sm={4} md={5} >
+        <Grid className='singleColumn' item xs={12} sm={12} md={5} >
 
             {/* VARIATIONS POPUP  */}
             <Popup
@@ -35,51 +35,34 @@ export default function OrderDishesColumn() {
                 open={variationModalIsOpened}
                 closeOnDocumentClick onClose={() => { setvariationModalIsOpened(false) }}
             >
+                <div className={styles.crossPopup}>
+              <button onClick={()=>setvariationModalIsOpened(false)}>X</button>
+            </div>
                 <h4 style={{ textAlign: 'center', marginBottom: '10px' }}>Select Variations</h4>
                 {/* VARIATION CONTAINER  */}
-                <div className='orderVariationContainer'>
-                    {
-                        dishVariations.map((vari, i) =>
-                            // SINGLE VARIATION CARD 
-                            <div key={i}>
-                                <Accordion style={{ background: '#0575B4', marginBottom: '5px' }}>
-                                    <AccordionSummary
-                                        expandIcon={<MdExpandMore style={{ color: '#fff' }} />}
-                                        aria-controls="panel2a-content"
-                                        style={{ color: '#fff' }}
-                                    >
-                                        <Typography
-                                            variant='h6'
-                                        >{vari?.variation_type?.name}</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails style={{
-                                        background: '#ddd'
-                                    }}>
-                                        <Typography>
-                                            {
-                                                selectedVariations.filter(variation => variation?.id === vari?.id).length > 0 ?
-                                                    <Button style={{ background: '#0575B4', color: '#fff' }} onClick={() => handleRemoveVariation(vari)}>
-                                                        <BiMinus style={{ marginRight: '5px', fontWeight: 'bold', fontSize: '1.5rem' }} /> Unselect
-                                                    </Button>
-                                                    :
-                                                    <Button style={{ background: '#eee', color: '#0575B4' }} onClick={() => handleAddVariation(vari)}>
-                                                        <BiPlus style={{ marginRight: '5px', fontWeight: 'bold', fontSize: '1.5rem' }} /> Select
-                                                    </Button>
-                                            }
-
-                                            <div style={{ marginTop: '10px', padding: '0px 5px' }}>
-                                                <h5>Description:</h5>
-                                                {vari?.variation_type?.description}
-                                            </div>
-
-                                        </Typography>
-                                    </AccordionDetails>
-                                </Accordion>
-                            </div>
-                        )
-                    }
+                {console.log(dishVariations)}
+                <div className={styles.orderVariationContainer}>
+                    <div className={styles.orderVariationContainer}>
+                        {
+                            dishVariations.map((variation, i) =>
+                                // SINGLE VARIATION CARD 
+                                <div key={i}>
+                                    <h3 className={styles.variationDetails}>
+                                        Select {variation?.variation_type?.name} - Choose up to: {variation?.no_of_varation_allowed}
+                                    </h3>
+                                    <div className={styles.variationSelectonContainer}>
+                                        {
+                                            variation?.variation_type?.variation.map(v => (
+                                                <Button className={styles.variationAddButton}>{v.name}</Button>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
                 </div>
-                <Button className='OrderAddToCardButton' onClick={addToCartWithVariation}>
+                <Button className={styles.OrderAddToCardButton} onClick={addToCartWithVariation}>
                     Add To Cart
                 </Button>
             </Popup>

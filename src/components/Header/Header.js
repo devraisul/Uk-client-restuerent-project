@@ -57,39 +57,41 @@ export default function Header(props) {
       background: "#0575B4"
     }} className={classes.appBar}>
 
-      {/* ORDER POPUP  */}
-      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-        <div className="popupContainer">
-          <h1 style={{ textAlign: 'center', marginBottom: '50px', color: '#aaa' }}>Choice Your Order Type</h1>
-          <Button
-            onClick={() => {
-              history.push('/app/add-order/eat_in')
-              setOpen(false)
-            }}
-            className='AdminOrderButton'
-          >
-            <IoFastFoodOutline style={{ marginRight: '30px' }} /> Eat In
-          </Button>
-          <Button
-            onClick={() => {
-              history.push('/app/add-order/delivery')
-              setOpen(false)
-            }}
-            className='AdminOrderButton'
-          >
-            <RiEBike2Line style={{ marginRight: '30px' }} /> Delivery
-          </Button>
-          <Button
-            onClick={() => {
-              history.push('/app/add-order/take_away')
-              setOpen(false)
-            }}
-            className='AdminOrderButton'
-          >
-            <GoPackage style={{ marginRight: '30px' }} /> Take Away
-          </Button>
-        </div>
-      </Popup>
+   
+        {/* ORDER POPUP  */}
+        <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+          <div  className="popupContainer">
+            <h1 style={{ textAlign: 'center', marginBottom: '50px', color: '#aaa' }}>Choice Your Order Type</h1>
+            <Button
+              onClick={() => {
+                history.push('/app/add-order/eat_in')
+                setOpen(false)
+              }}
+              className='AdminOrderButton'
+            >
+              <IoFastFoodOutline style={{ marginRight: '30px' }} /> Eat In
+            </Button>
+            <Button
+              onClick={() => {
+                history.push('/app/add-order/delivery')
+                setOpen(false)
+              }}
+              className='AdminOrderButton'
+            >
+              <RiEBike2Line style={{ marginRight: '30px' }} /> Delivery
+            </Button>
+            <Button
+              onClick={() => {
+                history.push('/app/add-order/take_away')
+                setOpen(false)
+              }}
+              className='AdminOrderButton'
+            >
+              <GoPackage style={{ marginRight: '30px' }} /> Take Away
+            </Button>
+          </div>
+        </Popup>
+
 
 
       <Toolbar className={classes.toolbar}>

@@ -71,8 +71,9 @@ export default function RestaurantOrder() {
             <Grid
                 className='singleColumn'
                 item
-                xs={2}
-                sm={4}
+                
+                xs={order_type === 'eat_in' ? (selectedTable ? 12 : 12) : 12}
+                sm={order_type === 'eat_in' ? (selectedTable ? 12 : 12) : 4}
                 md={order_type === 'eat_in' ? (selectedTable ? 5 : 12) : 5}
             >
                 {selectedTable && <h2 className='columnTitle'>Cart</h2>}

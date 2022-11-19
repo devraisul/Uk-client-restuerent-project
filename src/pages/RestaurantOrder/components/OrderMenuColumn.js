@@ -10,7 +10,7 @@ export default function OrderMenuColumn() {
     return (
         <Grid
             className='singleColumn'
-            item xs={2} sm={2} md={2}
+            item xs={12} sm={12} md={2}
         >
             {/* COLUMN TITLE  */}
             <h2 className='columnTitle'>
@@ -60,7 +60,7 @@ export default function OrderMenuColumn() {
                         :
                         <>
                             {
-                                (menus.length > 0) ?
+                                (menus?.length > 0) ?
                                     <>
                                         {
                                             menus.map((menu, i) => (
@@ -96,9 +96,10 @@ export default function OrderMenuColumn() {
                                                 style={{ fontSize: '3rem', }}
                                             />
                                             <span
-                                                style={{ fontWeight: 'bold' }}
+                                                style={{ fontWeight: 'bold',textAlign:'center' }}
                                             >
-                                                Empty
+                                                Empty <br />
+                                                Please Add a Menu
                                             </span>
                                         </div>
                                     </div>

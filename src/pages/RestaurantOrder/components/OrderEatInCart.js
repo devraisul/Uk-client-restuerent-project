@@ -1,4 +1,4 @@
-import { Button, Grid, MenuItem, Select, TextField } from '@material-ui/core'
+import { Box, Button, MenuItem, Select, TextField } from '@material-ui/core'
 import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
@@ -78,12 +78,7 @@ export default function OrderEatInCart() {
     console.log(isRiciptView);
   }, [isRiciptView])
   return (
-    <Grid
-      className='cartGridContainer'
-      container
-      spacing={{ xs: 2, sm: 2, md: 2 }}
-      columns={{ xs: 4, sm: 8, md: 12 }}
-    >
+    <Box>
       <>
         {!selectedTable ? <OrderTableSelection />
           :
@@ -299,6 +294,6 @@ export default function OrderEatInCart() {
           </>
         }
       </>
-    </Grid>
+    </Box>
   )
 }

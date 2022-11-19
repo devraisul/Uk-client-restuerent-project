@@ -1,0 +1,22 @@
+.emptyTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  width: 100%;
+  padding: 10px;
+  /* background-color: aqua; */
+}
+.mainContainer {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* @media screen and (max-width: 600px) {
+  .emptyTextContainer {
+    background-color: red;
+  }
+} */

@@ -1,0 +1,13 @@
+.searchFieldForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.searchField {
+  width: 70%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}

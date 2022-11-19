@@ -1,24 +1,17 @@
-import React from 'react'
-import { BiMessageAltError } from 'react-icons/bi'
+import React from 'react';
+import { BiMessageAltError } from 'react-icons/bi';
+import styles from './OrderEmpty.module.css';
 
 export default function OrderEmpty() {
   return (
-    <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%,-50%)'
-    }}>
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#aaa'
-        }}>
-            <BiMessageAltError style={{ fontSize: '3rem', }} />
-            <span style={{ fontWeight: 'bold' }}>Empty</span>
-        </div>
+    <div className={styles.mainContainer}>
+      <div className={styles.emptyTextContainer} >
+        <BiMessageAltError style={{ fontSize: '2rem', }} />
+        <span style={{ fontWeight: 'bold',textAlign:'center' }}>
+          Please Select A Menu First. <br />
+          If you are selected then there is no dish in this menu.
+        </span>
+      </div>
     </div>
   )
 }

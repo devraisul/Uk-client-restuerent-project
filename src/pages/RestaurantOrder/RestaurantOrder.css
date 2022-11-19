@@ -5,11 +5,11 @@
   padding: 0 10px;
   height: 80vh;
 }
-.mainColumnContainer {
-  padding-left: 15px;
-}
 .singleColumn::-webkit-scrollbar {
   display: none;
+}
+.mainColumnContainer {
+  padding-left: 15px;
 }
 
 .menuCardButton {

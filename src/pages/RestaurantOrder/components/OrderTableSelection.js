@@ -11,7 +11,11 @@ export default function OrderTableSelection() {
     ]
 
     return (
-        <>
+        <Grid
+            container
+            spacing={{ xs: 1, sm: 1, md: 1 }}
+            columns={{ xs: 12, sm: 12, md: 12 }}
+        >
             <div className='indicatorContainer'>
                 <h1 style={{ marginBottom: '10px', }}>Select a table</h1>
                 <div>
@@ -23,6 +27,7 @@ export default function OrderTableSelection() {
 
             {[...Array(18)].map((elementInArray, index) => (
                 <Grid
+          
                     key={index}
                     style={{
                         cursor: 'pointer',
@@ -56,6 +61,6 @@ export default function OrderTableSelection() {
                 </Grid>
             )
             )}
-        </>
+        </Grid>
     )
 }
