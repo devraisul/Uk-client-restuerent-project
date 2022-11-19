@@ -1,6 +1,6 @@
 import { Box, TableBody, TableCell, TableRow } from '@material-ui/core';
 import React, { Fragment, useState } from 'react';
-import { AiFillEdit } from 'react-icons/ai';
+import { AiFillEdit, AiOutlineInfoCircle } from 'react-icons/ai';
 import { FiLoader, FiSave, FiTrash2, FiUploadCloud } from 'react-icons/fi';
 import { IoCloudDoneOutline } from 'react-icons/io5';
 // import configData from "../../config.json";
@@ -379,11 +379,11 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                   style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }}
                   onClick={(e) => handleDeleteDish(e)}
                 ></FiTrash2>
-                <FiTrash2
+                <AiOutlineInfoCircle
                   title='delete'
-                  style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }}
+                  style={{ fontSize: '1.2rem', margin: '2px', color: '#0575B4', cursor: 'pointer' }}
                   onClick={(e) => handleViewDishDetails(e)}
-                ></FiTrash2>
+                ></AiOutlineInfoCircle>
               </Box>
             </TableCell>
           </TableRow>

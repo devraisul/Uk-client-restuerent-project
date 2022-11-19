@@ -97,15 +97,16 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
 
     if (inEditMode?.status) {
       // UPDATE DISH 
-      dishData.id = inEditMode?.id
+      dishData.id = inEditMode?.dish_id
       updateSingleDish(dishData).then(res => {
+        console.log('single',res);
         const variationArray = isChecked.filter(data => data.type_id !== 0)
         var Data = new FormData()
         // IF HAVE IMAGE AND HAVE VARIATIONS
         console.log('data', data);
         if (data?.image[0] !== undefined) {
           Data.append('image', data?.image[0], data?.image[0].name);
-          addDishImage(res.data[0]?.id, Data).then((resImg) => {
+          addDishImage(res?.data[0]?.id, Data).then((resImg) => {
             console.log('====================================');
             console.log(resImg);
             console.log('====================================');
@@ -140,7 +141,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
           // IF HAVE NO IMAGE AND HAVE VARIATION
           if (variationArray.length > 0) {
             console.log(res);
-            Variationlink(res.data[0].id, { varation: variationArray })
+            Variationlink(res?.data?.id, { varation: variationArray })
               .then((res) => {
                 if (res?.data.length > 0) {
                   setIsLoading(false)
