@@ -1,3 +1,4 @@
+import { Box, TableBody, TableCell, TableRow } from '@material-ui/core';
 import React, { Fragment, useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
 import { FiLoader, FiSave, FiTrash2, FiUploadCloud } from 'react-icons/fi';
@@ -28,7 +29,8 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
 
   React.useEffect(() => {
     getVariationByRestaurantIdAndDishId(dishes?.id).then(res => {
-      setVariationData(res?.data);
+
+      setVariationData(res);
     })
   }, [user, isVariationChanged])
 
@@ -54,16 +56,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
     }
   }
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-  const handleLinkClick = () => {
-    if (showLink) {
-      setShowLink(false)
-      setOpen(false)
-    }
-    else {
-      setShowLink(true)
-      setOpen(true)
-    }
-  }
+
   const handlepopup = () => {
     if (showLink) {
       setShowLink(false)
@@ -83,11 +76,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
       }
     })
   };
-  const onSubmit3 = async (e, id) => {
-    e.preventDefault();
-    // unlink(id, dishes?.id)
-    // window.location.reload(false)
-  };
+
   const handleDeleteDish = async (e) => {
     e.preventDefault();
     deleteDish(dishes?.id).then(res => {
@@ -123,50 +112,22 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
       .padEnd(string.length >= length - 3 ? length : string.length,
         '.')
   }
-  // STYLES 
-  const Styles = {
-    uploadImageButtonContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-      height: '100%'
-    },
-    variationButtonContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-      height: '100%'
-    },
-    variationButton: {
-      display: 'block',
-      cursor: 'pointer',
-      textAlign: 'center',
-      color: '#fff',
-      background: '#0575B4',
-      padding: '15px 5px',
-
-      borderRadius: '8px',
-      fontSize: '0.9rem',
-      fontWeight: 'bold',
-      width: '140px',
-    }
+  const handleViewDishDetails = (e) => {
+    console.log(e);
   }
-
   return (
     <Fragment>
       {editflag ? (
-        <tbody>
-          <tr>
-            <td width="2%" >
+        <TableBody>
+          <TableRow>
+            <TableCell width="2%" >
               {index}
-            </td>
-            <td width="15%">
+            </TableCell>
+            <TableCell width="15%">
 
               {/* NAME  */}
               <form className='form' >
-                <div className='form-groupnopadding'>
+                <Box className='form-groupnopadding'>
                   <input
                     style={{
                       outline: 'none',
@@ -179,10 +140,10 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                     onChange={(e) => onChange(e)}
                   //required
                   />
-                </div>
+                </Box>
               </form>
 
-            </td>
+            </TableCell>
             <td width="14%">
               {/* PRICE  */}
               <form className='form' >
@@ -203,6 +164,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
               </form>
             </td>
             <td width="22%">
+              {/* DESCRIPTION  */}
               <form className='form' >
                 <div className='form-groupnopadding'>
                   <input
@@ -221,6 +183,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
               </form>
             </td>
             <td width="5%">
+              {/* IMAGE  */}
               {isUploaded ?
                 <>
                   <div>
@@ -270,12 +233,13 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
               }
             </td>
             <td width="15%">
+              {/* VARIATIONS  */}
               <div>
                 <ul>
                   {
                     variationData?.map((variation, i) => (
                       <li key={i} style={{
-                        padding: '1px 4px',
+                        padding: '1px 20px',
                         background: '#0575B4',
                         color: '#ffffff',
                         margin: '1px 0px',
@@ -283,33 +247,14 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                         justifyContent: 'space-between',
                         display: 'flex'
                       }}>
-
                         <span style={{ width: '20%' }} >{i + 1}</span>
                         <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name}</span>
-                        {/* <span style={{ width: '20%' }} >{variation.no_of_varation_allowed}</span> */}
+
                       </li>
                     ))
                   }
                 </ul>
-                {/* <button
-                  title='Link Variation'
-                  style={{
-                    textAlign: 'center',
-                    width: '100%'
-                  }}
-                  onClick={(e) => handleLinkClick(e)} >
-                  <AiOutlinePlus style={{
-                    height: '25px',
-                    width: '25px',
-                    background: '#0575B4',
-                    padding: '5px',
-                    borderRadius: '50%',
-                    fontSize: '2rem',
-                    color: '#fff',
-                    marginTop: '10px',
-                    fontWeight: 'bold'
-                  }} />
-                </button> */}
+
                 {
                   //show upload image option on click
                   showLink && (
@@ -334,16 +279,16 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                 <button title='update' className='btn btn-primary2' onClick={(e) => handleSaveDish(e)}><FiSave /></button>
               </div>
             </td>
-          </tr>
-        </tbody>
+          </TableRow>
+        </TableBody>
       ) : (
-        <tbody>
-          <tr>
-            <td width="5%">{dishes?.id}</td>
-            <td width="15%">{dishes?.name}</td>
-            <td width="10%">£ {dishes?.price}</td>
-            <td width="15%">{trimString(dishes?.description)}</td>
-            <td style={{ padding: '0' }} width="30%">
+        <TableBody>
+          <TableRow>
+            <TableCell width="5%">{dishes?.id}</TableCell>
+            <TableCell width="15%">{dishes?.name}</TableCell>
+            <TableCell width="10%">£ {dishes?.price}</TableCell>
+            <TableCell width="15%">{trimString(dishes?.description)}</TableCell>
+            <TableCell style={{ padding: '0' }} width="30%">
               <div style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -380,14 +325,15 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                       <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
                     </Fragment>
                   ) : null} */}
-            </td>
-            <td width="10%">
+            </TableCell>
+            <TableCell width="15%">
               <div>
                 <ul>
                   {
                     variationData?.map((variation, i) => (
                       <li key={i} style={{
-                        padding: '1px 4px',
+                        width: "100%",
+                        padding: '1px 10px',
                         background: '#0575B4',
                         color: '#ffffff',
                         margin: '1px 0px',
@@ -396,16 +342,17 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                         display: 'flex'
                       }}>
 
-                        <span style={{ width: '20%' }} >{i + 1}</span>
-                        <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name}</span>
-                        {/* <span style={{ width: '20%' }} >{variation.no_of_varation_allowed}</span> */}
+                        <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name} ({variation.no_of_varation_allowed})</span>
                       </li>
                     ))
                   }
                 </ul>
                 {showLink && (
                   <Fragment>
-                    <Popup style={{ borderRadius: '30px' }} open={open} closeOnDocumentClick onClose={(e) => (handlepopup())}>
+                    <Popup
+                      style={{ borderRadius: '30px' }}
+                      open={open}
+                      closeOnDocumentClick onClose={(e) => (handlepopup())}>
                       <button style={{ color: '#0575B4', marginRight: '15px' }} className="close" onClick={(e) => {
                         setOpen(false)
                         setIsVariationChanged(Math.random())
@@ -419,23 +366,28 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                   </Fragment>
                 )}
               </div>
-            </td>
-            <td width="5%">
-              <div>
-                <AiFillEdit 
-                title='edit' 
-                style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }} 
-                onClick={(e) => handleEditDish(dishes?.id)}
+            </TableCell>
+            <TableCell width="5%">
+              <Box>
+                <AiFillEdit
+                  title='edit'
+                  style={{ fontSize: '1.2rem', margin: '2px', color: 'green', cursor: 'pointer' }}
+                  onClick={(e) => handleEditDish(dishes?.id)}
                 ></AiFillEdit>
-                <FiTrash2 
-                title='delete' 
-                style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }} 
-                onClick={(e) => handleDeleteDish(e)}
+                <FiTrash2
+                  title='delete'
+                  style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }}
+                  onClick={(e) => handleDeleteDish(e)}
                 ></FiTrash2>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+                <FiTrash2
+                  title='delete'
+                  style={{ fontSize: '1.2rem', margin: '2px', color: 'red', cursor: 'pointer' }}
+                  onClick={(e) => handleViewDishDetails(e)}
+                ></FiTrash2>
+              </Box>
+            </TableCell>
+          </TableRow>
+        </TableBody>
       )}
     </Fragment>
   )

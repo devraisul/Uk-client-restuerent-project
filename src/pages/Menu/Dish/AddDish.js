@@ -3,12 +3,20 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
-import { addDishes, addDishImage } from '../../../Apis/dish';
-import { getVariation, Variationlink } from '../../../Apis/variation';
+import { addDishes, addDishImage, getDishById, updateSingleDish } from '../../../Apis/dish';
+import { getVariation, getVariationByRestaurantIdAndDishId, Variationlink } from '../../../Apis/variation';
+import Loading from '../../../components/Loading/Loading';
 import { useAuth } from '../../../context/AuthContext';
 import styles from './AddDish.module.css';
-const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }) => {
+const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, inEditMode }) => {
   const user = useAuth()
+
+
+  // ===================== FROM API ========================
+  // SINGLE DISH DATA ======================================
+  const [singleDish, setSingleDish] = useState({})
+  // Variations ============================================
+  const [singleVariation, setSingleVariation] = useState()
 
   const [imageUrl, setImageUrl] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -25,6 +33,11 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
   const [isChecked, setIsChecked] = useState([{
     type_id: 0, no_of_varation_allowed: 0
   }])
+
+
+  // LOADINGS 
+  const [isDishLoading, setIsDishLoading] = useState(true)
+
 
   // TOGGOLE BETWEEN TABS FUNCTIONS 
   const shitToDetailsTab = () => {
@@ -66,10 +79,11 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
     }
   }
 
+
+
   // HANDLE FORM SUBMISSION 
   const onSubmit = (data, e) => {
     setIsLoading(true)
-
     const dishData = {};
     dishData.calories = data?.calories
     dishData.delivery = data?.delivery
@@ -81,74 +95,146 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
     dishData.take_away = data?.take_away
     dishData.menu_id = menuId
 
-    // ADD DISH 
-    addDishes(restaurentId, dishData).then(res => {
-      const variationArray = isChecked.filter(data => data.type_id !== 0)
-      var Data = new FormData()
-      // IF HAVE IMAGE AND HAVE VARIATIONS
-      if (data?.image[0] !== undefined) {
-        Data.append('image', data?.image[0], data?.image[0].name);
-        addDishImage(res.data[0]?.id, Data).then((resImg) => {
-          if (resImg.data) {
-            // IF IMAGE AND VARIATION HAVE 
-            if (variationArray.length > 0) {
-              Variationlink(res.data[0].id, { varation: variationArray }).then((res) => {
-                if (res?.data.length > 0) {
-                  setIsLoading(false)
-                  setSubmittedSuccessfully(true);
-                  toast.success("Dish added succeffully!")
-                  setTimeout(() => {
-                    setIsChangeMenu(Math.random())
-                    closeModal()
-                  }, 2000);
-                }
-              })
-            } else {
-              setIsLoading(false)
-              toast.success("Dish added successfully!")
-              setSubmittedSuccessfully(true);
-              setTimeout(() => {
-                setIsChangeMenu(Math.random())
-                closeModal()
-              }, 2000);
-            }
-          } else {
-            toast.error("Dish add but iamge throw an error!")
-          }
-        })
-      } else {
-        // IF HAVE NO IMAGE AND HAVE VARIATION
-        if (variationArray.length > 0) {
-          Variationlink(res.data[0].id, { varation: variationArray })
-            .then((res) => {
-              if (res?.data.length > 0) {
+    if (inEditMode?.status) {
+      // UPDATE DISH 
+      dishData.id = inEditMode?.id
+      updateSingleDish(dishData).then(res => {
+        const variationArray = isChecked.filter(data => data.type_id !== 0)
+        var Data = new FormData()
+        // IF HAVE IMAGE AND HAVE VARIATIONS
+        console.log('data', data);
+        if (data?.image[0] !== undefined) {
+          Data.append('image', data?.image[0], data?.image[0].name);
+          addDishImage(res.data[0]?.id, Data).then((resImg) => {
+            console.log('====================================');
+            console.log(resImg);
+            console.log('====================================');
+            if (resImg?.data) {
+              // IF IMAGE AND VARIATION HAVE 
+              if (variationArray.length > 0) {
+                Variationlink(res.data[0].id, { varation: variationArray }).then((res) => {
+                  if (res?.data.length > 0) {
+                    setIsLoading(false)
+                    setSubmittedSuccessfully(true);
+                    toast.success("Dish added succeffully!")
+                    setTimeout(() => {
+                      setIsChangeMenu(Math.random())
+                      closeModal()
+                    }, 2000);
+                  }
+                })
+              } else {
                 setIsLoading(false)
-                toast.success('Dish added successfully!')
+                toast.success("Dish added successfully!")
                 setSubmittedSuccessfully(true);
                 setTimeout(() => {
                   setIsChangeMenu(Math.random())
                   closeModal()
                 }, 2000);
-              } else {
-                toast.error("Dish added but variation throw an error!")
               }
-            })
+            } else {
+              toast.error("Dish add but iamge throw an error!")
+            }
+          })
         } else {
-          // NO ADITIONAL INFO FOUND 
-          setIsLoading(false)
-          toast.success("Dish added successfully!")
-          setSubmittedSuccessfully(true);
-          setTimeout(() => {
-            setIsChangeMenu(Math.random())
-            closeModal()
-          }, 2000);
+          // IF HAVE NO IMAGE AND HAVE VARIATION
+          if (variationArray.length > 0) {
+            console.log(res);
+            Variationlink(res.data[0].id, { varation: variationArray })
+              .then((res) => {
+                if (res?.data.length > 0) {
+                  setIsLoading(false)
+                  toast.success('Dish added successfully!')
+                  setSubmittedSuccessfully(true);
+                  setTimeout(() => {
+                    setIsChangeMenu(Math.random())
+                    closeModal()
+                  }, 2000);
+                } else {
+                  toast.error("Dish added but variation throw an error!")
+                }
+              })
+          } else {
+            // NO ADITIONAL INFO FOUND 
+            setIsLoading(false)
+            toast.success("Dish added successfully!")
+            setSubmittedSuccessfully(true);
+            setTimeout(() => {
+              setIsChangeMenu(Math.random())
+              closeModal()
+            }, 2000);
 
+          }
         }
-      }
-    });
+      });
+    } else {
+      // ADD DISH 
+      addDishes(restaurentId, dishData).then(res => {
+        const variationArray = isChecked.filter(data => data.type_id !== 0)
+        var Data = new FormData()
+        // IF HAVE IMAGE AND HAVE VARIATIONS
+        if (data?.image[0] !== undefined) {
+          Data.append('image', data?.image[0], data?.image[0].name);
+          addDishImage(res.data[0]?.id, Data).then((resImg) => {
+            if (resImg.data) {
+              // IF IMAGE AND VARIATION HAVE 
+              if (variationArray.length > 0) {
+                Variationlink(res.data[0].id, { varation: variationArray }).then((res) => {
+                  if (res?.data.length > 0) {
+                    setIsLoading(false)
+                    setSubmittedSuccessfully(true);
+                    toast.success("Dish added succeffully!")
+                    setTimeout(() => {
+                      setIsChangeMenu(Math.random())
+                      closeModal()
+                    }, 2000);
+                  }
+                })
+              } else {
+                setIsLoading(false)
+                toast.success("Dish added successfully!")
+                setSubmittedSuccessfully(true);
+                setTimeout(() => {
+                  setIsChangeMenu(Math.random())
+                  closeModal()
+                }, 2000);
+              }
+            } else {
+              toast.error("Dish add but iamge throw an error!")
+            }
+          })
+        } else {
+          // IF HAVE NO IMAGE AND HAVE VARIATION
+          if (variationArray.length > 0) {
+            Variationlink(res.data[0].id, { varation: variationArray })
+              .then((res) => {
+                if (res?.data.length > 0) {
+                  setIsLoading(false)
+                  toast.success('Dish added successfully!')
+                  setSubmittedSuccessfully(true);
+                  setTimeout(() => {
+                    setIsChangeMenu(Math.random())
+                    closeModal()
+                  }, 2000);
+                } else {
+                  toast.error("Dish added but variation throw an error!")
+                }
+              })
+          } else {
+            // NO ADITIONAL INFO FOUND 
+            setIsLoading(false)
+            toast.success("Dish added successfully!")
+            setSubmittedSuccessfully(true);
+            setTimeout(() => {
+              setIsChangeMenu(Math.random())
+              closeModal()
+            }, 2000);
 
+          }
+        }
+      });
+    }
   };
-
 
   // GET VARIATIONS 
   useEffect(() => {
@@ -159,6 +245,33 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
     })
   }, [user]);
 
+  // GET SINGLE DISH 
+  useEffect(() => {
+    if (inEditMode?.status) {
+      console.log(inEditMode);
+      setIsDishLoading(true)
+      getDishById(inEditMode?.dish_id)
+        .then(res => {
+          setSingleDish(res[0]);
+          console.log("dishData", res[0]);
+          if (res.length > 0) {
+            getVariationByRestaurantIdAndDishId(res[0]?.id)
+              .then(res => {
+                setSingleVariation(res);
+                setIsDishLoading(false)
+              })
+          }
+        })
+    }
+
+  }, [inEditMode])
+
+
+  useEffect(() => {
+    console.log('he he', singleVariation);
+  }, [singleVariation])
+
+
   return (
     <>
       <Toaster
@@ -167,183 +280,360 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal }
       />
 
       {submittedSuccessfully ?
-        (
-          <div className={styles.SubmitedMessage}>
-            <img src="https://i.postimg.cc/MGXQ6w85/13-pizza-outline.gif" alt="done" className='doneImage' />
-            <p>Submitted!</p>
-          </div>
-        )
+        (<div className={styles.SubmitedMessage}>
+          <img src="https://i.postimg.cc/MGXQ6w85/13-pizza-outline.gif" alt="done" className='doneImage' />
+          <p>Submitted!</p>
+        </div>)
         :
         (
-          <div>
-            {/* POPUP CLOSE BUTTON  */}
-            <div className={styles.crossPopup}>
-              <button onClick={closeModal}>X</button>
-            </div>
+          <>
+            {inEditMode.status ?
+              // ======= ON EDIT DISH MODE ========
+              <div>
+                {/* POPUP CLOSE BUTTON  */}
+                <div className={styles.crossPopup}>
+                  <button onClick={closeModal}>X</button>
+                </div>
 
-            {/* TAB TOGGLE BUTTONS  */}
-            <div className={styles.buttonsContainer}>
-              <Button
-                className={styles.tabButton}
-                onClick={shitToDetailsTab}
-                style={{
-                  background: `${onDetailsTab ? "#0575B4" : ""}`,
-                  color: `${onDetailsTab ? "#fff" : ""}`
-                }}
-              >Details</Button>
-              <Button
-                className={styles.tabButton}
-                disabled={(errors?.DishName || errors?.description) && true}
-                onClick={shitToInformationTab}
-                style={{
-                  background: `${onInformationTab ? "#0575B4" : ""}`,
-                  color: `${onInformationTab ? "#fff" : ""}`
-                }}
-              >Imformations</Button>
-              <Button
-                className={styles.tabButton}
-                disabled={(errors?.DishName || errors?.description) && true}
-                onClick={shitToVariationTab}
-                style={{
-                  background: `${onVariationTab ? "#0575B4" : ""}`,
-                  color: `${onVariationTab ? "#fff" : ""}`
-                }}
-              >Variations</Button>
-            </div>
+                {/* TAB TOGGLE BUTTONS  */}
+                <div className={styles.buttonsContainer}>
+                  <Button
+                    className={styles.tabButton}
+                    onClick={shitToDetailsTab}
+                    style={{
+                      background: `${onDetailsTab ? "#0575B4" : ""}`,
+                      color: `${onDetailsTab ? "#fff" : ""}`
+                    }}
+                  >Details</Button>
+                  <Button
+                    className={styles.tabButton}
+                    disabled={(errors?.DishName || errors?.description) && true}
+                    onClick={shitToInformationTab}
+                    style={{
+                      background: `${onInformationTab ? "#0575B4" : ""}`,
+                      color: `${onInformationTab ? "#fff" : ""}`
+                    }}
+                  >Imformations</Button>
+                  <Button
+                    className={styles.tabButton}
+                    disabled={(errors?.DishName || errors?.description) && true}
+                    onClick={shitToVariationTab}
+                    style={{
+                      background: `${onVariationTab ? "#0575B4" : ""}`,
+                      color: `${onVariationTab ? "#fff" : ""}`
+                    }}
+                  >Variations</Button>
+                </div>
 
 
-            <div className={styles.containerOfForm}>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                {/* DETAILS TAB  */}
-                <div style={{ display: `${onDetailsTab ? "block" : "none"}` }} className={styles.container} >
-                  <h1>Add Dish</h1>
-                  <div className={styles.addDishForm}>
-                    <div className={styles.inputWrapper}>
-                      <label htmlFor="DishName">Dish Name <span className={styles.errorMsg}>{errors?.DishName && "Dish Name is required! "}</span></label>
-                      <input type="text" placeholder="Dish name" id='DishName' {...register("DishName", { required: true })} />
-                    </div>
-                    <div className={styles.inputWrapper} >
-                      <label htmlFor="description">Description <span className={styles.errorMsg}>{errors?.description && "Description is required! "}</span></label>
-                      <input type="text" placeholder="description" id='description' {...register("description", { required: true })} />
-                    </div>
-                    <div className={styles.inputWrapper} >
-                      <label htmlFor="price">Price <span className={styles.errorMsg}>{errors?.price && "Price is required! "}</span></label>
-                      <input onWheel={(e) => e.target.blur()} type="number" defaultValue={0} placeholder="price" id='price' {...register("price", { required: false })} />
-                    </div>
-                    <div className={styles.inputWrapper} >
-                      <label htmlFor="take_away">Delivery <span className={styles.reqMessage}>(optional) </span></label>
-                      <input onWheel={(e) => e.target.blur()} type="number" placeholder="delivery" id='delivery' {...register("delivery", { required: false })} />
-                    </div>
-                    <div className={styles.inputWrapper} >
-                      <label htmlFor="take_away">Take Away <span className={styles.reqMessage}>(optional) </span></label>
-                      <input onWheel={(e) => e.target.blur()} type="number" placeholder="take_away" id='take_away' {...register("take_away", { required: false })} />
-                    </div>
-                    <div className={styles.inputWrapper} >
-                      <span>Image <span className='reqMessage'>(optional) </span></span>
-                    </div>
-                    <label title='upload image' htmlFor="image" >
-                      <div className={styles.imageDropper} >
-                        {!imageUrl ?
-                          <img className={styles.imageUpPlaceholder}
-                            alt={"profile_pic"}
-                            src={"https://i.postimg.cc/rFzvBdw7/gallery.png"}
-                          /> :
-                          <img className={styles.imageUp}
-                            alt={"profile_pic"}
-                            src={imageUrl}
-                          />
-                        }
-                        {!imageUrl && <>
-                          <p>Click to upload a file</p>
-                          <p style={{ fontSize: '0.7rem', color: '#ccc' }}>Only JPG, JPEG & PNG image supported</p>
-                        </>}
+
+
+                {/* MAIN FORM  */}
+                {isDishLoading ?
+                  <Loading />
+                  :
+                  <div className={styles.containerOfForm}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      {/* DETAILS TAB  */}
+                      <div style={{ display: `${onDetailsTab ? "block" : "none"}` }} className={styles.container} >
+                        <h1>Add Dish</h1>
+                        <div className={styles.addDishForm}>
+                          <div className={styles.inputWrapper}>
+                            <label htmlFor="DishName">Dish Name <span className={styles.errorMsg}>{errors?.DishName && "Dish Name is required! "}</span></label>
+                            <input defaultValue={singleDish?.name} type="text" placeholder="Dish name" id='DishName' {...register("DishName", { required: true })} />
+                          </div>
+                          <div className={styles.inputWrapper} >
+                            <label htmlFor="description">Description <span className={styles.errorMsg}>{errors?.description && "Description is required! "}</span></label>
+                            <input defaultValue={singleDish?.description} type="text" placeholder="description" id='description' {...register("description", { required: true })} />
+                          </div>
+                          <div className={styles.inputWrapper} >
+                            <label htmlFor="price">Price <span className={styles.errorMsg}>{errors?.price && "Price is required! "}</span></label>
+                            <input defaultValue={singleDish?.price} onWheel={(e) => e.target.blur()} type="number" placeholder="price" id='price' {...register("price", { required: false })} />
+                          </div>
+                          <div className={styles.inputWrapper} >
+                            <label htmlFor="take_away">Delivery <span className={styles.reqMessage}>(optional) </span></label>
+                            <input defaultValue={singleDish?.delivery} onWheel={(e) => e.target.blur()} type="number" placeholder="delivery" id='delivery' {...register("delivery", { required: false })} />
+                          </div>
+                          <div className={styles.inputWrapper} >
+                            <label htmlFor="take_away">Take Away <span className={styles.reqMessage}>(optional) </span></label>
+                            <input defaultValue={singleDish?.delivery} onWheel={(e) => e.target.blur()} type="number" placeholder="take_away" id='take_away' {...register("take_away", { required: false })} />
+                          </div>
+                          <div className={styles.inputWrapper} >
+                            <span>Image <span className='reqMessage'>(optional) </span></span>
+                          </div>
+                          <label title='upload image' htmlFor="image" >
+                            <div className={styles.imageDropper} >
+                              {!imageUrl ?
+                                <img className={styles.imageUpPlaceholder}
+                                  alt={"profile_pic"}
+                                  src={`https://mughalsignandprint.co.uk/restaurant/${singleDish?.image}`}
+                                /> :
+                                <img className={styles.imageUp}
+                                  alt={"profile_pic"}
+                                  src={imageUrl}
+                                />
+                              }
+                              {!imageUrl && <>
+                                <p>Click to upload a new file</p>
+                                <p style={{ fontSize: '0.7rem', color: '#ccc' }}>Only JPG, JPEG & PNG image supported</p>
+                              </>}
+                            </div>
+                          </label>
+                          <input type={"file"} accept={"image/x-png,image/jpg,image/jpeg"} style={{ display: 'none' }} placeholder="image" id='image' {...register("image", {
+                            onChange: (e) => {
+                              setImageUrl(URL.createObjectURL(e.target.files[0]));
+                            },
+                            required: false,
+                          })} />
+                        </div>
                       </div>
-                    </label>
-                    <input type={"file"} accept={"image/x-png,image/jpg,image/jpeg"} style={{ display: 'none' }} placeholder="image" id='image' {...register("image", {
-                      onChange: (e) => {
-                        setImageUrl(URL.createObjectURL(e.target.files[0]));
-                      },
-                      required: false,
-                    })} />
 
-                  </div>
+                      {/* INFORMATION TAB  */}
+                      <div style={{ display: `${onInformationTab ? "block" : "none"}` }} className={styles.container}  >
+                        <h1>Add Informations</h1>
+                        <div className={styles.addDishForm}>
+                          <div className={styles.inputWrapper}>
+                            <label htmlFor="ingredients">Ingredients <span className={styles.reqMessage}>(optional) </span></label>
+                            <input defaultValue={singleDish?.ingredients} type="text" placeholder="ingredients" id='ingredients' {...register("ingredients", {})} />
+                          </div>
+                          <div className={styles.inputWrapper}>
+                            <label htmlFor="calories">Calories <span className={styles.reqMessage}>(optional) </span></label>
+                            <input defaultValue={singleDish?.calories} onWheel={(e) => e.target.blur()} type="number" placeholder="calories" id='calories' {...register("calories", {})} />
+                          </div>
+
+                        </div>
+                      </div>
+
+
+                      {/* VARIATION TAB  */}
+                      <div style={{ display: `${onVariationTab ? "block" : "none"}` }} className={styles.container}  >
+                        <h1 style={{ marginBottom: '10px' }}>Add Variations</h1>
+                        <>
+                          <Table>
+                            <TableHead>
+                              <TableRow style={{ background: '#0575B4' }}>
+                                <TableCell style={{ color: '#fff' }} width="2%">Linked</TableCell>
+                                <TableCell style={{ color: '#fff' }} width="59%">Variation Type</TableCell>
+                                <TableCell style={{ color: '#fff' }} width="39%">Allowed</TableCell>
+                              </TableRow>
+                            </TableHead>
+
+                            <TableBody>
+                              {variations.map((variation, index) => (
+                                <TableRow key={index}>
+
+                                  <TableCell>
+                                    <input
+                                      defaultValue={variation?.type_id}
+
+                                      defaultChecked={variation?.type_id === singleVariation[index]?.type_id ? true : false}
+                                      onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed ? variation?.no_of_varation_allowed : singleVariation.no_of_varation_allowed) }} type="checkbox"
+                                      name="" />
+                                  </TableCell>
+                                  <TableCell>{variation?.name}</TableCell>
+                                  <TableCell>
+
+                                    <select
+                                      disabled={((variation?.type_id === singleVariation[index]?.type_id) || (isChecked.filter(data => data.type_id === variation?.type_id).length > 0)) ? false : true}
+                                      name='no_of_varation_allowed'
+                                      onChange={(e) => { handleAllowedVariation(e, variation.type_id) }}
+                                      defaultValue={singleVariation[index]?.no_of_varation_allowed}
+                                      className={styles.selectVariations} >
+                                      <option value={0}>* Select No of Variation Allowed</option>
+                                      <option value={1} >1</option>
+                                      <option value={2} >2</option>
+                                      <option value={3} >3</option>
+                                      <option value={4} >4</option>
+                                      <option value={5} >5</option>
+                                    </select>
+                                  </TableCell>
+                                </TableRow>
+
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </>
+                      </div>
+                      <input id='sunmitBtn' hidden type="submit" />
+                    </form>
+                  </div>}
+
+                {isLoading ?
+                  <div className={styles.loading}>Loading ...</div> :
+                  <label className={styles.submitButton} htmlFor="sunmitBtn">Submit</label>
+                }
+              </div>
+              :
+              // ======= ON ADD DISH MODE ========
+              <div>
+                {/* POPUP CLOSE BUTTON  */}
+                <div className={styles.crossPopup}>
+                  <button onClick={closeModal}>X</button>
                 </div>
 
-                {/* INFORMATION TAB  */}
-                <div style={{ display: `${onInformationTab ? "block" : "none"}` }} className={styles.container}  >
-                  <h1>Add Informations</h1>
-                  <div className={styles.addDishForm}>
-                    <div className={styles.inputWrapper}>
-                      <label htmlFor="ingredients">Ingredients <span className={styles.reqMessage}>(optional) </span></label>
-                      <input type="text" placeholder="ingredients" id='ingredients' {...register("ingredients", {})} />
+                {/* TAB TOGGLE BUTTONS  */}
+                <div className={styles.buttonsContainer}>
+                  <Button
+                    className={styles.tabButton}
+                    onClick={shitToDetailsTab}
+                    style={{
+                      background: `${onDetailsTab ? "#0575B4" : ""}`,
+                      color: `${onDetailsTab ? "#fff" : ""}`
+                    }}
+                  >Details</Button>
+                  <Button
+                    className={styles.tabButton}
+                    disabled={(errors?.DishName || errors?.description) && true}
+                    onClick={shitToInformationTab}
+                    style={{
+                      background: `${onInformationTab ? "#0575B4" : ""}`,
+                      color: `${onInformationTab ? "#fff" : ""}`
+                    }}
+                  >Imformations</Button>
+                  <Button
+                    className={styles.tabButton}
+                    disabled={(errors?.DishName || errors?.description) && true}
+                    onClick={shitToVariationTab}
+                    style={{
+                      background: `${onVariationTab ? "#0575B4" : ""}`,
+                      color: `${onVariationTab ? "#fff" : ""}`
+                    }}
+                  >Variations</Button>
+                </div>
+
+
+                <div className={styles.containerOfForm}>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* DETAILS TAB  */}
+                    <div style={{ display: `${onDetailsTab ? "block" : "none"}` }} className={styles.container} >
+                      <h1>Add Dish</h1>
+                      <div className={styles.addDishForm}>
+                        <div className={styles.inputWrapper}>
+                          <label htmlFor="DishName">Dish Name <span className={styles.errorMsg}>{errors?.DishName && "Dish Name is required! "}</span></label>
+                          <input type="text" placeholder="Dish name" id='DishName' {...register("DishName", { required: true })} />
+                        </div>
+                        <div className={styles.inputWrapper} >
+                          <label htmlFor="description">Description <span className={styles.errorMsg}>{errors?.description && "Description is required! "}</span></label>
+                          <input type="text" placeholder="description" id='description' {...register("description", { required: true })} />
+                        </div>
+                        <div className={styles.inputWrapper} >
+                          <label htmlFor="price">Price <span className={styles.errorMsg}>{errors?.price && "Price is required! "}</span></label>
+                          <input onWheel={(e) => e.target.blur()} type="number" defaultValue={0} placeholder="price" id='price' {...register("price", { required: false })} />
+                        </div>
+                        <div className={styles.inputWrapper} >
+                          <label htmlFor="take_away">Delivery <span className={styles.reqMessage}>(optional) </span></label>
+                          <input onWheel={(e) => e.target.blur()} type="number" placeholder="delivery" id='delivery' {...register("delivery", { required: false })} />
+                        </div>
+                        <div className={styles.inputWrapper} >
+                          <label htmlFor="take_away">Take Away <span className={styles.reqMessage}>(optional) </span></label>
+                          <input onWheel={(e) => e.target.blur()} type="number" placeholder="take_away" id='take_away' {...register("take_away", { required: false })} />
+                        </div>
+                        <div className={styles.inputWrapper} >
+                          <span>Image <span className='reqMessage'>(optional) </span></span>
+                        </div>
+                        <label title='upload image' htmlFor="image" >
+                          <div className={styles.imageDropper} >
+                            {!imageUrl ?
+                              <img className={styles.imageUpPlaceholder}
+                                alt={"profile_pic"}
+                                src={"https://i.postimg.cc/rFzvBdw7/gallery.png"}
+                              /> :
+                              <img className={styles.imageUp}
+                                alt={"profile_pic"}
+                                src={imageUrl}
+                              />
+                            }
+                            {!imageUrl && <>
+                              <p>Click to upload a file</p>
+                              <p style={{ fontSize: '0.7rem', color: '#ccc' }}>Only JPG, JPEG & PNG image supported</p>
+                            </>}
+                          </div>
+                        </label>
+                        <input type={"file"} accept={"image/x-png,image/jpg,image/jpeg"} style={{ display: 'none' }} placeholder="image" id='image' {...register("image", {
+                          onChange: (e) => {
+                            setImageUrl(URL.createObjectURL(e.target.files[0]));
+                          },
+                          required: false,
+                        })} />
+
+                      </div>
                     </div>
-                    <div className={styles.inputWrapper}>
-                      <label htmlFor="calories">Calories <span className={styles.reqMessage}>(optional) </span></label>
-                      <input onWheel={(e) => e.target.blur()} type="number" placeholder="calories" id='calories' {...register("calories", {})} />
+
+                    {/* INFORMATION TAB  */}
+                    <div style={{ display: `${onInformationTab ? "block" : "none"}` }} className={styles.container}  >
+                      <h1>Add Informations</h1>
+                      <div className={styles.addDishForm}>
+                        <div className={styles.inputWrapper}>
+                          <label htmlFor="ingredients">Ingredients <span className={styles.reqMessage}>(optional) </span></label>
+                          <input type="text" placeholder="ingredients" id='ingredients' {...register("ingredients", {})} />
+                        </div>
+                        <div className={styles.inputWrapper}>
+                          <label htmlFor="calories">Calories <span className={styles.reqMessage}>(optional) </span></label>
+                          <input onWheel={(e) => e.target.blur()} type="number" placeholder="calories" id='calories' {...register("calories", {})} />
+                        </div>
+
+                      </div>
                     </div>
 
-                  </div>
+
+                    {/* VARIATION TAB  */}
+                    <div style={{ display: `${onVariationTab ? "block" : "none"}` }} className={styles.container}  >
+                      <h1 style={{ marginBottom: '10px' }}>Add Variations</h1>
+
+                      <>
+                        <Table>
+                          <TableHead>
+                            <TableRow style={{ background: '#0575B4' }}>
+                              <TableCell style={{ color: '#fff' }} width="2%">Linked</TableCell>
+                              <TableCell style={{ color: '#fff' }} width="59%">Variation Type</TableCell>
+                              <TableCell style={{ color: '#fff' }} width="39%">Allowed</TableCell>
+                            </TableRow>
+                          </TableHead>
+
+                          <TableBody>
+                            {variations.map((variation, index) => (
+                              <TableRow key={index}>
+                                <TableCell>
+                                  <input
+
+                                    value={variation?.type_id}
+                                    checked={variation.isChecked}
+                                    onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed) }} type="checkbox"
+                                    name="" />
+                                </TableCell>
+                                <TableCell>{variation?.name}</TableCell>
+                                <TableCell>
+
+                                  <select
+                                    disabled={isChecked.filter(data => data.type_id === variation?.type_id).length > 0 ? false : true}
+                                    name='no_of_varation_allowed'
+                                    onChange={(e) => { handleAllowedVariation(e, variation.type_id) }}
+                                    className={styles.selectVariations} >
+                                    <option value={0}>* Select No of Variation Allowed</option>
+                                    <option value={1} >1</option>
+                                    <option value={2} >2</option>
+                                    <option value={3} >3</option>
+                                    <option value={4} >4</option>
+                                    <option value={5} >5</option>
+                                  </select>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </>
+                    </div>
+                    <input id='sunmitBtn' hidden type="submit" />
+                  </form>
+
                 </div>
 
-
-                {/* VARIATION TAB  */}
-                <div style={{ display: `${onVariationTab ? "block" : "none"}` }} className={styles.container}  >
-                  <h1 style={{ marginBottom: '10px' }}>Add Variations</h1>
-
-                  <>
-                    <Table>
-                      <TableHead>
-                        <TableRow style={{ background: '#0575B4' }}>
-                          <TableCell style={{ color: '#fff' }} width="2%">Linked</TableCell>
-                          <TableCell style={{ color: '#fff' }} width="59%">Variation Type</TableCell>
-                          <TableCell style={{ color: '#fff' }} width="39%">Allowed</TableCell>
-                        </TableRow>
-                      </TableHead>
-
-                      <TableBody>
-                        {variations.map((variation, index) => (
-                          <TableRow key={index}>
-                            <TableCell>
-                              <input
-
-                                value={variation?.type_id}
-                                checked={variation.isChecked}
-                                onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed) }} type="checkbox"
-                                name="" />
-                            </TableCell>
-                            <TableCell>{variation?.name}</TableCell>
-                            <TableCell>
-
-                              <select
-                                disabled={isChecked.filter(data => data.type_id === variation?.type_id).length > 0 ? false : true}
-                                name='no_of_varation_allowed'
-                                onChange={(e) => { handleAllowedVariation(e, variation.type_id) }}
-                                className={styles.selectVariations} >
-                                <option value={0}>* Select No of Variation Allowed</option>
-                                <option value={1} >1</option>
-                                <option value={2} >2</option>
-                                <option value={3} >3</option>
-                                <option value={4} >4</option>
-                                <option value={5} >5</option>
-                              </select>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </>
-                </div>
-                <input id='sunmitBtn' hidden type="submit" />
-              </form>
-
-            </div>
-
-            {isLoading ?
-              <div className={styles.loading}>Loading ...</div> :
-              <label className={styles.submitButton} htmlFor="sunmitBtn">Submit</label>
-            }
-          </div >
-
+                {isLoading ?
+                  <div className={styles.loading}>Loading ...</div> :
+                  <label className={styles.submitButton} htmlFor="sunmitBtn">Submit</label>
+                }
+              </div>}
+          </>
         )
       }
     </>

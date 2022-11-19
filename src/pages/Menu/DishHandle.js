@@ -10,7 +10,7 @@ import Popup from 'reactjs-popup';
 import { useAuth } from '../../context/AuthContext';
 import AddDish from './Dish/AddDish';
 import Alldish from './Dish/Alldish';
-import EditDish from './Dish/EditDish';
+import EditAllDish from './Dish/EditAllDish';
 import './DishHandle.css';
 const DishHandle = () => {
   const { user } = useAuth()
@@ -21,17 +21,29 @@ const DishHandle = () => {
   const params = useParams()
 
   const [open, setOpen] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const closeEditModal = () => setOpenEdit(false);
-  const closeModal = () => setOpen(false);
-  const [singleDishId, setSingleDishId] = useState()
+  const [inEditMode, setInEditMode] = useState({
+    status:false,
+    dish_id:""
+  });
+
+  // ON EDIT/ADD POPUP CLOSED ==================== 
+  const closeModal = () => {
+    setOpen(false)
+    setInEditMode({
+      status:false,
+      dish_id:""
+    })
+  };
 
   const handleAddDish = (e) => {
     setOpen(true)
   };
   const handleEditDish = (dish_id) => {
-    setSingleDishId(dish_id)
-    setOpenEdit(true)
+    setInEditMode({
+      status:true,
+      dish_id:dish_id
+    });
+    setOpen(true)
   };
 
   const onEditAll = (e) => {
@@ -49,7 +61,6 @@ const DishHandle = () => {
     setShowAllMenu(true)
     setEditAll(false)
   }
-
 
   return (
     <Fragment>
@@ -162,21 +173,14 @@ const DishHandle = () => {
       {/* {showAddMenu &&  */}
       <div>
         <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-          <AddDish closeModal={closeModal} setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
+          <AddDish inEditMode={inEditMode} closeModal={closeModal} setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
         </Popup>
       </div>
-
-      <div>
-        <Popup open={openEdit} closeOnDocumentClick onClose={closeEditModal}>
-          <EditDish singleDishId={singleDishId} closeEditModal={closeEditModal} setIsChangeMenu={setIsChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />
-        </Popup>
-      </div>
-
 
       {/* } */}
 
 
-      {/* {editAll && <EditAllDish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />} */}
+      {editAll && <EditAllDish setIsChangeMenu={setIsChangeMenu} isChangeMenu={isChangeMenu} menuId={params.menuId} restaurentId={params.restaurentId} menuName={params.menuName} />}
 
 
       {showAllMenu && <Alldish

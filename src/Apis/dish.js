@@ -146,7 +146,6 @@ export const getuserdeal = async () => {
 }
 // UPDATE DISH
 export const updateSingleDish = async (data) => {
-  
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {

@@ -1,3 +1,5 @@
+import { TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { Table } from '@mui/material';
 import React, { Fragment } from 'react';
 import { getdish } from '../../../Apis/dish';
 import Loading from '../../../components/Loading/Loading';
@@ -34,6 +36,8 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
       alignItems: 'center',
       flexDirection: 'column',
       padding: '20px 5px',
+      width:'100%',
+      overflowX:'scroll'
     },
     h1: {
       color: '#0575B4'
@@ -63,26 +67,25 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
     <Fragment>
       <div style={Styles.constainer} >
         <h1 style={{color:'#0575B4'}} className='large text-center'>{menuName} Dishes</h1>
-        <table className='servicesT'>
-          <tbody>
-            <tr>
-              <th style={Styles.tableHead} width="5%">#</th>
-              <th style={Styles.tableHead} width="5%">Name</th>
-              <th style={Styles.tableHead} width="5%">Price</th>
-              <th style={Styles.tableHead} width="10%">Description</th>
-              <th style={Styles.tableHead} width="30%">Upload Image</th>
-              {/* <th style={Styles.tableHead} width="30%">Link Variation</th> */}
-              <th style={Styles.tableHead} width="10%">Linked Variations</th>
-              <th style={Styles.tableHead} width="5%">Edit</th>
-            </tr>
-          </tbody>
+        <Table sx={{ minWidth: 1150 }} className='servicesT'>
+          <TableHead>
+            <TableRow>
+              <TableCell style={Styles.tableHead} minWidth="5%">#</TableCell>
+              <TableCell style={Styles.tableHead} minWidth="15%">Name</TableCell>
+              <TableCell style={Styles.tableHead} minWidth="10%">Price</TableCell>
+              <TableCell style={Styles.tableHead} minWidth="30%">Description</TableCell>
+              <TableCell style={Styles.tableHead} minWidth="10%">Image</TableCell>
+              <TableCell style={Styles.tableHead} minWidth="20%">Linked Variations</TableCell>
+              <TableCell style={Styles.tableHead} minWidth="20%">Edit</TableCell>
+            </TableRow>
+          </TableHead>
           {!dishes?.length ? (
             <Fragment>
-              <tbody>
-                <tr>
-                  <td style={{fontSize:'2rem'}} colSpan={8}>No dish found!</td>
-                </tr>
-              </tbody>
+              <TableBody>
+                <TableRow>
+                  <TableCell style={{fontSize:'2rem'}} colSpan={8}>No dish found!</TableCell>
+                </TableRow>
+              </TableBody>
             </Fragment>
           ) : (
             <Fragment>
@@ -99,7 +102,7 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
             </Fragment>
           )
           }
-        </table>
+        </Table>
       </div>
     </Fragment>
 

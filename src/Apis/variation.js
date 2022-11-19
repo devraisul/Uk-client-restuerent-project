@@ -31,7 +31,7 @@ export const getVariationByRestaurantIdAndDishId = async (dish_id) => {
   };
   const result = await axios.get(`/api/variation/dish_variation/${dish_id}`, config)
     .then(res => {
-      return res;
+      return res?.data;
     })
     .catch(err => console.log(err));
   return result
