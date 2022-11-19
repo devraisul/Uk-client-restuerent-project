@@ -157,23 +157,24 @@ export default function AddQuestion({ setAddPopupIsOpend, setIsQuestionUpdated }
 
     // ADD BUTTON HANDLER 
     const handleSubmit = () => {
-
         setIsSubmited(true)
         setIsSubmissionLoading(true)
-
         const questionData = {
             question: questionDetails,
             restaurant_id: restaurant_id,
             is_active: questionStatus
         };
-
         if ((star1 !== undefined) && (star2 !== undefined) && (star3 !== undefined) && (star4 !== undefined) && (star5 !== undefined)) {
+
             console.log('question data', questionData);
+
             // ADD QUESTION 
-            postReviewQuestion(questionData)
-                .then((res) => {
-                    if (res.data.id) {
-                        const singleQuestion = res?.data
+            postReviewQuestion(questionData).then((res) => {
+                    console.log('====================================');
+                    console.log('API RES',res);
+                    console.log('====================================');
+                    if (res) {
+                        const singleQuestion = res
                         var linkData = {
                             question_id: singleQuestion?.id,
                             stars: []
@@ -183,8 +184,9 @@ export default function AddQuestion({ setAddPopupIsOpend, setIsQuestionUpdated }
                         star3 !== undefined && linkData.stars.push(star3);
                         star4 !== undefined && linkData.stars.push(star4);
                         star5 !== undefined && linkData.stars.push(star5);
-                        linkReview(linkData)
-                            .then(res => {
+                        console.log('llll',linkData);
+                        linkReview(linkData).then(res => {
+                            console.log('189',res);
                                 if (res?.data?.message) {
                                     toast.success("Question Updated Successfully!")
                                     setTimeout(() => {

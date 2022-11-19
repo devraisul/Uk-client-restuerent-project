@@ -150,11 +150,10 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
         setIsQuestionLoading(true)
         getAllTag(restaurant_id)
             .then(res => {
-
                 setAllTags(res?.data);
                 getSingleQuestion(editQuestion?.id)
                     .then((res) => {
-
+                        console.log('single',res);
                         setSingleQuestion(res?.data);
                         setDefaultStar1(res?.data?.question_stars[0].star?.star_tags.filter((value, index, self) =>
                             index === self.findIndex((t) => (
@@ -234,6 +233,13 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
         setDefaultTags3(defaultStar3.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
         setDefaultTags4(defaultStar4.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
         setDefaultTags5(defaultStar5.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
+        console.log('====================================');
+        console.log(defaultTags1);
+        console.log(defaultTags2);
+        console.log(defaultTags3);
+        console.log(defaultTags4);
+        console.log(defaultTags5);
+        console.log('====================================');
         setIsAllDone(true)
     }, [
         defaultStar1,
@@ -362,10 +368,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
-                                                defaultInputValue={setDefaultTags1}
-                                                // defaultInputValue={linkedTags.filter(link => link.id === 1)?.tags.map(tag => {
-                                                //     return { value: tag?.id, label: tag?.tag }
-                                                // })}
+                                                defaultValue={isAllDone&&defaultTags1}
                                                 options={option} />
                                         }
                                     </div>
@@ -382,6 +385,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
+                                                defaultValue={isAllDone&&defaultTags2}
                                                 options={option} />
                                         }
                                     </div>
@@ -398,6 +402,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
+                                                defaultValue={isAllDone&&defaultTags3}
                                                 options={option} />
                                         }
                                     </div>
@@ -414,6 +419,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
+                                                defaultValue={isAllDone&&defaultTags4}
                                                 options={option} />
                                         }
                                     </div>
@@ -430,6 +436,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
+                                                defaultValue={isAllDone&&defaultTags5}
                                                 options={option} />
                                         }
                                     </div>

@@ -5,12 +5,13 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { AiFillTag } from 'react-icons/ai';
-import { BiMemoryCard } from 'react-icons/bi';
+import { BiEdit, BiMemoryCard } from 'react-icons/bi';
 import { BsPatchQuestionFill } from 'react-icons/bs';
+import { MdOutlineDelete } from 'react-icons/md';
 import { NavLink } from "react-router-dom";
 
 import Popup from "reactjs-popup";
-import { addReview, editSingleQuestion, editSingleTag, getAllTag, getReviewAll, postTag } from "../../Apis/Review";
+import { addReview, deleteSingleQuestion, editSingleQuestion, editSingleTag, getAllTag, getReviewAll, postTag } from "../../Apis/Review";
 import Loading from '../../components/Loading/Loading';
 import AddQuestion from "./AddQuestion/AddQuestion";
 
@@ -183,6 +184,15 @@ const AddReviewTag = () => {
         }
       }).catch(err => console.log(err))
   }
+  // DELETE QUESTION 
+  const handleDeleteQuestion = (id) => {
+    deleteSingleQuestion(id).then(res=>{
+      if(res?.data?.message){
+        setIsQuestionUpdated(Math.random())
+        toast.success('Question deleted successfully.')
+      }
+    })
+  }
 
 
   return (
@@ -247,62 +257,8 @@ const AddReviewTag = () => {
         <>
           {isOnQuestionTab &&
             <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column' }}>
-              {addMode &&
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyontent: 'center',
-                    alignItems: 'center',
-                    marginBottom: '50px'
-                  }}
-                >
-                  <h1 style={{ marginBottom: '20px' }}>Add Review Question</h1>
-                  <form
-                    style={{
-                      display: 'flex',
-                      width: '500px',
-                      justifyContent: 'center',
-                      alignItems: 'center'
-                    }}
-                    onSubmit={handleSubmit(onSubmitAddQuestion)}
-                  >
-                    <TextField
-                      style={{
-                        width: '300px',
-                        marginRight: '5px'
-                      }}
-                      required
-                      name="question"
-                      id="filled-basic"
-                      label="Review Question"
-                      placeholder="Review Question"
-                      variant="outlined"
-                      {...register("question")}
-                    />
-
-                    <Button
-                      type="submit"
-                      style={{
-                        padding: '15px 30px',
-                        color: '#fff',
-                        backgroundColor: '#0575B4'
-                      }}
-                      variant="contained" >
-                      Add
-                    </Button>
-
-                  </form>
-                </div>
-              }
-
               <div style={{ position: 'relative' }}>
-                <h1 style={{
-                  textAlign: 'center',
-                  marginBottom: '20px',
-                  color: '#0575B4',
-                }} >Your Question</h1>
-
+                <h1 className={styles.title}> Your Question </h1>
                 {/* ADD QUESTION BUTTON  */}
                 <>
                   {
@@ -314,195 +270,84 @@ const AddReviewTag = () => {
                   }
                 </>
 
-
                 {/* QUESTION TABLE  */}
                 {isLoadingQuestion ?
                   <Loading />
                   :
-                  <Table
-                    style={{
-                      background: '#ccc',
-                      textAlign: 'center'
-                    }}
-                    className="mb-0"
-                  >
-                    <TableHead style={{
-                      textAlign: 'center'
-                    }}>
-                      <TableRow style={{
-                        background: '#0575B4'
-                      }}>
-                        <TableCell style={{
-                          fontWeight: 'bold',
-                          textAlign: 'center',
-                          color: 'white',
-                          borderBottom: '3px solid #ccc'
-                        }}>
+                  <Table className={`mb-0 ${styles.table}`}>
+                    <TableHead className={styles.tableHead}>
+                      <TableRow className={styles.tableHeaderRow}>
+                        <TableCell minWidth={'25%'} className={styles.tableHeaderCell}>
                           No
                         </TableCell>
-                        <TableCell style={{
-                          fontWeight: 'bold',
-                          textAlign: 'center',
-                          color: 'white',
-                          borderBottom: '3px solid #ccc'
-                        }}>
+                        <TableCell minWidth={'25%'} className={styles.tableHeaderCell}>
                           Question
                         </TableCell>
-                        <TableCell style={{
-                          fontWeight: 'bold',
-                          textAlign: 'center',
-                          color: 'white',
-                          borderBottom: '3px solid #ccc'
-                        }}>
+                        <TableCell minWidth={'25%'} className={styles.tableHeaderCell}>
                           Status
                         </TableCell>
-                        <TableCell style={{
-                          fontWeight: 'bold',
-                          textAlign: 'center',
-                          color: 'white',
-                          borderBottom: '3px solid #ccc'
-                        }}>
+                        <TableCell minWidth={'25%'} className={styles.tableHeaderCell}>
                           Options
                         </TableCell>
                       </TableRow>
                     </TableHead>
-                    <TableBody style={{ color: '#545454' }}>
-                      {allQuestion?.map((item, index) => (
-                        <TableRow
-                          style={{
-                            textAlign: 'center',
-                            background: '#fff',
-                          }}
-                          key={index}
-                        >
-                          <TableCell style={{
-                            textAlign: 'center',
-                            fontWeight: '600',
-                            border: "1px solid #ccc"
-                          }}>
-                            {index + 1}
-                          </TableCell>
-                          <TableCell style={{
-                            textAlign: 'left',
-                            fontWeight: '600',
-                            border: "1px solid #ccc",
-                          }}>
-                            {
-                              item?.question
-                            }
-                          </TableCell>
-                          <TableCell style={{
-                            textAlign: 'center',
-                            fontWeight: '600',
-                            border: "1px solid #ccc",
-                          }}>
-                            <div style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center'
-                            }}>
-                              {item?.is_active ? 'Public' : 'Private'}
-                              {/* <button
-                                title={!item?.is_active ? 'Change To Public' : 'Change To Private'}
-                                onClick={() => { handleQuestionUpdate(item?.id, item?.is_active, restaurant_id, item?.question) }}
-                                style={{
-                                  background: '#0575B4',
-                                  width: '25px',
-                                  height: '25px',
-                                  padding: '0px !important',
-                                  borderRadius: '50%',
-                                  fontSize: '1.2rem',
-                                  display: 'flex',
-                                  justifyContent: 'center',
-                                  alignItems: 'center',
-                                  marginLeft: '5px',
-                                  color: '#fff'
-                                }} >
-                                <MdOutlineSwapVert />
-                              </button> */}
-                            </div>
-
-                          </TableCell>
-                          <TableCell style={{
-                            textAlign: 'center',
-                            border: "1px solid #ccc",
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '100%'
-                          }}>
-
-                            {
-                              // !(editQuestion.id === item?.id) &&
-                              <Button
-                                onClick={() => {
-                                  setEditQuestion({
-                                    mode: true,
-                                    id: item?.id,
-                                    question: item?.question,
-                                    serial: index
-                                  });
-                                  setPopupIsOpend(true)
-                                }}
-                                style={{
-                                  padding: "5px 10px",
-                                  width: '100px',
-                                  background: '#0575B4',
-                                  margin: '0px 2px',
-                                  borderRadius: '30px',
-                                  color: 'white'
-                                }}>
-                                Edit
-                              </Button>
-                            }
-                            {
-                              /* {
-                                editQuestion.mode === true && editQuestion.id === item?.id &&
+                    <TableBody className={styles.tableBody}>
+                      {(allQuestion.length > 0) ?
+                        <>
+                          {allQuestion?.map((item, index) => (
+                            <TableRow className={styles.tableBodyRow} key={index} >
+                              <TableCell className={styles.tableBodyCell}>
+                                {index + 1}
+                              </TableCell>
+                              <TableCell className={styles.tableBodyCell}>
+                                {
+                                  item?.question
+                                }
+                              </TableCell>
+                              <TableCell className={styles.tableBodyCell}>
                                 <div
                                   style={{
                                     display: 'flex',
-                                    flexDirection: 'column'
-                                  }}
-                                >
-                                  <Button
-                                    onClick={() => { handleQuestionUpdate(item?.id, item?.is_active, restaurant_id, editQuestion.question) }}
-                                    style={{
-                                      padding: "5px 10px",
-                                      width: '100px',
-                                      background: '#0575B4',
-                                      margin: '0px 2px',
-                                      borderRadius: '30px',
-                                      color: 'white',
-                                      marginBottom: '10px'
-                                    }}
-                                  >
-                                    <BiMemoryCard style={{ marginRight: '5px' }} /> Save
-                                  </Button>
-                                  <Button
-                                    onClick={() => {
-                                      setEditQuestion({
-                                        mode: false,
-                                        id: '',
-                                        question: ""
-                                      })
-                                    }}
-                                    style={{
-                                      padding: "5px 10px",
-                                      width: '100px',
-                                      background: '#ff1100',
-                                      margin: '0px 2px',
-                                      borderRadius: '30px',
-                                      color: 'white'
-                                    }}>
-                                    Cancel
-                                  </Button>
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                  }}>
+                                  {item?.is_active ? 'Public' : 'Private'}
                                 </div>
-  
-                              } */
-                            }
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                              </TableCell>
+                              <TableCell className={styles.optionCell}>
+                                <Button
+                                  onClick={() => {
+                                    setEditQuestion({
+                                      mode: true,
+                                      id: item?.id,
+                                      question: item?.question,
+                                      serial: index
+                                    });
+                                    setPopupIsOpend(true)
+                                  }}
+                                  className={styles.editButtonDiv}
+                                  title='Edit'>
+                                  <BiEdit />
+                                </Button>
+                                <Button
+                                  onClick={() => { handleDeleteQuestion(item?.id) }} 
+                                  className={styles.deleteButtonDiv}
+                                  title='Delete'>
+                                  <MdOutlineDelete />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </>
+                        :
+                        <>
+                          <TableRow>
+                            <TableCell colSpan={4}>
+                              <h2 className={styles.notFoundTitle}>No Data Found!</h2>
+                            </TableCell>
+                          </TableRow>
+                        </>
+                      }
                     </TableBody>
                   </Table>}
               </div>

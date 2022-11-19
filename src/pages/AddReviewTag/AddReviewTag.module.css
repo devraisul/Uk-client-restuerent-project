@@ -16,6 +16,89 @@
 .menuNav {
   margin-left: 10px;
 }
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0575b4;
+}
+
+.form {
+  display: flex;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+}
+.table {
+  background: #ccc;
+  text-align: center;
+}
+.tableHead {
+  textalign: center;
+}
+.tableHeaderRow {
+  background: #0575b4;
+}
+.tableHeaderCell {
+  font-weight: bold !important;
+  text-align: center !important;
+  color: white !important;
+  border-bottom: 3px solid #ccc !important;
+}
+.tableBody {
+  color: #545454 !important;
+}
+.tableBodyRow {
+  text-align: center;
+  background: #fff;
+}
+.tableBodyCell {
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid #ccc;
+}
+.notFoundTitle {
+  text-align: center;
+}
+.optionCell {
+  text-align: center !important;
+  border: 1px solid #ccc !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+.editButtonDiv {
+  width: 30px !important;
+  height: 30px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-size: 1.5rem !important;
+  background: #0575b4 !important;
+  margin: 0px 2px !important;
+  border-radius: 30px !important;
+  color: white !important;
+}
+.editButtonDiv:hover {
+  background-color: #005281 !important;
+}
+.deleteButtonDiv {
+  width: 30px !important;
+  height: 30px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-size: 1.5rem !important;
+  background: #e90000 !important;
+  margin: 0px 2px !important;
+  border-radius: 30px !important;
+  color: white !important;
+}
+.deleteButtonDiv:hover {
+  background: #b10101 !important;
+}
+
 @media only screen and (max-width: 690px) {
   .menuNav {
     display: none !important;
