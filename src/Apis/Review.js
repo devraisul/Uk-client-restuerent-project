@@ -87,7 +87,7 @@ export const addReview = async (id, data) => {
 
 
 // QUESTION
-export const postReviewQuestion = async () => {
+export const postReviewQuestion = async (data) => {
   const userInfo = localStorage.getItem("data");
   const jwt = JSON.parse(userInfo);
   const config = {
@@ -97,8 +97,8 @@ export const postReviewQuestion = async () => {
       Authorization: `Bearer ${jwt.token}`,
     },
   };
-  
-  const result = await axios.post(`/api/review-new/create/questions`, config)
+
+  const result = await axios.post(`/api/review-new/create/questions`, data, config)
     .then((res) => {
       return res.data;
     })
@@ -176,6 +176,20 @@ export const editSingleQuestion = async (data) => {
   }).catch((err) => console.log(err));
 
   return result;
+}
+export const deleteSingleQuestion = async (id) => {
+  const userInfo = localStorage.getItem("data");
+  const jwt = JSON.parse(userInfo).token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  };
+  return await axios.delete(`/api/review-new/delete/questions/${id}`, config).then((res) => {
+    return res;
+  }).catch((err) => console.log(err));
 }
 
 

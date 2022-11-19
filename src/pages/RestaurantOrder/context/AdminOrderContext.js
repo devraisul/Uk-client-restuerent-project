@@ -1,4 +1,4 @@
-import { createContext, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { getdish, getDishById } from "../../../Apis/dish";
 import { getVariationByDishId } from "../../../Apis/variation";
 
@@ -60,20 +60,26 @@ const AdminOrderProvider = ({ children }) => {
   }
   const addToCartWithVariation = () => {
     getDishById(setselectedDishId).then(dis => {
-      setCartData([...cartData, { dish: dis[0], variation: selectedVariations }]);
+      setCartData([...cartData, {dish_id: dis[0]?.id, dish: dis[0], variation: selectedVariations }]);
+      setSelectedVariations([])
     }).then(() => {
       setvariationModalIsOpened(false)
     })
+  }
+  const removeFromCart = (id) => {
+    setCartData(cartData.filter(data=>data?.dish_id !== id))
   }
   const handleAddVariation = (variation) => {
     (selectedVariations.length === 0) ?
       setSelectedVariations([...selectedVariations, variation])
       :
-      (selectedVariations.filter(singleVar => singleVar.id === variation.id).length === 0) && setSelectedVariations([...selectedVariations, variation])
+      (selectedVariations.filter(singleVar => singleVar?.id === variation?.id).length === 0) ? setSelectedVariations([...selectedVariations, variation]):setSelectedVariations(selectedVariations.filter(singleVar => singleVar?.id !== variation?.id))
   }
   const handleRemoveVariation = (variation) => {
     setSelectedVariations(selectedVariations.filter(variations => variations?.id !== variation?.id))
   }
+
+  useEffect(()=>{console.log(cartData);},[cartData])
 
   const providerValue = {
     cartData,
@@ -105,6 +111,7 @@ const AdminOrderProvider = ({ children }) => {
     dishVariations,
     setDishVariations,
     addToCartWithVariation,
+    removeFromCart,
     selectedVariations,
     prntComponentRef
   }

@@ -15,7 +15,7 @@ import OrderPrintInvoice from './OrderPrintInvoice'
 import OrderTableSelection from './OrderTableSelection'
 
 export default function OrderEatInCart() {
-  const { cartData, selectedTable, prntComponentRef } = useContext(AdminOrderContext)
+  const { cartData, selectedTable, prntComponentRef,removeFromCart } = useContext(AdminOrderContext)
 
 
 
@@ -76,6 +76,7 @@ export default function OrderEatInCart() {
   }
   useEffect(() => {
     console.log(isRiciptView);
+    console.log('cartData',cartData);
   }, [isRiciptView])
   return (
     <Box>
@@ -99,14 +100,9 @@ export default function OrderEatInCart() {
                           {
                             cartData.map(data => (
                               <div className='OrderCartCard'>
-
-                                <div
-                                  style={{ width: '300px' }}
-                                >
+                                <div style={{ width: '300px' }} >
                                   <h4 style={{ marginRight: '10px' }}>{data?.dish?.id}</h4>
-                                  <img
-                                    src={`https://mughalsignandprint.co.uk/restaurant/${data?.dish?.image}`} alt=""
-                                  />
+                                  <img src={`https://mughalsignandprint.co.uk/restaurant/${data?.dish?.image}`} alt="" />
                                   <h4>{data?.dish?.name}</h4>
                                 </div>
 
@@ -118,8 +114,7 @@ export default function OrderEatInCart() {
                                     alignItems: "center",
                                     fontWeight: 'bold',
                                     color: '#0575B4'
-                                  }}
-                                >
+                                  }} >
                                   £ {data?.dish?.price}
                                 </div>
 
@@ -128,7 +123,7 @@ export default function OrderEatInCart() {
                                   {qt}
                                   <button onClick={() => increaseQT(data?.dish?.id)}>+</button>
                                 </div>
-                                <button>
+                                <button onClick={()=>removeFromCart(data?.dish?.id)}>
                                   <MdDelete style={{ fontSize: '1.5rem', color: 'red' }} />
                                 </button>
                               </div>

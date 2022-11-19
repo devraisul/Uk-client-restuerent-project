@@ -27,11 +27,38 @@
   color: #fff !important;
   margin: 20px 5px !important;
 }
+.variationRemoveButton {
+  border-radius: 30px !important;
+  background-color: #d5d5d5 !important;
+  color: #fff !important;
+  margin: 10px 10px !important;
+  border: 2px solid #ffffff !important;
+}
+.variationRemoveButtonIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+.variationDisabledButton {
+  border-radius: 30px !important;
+  background-color: #ffbbbb !important;
+  color: rgb(255, 0, 0) !important;
+  margin: 10px 10px !important;
+  border: 2px solid #ff0000 !important;
+}
+.variationDisabledButtonIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
 .variationAddButton {
+  border-radius: 30px !important;
   background-color: #0575b4 !important;
   color: #fff !important;
   margin: 10px 10px !important;
   border: 2px solid #ffffff !important;
+}
+.variationAddButtonIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
 }
 .variationAddButtonSelected {
   background-color: transparent !important;
