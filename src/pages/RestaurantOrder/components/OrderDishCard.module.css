@@ -1,0 +1,13 @@
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image {
+  height: 100%;
+}
+.title {
+  margin-left: 10px;
+  font-size: 0.7rem;
+  text-align: left;
+}

@@ -7,7 +7,7 @@ import { AdminOrderContext } from '../context/AdminOrderContext'
 import OrderCalculator from './OrderCalculator'
 
 export default function OrderCartComp() {
-    const {cartData} = useContext(AdminOrderContext)
+    const { cartData, selectedTable, setCartData, prntComponentRef, removeFromCart, addCartDishQty, removeCartDishQty } = useContext(AdminOrderContext)
     const owner = JSON.parse(localStorage.getItem('data'))
     const [qt, setQt] = useState(1)
     const [isOnPaymentTab, setIsOnPaymentTab] = useState(false)
@@ -19,12 +19,7 @@ export default function OrderCartComp() {
     const goBack = () => {
         setIsOnPaymentTab(false)
     }
-    const dicreaseQT = (id) => {
-        qt > 0 && setQt(qt - 1)
-    }
-    const increaseQT = (id) => {
-        setQt(qt + 1)
-    }
+
 
     return (
         <div className='cartContainerMain'>
@@ -39,14 +34,29 @@ export default function OrderCartComp() {
                                         <p>Empty Cart!</p>
                                     </div>
                                     :
-                                    <div style={{height:'30vh'}} className='cartList'>
-                                        {cartData.map(data => (
-                                            <div className='OrderCartCard'>
+                                    <div style={{ height: '30vh' }} className='cartList'>
+                                        {cartData.map((data, i) => (
+                                            <div key={i} className='OrderCartCard'>
                                                 <div style={{ width: '300px' }}>
                                                     <h4 style={{ marginRight: '10px' }}>{data?.dish?.id}</h4>
-                                                    <img src={`https://mughalsignandprint.co.uk/restaurant/${data?.dish?.image}`} alt="" />
-                                                    <h4>{data?.dish?.name}</h4>
-
+                                                    <img src={`https://mughalsignandprint.co.uk/restaurant2/${data?.dish?.image}`} alt="" />
+                                                    <div
+                                                        style={{
+                                                            flexDirection: 'column',
+                                                            alignItems: 'start',
+                                                            justifyContent: 'start'
+                                                        }}>
+                                                        <h4>{data?.dish?.name}</h4>
+                                                        {data?.variation.length > 0 &&
+                                                            <h6>Options :
+                                                                (<>
+                                                                    {data?.variation.map(variation => (
+                                                                        <>{variation?.name},</>
+                                                                    ))}
+                                                                </>)
+                                                            </h6>
+                                                        }
+                                                    </div>
                                                 </div>
                                                 <div style={{
                                                     display: 'flex',
@@ -56,16 +66,20 @@ export default function OrderCartComp() {
                                                     fontWeight: 'bold',
                                                     color: '#0575B4'
                                                 }}>
-
                                                     £ {data?.dish?.price}
                                                 </div>
+
+
                                                 <div className='OrderQt'>
-                                                    <button
-                                                        onClick={() => dicreaseQT(data?.dish?.id)}>-</button>
-                                                    {qt}
-                                                    <button onClick={() => increaseQT(data?.dish?.id)}>+</button>
+                                                    <button onClick={() => removeCartDishQty(data?.dish?.id)}>-</button>
+                                                    {data?.qty}
+                                                    <button onClick={() => addCartDishQty(data?.dish?.id)}>+</button>
                                                 </div>
-                                                <button><MdDelete style={{ fontSize: '1.5rem', color: 'red' }} /></button>
+                                                <button onClick={() => removeFromCart(data?.dish?.id)}>
+                                                    <MdDelete style={{ fontSize: '1.5rem', color: 'red' }} />
+                                                </button>
+
+
                                             </div>
                                         ))
                                         }

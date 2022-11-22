@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { editSingleQuestion, getAllTag, getReviewAllWithLinkedTags, getSingleQuestion, linkReview } from '../../../Apis/Review';
+import { editSingleQuestion, getAllTag, getReviewAllWithLinkedTags, getSingleQuestion, updateLinkReview } from '../../../Apis/Review';
 import Loading from '../../../components/Loading/Loading';
 import styles from './EditQuestion.module.css';
 
@@ -27,11 +27,6 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
     const [star4, setStar4] = useState()
     const [star5, setStar5] = useState()
     // DEFAULT STAR & TAGS 
-    const [defaultStar1, setDefaultStar1] = useState([])
-    const [defaultStar2, setDefaultStar2] = useState([])
-    const [defaultStar3, setDefaultStar3] = useState([])
-    const [defaultStar4, setDefaultStar4] = useState([])
-    const [defaultStar5, setDefaultStar5] = useState([])
     const [defaultTags1, setDefaultTags1] = useState([])
     const [defaultTags2, setDefaultTags2] = useState([])
     const [defaultTags3, setDefaultTags3] = useState([])
@@ -153,35 +148,37 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                 setAllTags(res?.data);
                 getSingleQuestion(editQuestion?.id)
                     .then((res) => {
-                        console.log('single',res);
+                        console.log('single', res?.data?.stars.find((res) => res.value === 1)?.tags);
                         setSingleQuestion(res?.data);
-                        setDefaultStar1(res?.data?.question_stars[0].star?.star_tags.filter((value, index, self) =>
-                            index === self.findIndex((t) => (
-                                t.tag_id === value.tag_id
-                            ))
-                        ))
-                        setDefaultStar2(res?.data?.question_stars[1].star?.star_tags.filter((value, index, self) =>
-                            index === self.findIndex((t) => (
-                                t.tag_id === value.tag_id
-                            ))
-                        ))
-                        setDefaultStar3(res?.data?.question_stars[2].star?.star_tags.filter((value, index, self) =>
-                            index === self.findIndex((t) => (
-                                t.tag_id === value.tag_id
-                            ))
-                        ))
-                        setDefaultStar4(res?.data?.question_stars[3].star?.star_tags.filter((value, index, self) =>
-                            index === self.findIndex((t) => (
-                                t.tag_id === value.tag_id
-                            ))
-                        ))
-                        setDefaultStar5(res?.data?.question_stars[4].star?.star_tags.filter((value, index, self) =>
-                            index === self.findIndex((t) => (
-                                t.tag_id === value.tag_id
-                            ))
-                        ))
+                        setStar1({
+                            star_id: 1,
+                            tags: res?.data?.stars.find((res) => res.value === 1)?.tags.map(singleTag => { return { tag_id: singleTag?.id } })
+                        })
+                        setStar2({
+                            star_id: 2,
+                            tags: res?.data?.stars.find((res) => res.value === 2)?.tags.map(singleTag => { return { tag_id: singleTag?.id } })
+                        })
+                        setStar3({
+                            star_id: 3,
+                            tags: res?.data?.stars.find((res) => res.value === 3)?.tags.map(singleTag => { return { tag_id: singleTag?.id } })
+                        })
+                        setStar4({
+                            star_id: 4,
+                            tags: res?.data?.stars.find((res) => res.value === 4)?.tags.map(singleTag => { return { tag_id: singleTag?.id } })
+                        })
+                        setStar5({
+                            star_id: 5,
+                            tags: res?.data?.stars.find((res) => res.value === 5)?.tags.map(singleTag => { return { tag_id: singleTag?.id } })
+                        })
+
+                        setDefaultTags1(res?.data?.stars.find((res) => res.value === 1)?.tags.map(tag => { return { value: tag?.id, label: tag?.tag } }))
+                        setDefaultTags2(res?.data?.stars.find((res) => res.value === 2)?.tags.map(tag => { return { value: tag?.id, label: tag?.tag } }))
+                        setDefaultTags3(res?.data?.stars.find((res) => res.value === 3)?.tags.map(tag => { return { value: tag?.id, label: tag?.tag } }))
+                        setDefaultTags4(res?.data?.stars.find((res) => res.value === 4)?.tags.map(tag => { return { value: tag?.id, label: tag?.tag } }))
+                        setDefaultTags5(res?.data?.stars.find((res) => res.value === 5)?.tags.map(tag => { return { value: tag?.id, label: tag?.tag } }))
                     })
                     .then(() => {
+                        setIsAllDone(true)
                         setIsQuestionLoading(false)
                     }).catch(err => { console.log(err) })
             }).catch(err => console.log(err))
@@ -208,7 +205,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
 
 
     useEffect(() => {
-        linkedTags && console.log(linkedTags.filter(link => link?.value === 1));
+        // linkedTags && console.log(linkedTags.filter(link => link?.value === 1));
     }, [linkedTags])
 
 
@@ -220,37 +217,6 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
         }
         return object;
     })
-
-
-
-
-
-
-
-    useEffect(() => {
-        setDefaultTags1(defaultStar1.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
-        setDefaultTags2(defaultStar2.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
-        setDefaultTags3(defaultStar3.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
-        setDefaultTags4(defaultStar4.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
-        setDefaultTags5(defaultStar5.map(op=>{return{value:op?.tag_id,label:op?.tag?.tag}}))
-        console.log('====================================');
-        console.log(defaultTags1);
-        console.log(defaultTags2);
-        console.log(defaultTags3);
-        console.log(defaultTags4);
-        console.log(defaultTags5);
-        console.log('====================================');
-        setIsAllDone(true)
-    }, [
-        defaultStar1,
-        defaultStar2,
-        defaultStar3,
-        defaultStar4,
-        defaultStar5
-    ])
-
-
-
 
 
 
@@ -280,9 +246,11 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
         if ((star1 !== undefined) && (star2 !== undefined) && (star3 !== undefined) && (star4 !== undefined) && (star5 !== undefined)) {
             setIsSubmissionLoading(true)
             editSingleQuestion(questionData).then(res => {
+                console.log({res});
                 // IF QUESTION UPDATE DONE
                 if (res?.data?.id) {
-                    linkReview(linkData).then(res => {
+                    console.log({linkData});
+                    updateLinkReview(linkData).then(res => {
                         // IF LINKED DONE 
                         if (res?.data?.message) {
                             toast.success("Question Updated Successfully!")
@@ -306,7 +274,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
 
     return (
         <div className={styles.popupContainer}>
-            {isQuestionLoading ? <Loading />
+            {isQuestionLoading && isAllDone ? <Loading />
                 :
                 <div className={styles.popupMain}>
                     <h3 className={styles.questionPopupTitle}>Edit Question</h3>
@@ -368,7 +336,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
-                                                defaultValue={isAllDone&&defaultTags1}
+                                                defaultValue={defaultTags1}
                                                 options={option} />
                                         }
                                     </div>
@@ -385,7 +353,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
-                                                defaultValue={isAllDone&&defaultTags2}
+                                                defaultValue={defaultTags2}
                                                 options={option} />
                                         }
                                     </div>
@@ -402,7 +370,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
-                                                defaultValue={isAllDone&&defaultTags3}
+                                                defaultValue={defaultTags3}
                                                 options={option} />
                                         }
                                     </div>
@@ -419,7 +387,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
-                                                defaultValue={isAllDone&&defaultTags4}
+                                                defaultValue={defaultTags4}
                                                 options={option} />
                                         }
                                     </div>
@@ -436,7 +404,7 @@ export default function EditQuestion({ editQuestion, setEditQuestion, setPopupIs
                                                 components={animatedComponents}
                                                 placeholder={'Select Tags'}
                                                 isMulti
-                                                defaultValue={isAllDone&&defaultTags5}
+                                                defaultValue={defaultTags5}
                                                 options={option} />
                                         }
                                     </div>

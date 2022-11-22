@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getReviewAll } from '../../Apis/Review';
+import { getReviewAllWithLinkedTags } from '../../Apis/Review';
 import TableTemplateForRatingQuestions from './components/TableTemplateForRatingQuestions';
 import './Ratting.css';
 
@@ -23,37 +23,18 @@ const StyledRating = styled(Rating)({
 
 
 export default function Ratting() {
-    const [questions, setQuestions] = useState([
-        { id: 1, question: 'Rate delivery service.', rating: '0', tag: [] },
-        { id: 2, question: 'Rate decoration', rating: '0', tag: [] },
-        { id: 3, question: 'Rate welcome drinks', rating: '0', tag: []},
-        { id: 4, question: 'Rate drinks', rating: '0', tag: [] },
-        { id: 5, question: 'Rate dishes', rating: '0', tag: [] },
-        { id: 6, question: `Rate wayter's behaviour`, rating: '0', tag: [] },
-    ])
-    const [tags, setTags] = useState([
-        {id:'1',name:'Bad food'},
-        {id:'2',name:'Tangy'},
-        {id:'3',name:'Broken'},
-        {id:'4',name:'Bad service'},
-        {id:'5',name:'Unhealthy food'}, 
-        {id:'6',name:'Unhealthy environment'},
-        {id:'7',name:'Tasteless food'},
-        {id:'8',name:'Good decoration'},
-        {id:'9',name:'Good food'}, 
-        {id:'10',name:'Good behaviour'}, 
-        {id:'11',name:'Bad decoratin'},
-        {id:'12',name:'Excelant behaviour'}, 
-        {id:'13',name:'Mindblowing decoration'}
-    ])
+
+    const [questions, setQuestions] = useState([])
+
     useEffect(()=>{
-        console.log('====================================');
-        console.log(questions);
-        console.log('====================================');
-        getReviewAll().then(res=>{
-            
+        getReviewAllWithLinkedTags(1).then((res)=>{
+            console.log({res});
+            setQuestions(res.map(question=>{
+                return { id: question?.id, question: question?.question, rating: '0', stars: question?.stars }
+            }))
         })
-    },[questions])
+    },[])
+
     const history = useHistory()
 
 
@@ -77,7 +58,6 @@ export default function Ratting() {
                         { id: 'tag', label: 'Tag', minWidth: 5 },
                     ]}
                     setQuestions={setQuestions}
-                    tags={tags}
                     rows={questions}
                 />
             </div>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { getAllTag, linkReview, postReviewQuestion } from '../../../Apis/Review';
+import { getAllTag, postReviewQuestion, updateLinkReview } from '../../../Apis/Review';
 import Loading from '../../../components/Loading/Loading';
 import styles from './AddQuestion.module.css';
 
@@ -185,7 +185,7 @@ export default function AddQuestion({ setAddPopupIsOpend, setIsQuestionUpdated }
                         star4 !== undefined && linkData.stars.push(star4);
                         star5 !== undefined && linkData.stars.push(star5);
                         console.log('llll',linkData);
-                        linkReview(linkData).then(res => {
+                        updateLinkReview(linkData).then(res => {
                             console.log('189',res);
                                 if (res?.data?.message) {
                                     toast.success("Question Updated Successfully!")

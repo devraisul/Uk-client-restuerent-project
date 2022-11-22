@@ -54,3 +54,22 @@ export const addOrder = async (rest_id, data) => {
     .catch(err => console.log(err));
   return result
 }
+
+export const allOrders = async () => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo)?.token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt}`
+    },
+  };
+ 
+  const result = await axios.get(`/api/order/All/order`, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
+}

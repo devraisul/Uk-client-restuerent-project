@@ -60,7 +60,7 @@ export default function Header(props) {
    
         {/* ORDER POPUP  */}
         <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-          <div  className="popupContainer">
+          <div className="popupContainer">
             <h1 style={{ textAlign: 'center', marginBottom: '50px', color: '#aaa' }}>Choice Your Order Type</h1>
             <Button
               onClick={() => {

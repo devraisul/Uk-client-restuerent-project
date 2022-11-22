@@ -1,5 +1,5 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, styled, Typography } from '@material-ui/core';
-import { Rating } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, styled, Typography } from '@material-ui/core';
+import { Button, Rating } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
 import { FaRegStar, FaStar } from 'react-icons/fa';
@@ -26,7 +26,16 @@ export default function TableTemplateForRatingQuestions({ columns, tags, rows, s
     const [viewIsLoading, setViewIsLoading] = useState(false)
     const [SingleRattingId, setSingleRattingId] = useState()
     const [isSubmitedSuccessfully, setIsSubmitedSuccessfully] = useState(false)
-
+    const [ratingValue, setRatingValue] = useState(0)
+    const [selectedTags, setSelectedTags] = useState([])
+    // SUBMISSION DATA 
+    const [submisionData, setSubmisionData] = useState({
+        description: "",
+        restaurant_id: 1,
+        rate: ratingValue,
+        comment: "",
+        values: selectedTags
+    })
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -36,10 +45,6 @@ export default function TableTemplateForRatingQuestions({ columns, tags, rows, s
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-    const [ratingValue, setRatingValue] = useState(0)
-    const [selectedTags, setSelectedTags] = useState([])
-
 
 
     useEffect(() => {
@@ -51,13 +56,16 @@ export default function TableTemplateForRatingQuestions({ columns, tags, rows, s
 
 
 
-    const handleSelectTag = (id, name, handleSubmit) => {
-        if (selectedTags.filter(i => i.id === id).length > 0) {
-            console.log(id);
-            setSelectedTags(selectedTags.filter(i => i.id !== id));
+    const handleSelectTag = (question_id, tag_id, star_value, handleSubmit) => {
+        if (selectedTags.filter(i => i?.tag_id === tag_id).length > 0) {
+            setSelectedTags(selectedTags.filter(i => i?.tag_id !== tag_id));
             handleSubmit(SingleRattingId)
         } else {
-            setSelectedTags([...selectedTags, { id, name }]);
+            setSelectedTags([...selectedTags, {
+                question_id,
+                tag_id,
+                star_id: star_value
+            }]);
             handleSubmit(SingleRattingId)
         }
     }
@@ -75,7 +83,7 @@ export default function TableTemplateForRatingQuestions({ columns, tags, rows, s
         rows.map(question => {
             if (question?.id === id) {
                 question.rating = ratingValue.toString()
-                question.tag = selectedTags
+                question.stars = selectedTags
             }
         })
         setIsSubmitedSuccessfully(true)
@@ -84,17 +92,8 @@ export default function TableTemplateForRatingQuestions({ columns, tags, rows, s
             setIsSubmitedSuccessfully(false)
         }, 2000);
     }
+
     const [hover, setHover] = React.useState(-1);
-    const labels = {
-        0: [{ id: '1', name: 'Bad food' }, { id: '2', name: 'Tangy' }, { id: '3', name: 'Broken' }],
-        1: [{ id: '1', name: 'Bad food' }, { id: '2', name: 'Tangy' }, { id: '4', name: 'Bad service' }, { id: '5', name: 'Unhealthy food' }, { id: '6', name: 'Unhealthy environment' }],
-        2: [{ id: '7', name: 'Tasteless food' }, { id: '2', name: 'Tangy' }, { id: '3', name: 'Broken' }],
-        3: [{ id: '7', name: 'Tasteless food' }, { id: '8', name: 'Good decoration' }, { id: '4', name: 'Bad service' }],
-        4: [{ id: '9', name: 'Good food' }, { id: '10', name: 'Good behaviour' }, { id: '11', name: 'Bad decoratin' }],
-        5: [{ id: '9', name: 'Good food' }, { id: '12', name: 'Excelant behaviour' }, { id: '13', name: 'Mindblowing decoration' }],
-    };
-
-
 
     const [expanded, setExpanded] = React.useState();
 
@@ -106,10 +105,11 @@ export default function TableTemplateForRatingQuestions({ columns, tags, rows, s
         <>
             <div>
                 {
-                    rows.map(question =>
-                        <Accordion style={{ marginBottom: '2px', borderRadius: '10px', overflow: 'hidden' }} expanded={expanded === question?.id} onChange={handleChange(question?.id)}>
+                    rows.map((question, i) =>
+                        <Accordion key={i} style={{ marginBottom: '2px', borderRadius: '10px', overflow: 'hidden' }} expanded={expanded === question?.id} onChange={handleChange(question?.id)}>
                             <AccordionSummary style={{ background: '#0575B4', color: '#fff' }} aria-controls="panel1d-content" id="panel1d-header">
                                 <Typography className='accordingTitle' variant='h5'>
+                                    {/* {console.log(question)} */}
                                     <span>
                                         {question?.id} {question?.question}
                                     </span>
@@ -137,11 +137,17 @@ export default function TableTemplateForRatingQuestions({ columns, tags, rows, s
                                         />
                                         {ratingValue !== null && (
                                             <div className='ratingTag' sx={{ ml: 2 }}>
-                                                {labels[ratingValue].map((tag) => (
-                                                    <Button onClick={() => handleSelectTag(tag?.id, tag?.name, handleSubmit)} style={{
-                                                        background: `${selectedTags.filter(i => i.id === tag?.id).length > 0 ? '#0575B4' : '#fff'}`,
-                                                        color: `${selectedTags.filter(i => i.id === tag?.id).length > 0 ? '#fff' : '#0575B4'}`
-                                                    }} className="tagName">{tag?.name}</Button>
+                                                {question?.stars.find(star => star.value === ratingValue)?.tags.map((tag, i) => (
+                                                    <Button
+                                                        key={i}
+                                                        onClick={() => handleSelectTag(question?.id, tag?.id, question?.stars.find(star => star.value === ratingValue)?.value,handleSubmit)}
+                                                        style={{
+                                                            background: `${selectedTags.filter(i => i.id === tag?.id).length > 0 ? '#0575B4' : '#fff'}`,
+                                                            color: `${selectedTags.filter(i => i.id === tag?.id).length > 0 ? '#fff' : '#0575B4'}`
+                                                        }}
+                                                        className="tagName">
+                                                        {tag?.tag}
+                                                    </Button>
                                                 ))}
                                             </div>
                                         )}

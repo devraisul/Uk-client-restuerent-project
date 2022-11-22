@@ -33,7 +33,7 @@ export const getDishById = async (id) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  const result = await axios.get(`/api/dishes/getdealsdishes/${id}`, config)
+  const result = await axios.get(`/api/dishes/by-dishid/${id}`, config)
     .then(res => {
       return res.data;
     })

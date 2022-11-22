@@ -40,10 +40,6 @@ export default function RestaurantOrder() {
     }, [order_type])
 
     useEffect(() => {
-        console.log(cartData);
-    }, [cartData])
-
-    useEffect(() => {
         setCartData([])
     }, [order_type])
 

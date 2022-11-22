@@ -1,5 +1,5 @@
 import { Button, Grid } from '@material-ui/core';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 import { MdDoNotDisturb } from 'react-icons/md';
 import Popup from 'reactjs-popup';
@@ -23,15 +23,11 @@ export default function OrderDishesColumn() {
         dishVariations,
         selectedVariations,
         addToCartWithVariation,
-        handleRemoveVariation,
-
-
+        setSelectedVariations
     } = useContext(AdminOrderContext);
     const [isPopupOpened, setIsPopupOpened] = useState(false)
 
-    useEffect(() => {
-        console.log('dishVariations', selectedVariations);
-    }, [selectedVariations])
+
     return (
         <Grid className='singleColumn' item xs={12} sm={12} md={5} >
 
@@ -39,13 +35,16 @@ export default function OrderDishesColumn() {
             <Popup
                 style={{ position: 'relative' }}
                 open={variationModalIsOpened}
-                closeOnDocumentClick onClose={() => { setvariationModalIsOpened(false) }} >
+                closeOnDocumentClick onClose={() => { 
+                    setvariationModalIsOpened(false);
+                    setSelectedVariations([])
+                     }} >
                 <div className={styles.crossPopup}>
                     <button onClick={() => setvariationModalIsOpened(false)}>X</button>
                 </div>
                 <h4 style={{ textAlign: 'center', marginBottom: '10px' }}>Select Variations</h4>
                 {/* VARIATION CONTAINER  */}
-                {console.log(dishVariations)}
+
                 <div className={styles.orderVariationContainer}>
                     <div className={styles.orderVariationContainer}>
                         {

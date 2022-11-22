@@ -28,7 +28,7 @@ import CustomerLogin from "./CustomerLogin/CustomerLogin";
 export default function App() {
   // global
   var { isAuthenticated,user } = useAuth();
-  axios.defaults.baseURL = `https://mughalsignandprint.co.uk/restaurant`;
+  axios.defaults.baseURL = `https://mughalsignandprint.co.uk/restaurant2`;
   
   return (
     <BrowserRouter>

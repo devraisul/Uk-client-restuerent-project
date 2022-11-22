@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AdminOrderContext } from '../context/AdminOrderContext'
 
 export default function OrderPrintInvoice() {
@@ -7,6 +7,14 @@ export default function OrderPrintInvoice() {
     const owner = JSON.parse(localStorage.getItem('data'))
     let today = new Date()
 
+    const [total, setTotal] = useState(0)
+
+    useEffect(() => {
+        setTotal(0)
+        cartData.map(d => {
+            setTotal(total + (d?.qty * d.dish.price));
+        })
+    }, [])
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -37,12 +45,27 @@ export default function OrderPrintInvoice() {
 
                     {
                         cartData.map(dish => (
-                            <>
-
-                            </>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    fontWeight: 'bold'
+                                }}>
+                                {console.log('print', dish)}
+                                <span>{dish?.dish?.name}</span><span>{dish?.qty}</span>
+                            </div>
                         ))
                     }
-
+                    <hr style={{ border: '1px dashed #000', margin: '10px 0px' }} />
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        fontWeight: 'bold'
+                    }}>
+                        <span>Total</span><span>300</span>
+                    </div>
                     <br />
                     <p style={{ textAlign: 'center', fontSize: '0.8rem' }}>Wifi password : Test123</p>
                     <p style={{ textAlign: 'center', fontSize: '0.7rem' }}>THANK YOU! SEE YOU SOON!</p>

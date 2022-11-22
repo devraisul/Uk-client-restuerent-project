@@ -42,9 +42,11 @@ const AdminOrderProvider = ({ children }) => {
   const handleDishClick = (id) => {
     setsetselectedDishId(id)
     getVariationByDishId(id).then((res) => {
-      if (res?.data[0] === undefined) {
+
+      if (res?.data.length === 0) {
+
         getDishById(id).then(dis => {
-          setCartData([...cartData, { dish: dis[0], variation: [] }]);
+          setCartData([...cartData, { dish_id: dis?.id, dish: dis, qty: 1, variation: [] }]);
         })
       } else {
         setDishVariations(res?.data)
@@ -60,26 +62,34 @@ const AdminOrderProvider = ({ children }) => {
   }
   const addToCartWithVariation = () => {
     getDishById(setselectedDishId).then(dis => {
-      setCartData([...cartData, {dish_id: dis[0]?.id, dish: dis[0], variation: selectedVariations }]);
+      setCartData([...cartData, { dish_id: dis?.id, qty: 1, dish: dis, variation: selectedVariations }]);
       setSelectedVariations([])
     }).then(() => {
       setvariationModalIsOpened(false)
     })
   }
   const removeFromCart = (id) => {
-    setCartData(cartData.filter(data=>data?.dish_id !== id))
+    console.log({ id, cartData });
+    setCartData(cartData.filter(data => data?.dish?.id !== id))
   }
   const handleAddVariation = (variation) => {
     (selectedVariations.length === 0) ?
       setSelectedVariations([...selectedVariations, variation])
       :
-      (selectedVariations.filter(singleVar => singleVar?.id === variation?.id).length === 0) ? setSelectedVariations([...selectedVariations, variation]):setSelectedVariations(selectedVariations.filter(singleVar => singleVar?.id !== variation?.id))
+      (selectedVariations.filter(singleVar => singleVar?.id === variation?.id).length === 0) ? setSelectedVariations([...selectedVariations, variation]) : setSelectedVariations(selectedVariations.filter(singleVar => singleVar?.id !== variation?.id))
   }
   const handleRemoveVariation = (variation) => {
     setSelectedVariations(selectedVariations.filter(variations => variations?.id !== variation?.id))
   }
 
-  useEffect(()=>{console.log(cartData);},[cartData])
+  const addCartDishQty = (id) => {
+    console.log(cartData.find(dish => dish?.id === id));
+  }
+
+  const removeCartDishQty = (id) => {
+    console.log(cartData.find(dish => dish?.id === id));
+  }
+  useEffect(() => { console.log(cartData); }, [cartData])
 
   const providerValue = {
     cartData,
@@ -113,7 +123,10 @@ const AdminOrderProvider = ({ children }) => {
     addToCartWithVariation,
     removeFromCart,
     selectedVariations,
-    prntComponentRef
+    prntComponentRef,
+    setSelectedVariations,
+    addCartDishQty,
+    removeCartDishQty
   }
 
   return (

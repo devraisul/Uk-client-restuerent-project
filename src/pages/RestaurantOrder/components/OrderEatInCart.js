@@ -1,10 +1,11 @@
 import { Box, Button, MenuItem, Select, TextField } from '@material-ui/core'
-import React, { useContext, useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import React, { useContext, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BiDollarCircle, BiPrinter } from 'react-icons/bi'
 import { BsArrowReturnLeft, BsArrowRight, BsCashCoin } from 'react-icons/bs'
 import { MdDelete } from 'react-icons/md'
+import { useHistory } from 'react-router-dom'
 import ReactToPrint from 'react-to-print'
 import { addOrder } from '../../../Apis/Order'
 
@@ -15,8 +16,9 @@ import OrderPrintInvoice from './OrderPrintInvoice'
 import OrderTableSelection from './OrderTableSelection'
 
 export default function OrderEatInCart() {
-  const { cartData, selectedTable, prntComponentRef,removeFromCart } = useContext(AdminOrderContext)
+  const { cartData, selectedTable, setCartData, prntComponentRef, removeFromCart, addCartDishQty, removeCartDishQty } = useContext(AdminOrderContext)
 
+  const history = useHistory()
 
 
   const owner = JSON.parse(localStorage.getItem('data'))
@@ -26,7 +28,7 @@ export default function OrderEatInCart() {
   const [isOnCartTab, setIsOnCartTab] = useState(true)
   const [isRiciptView, setIsRiciptView] = useState(false)
   const [inputCustomerName, setInputCustomerName] = useState('')
-  const [inputPhone, setInputPhone] = useState('')
+  const [inputPhone, setInputPhone] = useState()
   const [inputAddress, setInputAddress] = useState('')
 
 
@@ -50,36 +52,41 @@ export default function OrderEatInCart() {
   }
 
 
-  const dicreaseQT = (id) => {
-    qt > 0 && setQt(qt - 1)
-  }
-  const increaseQT = (id) => {
-    setQt(qt + 1)
-  }
-
-
   const submitButton = () => {
     const data = {
-      amount: 0,
+      amount: 350,
       customer_name: inputCustomerName,
       table_number: selectedTable,
       type: 'eat_in',
       phone: inputPhone,
       address: inputAddress,
-      dishes: []
+      dishes: cartData.map(dish => {
+        return {
+          Dish_Price: dish?.dish?.price,
+          qty: dish?.qty,
+          id: dish?.dish?.id,
+          variation: dish?.variation.length > 0 ? dish?.variation.map(variation => {
+            return { id: variation?.id }
+          }) : []
+        }
+      })
     }
-
-    console.log({ inputCustomerName, inputPhone, inputAddress })
+    console.log('ORDER -> ', data);
     addOrder(owner?.restaurant[0]?.id, data).then((res) => {
+      console.log(res);
       toast.success(res?.data?.message);
+      setCartData([])
+      setInputPhone("")
+      setInputAddress("")
+      setInputCustomerName("")
+      setTimeout(() => {
+        history.push('/')
+      }, 1000);
     })
   }
-  useEffect(() => {
-    console.log(isRiciptView);
-    console.log('cartData',cartData);
-  }, [isRiciptView])
   return (
     <Box>
+      <Toaster position='top-right' />
       <>
         {!selectedTable ? <OrderTableSelection />
           :
@@ -98,12 +105,28 @@ export default function OrderEatInCart() {
                         :
                         <div style={{ height: '50vh' }} className='cartList'>
                           {
-                            cartData.map(data => (
-                              <div className='OrderCartCard'>
+                            cartData.map((data, i) => (
+                              <div key={i} className='OrderCartCard'>
                                 <div style={{ width: '300px' }} >
                                   <h4 style={{ marginRight: '10px' }}>{data?.dish?.id}</h4>
-                                  <img src={`https://mughalsignandprint.co.uk/restaurant/${data?.dish?.image}`} alt="" />
-                                  <h4>{data?.dish?.name}</h4>
+                                  <img src={`https://mughalsignandprint.co.uk/restaurant2/${data?.dish?.image}`} alt="" />
+                                  <div
+                                    style={{
+                                      flexDirection: 'column',
+                                      alignItems: 'start',
+                                      justifyContent: 'start'
+                                    }}>
+                                    <h4>{data?.dish?.name}</h4>
+                                    {data?.variation.length > 0 &&
+                                      <h6>Options :
+                                        (<>
+                                          {data?.variation.map(variation => (
+                                            <>{variation?.name},</>
+                                          ))}
+                                        </>)
+                                      </h6>
+                                    }
+                                  </div>
                                 </div>
 
                                 <div
@@ -119,11 +142,11 @@ export default function OrderEatInCart() {
                                 </div>
 
                                 <div className='OrderQt'>
-                                  <button onClick={() => dicreaseQT(data?.dish?.id)}>-</button>
-                                  {qt}
-                                  <button onClick={() => increaseQT(data?.dish?.id)}>+</button>
+                                  <button onClick={() => removeCartDishQty(data?.dish?.id)}>-</button>
+                                  {data?.qty}
+                                  <button onClick={() => addCartDishQty(data?.dish?.id)}>+</button>
                                 </div>
-                                <button onClick={()=>removeFromCart(data?.dish?.id)}>
+                                <button onClick={() => removeFromCart(data?.dish?.id)}>
                                   <MdDelete style={{ fontSize: '1.5rem', color: 'red' }} />
                                 </button>
                               </div>
@@ -139,7 +162,7 @@ export default function OrderEatInCart() {
 
 
                 {/* PRINT BUTTON FOR RECEIPT  */}
-                {isRiciptView && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width:'92%', position: 'absolute', bottom: 0 }}>
+                {isRiciptView && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '92%', position: 'absolute', bottom: 0 }}>
                   <Button className='OrderRecipetButton' onClick={goBack}>Go Back <BsArrowReturnLeft style={{ marginLeft: '10px' }} /></Button>
                   <ReactToPrint trigger={() => (
                     <Button className='OrderRecipetButton'>
@@ -153,7 +176,7 @@ export default function OrderEatInCart() {
                 <div className='OrderCartButtonContainer'>
 
                   {!isRiciptView && <>
-                    <Button className='OrderCartButton' onClick={()=>setIsRiciptView(true)} >
+                    <Button className='OrderCartButton' onClick={() => setIsRiciptView(true)} >
                       Reciept <BiPrinter style={{ marginLeft: '10px', fontSize: '1.4rem' }} />
                     </Button>
 
@@ -193,7 +216,7 @@ export default function OrderEatInCart() {
                     id='phone'
                     name='phone'
                     className='OrderEatInInput'
-                    type="tel"
+                    type="number"
                     placeholder='Phone Number' />
 
                   <label className='OrderEatInInputLabel' htmlFor="address">

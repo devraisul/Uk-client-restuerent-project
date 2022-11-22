@@ -1,6 +1,7 @@
 import { Button, Grid } from '@material-ui/core'
 import React from 'react'
 import { FiCameraOff } from 'react-icons/fi'
+import styles from './OrderDishCard.module.css'
 
 export default function OrderDishCard({ handleDishClick, dis }) {
     return (
@@ -10,9 +11,9 @@ export default function OrderDishCard({ handleDishClick, dis }) {
                 variant="contained"
                 className='menuCardButton'
             >
-                <span>
+                <span className={styles.imageContainer}>
                     {dis?.image ?
-                        <img src={`https://mughalsignandprint.co.uk/restaurant/${dis?.image}`} alt="" />
+                        <img className={styles.image} src={`https://mughalsignandprint.co.uk/restaurant2/${dis?.image}`} alt="" />
                         :
                         <FiCameraOff style={{
                             marginRight: '10px',
@@ -20,7 +21,7 @@ export default function OrderDishCard({ handleDishClick, dis }) {
                         }} />
                     }
                 </span>
-                <span>
+                <span className={styles.title}>
                     <p>{dis?.name}</p>
                 </span>
             </Button>

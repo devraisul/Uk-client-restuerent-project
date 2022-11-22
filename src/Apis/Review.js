@@ -328,6 +328,22 @@ export const linkReview = async (data) => {
 
   return result;
 }
+export const updateLinkReview = async (data) => {
+  const userInfo = localStorage.getItem("data");
+  const jwt = JSON.parse(userInfo).token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  };
+  const result = await axios.post(`/api/review-new/owner/update/questions?_method=PATCH`, data, config).then((res) => {
+    return res;
+  }).catch((err) => console.log(err));
+
+  return result;
+}
 
 
 
