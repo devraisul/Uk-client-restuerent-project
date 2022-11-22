@@ -1,5 +1,6 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -11,31 +12,24 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import moment from 'moment/moment';
-import PropTypes from 'prop-types';
+import moment from 'moment';
 import * as React from 'react';
+import { useEffect } from 'react';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { allOrders } from '../../Apis/Order';
+import Loading from '../../components/Loading/Loading';
 
-function createData(name, calories, fat, carbs, protein, price, actions) {
+function createData(id, order_type, status, order_date, amount, customer_id, customer_name, customer_phone, customer_address, table_number, dishes) {
     return {
-        name,
-        calories,
-        fat,
-        carbs,
-        protein,
-        price,
-        actions,
-        history: [
-            {
-                date: '2020-01-05',
-                customerId: '11091700',
-                amount: 3,
-            },
-            {
-                date: '2020-01-02',
-                customerId: 'Anonymous',
-                amount: 1,
-            },
-        ],
+        id,
+        order_type,
+        status,
+        order_date: moment(order_date).format('LLL'),
+        amount,
+        table_number,
+        dishes,
+        customer_id,
+        customer_name,
     };
 }
 
@@ -56,31 +50,68 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {row.name}
+                    {row.id}
                 </TableCell>
-                <TableCell align="center">{row.calories}</TableCell>
+                <TableCell align="center">{row.order_type}</TableCell>
 
-                {(row.fat == 'Processing') &&
-                    <TableCell style={{ color: '#ff8000', }} align="center"><span style={{ padding: '3px 15px', background: '#ffcc99',borderRadius:'30px',width:'200px' }}>{row.fat}</span></TableCell>
-                }
-                {row.fat == 'Complete' && (
-                    <TableCell style={{ color: '#00cc00', }} align="center"><span style={{ padding: '3px 15px', background: '#b3ffb3',borderRadius:'30px',width:'200px' }}>{row.fat}</span></TableCell>
+                {(row.status === 'Processing') && (
+                    <TableCell style={{ color: '#ff8000', }} align="center">
+                        <span style={{ padding: '3px 15px', background: '#ffcc99', borderRadius: '30px', width: '200px' }}>
+                            {row.status}
+                        </span>
+                    </TableCell>
                 )}
-                {row.fat == 'Pending' && (
-                    <TableCell style={{ color: '#aaa', }} align="center"><span style={{ padding: '3px 15px', background: '#ddd',borderRadius:'30px',width:'200px' }}>{row.fat}</span></TableCell>
+                {row.status === 'Complete' && (
+                    <TableCell style={{ color: '#00cc00', }} align="center">
+                        <span style={{ padding: '3px 15px', background: '#b3ffb3', borderRadius: '30px', width: '200px' }}>
+                            {row.status}
+                        </span>
+                    </TableCell>
+                )}
+                {row.status === 'pending' && (
+                    <TableCell style={{ color: '#aaa', }} align="center">
+                        <span style={{ padding: '3px 15px', background: '#ddd', borderRadius: '30px', width: '200px' }}>
+                            {row.status}
+                        </span>
+                    </TableCell>
                 )}
 
-                <TableCell align="center">{row.carbs}</TableCell>
-                <TableCell align="center">{row.protein}</TableCell>
-                <TableCell align="center">{row.actions}</TableCell>
+                <TableCell align="center">{row.order_date}</TableCell>
+                <TableCell align="center">{row.amount}</TableCell>
+                <TableCell align="center">
+                    <Button title='options'><BsThreeDotsVertical /></Button>
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
-                            <Typography variant="h6" gutterBottom component="div">
+                            <Typography variant="h5" color={'#0575B4'} gutterBottom component="div">
                                 Details
                             </Typography>
+                            <Box width={'200px'} marginBottom={'20px'}>
+                                <Typography variant="h6">Customer details</Typography>
+                                <Table style={{margin:'10px 10px'}}>
+                                    <TableBody>
+                                        <TableRow>
+                                            <td><strong>ID :</strong></td>
+                                            <td>{row?.customer_id || 'N/A'}</td>
+                                        </TableRow>
+                                        <TableRow>
+                                            <td><strong>Name :</strong></td>
+                                            <td>{row?.customer_name || 'N/A'}</td>
+                                        </TableRow>
+                                        <TableRow>
+                                            <td><strong>Phone :</strong></td>
+                                            <td>{row?.customer_phone || 'N/A'}</td>
+                                        </TableRow>
+                                        <TableRow>
+                                            <td><strong>Address :</strong></td>
+                                            <td>{row?.customer_address || 'N/A'}</td>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </Box>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
@@ -92,19 +123,19 @@ function Row(props) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.history.map((historyRow) => (
-                                        <TableRow key={historyRow.date}>
+                                    {/* {row.dishes.map((dishe) => (
+                                        <TableRow key={dishe.id}>
                                             <TableCell>a</TableCell>
                                             <TableCell component="th" scope="row">
-                                                {historyRow.date}
+
                                             </TableCell>
-                                            <TableCell>{historyRow.customerId}</TableCell>
-                                            <TableCell align="right">{historyRow.amount}</TableCell>
+                                            <TableCell></TableCell>
+                                            <TableCell align="right"></TableCell>
                                             <TableCell align="right">
-                                                {Math.round(historyRow.amount * row.price * 100) / 100}
+
                                             </TableCell>
                                         </TableRow>
-                                    ))}
+                                    ))} */}
                                 </TableBody>
                             </Table>
                         </Box>
@@ -115,23 +146,7 @@ function Row(props) {
     );
 }
 
-Row.propTypes = {
-    row: PropTypes.shape({
-        calories: PropTypes.number.isRequired,
-        carbs: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        history: PropTypes.arrayOf(
-            PropTypes.shape({
-                amount: PropTypes.number.isRequired,
-                customerId: PropTypes.string.isRequired,
-                date: PropTypes.string.isRequired,
-            }),
-        ).isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        protein: PropTypes.number.isRequired,
-    }).isRequired,
-};
+
 const TYPES = [
     // 'Take Away',
     'Dine In',
@@ -142,110 +157,22 @@ const STATUS = [
     'Complete',
     'Pending',
 ]
-const rows = [
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-    createData(
-        `#${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`,
-        `${TYPES[Math.floor(Math.random() * (TYPES.length))]}`,
-        `${STATUS[Math.floor(Math.random() * (STATUS.length))]}`,
-        `${moment(new Date()).format('LLL')}`,
-        `${Math.floor(Math.random() * (2000 - 10 + 1)) + 10}`,
-        0,
-        0
-    ),
-
-];
+const rows = [];
 
 export default function CollapsibleTable() {
+    const [isLoading, setIsLoading] = React.useState(true)
+
+    useEffect(() => {
+        allOrders().then((res) => {
+            setIsLoading(true)
+            res?.data.map(order => {
+                rows.push(createData(order?.id, order?.type, order?.status, order?.created_at, order?.amount, order?.customer_id, order?.customer_name, order?.customer_phone, order?.customer_address, order?.table_number, order?.detail))
+            });
+        }).then(() => {
+            setIsLoading(false)
+        }).catch(err => { console.log(err); })
+    }, [])
+
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
@@ -260,11 +187,13 @@ export default function CollapsibleTable() {
                         <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Actions</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <Row key={row.name} row={row} />
-                    ))}
-                </TableBody>
+
+                {isLoading ? <Loading /> :
+                    <TableBody>
+                        {rows.map((row) => (
+                            <Row key={row.id} row={row} />
+                        ))}
+                    </TableBody>}
             </Table>
         </TableContainer>
     );

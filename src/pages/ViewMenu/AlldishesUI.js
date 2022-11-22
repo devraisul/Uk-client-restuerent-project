@@ -287,8 +287,8 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
             <TableCell width="5%">{dishes?.id}</TableCell>
             <TableCell width="15%">{dishes?.name}</TableCell>
             <TableCell width="10%">£ {dishes?.price}</TableCell>
-            <TableCell width="15%">{trimString(dishes?.description)}</TableCell>
-            <TableCell style={{ padding: '0' }} width="30%">
+            <TableCell width="20%">{trimString(dishes?.description)}</TableCell>
+            <TableCell style={{ padding: '0' }} width="20%">
               <div style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -302,7 +302,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                     }}
                     height={'100px'}
                     className="roundimgg"
-                    src={`https://mughalsignandprint.co.uk/restaurant/${dishes?.image}`}
+                    src={`https://mughalsignandprint.co.uk/restaurant2/${dishes?.image}`}
                     alt={`${dishes?.name}`}
                     onClick={(e) => setOpen2(true)}
                   />
@@ -334,8 +334,6 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                       <li key={i} style={{
                         width: "100%",
                         padding: '1px 10px',
-                        background: '#0575B4',
-                        color: '#ffffff',
                         margin: '1px 0px',
                         borderRadius: '30px',
                         justifyContent: 'space-between',
@@ -367,7 +365,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                 )}
               </div>
             </TableCell>
-            <TableCell width="5%">
+            <TableCell width="10%">
               <Box>
                 <AiFillEdit
                   title='edit'
@@ -380,7 +378,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                   onClick={(e) => handleDeleteDish(e)}
                 ></FiTrash2>
                 <AiOutlineInfoCircle
-                  title='delete'
+                  title='details'
                   style={{ fontSize: '1.2rem', margin: '2px', color: '#0575B4', cursor: 'pointer' }}
                   onClick={(e) => handleViewDishDetails(e)}
                 ></AiOutlineInfoCircle>

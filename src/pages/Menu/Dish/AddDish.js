@@ -60,6 +60,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
     const { name, value } = e.target;
     console.log('drom', { vId, name, value });
     const objID = isChecked.findIndex((obj => obj.type_id === vId));
+
     isChecked[objID].no_of_varation_allowed = parseInt(value)
 
     variations.map(variation => {
@@ -97,19 +98,17 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
 
     if (inEditMode?.status) {
       // UPDATE DISH 
-      dishData.id = inEditMode?.dish_id
+      dishData.id = inEditMode?.dish_id;
+      console.log({ dishData });
       updateSingleDish(dishData).then(res => {
-        console.log('single',res);
+        console.log('single', res);
         const variationArray = isChecked.filter(data => data.type_id !== 0)
         var Data = new FormData()
         // IF HAVE IMAGE AND HAVE VARIATIONS
-        console.log('data', data);
         if (data?.image[0] !== undefined) {
           Data.append('image', data?.image[0], data?.image[0].name);
-          addDishImage(res?.data[0]?.id, Data).then((resImg) => {
-            console.log('====================================');
-            console.log(resImg);
-            console.log('====================================');
+
+          addDishImage(res?.data?.id, Data).then((resImg) => {
             if (resImg?.data) {
               // IF IMAGE AND VARIATION HAVE 
               if (variationArray.length > 0) {
@@ -177,6 +176,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
         if (data?.image[0] !== undefined) {
           Data.append('image', data?.image[0], data?.image[0].name);
           addDishImage(res.data[0]?.id, Data).then((resImg) => {
+            console.log('imageData: ',resImg);
             if (resImg.data) {
               // IF IMAGE AND VARIATION HAVE 
               if (variationArray.length > 0) {
@@ -253,11 +253,13 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
       setIsDishLoading(true)
       getDishById(inEditMode?.dish_id)
         .then(res => {
-          setSingleDish(res[0]);
-          console.log("dishData", res[0]);
-          if (res.length > 0) {
-            getVariationByRestaurantIdAndDishId(res[0]?.id)
+          console.log('data', res);
+          setSingleDish(res);
+          console.log("dishData", res?.id);
+          if (res.id) {
+            getVariationByRestaurantIdAndDishId(res?.id)
               .then(res => {
+                console.log(res);
                 setSingleVariation(res);
                 setIsDishLoading(false)
               })
@@ -267,10 +269,6 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
 
   }, [inEditMode])
 
-
-  useEffect(() => {
-    console.log('he he', singleVariation);
-  }, [singleVariation])
 
 
   return (
@@ -326,9 +324,6 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
                   >Variations</Button>
                 </div>
 
-
-
-
                 {/* MAIN FORM  */}
                 {isDishLoading ?
                   <Loading />
@@ -340,24 +335,79 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
                         <h1>Add Dish</h1>
                         <div className={styles.addDishForm}>
                           <div className={styles.inputWrapper}>
-                            <label htmlFor="DishName">Dish Name <span className={styles.errorMsg}>{errors?.DishName && "Dish Name is required! "}</span></label>
-                            <input defaultValue={singleDish?.name} type="text" placeholder="Dish name" id='DishName' {...register("DishName", { required: true })} />
+                            <label
+                              htmlFor="DishName">
+                              Dish Name
+                              <span
+                                className={styles.errorMsg}>
+                                {errors?.DishName && "Dish Name is required! "}
+                              </span>
+                            </label>
+                            <input
+                              defaultValue={singleDish?.name}
+                              type="text"
+                              placeholder="Dish name"
+                              id='DishName'
+                              {...register("DishName", { required: true })} />
+                          </div>
+                          <div
+                            className={styles.inputWrapper} >
+                            <label
+                              htmlFor="description">
+                              Description <span className={styles.errorMsg}>
+                                {errors?.description && "Description is required! "}
+                              </span>
+                            </label>
+                            <input
+                              defaultValue={singleDish?.description}
+                              type="text"
+                              placeholder="description"
+                              id='description'
+                              {...register("description", { required: true })} />
+                          </div>
+                          <div
+                            className={styles.inputWrapper} >
+                            <label
+                              htmlFor="price">
+                              Price <span className={styles.errorMsg}>
+                                {errors?.price && "Price is required! "}
+                              </span>
+                            </label>
+                            <input
+                              defaultValue={singleDish?.price}
+                              onWheel={(e) => e.target.blur()}
+                              type="number"
+                              placeholder="price"
+                              id='price'
+                              {...register("price", { required: false })} />
                           </div>
                           <div className={styles.inputWrapper} >
-                            <label htmlFor="description">Description <span className={styles.errorMsg}>{errors?.description && "Description is required! "}</span></label>
-                            <input defaultValue={singleDish?.description} type="text" placeholder="description" id='description' {...register("description", { required: true })} />
+                            <label
+                              htmlFor="take_away">
+                              Delivery <span
+                                className={styles.reqMessage}>
+                                (optional)
+                              </span>
+                            </label>
+                            <input
+                              defaultValue={singleDish?.delivery}
+                              onWheel={(e) => e.target.blur()}
+                              type="number"
+                              placeholder="delivery"
+                              id='delivery'
+                              {...register("delivery", { required: false })} />
                           </div>
                           <div className={styles.inputWrapper} >
-                            <label htmlFor="price">Price <span className={styles.errorMsg}>{errors?.price && "Price is required! "}</span></label>
-                            <input defaultValue={singleDish?.price} onWheel={(e) => e.target.blur()} type="number" placeholder="price" id='price' {...register("price", { required: false })} />
-                          </div>
-                          <div className={styles.inputWrapper} >
-                            <label htmlFor="take_away">Delivery <span className={styles.reqMessage}>(optional) </span></label>
-                            <input defaultValue={singleDish?.delivery} onWheel={(e) => e.target.blur()} type="number" placeholder="delivery" id='delivery' {...register("delivery", { required: false })} />
-                          </div>
-                          <div className={styles.inputWrapper} >
-                            <label htmlFor="take_away">Take Away <span className={styles.reqMessage}>(optional) </span></label>
-                            <input defaultValue={singleDish?.delivery} onWheel={(e) => e.target.blur()} type="number" placeholder="take_away" id='take_away' {...register("take_away", { required: false })} />
+                            <label
+                              htmlFor="take_away">Take Away <span className={styles.reqMessage}>(optional) </span>
+                            </label>
+                            <input
+                              defaultValue={singleDish?.delivery}
+                              onWheel={(e) => e.target.blur()}
+                              type="number"
+                              placeholder="take_away"
+                              id='take_away'
+                              {...register("take_away", { required: false })} />
                           </div>
                           <div className={styles.inputWrapper} >
                             <span>Image <span className='reqMessage'>(optional) </span></span>
@@ -367,7 +417,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
                               {!imageUrl ?
                                 <img className={styles.imageUpPlaceholder}
                                   alt={"profile_pic"}
-                                  src={`https://mughalsignandprint.co.uk/restaurant/${singleDish?.image}`}
+                                  src={`https://mughalsignandprint.co.uk/restaurant2/${singleDish?.image}`}
                                 /> :
                                 <img className={styles.imageUp}
                                   alt={"profile_pic"}
@@ -380,12 +430,18 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
                               </>}
                             </div>
                           </label>
-                          <input type={"file"} accept={"image/x-png,image/jpg,image/jpeg"} style={{ display: 'none' }} placeholder="image" id='image' {...register("image", {
-                            onChange: (e) => {
-                              setImageUrl(URL.createObjectURL(e.target.files[0]));
-                            },
-                            required: false,
-                          })} />
+                          <input
+                            type={"file"}
+                            accept={"image/x-png,image/jpg,image/jpeg"}
+                            style={{ display: 'none' }}
+                            placeholder="image"
+                            id='image'
+                            {...register("image", {
+                              onChange: (e) => {
+                                setImageUrl(URL.createObjectURL(e.target.files[0]));
+                              },
+                              required: false,
+                            })} />
                         </div>
                       </div>
 
@@ -422,16 +478,15 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
                             <TableBody>
                               {variations.map((variation, index) => (
                                 <TableRow key={index}>
-
                                   <TableCell>
                                     <input
                                       defaultValue={variation?.type_id}
-
                                       defaultChecked={variation?.type_id === singleVariation[index]?.type_id ? true : false}
-                                      onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed ? variation?.no_of_varation_allowed : singleVariation.no_of_varation_allowed) }} type="checkbox"
+                                      onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed ? variation?.no_of_varation_allowed : singleVariation.no_of_varation_allowed) }}
+                                      type="checkbox"
                                       name="" />
                                   </TableCell>
-                                  <TableCell>{variation?.name}</TableCell>
+                                  <TableCell>{variation?.name}{console.log(variation)}</TableCell>
                                   <TableCell>
 
                                     <select
