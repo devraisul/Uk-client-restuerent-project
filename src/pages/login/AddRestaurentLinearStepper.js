@@ -19,13 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 function getSteps() {
   return [
-    "Personal Information",
+    "Business Information",
     "Contact Information",
-    "Adress Information",
     "Website Information",
   ];
 }
-
+// STEPS FORM 
 const BasicForm = () => {
   const { control, formState: { errors } } = useFormContext();
   return (
@@ -34,15 +33,15 @@ const BasicForm = () => {
         control={control}
         name="Name"
         rules={{
-          required: "* Name is required"
+          required: "* Business Name is required"
         }}
         render={({ field }) => (
           <TextField
             type={"text"}
             id="name"
-            label="Name"
+            label="Business Name *"
             variant="outlined"
-            placeholder="Enter Your Name"
+            placeholder="Enter Your Business Name"
             fullWidth
             margin="normal"
             {...field}
@@ -56,74 +55,25 @@ const BasicForm = () => {
         control={control}
         name="About"
         render={({ field }) => (
-          <TextField
-            type={"text"}
-            id="about"
-            label="About"
-            variant="outlined"
-            placeholder="About"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
+          <>
+            {console.log(errors)}
+            <TextField
+              type={"text"}
+              id="about"
+              label="Business About"
+              variant="outlined"
+              placeholder="Enter Your Business About"
+              fullWidth
+              margin="normal"
+              {...field}
+            />
+          </>
         )}
       />
     </>
   );
 };
 const ContactForm = () => {
-  const { control, formState: { errors } } = useFormContext();
-  return (
-    <>
-      <Controller
-        control={control}
-        name="EmailAddress"
-        rules={{
-          required: "* Email is required"
-        }}
-        render={({ field }) => (
-          <TextField
-            type={"email"}
-            id="email"
-            label="E-mail"
-            variant="outlined"
-            placeholder="Enter Your E-mail Address"
-            fullWidth
-            required
-            margin="normal"
-            {...field}
-            error={errors.EmailAddress}
-            helperText={errors?.EmailAddress?.message}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="PhoneNumber"
-        rules={{
-          required: "* Phone number mustbe have 11 digit (require)",
-          minLength: 11,
-          maxLength: 11
-        }}
-        render={({ field, formState: { errors } }) => (
-          <TextField
-            type={"number"}
-            id="phone-number"
-            label="Phone Number"
-            variant="outlined"
-            placeholder="Enter Your 11 Digit Phone Number"
-            fullWidth
-            margin="normal"
-            error={errors.PhoneNumber}
-            helperText={errors?.PhoneNumber?.message}
-            {...field}
-          />
-        )}
-      />
-    </>
-  );
-};
-const AboutForm = () => {
   const { control, formState: { errors } } = useFormContext();
   return (
     <>
@@ -137,12 +87,13 @@ const AboutForm = () => {
           <TextField
             type={"text"}
             id="address"
-            label="Address"
+            label="Address *"
             variant="outlined"
             placeholder="Enter Your Address"
             fullWidth
             margin="normal"
             {...field}
+            error={errors?.Address}
             helperText={errors?.Address?.message}
           />
         )}
@@ -155,16 +106,47 @@ const AboutForm = () => {
         }}
         render={({ field }) => (
           <TextField
-            type={"number"}
+            type={"text"}
             id="PostCode"
-            label="Post Code"
+            label="Post Code *"
             variant="outlined"
             placeholder="Enter Your PostCode"
             fullWidth
             margin="normal"
             {...field}
+            error={errors?.PostCode}
             helperText={errors?.PostCode?.message}
           />
+        )}
+      />
+      <Controller
+        control={control}
+        name="PhoneNumber"
+        rules={{
+          required: false,
+          minLength: 11,
+          maxLength: 11
+        }}
+        render={({ field, formState: { errors } }) => (
+          <>
+            {console.log(errors)}
+            <TextField
+              type={"number"}
+              id="phone-number"
+              label="Phone Number"
+              variant="outlined"
+              placeholder="Enter Your 11 Digit Phone Number"
+              fullWidth
+              margin="normal"
+              error={errors?.PhoneNumber}
+              helperText={
+                (errors?.PhoneNumber?.type === 'maxLength' && '* Phone number mustbe have 11 digit (required)') ||
+                (errors?.PhoneNumber?.type === 'minLength' && '* Phone number mustbe have 11 digit (required)')
+              }
+              {...field}
+            />
+          </>
+
         )}
       />
     </>
@@ -176,10 +158,23 @@ const WebsiteForm = () => {
     <>
       <Controller
         control={control}
+        name="EmailAddress"
+        render={({ field }) => (
+          <TextField
+            type={"email"}
+            id="email"
+            label="E-mail"
+            variant="outlined"
+            placeholder="Enter Your E-mail Address"
+            fullWidth
+            margin="normal"
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        control={control}
         name="Webpage"
-        rules={{
-          required: "* Webpage is required"
-        }}
         render={({ field }) => (
           <TextField
             type={"text"}
@@ -190,16 +185,12 @@ const WebsiteForm = () => {
             fullWidth
             margin="normal"
             {...field}
-            helperText={errors?.Webpage?.message}
           />
         )}
       />
       <Controller
         control={control}
         name="homeText"
-        rules={{
-          required: "* Home text is required"
-        }}
         render={({ field }) => (
           <TextField
             type={"text"}
@@ -210,7 +201,6 @@ const WebsiteForm = () => {
             fullWidth
             margin="normal"
             {...field}
-            helperText={errors?.homeText?.message}
           />
         )}
       />
@@ -243,7 +233,6 @@ const WebsiteForm = () => {
               label="enable_question"
               variant="outlined"
               placeholder="Enter Your question"
-              // margin="normal"
               {...field}
             />
           )}
@@ -254,6 +243,8 @@ const WebsiteForm = () => {
     </>
   );
 };
+
+
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -261,8 +252,6 @@ function getStepContent(step) {
     case 1:
       return <ContactForm />;
     case 2:
-      return <AboutForm />;
-    case 3:
       return <WebsiteForm />;
     default:
       return "unknown step";
@@ -297,7 +286,7 @@ const AddRestaurentLinearStepper = () => {
     return skippedSteps.includes(step);
   };
   const handleNext = (data) => {
-    if (activeStep == steps.length - 1) {
+    if (activeStep === steps.length - 1) {
       setIsLoading(true);
       addRestaurent(data).then((res) => {
         setIsLoading(false);
@@ -326,7 +315,8 @@ const AddRestaurentLinearStepper = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        maxWidth:'400px'
       }}>
       <h1
         style={{
@@ -359,7 +349,6 @@ const AddRestaurentLinearStepper = () => {
           textAlign: 'center',
           fontWeight: 'bold',
           fontSize: '15px'
-
         }}>
           <span style={{
             fontSize: '25px'
@@ -374,14 +363,11 @@ const AddRestaurentLinearStepper = () => {
               <div
                 style={{
                   marginTop: "20px",
-                }}
-              >
-
+                }} >
                 <Button
                   className={classes.button}
                   disabled={activeStep === 0}
-                  onClick={handleBack}
-                >
+                  onClick={handleBack} >
                   back
                 </Button>
                 <Button
@@ -390,8 +376,7 @@ const AddRestaurentLinearStepper = () => {
                   variant="contained"
                   color="primary"
                   // onClick={handleNext}
-                  type="submit"
-                >
+                  type="submit" >
                   {isLoading ? "..." : (activeStep === steps.length - 1 ? "Finish" : "Next")}
                 </Button>
               </div>

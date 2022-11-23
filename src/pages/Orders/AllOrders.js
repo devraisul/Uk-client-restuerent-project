@@ -91,7 +91,7 @@ function Row(props) {
                             </Typography>
                             <Box width={'200px'} marginBottom={'20px'}>
                                 <Typography variant="h6">Customer details</Typography>
-                                <Table style={{margin:'10px 10px'}}>
+                                <Table style={{ margin: '10px 10px' }}>
                                     <TableBody>
                                         <TableRow>
                                             <td><strong>ID :</strong></td>

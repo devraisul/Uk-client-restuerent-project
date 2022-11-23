@@ -1,14 +1,8 @@
-import {
-  Button, Step,
-  StepLabel, Stepper, TextField, Typography
-} from "@material-ui/core";
+import { Button, Step, StepLabel, Stepper, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import React, { useState } from "react";
-import {
-  Controller,
-  FormProvider, useForm, useFormContext
-} from "react-hook-form";
+import { Controller, FormProvider, useForm, useFormContext } from "react-hook-form";
 import { NavLink, useHistory } from "react-router-dom";
 import { userRegister } from "../../Apis/Auth";
 import { useAuth } from "../../context/AuthContext";
@@ -19,9 +13,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function getSteps() {
   return ["Basic information", "Contact information", "Security information"];
 }
+
+
 const BasicForm = () => {
   const { control, formState: { errors } } = useFormContext();
   return (
@@ -43,6 +40,7 @@ const BasicForm = () => {
             type={'text'}
             margin="normal"
             {...field}
+            error={errors?.first_Name}
             helperText={errors?.first_Name?.message}
           />
         )}
@@ -65,8 +63,8 @@ const BasicForm = () => {
             required
             margin="normal"
             {...field}
+            error={errors?.last_Name}
             helperText={errors?.last_Name?.message}
-
           />
         )}
       />
@@ -94,6 +92,7 @@ const ContactForm = () => {
             fullWidth
             margin="normal"
             {...field}
+            error={errors?.email}
             helperText={errors?.email?.message}
           />
         )}
@@ -102,26 +101,26 @@ const ContactForm = () => {
         control={control}
         name="phone"
         rules={{
-          required: "* Phone number mustbe have 11 digit (require)",
+          required:false,
           minLength: 11,
           maxLength: 11
         }}
 
         render={({ field }) => (
           <>
-            {console.log(errors)}
             <TextField
               id="phone-number"
               label="Phone Number"
               variant="outlined"
               type='number'
-              placeholder="Enter Your 11 Digit Phone Number"
+              placeholder="Enter Your Phone Number"
               fullWidth
               margin="normal"
               {...field}
+              error={errors?.phone}
               helperText={
-                (errors?.phone?.type === 'maxLength'&& '* Phone number mustbe have 11 digit (require)')||
-                (errors?.phone?.type === 'minLength'&& '* Phone number mustbe have 11 digit (require)')
+                (errors?.phone?.type === 'maxLength' && '* Phone number mustbe have 11 digit (required)') ||
+                (errors?.phone?.type === 'minLength' && '* Phone number mustbe have 11 digit (required)')
               }
             />
           </>
@@ -163,6 +162,7 @@ const SecurityForm = () => {
               fullWidth
               margin="normal"
               {...field}
+              error={errors?.password}
               helperText={errors?.password?.message}
             />
             <VisibilityIcon
@@ -319,7 +319,7 @@ const RegistartionLinearStepper = () => {
                     to={"/login"}
                     style={{
                       color: "#0575B4",
-                      fontWeight:'bold'
+                      fontWeight: 'bold'
                     }}
                   >
                     {" "}
