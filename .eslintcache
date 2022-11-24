@@ -1,1 +1,1381 @@
-[{"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\index.js":"1","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\serviceWorker.js":"2","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\LayoutContext.js":"3","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\App.js":"4","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\AuthContext.js":"5","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\UserContext.js":"6","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\index.js":"7","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\AddRestaurentForm.js":"8","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\Login.js":"9","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\Error.js":"10","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\default.js":"11","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\Layout.js":"12","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Auth.js":"13","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\ChangePass.js":"14","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\Addveriation.js":"15","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\styles.js":"16","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\AllVariation.js":"17","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\variation.js":"18","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\styles.js":"19","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\CustomerSatisfection\\CustomerSatisfaction.js":"20","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\AddReviewTag\\AddReviewTag.js":"21","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Menu\\Menu.js":"22","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\styles.js":"23","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\styles.js":"24","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Restaurent.js":"25","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\Header.js":"26","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\tables\\Tables.js":"27","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\Typography.js":"28","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\Dashboard.js":"29","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\Sidebar.js":"30","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Review.js":"31","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Menu.js":"32","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\Widget.js":"33","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\styles.js":"34","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\mock.js":"35","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\styles.js":"36","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\styles.js":"37","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\Dot.js":"38","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\Table\\Table.js":"39","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\BigStat.js":"40","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\styles.js":"41","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\SidebarLink.js":"42","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\styles.js":"43","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Wrappers\\Wrappers.js":"44","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\PageTitle.js":"45","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\styles.js":"46","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\styles.js":"47","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\styles.js":"48","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\UpdateRestaurent\\UpdateRestaurent.js":"49"},{"size":1000,"mtime":1658073010966,"results":"50","hashOfConfig":"51"},{"size":5083,"mtime":1658073010979,"results":"52","hashOfConfig":"51"},{"size":1444,"mtime":1658073010962,"results":"53","hashOfConfig":"51"},{"size":2189,"mtime":1658073010950,"results":"54","hashOfConfig":"51"},{"size":1311,"mtime":1658073010961,"results":"55","hashOfConfig":"51"},{"size":2053,"mtime":1658073010962,"results":"56","hashOfConfig":"51"},{"size":534,"mtime":1658073010980,"results":"57","hashOfConfig":"51"},{"size":10970,"mtime":1658765351742,"results":"58","hashOfConfig":"51"},{"size":9604,"mtime":1658769897211,"results":"59","hashOfConfig":"51"},{"size":1626,"mtime":1658073010973,"results":"60","hashOfConfig":"51"},{"size":3127,"mtime":1658073010979,"results":"61","hashOfConfig":"51"},{"size":4495,"mtime":1658769897144,"results":"62","hashOfConfig":"51"},{"size":1315,"mtime":1658765368951,"results":"63","hashOfConfig":"51"},{"size":2689,"mtime":1658765368956,"results":"64","hashOfConfig":"51"},{"size":5610,"mtime":1658765368955,"results":"65","hashOfConfig":"51"},{"size":3349,"mtime":1658765368956,"results":"66","hashOfConfig":"51"},{"size":1666,"mtime":1658765368955,"results":"67","hashOfConfig":"51"},{"size":1694,"mtime":1658765368952,"results":"68","hashOfConfig":"51"},{"size":710,"mtime":1658073010953,"results":"69","hashOfConfig":"51"},{"size":4980,"mtime":1658073010967,"results":"70","hashOfConfig":"51"},{"size":1856,"mtime":1658073010967,"results":"71","hashOfConfig":"51"},{"size":6725,"mtime":1658073010968,"results":"72","hashOfConfig":"51"},{"size":1395,"mtime":1658073010973,"results":"73","hashOfConfig":"51"},{"size":3349,"mtime":1658073010975,"results":"74","hashOfConfig":"51"},{"size":1054,"mtime":1658769897127,"results":"75","hashOfConfig":"51"},{"size":4645,"mtime":1658769897132,"results":"76","hashOfConfig":"51"},{"size":1752,"mtime":1658769897225,"results":"77","hashOfConfig":"51"},{"size":4632,"mtime":1658073010978,"results":"78","hashOfConfig":"51"},{"size":16126,"mtime":1658073010970,"results":"79","hashOfConfig":"51"},{"size":4982,"mtime":1658769897153,"results":"80","hashOfConfig":"51"},{"size":1337,"mtime":1658073010950,"results":"81","hashOfConfig":"51"},{"size":1056,"mtime":1658765368952,"results":"82","hashOfConfig":"51"},{"size":2581,"mtime":1658073010959,"results":"83","hashOfConfig":"51"},{"size":4043,"mtime":1658073010952,"results":"84","hashOfConfig":"51"},{"size":4288,"mtime":1658073010972,"results":"85","hashOfConfig":"51"},{"size":389,"mtime":1658073010979,"results":"86","hashOfConfig":"51"},{"size":3000,"mtime":1658073010972,"results":"87","hashOfConfig":"51"},{"size":902,"mtime":1658073010956,"results":"88","hashOfConfig":"51"},{"size":1190,"mtime":1658769897194,"results":"89","hashOfConfig":"51"},{"size":4160,"mtime":1658073010971,"results":"90","hashOfConfig":"51"},{"size":1363,"mtime":1658073010957,"results":"91","hashOfConfig":"51"},{"size":4589,"mtime":1658073010956,"results":"92","hashOfConfig":"51"},{"size":1015,"mtime":1658073010960,"results":"93","hashOfConfig":"51"},{"size":3971,"mtime":1658073010961,"results":"94","hashOfConfig":"51"},{"size":447,"mtime":1658073010954,"results":"95","hashOfConfig":"51"},{"size":1075,"mtime":1658073010971,"results":"96","hashOfConfig":"51"},{"size":1474,"mtime":1658073010957,"results":"97","hashOfConfig":"51"},{"size":482,"mtime":1658073010955,"results":"98","hashOfConfig":"51"},{"size":5759,"mtime":1658769897180,"results":"99","hashOfConfig":"51"},{"filePath":"100","messages":"101","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},"1ob6bwf",{"filePath":"103","messages":"104","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"105","messages":"106","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"107","messages":"108","errorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":"109","usedDeprecatedRules":"102"},{"filePath":"110","messages":"111","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"112","messages":"113","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"114","messages":"115","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"116","messages":"117","errorCount":0,"warningCount":1,"fixableErrorCount":0,"fixableWarningCount":0,"source":"118","usedDeprecatedRules":"102"},{"filePath":"119","messages":"120","errorCount":0,"warningCount":2,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},{"filePath":"121","messages":"122","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"123","messages":"124","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"125","messages":"126","errorCount":0,"warningCount":9,"fixableErrorCount":0,"fixableWarningCount":0,"source":"127","usedDeprecatedRules":"102"},{"filePath":"128","messages":"129","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"130","messages":"131","errorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":"132","usedDeprecatedRules":"102"},{"filePath":"133","messages":"134","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"135","messages":"136","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"137","messages":"138","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"139","messages":"140","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"141","messages":"142","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"143","messages":"144","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"145","messages":"146","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"147","messages":"148","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"149","messages":"150","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"151","messages":"152","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"153","messages":"154","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"155","messages":"156","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"157","messages":"158","errorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":"159","usedDeprecatedRules":"102"},{"filePath":"160","messages":"161","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"162","messages":"163","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"164","messages":"165","errorCount":0,"warningCount":7,"fixableErrorCount":0,"fixableWarningCount":0,"source":"166","usedDeprecatedRules":"102"},{"filePath":"167","messages":"168","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"169","messages":"170","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"171","messages":"172","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"173","messages":"174","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"175","messages":"176","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"177","messages":"178","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"179","messages":"180","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"181","messages":"182","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"183","messages":"184","errorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":"185","usedDeprecatedRules":"102"},{"filePath":"186","messages":"187","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"188","messages":"189","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"190","messages":"191","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"192","messages":"193","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"194","messages":"195","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"196","messages":"197","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"198","messages":"199","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"200","messages":"201","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"202","messages":"203","errorCount":0,"warningCount":0,"fixableErrorCount":0,"fixableWarningCount":0,"usedDeprecatedRules":"102"},{"filePath":"204","messages":"205","errorCount":0,"warningCount":3,"fixableErrorCount":0,"fixableWarningCount":0,"source":null},"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\index.js",[],["206","207"],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\serviceWorker.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\LayoutContext.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\App.js",["208","209"],"import React from \"react\";\r\nimport { Route, Switch, Redirect, BrowserRouter } from \"react-router-dom\";\r\nimport axios from \"axios\";\r\n// components\r\nimport Layout from \"./Layout\";\r\n\r\n// pages\r\nimport Error from \"../pages/error\";\r\nimport Login from \"../pages/login\";\r\n\r\n// context\r\nimport { useUserState } from \"../context/UserContext\";\r\nimport AuthProvider, { useAuth } from \"../context/AuthContext\";\r\nimport AddRestaurentForm from \"../pages/login/AddRestaurentForm\";\r\n\r\nexport default function App() {\r\n  // global\r\n  var { isAuthenticated } = useAuth();\r\n  axios.defaults.baseURL = `https://mughalsignandprint.co.uk/restaurant`;\r\n  return (\r\n    <BrowserRouter>\r\n      <Switch>\r\n        {/* <Route exact path=\"/\" render={() => <Redirect to=\"/app/dashboard\" />} /> */}\r\n        <Route exact path=\"/\" render={() => <Redirect to=\"/app/dashboard\" />} />\r\n        <Route\r\n          exact\r\n          path=\"/app\"\r\n          render={() => <Redirect to=\"/app/dashboard\" />}\r\n        />\r\n        <PrivateRoute path=\"/app\" component={Layout} />\r\n        <PublicRoute path=\"/login\" component={Login} />\r\n        <PublicRoute path=\"/addrestaurent\" component={AddRestaurentForm} />\r\n        <Route component={Error} />\r\n      </Switch>\r\n    </BrowserRouter>\r\n  );\r\n\r\n  // #######################################################################\r\n\r\n  function PrivateRoute({ component, ...rest }) {\r\n    return (\r\n      <Route\r\n        {...rest}\r\n        render={props =>\r\n          isAuthenticated ? (\r\n            React.createElement(component, props)\r\n          ) : (\r\n            <Redirect\r\n              to={{\r\n                pathname: \"/login\",\r\n                state: {\r\n                  from: props.location,\r\n                },\r\n              }}\r\n            />\r\n          )\r\n        }\r\n      />\r\n    );\r\n  }\r\n\r\n  function PublicRoute({ component, ...rest }) {\r\n    return (\r\n      <Route\r\n        {...rest}\r\n        render={props =>\r\n          isAuthenticated ? (\r\n            <Redirect\r\n              to={{\r\n                pathname: \"/\",\r\n              }}\r\n            />\r\n          ) : (\r\n            React.createElement(component, props)\r\n          )\r\n        }\r\n      />\r\n    );\r\n  }\r\n}\r\n","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\AuthContext.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\UserContext.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\index.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\AddRestaurentForm.js",["210"],"import { Button, CircularProgress, Fade, Grid, Tab, Tabs, TextField, Typography } from '@material-ui/core';\r\nimport React, { useState } from 'react';\r\nimport { useHistory } from 'react-router-dom';\r\nimport { addRestaurent } from '../../Apis/Restaurent';\r\nimport useStyles from \"./styles\";\r\nimport toast, { Toaster } from 'react-hot-toast';\r\n\r\nconst AddRestaurentForm = () => {\r\n    var [error, setError] = useState(null);\r\n    var [isLoading, setIsLoading] = useState(false);\r\n    var classes = useStyles();\r\n    const [checked, setChecked] = useState(false);\r\n    let history = useHistory()\r\n    toast.success(\"Regestration Success.Now Add Restaurent\");\r\n    const onSubmit = async (e) => {\r\n        e.preventDefault();\r\n        setIsLoading(true);\r\n        const data = {\r\n            \"Name\": e.target.Name.value,\r\n            \"Address\": e.target.Address.value,\r\n            \"PostCode\": e.target.PostCode.value,\r\n            \"enable_question\": checked,\r\n            \"About\": e.target.About.value,\r\n            \"Webpage\": e.target.Webpage.value,\r\n            \"PhoneNumber\": e.target.PhoneNumber.value,\r\n            \"EmailAddress\": e.target.EmailAddress.value,\r\n            \"homeText\": e.target.homeText.value,\r\n            \"AdditionalInformation\": e.target.AdditionalInformation.value\r\n        }\r\n        addRestaurent(data)\r\n            .then(res => {\r\n                setIsLoading(false);\r\n                localStorage.removeItem('user');\r\n                localStorage.removeItem('token');\r\n                history.push(\"/login\")\r\n            })\r\n    };\r\n    const onCheck = () => {\r\n        setChecked(true)\r\n    }\r\n    return (\r\n        <Grid container className={classes.container} >\r\n            {/* <Grid container className={classes.container} style={{ backgroundImage: `url(\"https://i.ibb.co/cgNXhWs/authbg.jpg\")`, backgroundRepeat: \"no-repeat\", backgroundPosition: \"center\", backgroundSize: \"cover\" }}> */}\r\n            <Toaster\r\n                position=\"top-right\"\r\n                reverseOrder={false}\r\n            />\r\n            <div className={classes.formContainer}>\r\n                <div className={classes.form}>\r\n                    <React.Fragment>\r\n                        <form onSubmit={onSubmit}>\r\n                            {/* <Typography variant=\"h1\" className={classes.greeting}>\r\n                Welcome!\r\n              </Typography> */}\r\n                            {/* <Typography variant=\"h2\" className={classes.subGreeting}>\r\n                Create your account\r\n              </Typography> */}\r\n\r\n                            <Fade in={error}>\r\n                                <Typography color=\"secondary\" className={classes.errorMessage}>\r\n                                    Something is wrong with your login or password :(\r\n                                </Typography>\r\n                            </Fade>\r\n                            <Tabs\r\n                                indicatorColor=\"primary\"\r\n                                textColor=\"primary\"\r\n                                centered\r\n                            >\r\n                                <Tab label=\"Add Restaurent\" classes={{ root: classes.tab }} />\r\n                            </Tabs>\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"Name\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Restaurent Name\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"Address\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Restaurent Address\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"PostCode\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Post Code\"\r\n                                type=\"number\"\r\n                                fullWidth\r\n                            />\r\n                            <div>\r\n                                <input onChange={onCheck} type=\"checkbox\" name=\"\" id=\"\" /> <label style={{ color: \"white\" }} htmlFor=\"\">Enable question</label>\r\n                            </div>\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"About\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Restaurent About\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"Webpage\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter WebPage Url\"\r\n                                type=\"url\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"PhoneNumber\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Phone Number\"\r\n                                type=\"number\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"email\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"EmailAddress\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Email Adress\"\r\n                                type=\"email\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"homeText\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Home Text\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"AdditionalInformation\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Additional Information\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <div className={classes.creatingButtonContainer}>\r\n                                {isLoading ? (\r\n                                    <CircularProgress size={26} />\r\n                                ) : (\r\n                                    <Button\r\n                                        type=\"submit\"\r\n                                        // disabled={\r\n                                        //   loginValue.length === 0 ||\r\n                                        //   passwordValue.length === 0 ||\r\n                                        //   nameValue.length === 0\r\n                                        // }\r\n                                        size=\"large\"\r\n                                        variant=\"contained\"\r\n                                        color=\"primary\"\r\n                                        fullWidth\r\n                                        className={classes.createAccountButton}\r\n                                    >\r\n                                        Add\r\n                                    </Button>\r\n                                )}\r\n                            </div>\r\n                        </form>\r\n                    </React.Fragment>\r\n                </div>\r\n            </div>\r\n        </Grid>\r\n    );\r\n};\r\n\r\nexport default AddRestaurentForm;","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\Login.js",["211","212"],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\Error.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\default.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\Layout.js",["213","214","215","216","217","218","219","220","221"],"import React from \"react\";\r\nimport {\r\n  Route,\r\n  Switch,\r\n  Redirect,\r\n  withRouter,\r\n} from \"react-router-dom\";\r\nimport classnames from \"classnames\";\r\nimport { Box, IconButton, Link } from '@material-ui/core'\r\nimport Icon from '@mdi/react'\r\n\r\n//icons\r\nimport {\r\n  mdiFacebook as FacebookIcon,\r\n  mdiTwitter as TwitterIcon,\r\n  mdiGithub as GithubIcon,\r\n} from '@mdi/js'\r\n\r\n// styles\r\nimport useStyles from \"./styles\";\r\n\r\n// components\r\nimport Header from \"../Header\";\r\nimport Sidebar from \"../Sidebar\";\r\n\r\n// pages\r\nimport Dashboard from \"../../pages/dashboard\";\r\nimport Typography from \"../../pages/typography\";\r\n// import Notifications from \"../../pages/notifications\";\r\nimport Tables from \"../../pages/tables\";\r\n\r\n// context\r\nimport { useLayoutState } from \"../../context/LayoutContext\";\r\nimport Menu from \"../../pages/Menu/Menu\";\r\nimport AddReviewTag from \"../../pages/AddReviewTag/AddReviewTag\";\r\nimport CustomerSatisfaction from \"../../pages/CustomerSatisfection/CustomerSatisfaction\";\r\nimport Addveriation from \"../../pages/Addvariation/Addveriation\";\r\nimport ChangePass from \"../../pages/ResetPass/ChangePass\";\r\n\r\nfunction Layout(props) {\r\n  var classes = useStyles();\r\n\r\n  // global\r\n  var layoutState = useLayoutState();\r\n\r\n  return (\r\n    <div className={classes.root}>\r\n      <>\r\n        <Header history={props.history} />\r\n        <Sidebar />\r\n        <div\r\n          className={classnames(classes.content, {\r\n            [classes.contentShift]: layoutState.isSidebarOpened,\r\n          })}\r\n        >\r\n          <div className={classes.fakeToolbar} />\r\n          <Switch>\r\n            <Route path=\"/app/dashboard\" component={Tables} />\r\n            {/* <Route path=\"/app/typography\" component={Typography} /> */}\r\n            <Route path=\"/app/menu\" component={Menu} />\r\n            <Route path=\"/app/tables\" component={Dashboard} />\r\n            <Route path=\"/app/addReviewTag\" component={AddReviewTag} />\r\n            <Route path=\"/app/variation\" component={Addveriation} />\r\n            <Route path=\"/app/reviews\" component={CustomerSatisfaction} />\r\n            <Route path=\"/app/changepassword\" component={ChangePass} />\r\n            {/* <Route path=\"/app/notifications\" component={Notifications} /> */}\r\n          </Switch>\r\n          {/* <Box\r\n            mt={5}\r\n            width={\"100%\"}\r\n            display={\"flex\"}\r\n            alignItems={\"center\"}\r\n            justifyContent=\"space-between\" */}\r\n\r\n          {/* > */}\r\n          {/* <div>\r\n              <Link\r\n                color={'primary'}\r\n                href={'https://flatlogic.com/'}\r\n                target={'_blank'}\r\n                className={classes.link}\r\n              >\r\n                © 2022 Menu Qr Codes. All Rights Reserved.\r\n              </Link>\r\n            </div> */}\r\n          {/* <div>\r\n              © 2022 Menu Qr Codes. All Rights Reserved.\r\n            </div>\r\n            <div> */}\r\n          {/* <Link\r\n                href={'https://www.facebook.com/flatlogic'}\r\n                target={'_blank'}\r\n              >\r\n                <IconButton aria-label=\"facebook\">\r\n                  <Icon\r\n                    path={FacebookIcon}\r\n                    size={1}\r\n                    color=\"#6E6E6E99\"\r\n                  />\r\n                </IconButton>\r\n              </Link>\r\n              <Link\r\n                href={'https://twitter.com/flatlogic'}\r\n                target={'_blank'}\r\n              >\r\n                <IconButton aria-label=\"twitter\">\r\n                  <Icon\r\n                    path={TwitterIcon}\r\n                    size={1}\r\n                    color=\"#6E6E6E99\"\r\n                  />\r\n                </IconButton>\r\n              </Link>\r\n              <Link\r\n                href={'https://github.com/flatlogic'}\r\n                target={'_blank'}\r\n              >\r\n                <IconButton\r\n                  aria-label=\"github\"\r\n                  style={{ marginRight: -12 }}\r\n                >\r\n                  <Icon\r\n                    path={GithubIcon}\r\n                    size={1}\r\n                    color=\"#6E6E6E99\"\r\n                  />\r\n                </IconButton>\r\n              </Link> */}\r\n          {/* Order Booking App\r\n            </div>\r\n          </Box> */}\r\n        </div>\r\n      </>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default withRouter(Layout);\r\n","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Auth.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\ChangePass.js",["222","223","224"],"import { Button, CircularProgress, Fade, TextField, Typography } from '@material-ui/core';\r\nimport React from 'react';\r\nimport { changePass } from '../../Apis/Auth';\r\nimport useStyles from \"./styles\";\r\nimport toast, { Toaster } from 'react-hot-toast';\r\n\r\nconst ChangePass = () => {\r\n  var classes = useStyles();\r\n\r\n  const hadleLogin = (e) => {\r\n    e.preventDefault();\r\n\r\n    if (e.target.newpassword.value === e.target.confirmpassword.value) {\r\n      const data = {\r\n        \"password\": e.target.newpassword.value,\r\n        \"cpassword\": e.target.currentpassword.value\r\n      }\r\n      changePass(data)\r\n        .then((res) => {\r\n          toast.success('Successfully Password Changed');\r\n        })\r\n        .catch(err => {\r\n          toast.error(err.response.data.message);\r\n        })\r\n    }\r\n    else {\r\n      toast.error('Password Did not match');\r\n    }\r\n\r\n  }\r\n  return (\r\n    <>\r\n      <Toaster\r\n        position=\"top-right\"\r\n        reverseOrder={false}\r\n      />\r\n      <React.Fragment>\r\n        <form onSubmit={hadleLogin} style={{ width: \"30%\", margin: \"50px auto\" }}>\r\n          <TextField\r\n            id=\"password\"\r\n            InputProps={{\r\n              classes: {\r\n                underline: classes.textFieldUnderline,\r\n                input: classes.textField,\r\n              },\r\n            }}\r\n            name=\"currentpassword\"\r\n            margin=\"normal\"\r\n            placeholder=\"Current Password\"\r\n            type=\"password\"\r\n            fullWidth\r\n          />\r\n          <TextField\r\n            id=\"password\"\r\n            InputProps={{\r\n              classes: {\r\n                underline: classes.textFieldUnderline,\r\n                input: classes.textField,\r\n              },\r\n            }}\r\n            name=\"newpassword\"\r\n            margin=\"normal\"\r\n            placeholder=\"New Password\"\r\n            type=\"password\"\r\n            fullWidth\r\n          />\r\n          <TextField\r\n            id=\"password\"\r\n            InputProps={{\r\n              classes: {\r\n                underline: classes.textFieldUnderline,\r\n                input: classes.textField,\r\n              },\r\n            }}\r\n            name=\"confirmpassword\"\r\n            margin=\"normal\"\r\n            placeholder=\"Confirm Password\"\r\n            type=\"password\"\r\n            fullWidth\r\n          />\r\n          <div className={classes.formButtons}>\r\n            <Button\r\n              type=\"submit\"\r\n              variant=\"contained\"\r\n              color=\"primary\"\r\n              size=\"large\"\r\n              fullWidth\r\n            >\r\n              Change\r\n            </Button>\r\n          </div>\r\n        </form>\r\n      </React.Fragment>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default ChangePass;","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\Addveriation.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\AllVariation.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\variation.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\CustomerSatisfection\\CustomerSatisfaction.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\AddReviewTag\\AddReviewTag.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Menu\\Menu.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Restaurent.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\Header.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\tables\\Tables.js",["225","226","227"],"import React from \"react\";\r\nimport { Box, Grid } from \"@material-ui/core\";\r\nimport { makeStyles } from \"@material-ui/styles\";\r\nimport MUIDataTable from \"mui-datatables\";\r\nimport QRCode from 'qrcode.react';\r\n// components\r\nimport PageTitle from \"../../components/PageTitle\";\r\nimport Widget from \"../../components/Widget\";\r\nimport Table from \"../dashboard/components/Table/Table\";\r\n\r\n// data\r\nimport mock from \"../dashboard/mock\";\r\nimport { useAuth } from \"../../context/AuthContext\";\r\nimport { getMenu } from \"../../Apis/Menu\";\r\n\r\n\r\n\r\nconst useStyles = makeStyles(theme => ({\r\n  tableOverflow: {\r\n    overflow: 'auto'\r\n  },\r\n  qrcode: {\r\n    display: \"flex\",\r\n    justifyContent: \"center\",\r\n    background: \"white\",\r\n    marginTop: \"20px\",\r\n    padding: \"30px 0px\",\r\n    boxShadow: \"0 0 10px 5px rgba(0,0,0,0.1)\"\r\n  }\r\n}))\r\n\r\nexport default function Tables() {\r\n  const { user } = useAuth();\r\n  const [menus, setMenus] = React.useState();\r\n  const classes = useStyles();\r\n\r\n  React.useEffect(() => {\r\n    getMenu(user.restaurant[0].id)\r\n      .then(res => {\r\n        setMenus(res);\r\n        console.log(res);\r\n      })\r\n  }, [])\r\n  const datatableData = [\r\n    menus?.map(data => (\r\n      [`${data.name}`, `${data.description}`, \"Yonkers\", \"NY\"]\r\n    ))\r\n  ];\r\n  console.log(mock.table);\r\n  console.log(menus);\r\n  return (\r\n    <>\r\n      <PageTitle title=\"All Menus\" />\r\n      <Grid container spacing={4}>\r\n        {/* <Grid item xs={12}>\r\n          <MUIDataTable\r\n            title=\"Menu List\"\r\n            data={datatableData}\r\n            columns={[\"Name\", \"Description\", \"\", \"Total dishes\"]}\r\n            options={{\r\n              filterType: \"checkbox\",\r\n            }}\r\n          />\r\n        </Grid> */}\r\n        <Grid item xs={12}>\r\n          <Widget title=\"Menu List\" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>\r\n            <Table data={menus} />\r\n          </Widget>\r\n        </Grid>\r\n      </Grid>\r\n      <Box className={classes.qrcode}>\r\n        <div>\r\n          <h1> QR Code</h1>\r\n          <QRCode value={`https://menuqrcodes.co.uk/System/usermenu/`} />\r\n        </div>\r\n      </Box>\r\n    </>\r\n  );\r\n}\r\n","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\Typography.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\Dashboard.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\Sidebar.js",["228","229","230","231","232","233","234"],"import React, { useState, useEffect } from \"react\";\r\nimport { Drawer, IconButton, List } from \"@material-ui/core\";\r\nimport {\r\n  Home as HomeIcon,\r\n  NotificationsNone as NotificationsIcon,\r\n  FormatSize as TypographyIcon,\r\n  FilterNone as UIElementsIcon,\r\n  BorderAll as TableIcon,\r\n  QuestionAnswer as SupportIcon,\r\n  LibraryBooks as LibraryIcon,\r\n  HelpOutline as FAQIcon,\r\n  ArrowBack as ArrowBackIcon,\r\n  MenuBook,\r\n  RateReview,\r\n  BorderOuter,\r\n  Visibility,\r\n  RestaurantMenu,\r\n  Web,\r\n  LockSharp,\r\n  SentimentSatisfied,\r\n} from \"@material-ui/icons\";\r\nimport { useTheme } from \"@material-ui/styles\";\r\nimport { withRouter } from \"react-router-dom\";\r\nimport classNames from \"classnames\";\r\n\r\n// styles\r\nimport useStyles from \"./styles\";\r\n\r\n// components\r\nimport SidebarLink from \"./components/SidebarLink/SidebarLink\";\r\nimport Dot from \"./components/Dot\";\r\n\r\n// context\r\nimport {\r\n  useLayoutState,\r\n  useLayoutDispatch,\r\n  toggleSidebar,\r\n} from \"../../context/LayoutContext\";\r\n\r\nconst structure = [\r\n  { id: 0, label: \"Dashboard\", link: \"/app/dashboard\", icon: <HomeIcon /> },\r\n  {\r\n    id: 1,\r\n    label: \"Menu\",\r\n    link: \"/app/menu\",\r\n    icon: <RestaurantMenu />,\r\n  },\r\n  { id: 2, label: \"Update Restaurent\", link: \"/app/tables\", icon: <TableIcon /> },\r\n  {\r\n    id: 3,\r\n    label: \"Add Review Tag\",\r\n    link: \"/app/addReviewTag\",\r\n    icon: <RateReview />,\r\n  },\r\n  {\r\n    id: 4,\r\n    label: \"Variations\",\r\n    link: \"/app/variation\",\r\n    icon: <BorderOuter />,\r\n  },\r\n  {\r\n    id: 5,\r\n    label: \"Show Reviews\",\r\n    link: \"/app/notifications\",\r\n    icon: <Visibility />,\r\n  },\r\n  {\r\n    id: 6,\r\n    label: \"View Menus\",\r\n    link: \"/app/notifications\",\r\n    icon: <MenuBook />,\r\n  },\r\n  {\r\n    id: 7,\r\n    label: \"View WebPage\",\r\n    link: \"/app/notifications\",\r\n    icon: <Web />,\r\n  },\r\n  {\r\n    id: 8,\r\n    label: \"Reset Password\",\r\n    link: \"/app/changepassword\",\r\n    icon: <LockSharp />,\r\n  },\r\n  {\r\n    id: 9,\r\n    label: \"Customer Satisfac\",\r\n    link: \"/app/reviews\",\r\n    icon: <SentimentSatisfied />,\r\n  },\r\n  // { id: 5, type: \"divider\" },\r\n  // { id: 6, type: \"title\", label: \"HELP\" },\r\n  // { id: 7, label: \"Library\", link: \"https://flatlogic.com/templates\", icon: <LibraryIcon /> },\r\n  // { id: 8, label: \"Support\", link: \"https://flatlogic.com/forum\", icon: <SupportIcon /> },\r\n  // { id: 9, label: \"FAQ\", link: \"https://flatlogic.com/forum\", icon: <FAQIcon /> },\r\n  // { id: 10, type: \"divider\" },\r\n  // { id: 11, type: \"title\", label: \"PROJECTS\" },\r\n  // {\r\n  //   id: 12,\r\n  //   label: \"My recent\",\r\n  //   link: \"\",\r\n  //   icon: <Dot size=\"small\" color=\"warning\" />,\r\n  // },\r\n  // {\r\n  //   id: 13,\r\n  //   label: \"Starred\",\r\n  //   link: \"\",\r\n  //   icon: <Dot size=\"small\" color=\"primary\" />,\r\n  // },\r\n  // {\r\n  //   id: 14,\r\n  //   label: \"Background\",\r\n  //   link: \"\",\r\n  //   icon: <Dot size=\"small\" color=\"secondary\" />,\r\n  // },\r\n];\r\n\r\nfunction Sidebar({ location }) {\r\n  var classes = useStyles();\r\n  var theme = useTheme();\r\n\r\n  // global\r\n  var { isSidebarOpened } = useLayoutState();\r\n  var layoutDispatch = useLayoutDispatch();\r\n\r\n  // local\r\n  var [isPermanent, setPermanent] = useState(true);\r\n\r\n  useEffect(function () {\r\n    window.addEventListener(\"resize\", handleWindowWidthChange);\r\n    handleWindowWidthChange();\r\n    return function cleanup() {\r\n      window.removeEventListener(\"resize\", handleWindowWidthChange);\r\n    };\r\n  });\r\n\r\n  return (\r\n    <Drawer\r\n      variant={isPermanent ? \"permanent\" : \"temporary\"}\r\n      className={classNames(classes.drawer, {\r\n        [classes.drawerOpen]: isSidebarOpened,\r\n        [classes.drawerClose]: !isSidebarOpened,\r\n      })}\r\n      classes={{\r\n        paper: classNames({\r\n          [classes.drawerOpen]: isSidebarOpened,\r\n          [classes.drawerClose]: !isSidebarOpened,\r\n        }),\r\n      }}\r\n      open={isSidebarOpened}\r\n    >\r\n      <div className={classes.toolbar} />\r\n      <div className={classes.mobileBackButton}>\r\n        <IconButton onClick={() => toggleSidebar(layoutDispatch)}>\r\n          <ArrowBackIcon\r\n            classes={{\r\n              root: classNames(classes.headerIcon, classes.headerIconCollapse),\r\n            }}\r\n          />\r\n        </IconButton>\r\n      </div>\r\n      <List className={classes.sidebarList}>\r\n        {structure.map(link => (\r\n          <SidebarLink\r\n            key={link.id}\r\n            location={location}\r\n            isSidebarOpened={isSidebarOpened}\r\n            {...link}\r\n          />\r\n        ))}\r\n      </List>\r\n    </Drawer>\r\n  );\r\n\r\n  // ##################################################################\r\n  function handleWindowWidthChange() {\r\n    var windowWidth = window.innerWidth;\r\n    var breakpointWidth = theme.breakpoints.values.md;\r\n    var isSmallScreen = windowWidth < breakpointWidth;\r\n\r\n    if (isSmallScreen && isPermanent) {\r\n      setPermanent(false);\r\n    } else if (!isSmallScreen && !isPermanent) {\r\n      setPermanent(true);\r\n    }\r\n  }\r\n}\r\n\r\nexport default withRouter(Sidebar);\r\n","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Review.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Menu.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\Widget.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\mock.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\Dot.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\Table\\Table.js",["235","236","237"],"import React from \"react\";\r\nimport {\r\n  Table,\r\n  TableRow,\r\n  TableHead,\r\n  TableBody,\r\n  TableCell,\r\n  Chip\r\n} from \"@material-ui/core\";\r\nimport useStyles from \"../../styles\";\r\n\r\nconst states = {\r\n  sent: \"success\",\r\n  pending: \"warning\",\r\n  declined: \"secondary\",\r\n};\r\n\r\nexport default function TableComponent({ data }) {\r\n  const classes = useStyles();\r\n\r\n  return (\r\n    <Table className=\"mb-0\">\r\n      <TableHead>\r\n        <TableRow>\r\n          <TableCell>Name</TableCell>\r\n          <TableCell>Description</TableCell>\r\n          <TableCell></TableCell>\r\n          <TableCell>Total dishes</TableCell>\r\n        </TableRow>\r\n      </TableHead>\r\n      <TableBody>\r\n        {data?.map((item, index) => (\r\n          <TableRow key={index}>\r\n            <TableCell className=\"pl-3 fw-normal\">{item.name}</TableCell>\r\n            <TableCell>{item.description}</TableCell>\r\n            <TableCell>{''}</TableCell>\r\n            <TableCell>{''}</TableCell>\r\n            <TableCell>\r\n              {/* <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} /> */}\r\n            </TableCell>\r\n          </TableRow>\r\n        ))}\r\n      </TableBody>\r\n    </Table>\r\n  );\r\n}\r\n","C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\BigStat.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\SidebarLink.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Wrappers\\Wrappers.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\PageTitle.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\styles.js",[],"C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\UpdateRestaurent\\UpdateRestaurent.js",["238","239","240"],{"ruleId":"241","replacedBy":"242"},{"ruleId":"243","replacedBy":"244"},{"ruleId":"245","severity":1,"message":"246","line":12,"column":10,"nodeType":"247","messageId":"248","endLine":12,"endColumn":22},{"ruleId":"245","severity":1,"message":"249","line":13,"column":8,"nodeType":"247","messageId":"248","endLine":13,"endColumn":20},{"ruleId":"245","severity":1,"message":"250","line":9,"column":17,"nodeType":"247","messageId":"248","endLine":9,"endColumn":25},{"ruleId":"245","severity":1,"message":"251","line":20,"column":10,"nodeType":"247","messageId":"248","endLine":20,"endColumn":25},{"ruleId":"245","severity":1,"message":"252","line":20,"column":27,"nodeType":"247","messageId":"248","endLine":20,"endColumn":36},{"ruleId":"245","severity":1,"message":"253","line":5,"column":3,"nodeType":"247","messageId":"248","endLine":5,"endColumn":11},{"ruleId":"245","severity":1,"message":"254","line":9,"column":10,"nodeType":"247","messageId":"248","endLine":9,"endColumn":13},{"ruleId":"245","severity":1,"message":"255","line":9,"column":15,"nodeType":"247","messageId":"248","endLine":9,"endColumn":25},{"ruleId":"245","severity":1,"message":"256","line":9,"column":27,"nodeType":"247","messageId":"248","endLine":9,"endColumn":31},{"ruleId":"245","severity":1,"message":"257","line":10,"column":8,"nodeType":"247","messageId":"248","endLine":10,"endColumn":12},{"ruleId":"245","severity":1,"message":"258","line":14,"column":18,"nodeType":"247","messageId":"248","endLine":14,"endColumn":30},{"ruleId":"245","severity":1,"message":"259","line":15,"column":17,"nodeType":"247","messageId":"248","endLine":15,"endColumn":28},{"ruleId":"245","severity":1,"message":"260","line":16,"column":16,"nodeType":"247","messageId":"248","endLine":16,"endColumn":26},{"ruleId":"245","severity":1,"message":"261","line":28,"column":8,"nodeType":"247","messageId":"248","endLine":28,"endColumn":18},{"ruleId":"245","severity":1,"message":"262","line":1,"column":18,"nodeType":"247","messageId":"248","endLine":1,"endColumn":34},{"ruleId":"245","severity":1,"message":"263","line":1,"column":36,"nodeType":"247","messageId":"248","endLine":1,"endColumn":40},{"ruleId":"245","severity":1,"message":"261","line":1,"column":53,"nodeType":"247","messageId":"248","endLine":1,"endColumn":63},{"ruleId":"245","severity":1,"message":"264","line":4,"column":8,"nodeType":"247","messageId":"248","endLine":4,"endColumn":20},{"ruleId":"265","severity":1,"message":"266","line":43,"column":6,"nodeType":"267","endLine":43,"endColumn":8,"suggestions":"268"},{"ruleId":"245","severity":1,"message":"269","line":44,"column":9,"nodeType":"247","messageId":"248","endLine":44,"endColumn":22},{"ruleId":"245","severity":1,"message":"270","line":5,"column":24,"nodeType":"247","messageId":"248","endLine":5,"endColumn":41},{"ruleId":"245","severity":1,"message":"271","line":6,"column":17,"nodeType":"247","messageId":"248","endLine":6,"endColumn":31},{"ruleId":"245","severity":1,"message":"272","line":7,"column":17,"nodeType":"247","messageId":"248","endLine":7,"endColumn":31},{"ruleId":"245","severity":1,"message":"273","line":9,"column":21,"nodeType":"247","messageId":"248","endLine":9,"endColumn":32},{"ruleId":"245","severity":1,"message":"274","line":10,"column":19,"nodeType":"247","messageId":"248","endLine":10,"endColumn":30},{"ruleId":"245","severity":1,"message":"275","line":11,"column":18,"nodeType":"247","messageId":"248","endLine":11,"endColumn":25},{"ruleId":"245","severity":1,"message":"276","line":31,"column":8,"nodeType":"247","messageId":"248","endLine":31,"endColumn":11},{"ruleId":"245","severity":1,"message":"277","line":8,"column":3,"nodeType":"247","messageId":"248","endLine":8,"endColumn":7},{"ruleId":"245","severity":1,"message":"278","line":12,"column":7,"nodeType":"247","messageId":"248","endLine":12,"endColumn":13},{"ruleId":"245","severity":1,"message":"279","line":19,"column":9,"nodeType":"247","messageId":"248","endLine":19,"endColumn":16},{"ruleId":"245","severity":1,"message":"280","line":3,"column":37,"nodeType":"247","messageId":"248","endLine":3,"endColumn":46},{"ruleId":"245","severity":1,"message":"256","line":4,"column":10,"nodeType":"247","messageId":"248","endLine":4,"endColumn":14},{"ruleId":"245","severity":1,"message":"281","line":21,"column":36,"nodeType":"247","messageId":"248","endLine":21,"endColumn":42},"no-native-reassign",["282"],"no-negated-in-lhs",["283"],"no-unused-vars","'useUserState' is defined but never used.","Identifier","unusedVar","'AuthProvider' is defined but never used.","'setError' is assigned a value but never used.","'useUserDispatch' is defined but never used.","'loginUser' is defined but never used.","'Redirect' is defined but never used.","'Box' is defined but never used.","'IconButton' is defined but never used.","'Link' is defined but never used.","'Icon' is defined but never used.","'FacebookIcon' is defined but never used.","'TwitterIcon' is defined but never used.","'GithubIcon' is defined but never used.","'Typography' is defined but never used.","'CircularProgress' is defined but never used.","'Fade' is defined but never used.","'MUIDataTable' is defined but never used.","react-hooks/exhaustive-deps","React Hook React.useEffect has a missing dependency: 'user.restaurant'. Either include it or remove the dependency array.","ArrayExpression",["284"],"'datatableData' is assigned a value but never used.","'NotificationsIcon' is defined but never used.","'TypographyIcon' is defined but never used.","'UIElementsIcon' is defined but never used.","'SupportIcon' is defined but never used.","'LibraryIcon' is defined but never used.","'FAQIcon' is defined but never used.","'Dot' is defined but never used.","'Chip' is defined but never used.","'states' is assigned a value but never used.","'classes' is assigned a value but never used.","'useEffect' is defined but never used.","'Layout' is assigned a value but never used.","no-global-assign","no-unsafe-negation",{"desc":"285","fix":"286"},"Update the dependencies array to be: [user.restaurant]",{"range":"287","text":"288"},[1124,1126],"[user.restaurant]"]
+[
+  {
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\index.js": "1",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\serviceWorker.js": "2",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\LayoutContext.js": "3",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\App.js": "4",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\AuthContext.js": "5",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\UserContext.js": "6",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\index.js": "7",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\AddRestaurentForm.js": "8",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\Login.js": "9",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\Error.js": "10",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\default.js": "11",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\Layout.js": "12",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Auth.js": "13",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\ChangePass.js": "14",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\Addveriation.js": "15",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\styles.js": "16",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\AllVariation.js": "17",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\variation.js": "18",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\styles.js": "19",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\CustomerSatisfection\\CustomerSatisfaction.js": "20",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\AddReviewTag\\AddReviewTag.js": "21",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Menu\\Menu.js": "22",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\styles.js": "23",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\styles.js": "24",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Restaurent.js": "25",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\Header.js": "26",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\tables\\Tables.js": "27",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\Typography.js": "28",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\Dashboard.js": "29",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\Sidebar.js": "30",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Review.js": "31",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Menu.js": "32",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\Widget.js": "33",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\styles.js": "34",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\mock.js": "35",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\styles.js": "36",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\styles.js": "37",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\Dot.js": "38",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\Table\\Table.js": "39",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\BigStat.js": "40",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\styles.js": "41",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\SidebarLink.js": "42",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\styles.js": "43",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Wrappers\\Wrappers.js": "44",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\PageTitle.js": "45",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\styles.js": "46",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\styles.js": "47",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\styles.js": "48",
+    "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\UpdateRestaurent\\UpdateRestaurent.js": "49"
+  },
+  {
+    "size": 1000,
+    "mtime": 1658073010966,
+    "results": "50",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 5083,
+    "mtime": 1658073010979,
+    "results": "52",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1444,
+    "mtime": 1658073010962,
+    "results": "53",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 2189,
+    "mtime": 1658073010950,
+    "results": "54",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1311,
+    "mtime": 1658073010961,
+    "results": "55",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 2053,
+    "mtime": 1658073010962,
+    "results": "56",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 534,
+    "mtime": 1658073010980,
+    "results": "57",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 10970,
+    "mtime": 1658765351742,
+    "results": "58",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 9604,
+    "mtime": 1658769897211,
+    "results": "59",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1626,
+    "mtime": 1658073010973,
+    "results": "60",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 3127,
+    "mtime": 1658073010979,
+    "results": "61",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4495,
+    "mtime": 1658769897144,
+    "results": "62",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1315,
+    "mtime": 1658765368951,
+    "results": "63",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 2689,
+    "mtime": 1658765368956,
+    "results": "64",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 5610,
+    "mtime": 1658765368955,
+    "results": "65",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 3349,
+    "mtime": 1658765368956,
+    "results": "66",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1666,
+    "mtime": 1658765368955,
+    "results": "67",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1694,
+    "mtime": 1658765368952,
+    "results": "68",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 710,
+    "mtime": 1658073010953,
+    "results": "69",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4980,
+    "mtime": 1658073010967,
+    "results": "70",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1856,
+    "mtime": 1658073010967,
+    "results": "71",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 6725,
+    "mtime": 1658073010968,
+    "results": "72",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1395,
+    "mtime": 1658073010973,
+    "results": "73",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 3349,
+    "mtime": 1658073010975,
+    "results": "74",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1054,
+    "mtime": 1658769897127,
+    "results": "75",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4645,
+    "mtime": 1658769897132,
+    "results": "76",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1752,
+    "mtime": 1658769897225,
+    "results": "77",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4632,
+    "mtime": 1658073010978,
+    "results": "78",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 16126,
+    "mtime": 1658073010970,
+    "results": "79",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4982,
+    "mtime": 1658769897153,
+    "results": "80",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1337,
+    "mtime": 1658073010950,
+    "results": "81",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1056,
+    "mtime": 1658765368952,
+    "results": "82",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 2581,
+    "mtime": 1658073010959,
+    "results": "83",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4043,
+    "mtime": 1658073010952,
+    "results": "84",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4288,
+    "mtime": 1658073010972,
+    "results": "85",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 389,
+    "mtime": 1658073010979,
+    "results": "86",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 3000,
+    "mtime": 1658073010972,
+    "results": "87",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 902,
+    "mtime": 1658073010956,
+    "results": "88",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1190,
+    "mtime": 1658769897194,
+    "results": "89",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4160,
+    "mtime": 1658073010971,
+    "results": "90",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1363,
+    "mtime": 1658073010957,
+    "results": "91",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 4589,
+    "mtime": 1658073010956,
+    "results": "92",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1015,
+    "mtime": 1658073010960,
+    "results": "93",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 3971,
+    "mtime": 1658073010961,
+    "results": "94",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 447,
+    "mtime": 1658073010954,
+    "results": "95",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1075,
+    "mtime": 1658073010971,
+    "results": "96",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 1474,
+    "mtime": 1658073010957,
+    "results": "97",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 482,
+    "mtime": 1658073010955,
+    "results": "98",
+    "hashOfConfig": "51"
+  },
+  {
+    "size": 5759,
+    "mtime": 1658769897180,
+    "results": "99",
+    "hashOfConfig": "51"
+  },
+  {
+    "filePath": "100",
+    "messages": "101",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  "1ob6bwf",
+  {
+    "filePath": "103",
+    "messages": "104",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "105",
+    "messages": "106",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "107",
+    "messages": "108",
+    "errorCount": 0,
+    "warningCount": 2,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "109",
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "110",
+    "messages": "111",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "112",
+    "messages": "113",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "114",
+    "messages": "115",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "116",
+    "messages": "117",
+    "errorCount": 0,
+    "warningCount": 1,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "118",
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "119",
+    "messages": "120",
+    "errorCount": 0,
+    "warningCount": 2,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": null
+  },
+  {
+    "filePath": "121",
+    "messages": "122",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "123",
+    "messages": "124",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "125",
+    "messages": "126",
+    "errorCount": 0,
+    "warningCount": 9,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "127",
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "128",
+    "messages": "129",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "130",
+    "messages": "131",
+    "errorCount": 0,
+    "warningCount": 3,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "132",
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "133",
+    "messages": "134",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "135",
+    "messages": "136",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "137",
+    "messages": "138",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "139",
+    "messages": "140",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "141",
+    "messages": "142",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "143",
+    "messages": "144",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "145",
+    "messages": "146",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "147",
+    "messages": "148",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "149",
+    "messages": "150",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "151",
+    "messages": "152",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "153",
+    "messages": "154",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "155",
+    "messages": "156",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "157",
+    "messages": "158",
+    "errorCount": 0,
+    "warningCount": 3,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "159",
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "160",
+    "messages": "161",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "162",
+    "messages": "163",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "164",
+    "messages": "165",
+    "errorCount": 0,
+    "warningCount": 7,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "166",
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "167",
+    "messages": "168",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "169",
+    "messages": "170",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "171",
+    "messages": "172",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "173",
+    "messages": "174",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "175",
+    "messages": "176",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "177",
+    "messages": "178",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "179",
+    "messages": "180",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "181",
+    "messages": "182",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "183",
+    "messages": "184",
+    "errorCount": 0,
+    "warningCount": 3,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "185",
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "186",
+    "messages": "187",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "188",
+    "messages": "189",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "190",
+    "messages": "191",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "192",
+    "messages": "193",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "194",
+    "messages": "195",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "196",
+    "messages": "197",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "198",
+    "messages": "199",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "200",
+    "messages": "201",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "202",
+    "messages": "203",
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "usedDeprecatedRules": "102"
+  },
+  {
+    "filePath": "204",
+    "messages": "205",
+    "errorCount": 0,
+    "warningCount": 3,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": null
+  },
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\index.js",
+  [],
+  [
+    "206",
+    "207"
+  ],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\serviceWorker.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\LayoutContext.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\App.js",
+  [
+    "208",
+    "209"
+  ],
+  "import React from \"react\";\r\nimport { Route, Switch, Redirect, BrowserRouter } from \"react-router-dom\";\r\nimport axios from \"axios\";\r\n// components\r\nimport Layout from \"./Layout\";\r\n\r\n// pages\r\nimport Error from \"../pages/error\";\r\nimport Login from \"../pages/login\";\r\n\r\n// context\r\nimport { useUserState } from \"../context/UserContext\";\r\nimport AuthProvider, { useAuth } from \"../context/AuthContext\";\r\nimport AddRestaurentForm from \"../pages/login/AddRestaurentForm\";\r\n\r\nexport default function App() {\r\n  // global\r\n  var { isAuthenticated } = useAuth();\r\n  axios.defaults.baseURL = `https://mughalsignandprint.co.uk/restaurant`;\r\n  return (\r\n    <BrowserRouter>\r\n      <Switch>\r\n        {/* <Route exact path=\"/\" render={() => <Redirect to=\"/app/dashboard\" />} /> */}\r\n        <Route exact path=\"/\" render={() => <Redirect to=\"/app/dashboard\" />} />\r\n        <Route\r\n          exact\r\n          path=\"/app\"\r\n          render={() => <Redirect to=\"/app/dashboard\" />}\r\n        />\r\n        <PrivateRoute path=\"/app\" component={Layout} />\r\n        <PublicRoute path=\"/login\" component={Login} />\r\n        <PublicRoute path=\"/addrestaurent\" component={AddRestaurentForm} />\r\n        <Route component={Error} />\r\n      </Switch>\r\n    </BrowserRouter>\r\n  );\r\n\r\n  // #######################################################################\r\n\r\n  function PrivateRoute({ component, ...rest }) {\r\n    return (\r\n      <Route\r\n        {...rest}\r\n        render={props =>\r\n          isAuthenticated ? (\r\n            React.createElement(component, props)\r\n          ) : (\r\n            <Redirect\r\n              to={{\r\n                pathname: \"/login\",\r\n                state: {\r\n                  from: props.location,\r\n                },\r\n              }}\r\n            />\r\n          )\r\n        }\r\n      />\r\n    );\r\n  }\r\n\r\n  function PublicRoute({ component, ...rest }) {\r\n    return (\r\n      <Route\r\n        {...rest}\r\n        render={props =>\r\n          isAuthenticated ? (\r\n            <Redirect\r\n              to={{\r\n                pathname: \"/\",\r\n              }}\r\n            />\r\n          ) : (\r\n            React.createElement(component, props)\r\n          )\r\n        }\r\n      />\r\n    );\r\n  }\r\n}\r\n",
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\AuthContext.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\context\\UserContext.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\index.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\AddRestaurentForm.js",
+  [
+    "210"
+  ],
+  "import { Button, CircularProgress, Fade, Grid, Tab, Tabs, TextField, Typography } from '@material-ui/core';\r\nimport React, { useState } from 'react';\r\nimport { useHistory } from 'react-router-dom';\r\nimport { addRestaurent } from '../../Apis/Restaurent';\r\nimport useStyles from \"./styles\";\r\nimport toast, { Toaster } from 'react-hot-toast';\r\n\r\nconst AddRestaurentForm = () => {\r\n    var [error, setError] = useState(null);\r\n    var [isLoading, setIsLoading] = useState(false);\r\n    var classes = useStyles();\r\n    const [checked, setChecked] = useState(false);\r\n    let history = useHistory()\r\n    toast.success(\"Regestration Success.Now Add Restaurent\");\r\n    const onSubmit = async (e) => {\r\n        e.preventDefault();\r\n        setIsLoading(true);\r\n        const data = {\r\n            \"Name\": e.target.Name.value,\r\n            \"Address\": e.target.Address.value,\r\n            \"PostCode\": e.target.PostCode.value,\r\n            \"enable_question\": checked,\r\n            \"About\": e.target.About.value,\r\n            \"Webpage\": e.target.Webpage.value,\r\n            \"PhoneNumber\": e.target.PhoneNumber.value,\r\n            \"EmailAddress\": e.target.EmailAddress.value,\r\n            \"homeText\": e.target.homeText.value,\r\n            \"AdditionalInformation\": e.target.AdditionalInformation.value\r\n        }\r\n        addRestaurent(data)\r\n            .then(res => {\r\n                setIsLoading(false);\r\n                localStorage.removeItem('user');\r\n                localStorage.removeItem('token');\r\n                history.push(\"/login\")\r\n            })\r\n    };\r\n    const onCheck = () => {\r\n        setChecked(true)\r\n    }\r\n    return (\r\n        <Grid container className={classes.container} >\r\n            {/* <Grid container className={classes.container} style={{ backgroundImage: `url(\"https://i.ibb.co/cgNXhWs/authbg.jpg\")`, backgroundRepeat: \"no-repeat\", backgroundPosition: \"center\", backgroundSize: \"cover\" }}> */}\r\n            <Toaster\r\n                position=\"top-right\"\r\n                reverseOrder={false}\r\n            />\r\n            <div className={classes.formContainer}>\r\n                <div className={classes.form}>\r\n                    <React.Fragment>\r\n                        <form onSubmit={onSubmit}>\r\n                            {/* <Typography variant=\"h1\" className={classes.greeting}>\r\n                Welcome!\r\n              </Typography> */}\r\n                            {/* <Typography variant=\"h2\" className={classes.subGreeting}>\r\n                Create your account\r\n              </Typography> */}\r\n\r\n                            <Fade in={error}>\r\n                                <Typography color=\"secondary\" className={classes.errorMessage}>\r\n                                    Something is wrong with your login or password :(\r\n                                </Typography>\r\n                            </Fade>\r\n                            <Tabs\r\n                                indicatorColor=\"primary\"\r\n                                textColor=\"primary\"\r\n                                centered\r\n                            >\r\n                                <Tab label=\"Add Restaurent\" classes={{ root: classes.tab }} />\r\n                            </Tabs>\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"Name\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Restaurent Name\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"Address\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Restaurent Address\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"PostCode\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Post Code\"\r\n                                type=\"number\"\r\n                                fullWidth\r\n                            />\r\n                            <div>\r\n                                <input onChange={onCheck} type=\"checkbox\" name=\"\" id=\"\" /> <label style={{ color: \"white\" }} htmlFor=\"\">Enable question</label>\r\n                            </div>\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"About\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Restaurent About\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"Webpage\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter WebPage Url\"\r\n                                type=\"url\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"PhoneNumber\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Phone Number\"\r\n                                type=\"number\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"email\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"EmailAddress\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Email Adress\"\r\n                                type=\"email\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"homeText\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Home Text\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <TextField\r\n                                id=\"name\"\r\n                                InputProps={{\r\n                                    classes: {\r\n                                        underline: classes.textFieldUnderline,\r\n                                        input: classes.textField,\r\n                                    },\r\n                                }}\r\n                                name=\"AdditionalInformation\"\r\n                                margin=\"normal\"\r\n                                placeholder=\"Enter Additional Information\"\r\n                                type=\"text\"\r\n                                fullWidth\r\n                            />\r\n                            <div className={classes.creatingButtonContainer}>\r\n                                {isLoading ? (\r\n                                    <CircularProgress size={26} />\r\n                                ) : (\r\n                                    <Button\r\n                                        type=\"submit\"\r\n                                        // disabled={\r\n                                        //   loginValue.length === 0 ||\r\n                                        //   passwordValue.length === 0 ||\r\n                                        //   nameValue.length === 0\r\n                                        // }\r\n                                        size=\"large\"\r\n                                        variant=\"contained\"\r\n                                        color=\"primary\"\r\n                                        fullWidth\r\n                                        className={classes.createAccountButton}\r\n                                    >\r\n                                        Add\r\n                                    </Button>\r\n                                )}\r\n                            </div>\r\n                        </form>\r\n                    </React.Fragment>\r\n                </div>\r\n            </div>\r\n        </Grid>\r\n    );\r\n};\r\n\r\nexport default AddRestaurentForm;",
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\Login.js",
+  [
+    "211",
+    "212"
+  ],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\Error.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\themes\\default.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\Layout.js",
+  [
+    "213",
+    "214",
+    "215",
+    "216",
+    "217",
+    "218",
+    "219",
+    "220",
+    "221"
+  ],
+  "import React from \"react\";\r\nimport {\r\n  Route,\r\n  Switch,\r\n  Redirect,\r\n  withRouter,\r\n} from \"react-router-dom\";\r\nimport classnames from \"classnames\";\r\nimport { Box, IconButton, Link } from '@material-ui/core'\r\nimport Icon from '@mdi/react'\r\n\r\n//icons\r\nimport {\r\n  mdiFacebook as FacebookIcon,\r\n  mdiTwitter as TwitterIcon,\r\n  mdiGithub as GithubIcon,\r\n} from '@mdi/js'\r\n\r\n// styles\r\nimport useStyles from \"./styles\";\r\n\r\n// components\r\nimport Header from \"../Header\";\r\nimport Sidebar from \"../Sidebar\";\r\n\r\n// pages\r\nimport Dashboard from \"../../pages/dashboard\";\r\nimport Typography from \"../../pages/typography\";\r\n// import Notifications from \"../../pages/notifications\";\r\nimport Tables from \"../../pages/tables\";\r\n\r\n// context\r\nimport { useLayoutState } from \"../../context/LayoutContext\";\r\nimport Menu from \"../../pages/Menu/Menu\";\r\nimport AddReviewTag from \"../../pages/AddReviewTag/AddReviewTag\";\r\nimport CustomerSatisfaction from \"../../pages/CustomerSatisfection/CustomerSatisfaction\";\r\nimport Addveriation from \"../../pages/Addvariation/Addveriation\";\r\nimport ChangePass from \"../../pages/ResetPass/ChangePass\";\r\n\r\nfunction Layout(props) {\r\n  var classes = useStyles();\r\n\r\n  // global\r\n  var layoutState = useLayoutState();\r\n\r\n  return (\r\n    <div className={classes.root}>\r\n      <>\r\n        <Header history={props.history} />\r\n        <Sidebar />\r\n        <div\r\n          className={classnames(classes.content, {\r\n            [classes.contentShift]: layoutState.isSidebarOpened,\r\n          })}\r\n        >\r\n          <div className={classes.fakeToolbar} />\r\n          <Switch>\r\n            <Route path=\"/app/dashboard\" component={Tables} />\r\n            {/* <Route path=\"/app/typography\" component={Typography} /> */}\r\n            <Route path=\"/app/menu\" component={Menu} />\r\n            <Route path=\"/app/tables\" component={Dashboard} />\r\n            <Route path=\"/app/addReviewTag\" component={AddReviewTag} />\r\n            <Route path=\"/app/dish-options\" component={Addveriation} />\r\n            <Route path=\"/app/reviews\" component={CustomerSatisfaction} />\r\n            <Route path=\"/app/changepassword\" component={ChangePass} />\r\n            {/* <Route path=\"/app/notifications\" component={Notifications} /> */}\r\n          </Switch>\r\n          {/* <Box\r\n            mt={5}\r\n            width={\"100%\"}\r\n            display={\"flex\"}\r\n            alignItems={\"center\"}\r\n            justifyContent=\"space-between\" */}\r\n\r\n          {/* > */}\r\n          {/* <div>\r\n              <Link\r\n                color={'primary'}\r\n                href={'https://flatlogic.com/'}\r\n                target={'_blank'}\r\n                className={classes.link}\r\n              >\r\n                © 2022 Menu Qr Codes. All Rights Reserved.\r\n              </Link>\r\n            </div> */}\r\n          {/* <div>\r\n              © 2022 Menu Qr Codes. All Rights Reserved.\r\n            </div>\r\n            <div> */}\r\n          {/* <Link\r\n                href={'https://www.facebook.com/flatlogic'}\r\n                target={'_blank'}\r\n              >\r\n                <IconButton aria-label=\"facebook\">\r\n                  <Icon\r\n                    path={FacebookIcon}\r\n                    size={1}\r\n                    color=\"#6E6E6E99\"\r\n                  />\r\n                </IconButton>\r\n              </Link>\r\n              <Link\r\n                href={'https://twitter.com/flatlogic'}\r\n                target={'_blank'}\r\n              >\r\n                <IconButton aria-label=\"twitter\">\r\n                  <Icon\r\n                    path={TwitterIcon}\r\n                    size={1}\r\n                    color=\"#6E6E6E99\"\r\n                  />\r\n                </IconButton>\r\n              </Link>\r\n              <Link\r\n                href={'https://github.com/flatlogic'}\r\n                target={'_blank'}\r\n              >\r\n                <IconButton\r\n                  aria-label=\"github\"\r\n                  style={{ marginRight: -12 }}\r\n                >\r\n                  <Icon\r\n                    path={GithubIcon}\r\n                    size={1}\r\n                    color=\"#6E6E6E99\"\r\n                  />\r\n                </IconButton>\r\n              </Link> */}\r\n          {/* Order Booking App\r\n            </div>\r\n          </Box> */}\r\n        </div>\r\n      </>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default withRouter(Layout);\r\n",
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Auth.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\ChangePass.js",
+  [
+    "222",
+    "223",
+    "224"
+  ],
+  "import { Button, CircularProgress, Fade, TextField, Typography } from '@material-ui/core';\r\nimport React from 'react';\r\nimport { changePass } from '../../Apis/Auth';\r\nimport useStyles from \"./styles\";\r\nimport toast, { Toaster } from 'react-hot-toast';\r\n\r\nconst ChangePass = () => {\r\n  var classes = useStyles();\r\n\r\n  const hadleLogin = (e) => {\r\n    e.preventDefault();\r\n\r\n    if (e.target.newpassword.value === e.target.confirmpassword.value) {\r\n      const data = {\r\n        \"password\": e.target.newpassword.value,\r\n        \"cpassword\": e.target.currentpassword.value\r\n      }\r\n      changePass(data)\r\n        .then((res) => {\r\n          toast.success('Successfully Password Changed');\r\n        })\r\n        .catch(err => {\r\n          toast.error(err.response.data.message);\r\n        })\r\n    }\r\n    else {\r\n      toast.error('Password Did not match');\r\n    }\r\n\r\n  }\r\n  return (\r\n    <>\r\n      <Toaster\r\n        position=\"top-right\"\r\n        reverseOrder={false}\r\n      />\r\n      <React.Fragment>\r\n        <form onSubmit={hadleLogin} style={{ width: \"30%\", margin: \"50px auto\" }}>\r\n          <TextField\r\n            id=\"password\"\r\n            InputProps={{\r\n              classes: {\r\n                underline: classes.textFieldUnderline,\r\n                input: classes.textField,\r\n              },\r\n            }}\r\n            name=\"currentpassword\"\r\n            margin=\"normal\"\r\n            placeholder=\"Current Password\"\r\n            type=\"password\"\r\n            fullWidth\r\n          />\r\n          <TextField\r\n            id=\"password\"\r\n            InputProps={{\r\n              classes: {\r\n                underline: classes.textFieldUnderline,\r\n                input: classes.textField,\r\n              },\r\n            }}\r\n            name=\"newpassword\"\r\n            margin=\"normal\"\r\n            placeholder=\"New Password\"\r\n            type=\"password\"\r\n            fullWidth\r\n          />\r\n          <TextField\r\n            id=\"password\"\r\n            InputProps={{\r\n              classes: {\r\n                underline: classes.textFieldUnderline,\r\n                input: classes.textField,\r\n              },\r\n            }}\r\n            name=\"confirmpassword\"\r\n            margin=\"normal\"\r\n            placeholder=\"Confirm Password\"\r\n            type=\"password\"\r\n            fullWidth\r\n          />\r\n          <div className={classes.formButtons}>\r\n            <Button\r\n              type=\"submit\"\r\n              variant=\"contained\"\r\n              color=\"primary\"\r\n              size=\"large\"\r\n              fullWidth\r\n            >\r\n              Change\r\n            </Button>\r\n          </div>\r\n        </form>\r\n      </React.Fragment>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default ChangePass;",
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\Addveriation.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\ResetPass\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Addvariation\\AllVariation.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\variation.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Layout\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\CustomerSatisfection\\CustomerSatisfaction.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\AddReviewTag\\AddReviewTag.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\Menu\\Menu.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\error\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\login\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Restaurent.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\Header.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\tables\\Tables.js",
+  [
+    "225",
+    "226",
+    "227"
+  ],
+  "import React from \"react\";\r\nimport { Box, Grid } from \"@material-ui/core\";\r\nimport { makeStyles } from \"@material-ui/styles\";\r\nimport MUIDataTable from \"mui-datatables\";\r\nimport QRCode from 'qrcode.react';\r\n// components\r\nimport PageTitle from \"../../components/PageTitle\";\r\nimport Widget from \"../../components/Widget\";\r\nimport Table from \"../dashboard/components/Table/Table\";\r\n\r\n// data\r\nimport mock from \"../dashboard/mock\";\r\nimport { useAuth } from \"../../context/AuthContext\";\r\nimport { getMenu } from \"../../Apis/Menu\";\r\n\r\n\r\n\r\nconst useStyles = makeStyles(theme => ({\r\n  tableOverflow: {\r\n    overflow: 'auto'\r\n  },\r\n  qrcode: {\r\n    display: \"flex\",\r\n    justifyContent: \"center\",\r\n    background: \"white\",\r\n    marginTop: \"20px\",\r\n    padding: \"30px 0px\",\r\n    boxShadow: \"0 0 10px 5px rgba(0,0,0,0.1)\"\r\n  }\r\n}))\r\n\r\nexport default function Tables() {\r\n  const { user } = useAuth();\r\n  const [menus, setMenus] = React.useState();\r\n  const classes = useStyles();\r\n\r\n  React.useEffect(() => {\r\n    getMenu(user.restaurant[0].id)\r\n      .then(res => {\r\n        setMenus(res);\r\n        console.log(res);\r\n      })\r\n  }, [])\r\n  const datatableData = [\r\n    menus?.map(data => (\r\n      [`${data.name}`, `${data.description}`, \"Yonkers\", \"NY\"]\r\n    ))\r\n  ];\r\n  console.log(mock.table);\r\n  console.log(menus);\r\n  return (\r\n    <>\r\n      <PageTitle title=\"All Menus\" />\r\n      <Grid container spacing={4}>\r\n        {/* <Grid item xs={12}>\r\n          <MUIDataTable\r\n            title=\"Menu List\"\r\n            data={datatableData}\r\n            columns={[\"Name\", \"Description\", \"\", \"Total dishes\"]}\r\n            options={{\r\n              filterType: \"checkbox\",\r\n            }}\r\n          />\r\n        </Grid> */}\r\n        <Grid item xs={12}>\r\n          <Widget title=\"Menu List\" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>\r\n            <Table data={menus} />\r\n          </Widget>\r\n        </Grid>\r\n      </Grid>\r\n      <Box className={classes.qrcode}>\r\n        <div>\r\n          <h1> QR Code</h1>\r\n          <QRCode value={`https://menuqrcodes.co.uk/System/usermenu/`} />\r\n        </div>\r\n      </Box>\r\n    </>\r\n  );\r\n}\r\n",
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\Typography.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\Dashboard.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\Sidebar.js",
+  [
+    "228",
+    "229",
+    "230",
+    "231",
+    "232",
+    "233",
+    "234"
+  ],
+  "import React, { useState, useEffect } from \"react\";\r\nimport { Drawer, IconButton, List } from \"@material-ui/core\";\r\nimport {\r\n  Home as HomeIcon,\r\n  NotificationsNone as NotificationsIcon,\r\n  FormatSize as TypographyIcon,\r\n  FilterNone as UIElementsIcon,\r\n  BorderAll as TableIcon,\r\n  QuestionAnswer as SupportIcon,\r\n  LibraryBooks as LibraryIcon,\r\n  HelpOutline as FAQIcon,\r\n  ArrowBack as ArrowBackIcon,\r\n  MenuBook,\r\n  RateReview,\r\n  BorderOuter,\r\n  Visibility,\r\n  RestaurantMenu,\r\n  Web,\r\n  LockSharp,\r\n  SentimentSatisfied,\r\n} from \"@material-ui/icons\";\r\nimport { useTheme } from \"@material-ui/styles\";\r\nimport { withRouter } from \"react-router-dom\";\r\nimport classNames from \"classnames\";\r\n\r\n// styles\r\nimport useStyles from \"./styles\";\r\n\r\n// components\r\nimport SidebarLink from \"./components/SidebarLink/SidebarLink\";\r\nimport Dot from \"./components/Dot\";\r\n\r\n// context\r\nimport {\r\n  useLayoutState,\r\n  useLayoutDispatch,\r\n  toggleSidebar,\r\n} from \"../../context/LayoutContext\";\r\n\r\nconst structure = [\r\n  { id: 0, label: \"Dashboard\", link: \"/app/dashboard\", icon: <HomeIcon /> },\r\n  {\r\n    id: 1,\r\n    label: \"Menu\",\r\n    link: \"/app/menu\",\r\n    icon: <RestaurantMenu />,\r\n  },\r\n  { id: 2, label: \"Update Restaurent\", link: \"/app/tables\", icon: <TableIcon /> },\r\n  {\r\n    id: 3,\r\n    label: \"Add Review Tag\",\r\n    link: \"/app/addReviewTag\",\r\n    icon: <RateReview />,\r\n  },\r\n  {\r\n    id: 4,\r\n    label: \"Variations\",\r\n    link: \"/app/dish-options\",\r\n    icon: <BorderOuter />,\r\n  },\r\n  {\r\n    id: 5,\r\n    label: \"Show Reviews\",\r\n    link: \"/app/notifications\",\r\n    icon: <Visibility />,\r\n  },\r\n  {\r\n    id: 6,\r\n    label: \"View Menus\",\r\n    link: \"/app/notifications\",\r\n    icon: <MenuBook />,\r\n  },\r\n  {\r\n    id: 7,\r\n    label: \"View WebPage\",\r\n    link: \"/app/notifications\",\r\n    icon: <Web />,\r\n  },\r\n  {\r\n    id: 8,\r\n    label: \"Reset Password\",\r\n    link: \"/app/changepassword\",\r\n    icon: <LockSharp />,\r\n  },\r\n  {\r\n    id: 9,\r\n    label: \"Customer Satisfac\",\r\n    link: \"/app/reviews\",\r\n    icon: <SentimentSatisfied />,\r\n  },\r\n  // { id: 5, type: \"divider\" },\r\n  // { id: 6, type: \"title\", label: \"HELP\" },\r\n  // { id: 7, label: \"Library\", link: \"https://flatlogic.com/templates\", icon: <LibraryIcon /> },\r\n  // { id: 8, label: \"Support\", link: \"https://flatlogic.com/forum\", icon: <SupportIcon /> },\r\n  // { id: 9, label: \"FAQ\", link: \"https://flatlogic.com/forum\", icon: <FAQIcon /> },\r\n  // { id: 10, type: \"divider\" },\r\n  // { id: 11, type: \"title\", label: \"PROJECTS\" },\r\n  // {\r\n  //   id: 12,\r\n  //   label: \"My recent\",\r\n  //   link: \"\",\r\n  //   icon: <Dot size=\"small\" color=\"warning\" />,\r\n  // },\r\n  // {\r\n  //   id: 13,\r\n  //   label: \"Starred\",\r\n  //   link: \"\",\r\n  //   icon: <Dot size=\"small\" color=\"primary\" />,\r\n  // },\r\n  // {\r\n  //   id: 14,\r\n  //   label: \"Background\",\r\n  //   link: \"\",\r\n  //   icon: <Dot size=\"small\" color=\"secondary\" />,\r\n  // },\r\n];\r\n\r\nfunction Sidebar({ location }) {\r\n  var classes = useStyles();\r\n  var theme = useTheme();\r\n\r\n  // global\r\n  var { isSidebarOpened } = useLayoutState();\r\n  var layoutDispatch = useLayoutDispatch();\r\n\r\n  // local\r\n  var [isPermanent, setPermanent] = useState(true);\r\n\r\n  useEffect(function () {\r\n    window.addEventListener(\"resize\", handleWindowWidthChange);\r\n    handleWindowWidthChange();\r\n    return function cleanup() {\r\n      window.removeEventListener(\"resize\", handleWindowWidthChange);\r\n    };\r\n  });\r\n\r\n  return (\r\n    <Drawer\r\n      variant={isPermanent ? \"permanent\" : \"temporary\"}\r\n      className={classNames(classes.drawer, {\r\n        [classes.drawerOpen]: isSidebarOpened,\r\n        [classes.drawerClose]: !isSidebarOpened,\r\n      })}\r\n      classes={{\r\n        paper: classNames({\r\n          [classes.drawerOpen]: isSidebarOpened,\r\n          [classes.drawerClose]: !isSidebarOpened,\r\n        }),\r\n      }}\r\n      open={isSidebarOpened}\r\n    >\r\n      <div className={classes.toolbar} />\r\n      <div className={classes.mobileBackButton}>\r\n        <IconButton onClick={() => toggleSidebar(layoutDispatch)}>\r\n          <ArrowBackIcon\r\n            classes={{\r\n              root: classNames(classes.headerIcon, classes.headerIconCollapse),\r\n            }}\r\n          />\r\n        </IconButton>\r\n      </div>\r\n      <List className={classes.sidebarList}>\r\n        {structure.map(link => (\r\n          <SidebarLink\r\n            key={link.id}\r\n            location={location}\r\n            isSidebarOpened={isSidebarOpened}\r\n            {...link}\r\n          />\r\n        ))}\r\n      </List>\r\n    </Drawer>\r\n  );\r\n\r\n  // ##################################################################\r\n  function handleWindowWidthChange() {\r\n    var windowWidth = window.innerWidth;\r\n    var breakpointWidth = theme.breakpoints.values.md;\r\n    var isSmallScreen = windowWidth < breakpointWidth;\r\n\r\n    if (isSmallScreen && isPermanent) {\r\n      setPermanent(false);\r\n    } else if (!isSmallScreen && !isPermanent) {\r\n      setPermanent(true);\r\n    }\r\n  }\r\n}\r\n\r\nexport default withRouter(Sidebar);\r\n",
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Review.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\Apis\\Menu.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\Widget.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Header\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\mock.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\typography\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\Dot.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\Table\\Table.js",
+  [
+    "235",
+    "236",
+    "237"
+  ],
+  "import React from \"react\";\r\nimport {\r\n  Table,\r\n  TableRow,\r\n  TableHead,\r\n  TableBody,\r\n  TableCell,\r\n  Chip\r\n} from \"@material-ui/core\";\r\nimport useStyles from \"../../styles\";\r\n\r\nconst states = {\r\n  sent: \"success\",\r\n  pending: \"warning\",\r\n  declined: \"secondary\",\r\n};\r\n\r\nexport default function TableComponent({ data }) {\r\n  const classes = useStyles();\r\n\r\n  return (\r\n    <Table className=\"mb-0\">\r\n      <TableHead>\r\n        <TableRow>\r\n          <TableCell>Name</TableCell>\r\n          <TableCell>Description</TableCell>\r\n          <TableCell></TableCell>\r\n          <TableCell>Total dishes</TableCell>\r\n        </TableRow>\r\n      </TableHead>\r\n      <TableBody>\r\n        {data?.map((item, index) => (\r\n          <TableRow key={index}>\r\n            <TableCell className=\"pl-3 fw-normal\">{item.name}</TableCell>\r\n            <TableCell>{item.description}</TableCell>\r\n            <TableCell>{''}</TableCell>\r\n            <TableCell>{''}</TableCell>\r\n            <TableCell>\r\n              {/* <Chip label={status} classes={{ root: classes[states[status.toLowerCase()]] }} /> */}\r\n            </TableCell>\r\n          </TableRow>\r\n        ))}\r\n      </TableBody>\r\n    </Table>\r\n  );\r\n}\r\n",
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\BigStat.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\SidebarLink.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Widget\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Wrappers\\Wrappers.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\PageTitle.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\dashboard\\components\\BigStat\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\Sidebar\\components\\SidebarLink\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\components\\PageTitle\\styles.js",
+  [],
+  "C:\\Users\\lsmdl\\OneDrive\\Desktop\\image\\Uk-client-restuerent-project\\src\\pages\\UpdateRestaurent\\UpdateRestaurent.js",
+  [
+    "238",
+    "239",
+    "240"
+  ],
+  {
+    "ruleId": "241",
+    "replacedBy": "242"
+  },
+  {
+    "ruleId": "243",
+    "replacedBy": "244"
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "246",
+    "line": 12,
+    "column": 10,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 12,
+    "endColumn": 22
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "249",
+    "line": 13,
+    "column": 8,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 13,
+    "endColumn": 20
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "250",
+    "line": 9,
+    "column": 17,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 9,
+    "endColumn": 25
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "251",
+    "line": 20,
+    "column": 10,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 20,
+    "endColumn": 25
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "252",
+    "line": 20,
+    "column": 27,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 20,
+    "endColumn": 36
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "253",
+    "line": 5,
+    "column": 3,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 5,
+    "endColumn": 11
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "254",
+    "line": 9,
+    "column": 10,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 9,
+    "endColumn": 13
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "255",
+    "line": 9,
+    "column": 15,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 9,
+    "endColumn": 25
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "256",
+    "line": 9,
+    "column": 27,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 9,
+    "endColumn": 31
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "257",
+    "line": 10,
+    "column": 8,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 10,
+    "endColumn": 12
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "258",
+    "line": 14,
+    "column": 18,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 14,
+    "endColumn": 30
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "259",
+    "line": 15,
+    "column": 17,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 15,
+    "endColumn": 28
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "260",
+    "line": 16,
+    "column": 16,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 16,
+    "endColumn": 26
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "261",
+    "line": 28,
+    "column": 8,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 28,
+    "endColumn": 18
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "262",
+    "line": 1,
+    "column": 18,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 1,
+    "endColumn": 34
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "263",
+    "line": 1,
+    "column": 36,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 1,
+    "endColumn": 40
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "261",
+    "line": 1,
+    "column": 53,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 1,
+    "endColumn": 63
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "264",
+    "line": 4,
+    "column": 8,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 4,
+    "endColumn": 20
+  },
+  {
+    "ruleId": "265",
+    "severity": 1,
+    "message": "266",
+    "line": 43,
+    "column": 6,
+    "nodeType": "267",
+    "endLine": 43,
+    "endColumn": 8,
+    "suggestions": "268"
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "269",
+    "line": 44,
+    "column": 9,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 44,
+    "endColumn": 22
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "270",
+    "line": 5,
+    "column": 24,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 5,
+    "endColumn": 41
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "271",
+    "line": 6,
+    "column": 17,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 6,
+    "endColumn": 31
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "272",
+    "line": 7,
+    "column": 17,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 7,
+    "endColumn": 31
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "273",
+    "line": 9,
+    "column": 21,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 9,
+    "endColumn": 32
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "274",
+    "line": 10,
+    "column": 19,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 10,
+    "endColumn": 30
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "275",
+    "line": 11,
+    "column": 18,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 11,
+    "endColumn": 25
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "276",
+    "line": 31,
+    "column": 8,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 31,
+    "endColumn": 11
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "277",
+    "line": 8,
+    "column": 3,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 8,
+    "endColumn": 7
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "278",
+    "line": 12,
+    "column": 7,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 12,
+    "endColumn": 13
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "279",
+    "line": 19,
+    "column": 9,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 19,
+    "endColumn": 16
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "280",
+    "line": 3,
+    "column": 37,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 3,
+    "endColumn": 46
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "256",
+    "line": 4,
+    "column": 10,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 4,
+    "endColumn": 14
+  },
+  {
+    "ruleId": "245",
+    "severity": 1,
+    "message": "281",
+    "line": 21,
+    "column": 36,
+    "nodeType": "247",
+    "messageId": "248",
+    "endLine": 21,
+    "endColumn": 42
+  },
+  "no-native-reassign",
+  [
+    "282"
+  ],
+  "no-negated-in-lhs",
+  [
+    "283"
+  ],
+  "no-unused-vars",
+  "'useUserState' is defined but never used.",
+  "Identifier",
+  "unusedVar",
+  "'AuthProvider' is defined but never used.",
+  "'setError' is assigned a value but never used.",
+  "'useUserDispatch' is defined but never used.",
+  "'loginUser' is defined but never used.",
+  "'Redirect' is defined but never used.",
+  "'Box' is defined but never used.",
+  "'IconButton' is defined but never used.",
+  "'Link' is defined but never used.",
+  "'Icon' is defined but never used.",
+  "'FacebookIcon' is defined but never used.",
+  "'TwitterIcon' is defined but never used.",
+  "'GithubIcon' is defined but never used.",
+  "'Typography' is defined but never used.",
+  "'CircularProgress' is defined but never used.",
+  "'Fade' is defined but never used.",
+  "'MUIDataTable' is defined but never used.",
+  "react-hooks/exhaustive-deps",
+  "React Hook React.useEffect has a missing dependency: 'user.restaurant'. Either include it or remove the dependency array.",
+  "ArrayExpression",
+  [
+    "284"
+  ],
+  "'datatableData' is assigned a value but never used.",
+  "'NotificationsIcon' is defined but never used.",
+  "'TypographyIcon' is defined but never used.",
+  "'UIElementsIcon' is defined but never used.",
+  "'SupportIcon' is defined but never used.",
+  "'LibraryIcon' is defined but never used.",
+  "'FAQIcon' is defined but never used.",
+  "'Dot' is defined but never used.",
+  "'Chip' is defined but never used.",
+  "'states' is assigned a value but never used.",
+  "'classes' is assigned a value but never used.",
+  "'useEffect' is defined but never used.",
+  "'Layout' is assigned a value but never used.",
+  "no-global-assign",
+  "no-unsafe-negation",
+  {
+    "desc": "285",
+    "fix": "286"
+  },
+  "Update the dependencies array to be: [user.restaurant]",
+  {
+    "range": "287",
+    "text": "288"
+  },
+  [
+    1124,
+    1126
+  ],
+  "[user.restaurant]"
+]

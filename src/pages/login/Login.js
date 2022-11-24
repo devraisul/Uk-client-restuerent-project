@@ -29,9 +29,12 @@ function Login(props) {
     // console.log(data);
     userLogin(data)
       .then((res) => {
-        setIsAuthenticated(true);
         setUser(res);
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsAuthenticated(true);
+          setIsLoading(false);
+        }, 2000);
+
       })
       .catch((err) => {
         setIsLoading(false);
@@ -58,7 +61,7 @@ function Login(props) {
           <div>
             <div className={classes.form}>
               <React.Fragment>
-                
+
                 <form onSubmit={hadleLogin}>
                   <h1
                     style={{
@@ -95,28 +98,28 @@ function Login(props) {
                       label="password"
                       fullWidth
                     />
-                    {!passRevil?(<RiEyeCloseLine
+                    {!passRevil ? (<RiEyeCloseLine
                       style={{
                         color: "#0575B4",
                         cursor: "pointer",
                         position: "absolute",
                         top: "45%",
                         right: "5%",
-                        fontSize:'1.3rem'
+                        fontSize: '1.3rem'
                       }}
                       onClick={handleShowPassword}
-                    />):(
+                    />) : (
                       <RiEyeLine
-                      style={{
-                        color: "#0575B4",
-                        cursor: "pointer",
-                        position: "absolute",
-                        top: "45%",
-                        right: "5%",
-                        fontSize:'1.3rem'
-                      }}
-                      onClick={handleShowPassword}
-                    />
+                        style={{
+                          color: "#0575B4",
+                          cursor: "pointer",
+                          position: "absolute",
+                          top: "45%",
+                          right: "5%",
+                          fontSize: '1.3rem'
+                        }}
+                        onClick={handleShowPassword}
+                      />
                     )}
                   </div>
                   <div
@@ -136,15 +139,15 @@ function Login(props) {
                     </NavLink>
                   </div>
                   {error && (
-                  <Fade in={error}>
-                    <Typography
-                      color="secondary"
-                      style={{fontSize:'0.8rem',marginTop:'20px'}}
-                    >
-                      {`* ${error}`}
-                    </Typography>
-                  </Fade>
-                )}
+                    <Fade in={error}>
+                      <Typography
+                        color="secondary"
+                        style={{ fontSize: '0.8rem', marginTop: '20px' }}
+                      >
+                        {`* ${error}`}
+                      </Typography>
+                    </Fade>
+                  )}
                   <div className={classes.formButtons}>
                     {isLoading ? (
                       <CircularProgress
@@ -164,15 +167,15 @@ function Login(props) {
                     )}
                   </div>
                   <div style={{
-                    textAlign:'center',
-                    marginTop:'15px'
+                    textAlign: 'center',
+                    marginTop: '15px'
                   }}>
                     Don't have an accoun?
                     <NavLink
                       to={"/registration"}
                       style={{
                         color: "#0575B4",
-                        
+
                       }}
                     >
                       {" "}
