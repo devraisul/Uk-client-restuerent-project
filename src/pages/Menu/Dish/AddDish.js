@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
+import { useHistory } from 'react-router-dom';
 import { addDishes, addDishImage, getDishById, updateSingleDish } from '../../../Apis/dish';
 import { getVariation, getVariationByRestaurantIdAndDishId, Variationlink } from '../../../Apis/variation';
 import Loading from '../../../components/Loading/Loading';
@@ -176,7 +177,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
         if (data?.image[0] !== undefined) {
           Data.append('image', data?.image[0], data?.image[0].name);
           addDishImage(res.data[0]?.id, Data).then((resImg) => {
-            console.log('imageData: ',resImg);
+            console.log('imageData: ', resImg);
             if (resImg.data) {
               // IF IMAGE AND VARIATION HAVE 
               if (variationArray.length > 0) {
@@ -270,7 +271,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
   }, [inEditMode])
 
 
-
+const history = useHistory()
   return (
     <>
       <Toaster
@@ -647,7 +648,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
                           </TableHead>
 
                           <TableBody>
-                            {variations.map((variation, index) => (
+                            {variations.length > 0 ? variations.map((variation, index) => (
                               <TableRow key={index}>
                                 <TableCell>
                                   <input
@@ -674,7 +675,18 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
                                   </select>
                                 </TableCell>
                               </TableRow>
-                            ))}
+                            )) :
+                              <TableRow>
+                                <TableCell colSpan={3}>
+                                  <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',width:'100%',color:'#aaa'}}>
+                                    <span>No Dish Option Found!</span> <br />
+                                  <span>Add Dish Options To Link With Dishes</span> <br />
+                                  <Button onClick={()=>{history.push('/app/dish-options/')}} style={{background:'#0575B4',color:'#fff'}}>Add Dish Options</Button>
+                                  </div>
+                                  
+                                </TableCell>
+                              </TableRow>
+                            }
                           </TableBody>
                         </Table>
                       </>
