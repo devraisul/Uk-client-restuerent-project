@@ -20,7 +20,6 @@ import { useAuth } from "../../context/AuthContext";
 import { useLayoutState } from "../../context/LayoutContext";
 import AddReviewTag from '../../pages/AddReviewTag/AddReviewTag';
 import EditReviewTag from "../../pages/AddReviewTag/EditReviewTag/EditReviewTag";
-import Addveriation from "../../pages/Addvariation/Addveriation";
 import AdminAllCustomers from "../../pages/Admin/AdminAllCustomers/AdminAllCustomers";
 import AdminAllRestaurant from "../../pages/Admin/AdminAllRestaurant/AdminAllRestaurant";
 import AdminEditRestaurent from "../../pages/Admin/AdminAllRestaurant/AdminEditRestaurent";
@@ -30,6 +29,7 @@ import AdminReviews from "../../pages/Admin/AdminReviews/AdminReviews";
 import AdminViewReviews from "../../pages/Admin/AdminReviews/AdminViewReviews";
 import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatisfaction";
 import Dashboard from "../../pages/dashboard/Dashboard";
+import DishOptions from "../../pages/DishOptions/DishOptions";
 import DishHandle from "../../pages/Menu/DishHandle";
 import MenuHandle from "../../pages/Menu/MenuHandle";
 import AllOrders from "../../pages/Orders/AllOrders";
@@ -79,7 +79,7 @@ function Layout(props) {
               <Route path="/app/add-dish/:menuName/:restaurentId/:menuId" component={DishHandle} />
               <Route path="/app/addReview" component={AddReviewTag} />
               <Route path="/app/editReview/:id" component={EditReviewTag} />
-              <Route path="/app/variation" component={Addveriation} />
+              <Route path="/app/dish-options" component={DishOptions} />
               <Route path="/app/reviews" component={CustomerSatisfaction} />
               <Route path="/app/show-reviews" component={ShowReviews} />
               <Route path="/app/all-orders/:keyId/" component={AllOrders} />
