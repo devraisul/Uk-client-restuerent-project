@@ -64,6 +64,7 @@ const DishHandle = () => {
 
   return (
     <Fragment>
+      
       <div>
         {/* NAVIGATION BUTTONS  */}
         <div style={{
