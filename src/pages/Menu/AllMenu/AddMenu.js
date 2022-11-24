@@ -1,12 +1,13 @@
 import { Button, IconButton, TextField } from '@material-ui/core';
 import { Add, Delete } from '@material-ui/icons';
+import { Paper } from '@mui/material';
 import React, { Fragment, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { addMenu } from '../../../Apis/Menu';
 
 
 //Add menu Form
-const AddMenu = ({ id,setChangeMonitor,onAllMenu }) => {
+const AddMenu = ({ id, setChangeMonitor, onAllMenu }) => {
   console.log(id);
   const [inputList, setInputList] = useState([{ name: "", description: "" }]);
 
@@ -92,60 +93,98 @@ const AddMenu = ({ id,setChangeMonitor,onAllMenu }) => {
   };
 
   return (
-    <div className='table-wrapper'>
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-      />
-      <h1 style={{
-        color: '#0575B4'
-      }}>ADD Menu</h1>
-      <table className="fl-table">
-        {inputList.map((x, i) => {
-          return (
-            <tbody>
-              <tr>
-                <td>
-                  {i + 1}
-                </td>
-                <td>
-                  <TextField
-                    style={{ marginTop: "15px", marginRight: "15px" }}
-                    name="name"
-                    placeholder="Enter Menu Name"
-                    value={x.name}
-                    onChange={e => handleInputChange(e, i)}
-                    required
-                    id="outlined-basic" label="Menu Name" variant="outlined" />
-                </td>
-                <td>
-                  <TextField
-                    style={{ marginTop: "15px", marginRight: "15px" }}
-                    name="description"
-                    placeholder="Enter Menu Description"
-                    value={x.description}
-                    onChange={e => handleInputChange(e, i)}
-                    rows={1}
-                    required
-                    id="outlined-basic" label="Menu Description" variant="outlined" />
-                </td>
-                <td >
-                  {i > 0 ? (<IconButton style={{ marginTop: "15px", marginRight: "15px" }} onClick={(e) => handledeleteClick(i)} aria-label="delete">
-                    <Delete />
-                  </IconButton>) : ('')}
-                </td>
-                <td>
-                  {inputList[i].name || inputList[i].description === !'' ? <Fragment> {inputList.length - 1 === i && <Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" onClick={(e) => handleAddClick(i)}><Add />Add More</Button>}</Fragment> : <Fragment><Button style={{ marginTop: "15px", marginRight: "15px" }} variant="outlined" disabled><Add />Add More</Button></Fragment>}
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <div style={{ marginTop: "50px", }}>
-        <Button style={{ background: "#0575B4",width:'200px', color: "white" }} variant="contained" onClick={(e) => onSubmit(e)}>Submit</Button>
+    <Paper style={{
+      margin: '10px 0px',
+      padding: '10px'
+    }}>
+      <div className='table-wrapper'>
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
+        <h1 style={{
+          color: '#0575B4'
+        }}>Add Menu</h1>
+        <table className="fl-table">
+          {inputList.map((x, i) => {
+            return (
+              <tbody >
+                <tr>
+                  <td style={{
+                    border: 'none',
+                    fontSize: '1rem',
+                    fontWeight: 'bold'
+                  }}>
+                    {i + 1}
+                  </td>
+                  <td style={{ border: 'none' }}>
+                    <TextField
+                      style={{ marginTop: "15px", marginRight: "15px" }}
+                      name="name"
+                      placeholder="Enter Menu Name"
+                      value={x.name}
+                      onChange={e => handleInputChange(e, i)}
+                      required
+                      id="outlined-basic" label="Menu Name" variant="outlined" />
+                  </td>
+                  <td style={{ border: 'none' }}>
+                    <TextField
+                      style={{ marginTop: "15px", marginRight: "15px" }}
+                      name="description"
+                      placeholder="Enter Menu Description"
+                      value={x.description}
+                      onChange={e => handleInputChange(e, i)}
+                      rows={1}
+                      required
+                      id="outlined-basic" label="Menu Description" variant="outlined" />
+                  </td>
+                  <td style={{ border: 'none' }}>
+                    {i > 0 ? (
+                      <IconButton
+                        style={{ marginTop: "15px", marginRight: "15px" }}
+                        onClick={(e) => handledeleteClick(i)}
+                        aria-label="delete">
+                        <Delete style={{color:'#ff0000'}}  />
+                      </IconButton>
+                    ) : ('')}
+                  </td>
+                  <td style={{ border: 'none' }}>
+                    {inputList[i].name || inputList[i].description === !'' ?
+                      <Fragment> {inputList.length - 1 === i &&
+                        <Button
+                          style={{ marginTop: "15px", marginRight: "15px", background: '#0575B4', color: '#fff', cursor: 'pointer' }}
+                          variant="outlined"
+                          onClick={(e) => handleAddClick(i)}>
+                          <Add /> Add More
+                        </Button>
+                      }
+                      </Fragment> :
+                      <Fragment>
+                        <Button
+                          style={{ marginTop: "15px", marginRight: "15px", background: '#aaa', color: '#fff', cursor: 'pointer' }}
+                          variant="outlined"
+                          disabled>
+                          <Add /> Add More
+                        </Button>
+                      </Fragment>
+                    }
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table>
+        <div style={{ marginTop: "50px", }}>
+          <Button
+            style={{ background: "#0575B4", width: '200px', color: "white" }}
+            variant="contained"
+            onClick={(e) => onSubmit(e)}>
+            Submit
+          </Button>
+        </div>
       </div>
-    </div>
+    </Paper>
+
 
   );
 };
