@@ -91,7 +91,7 @@ export const getVariation = async (id) => {
       "Authorization": `Bearer ${jwt.token}`
     },
   };
-  await axios.get(`/api/variation/${id}/1`, config)
+  await axios.get(`/api/variation/${id}`, config)
     .then(res => {
       getVariationResponse = res;
     })
