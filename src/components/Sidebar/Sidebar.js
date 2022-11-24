@@ -23,6 +23,8 @@ import {
 
 function Sidebar({ location }) {
   const { user } = useAuth()
+
+  
   const structure = [
     { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
     {
@@ -40,8 +42,8 @@ function Sidebar({ location }) {
     },
     {
       id: 4,
-      label: "Variations",
-      link: "/app/variation",
+      label: "Dish Options",
+      link: "/app/dish-options",
       icon: <BorderOuter />,
     },
     {
@@ -94,7 +96,8 @@ function Sidebar({ location }) {
   });
 
   return (
-    <Drawer
+    <>
+    {<Drawer
       variant={isPermanent ? "permanent" : "temporary"}
       className={classNames(classes.drawer, {
         [classes.drawerOpen]: isSidebarOpened,
@@ -128,7 +131,9 @@ function Sidebar({ location }) {
           />
         ))}
       </List>
-    </Drawer>
+    </Drawer>}
+    </>
+    
   );
 
   // ##################################################################
