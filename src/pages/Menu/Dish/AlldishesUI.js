@@ -6,10 +6,10 @@ import { IoCloudDoneOutline } from 'react-icons/io5';
 // import configData from "../../config.json";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { addDishImage, deleteDish, updateSingleDish } from '../../Apis/dish';
-import { getVariationByRestaurantIdAndDishId } from '../../Apis/variation';
-import { useAuth } from '../../context/AuthContext';
-import LinkVariation from './LinkVariation';
+import { addDishImage, deleteDish, updateSingleDish } from '../../../Apis/dish';
+import { getVariationByRestaurantIdAndDishId } from '../../../Apis/variation';
+import { useAuth } from '../../../context/AuthContext';
+import LinkVariation from '../../ViewMenu/LinkVariation';
 //all dishes show UI in owner dashboard
 const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDish }) => {
   const [showuploader, setsshowuploader] = useState(false);

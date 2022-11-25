@@ -72,14 +72,15 @@ const AdminOrderProvider = ({ children }) => {
     console.log({ id, cartData });
     setCartData(cartData.filter(data => data?.dish?.id !== id))
   }
-  const handleAddVariation = (variation) => {
+  const handleAddVariation = (type_id,variation) => {
     (selectedVariations.length === 0) ?
-      setSelectedVariations([...selectedVariations, variation])
+      setSelectedVariations([...selectedVariations, {type_id,variation}])
       :
-      (selectedVariations.filter(singleVar => singleVar?.id === variation?.id).length === 0) ? setSelectedVariations([...selectedVariations, variation]) : setSelectedVariations(selectedVariations.filter(singleVar => singleVar?.id !== variation?.id))
+      (selectedVariations.filter(singleVar => 
+        singleVar?.id === variation?.id).length === 0) ? setSelectedVariations([...selectedVariations, {type_id,variation}]) : setSelectedVariations(selectedVariations.filter(singleVar => singleVar?.consolevariation?.id !== variation?.id))
   }
   const handleRemoveVariation = (variation) => {
-    setSelectedVariations(selectedVariations.filter(variations => variations?.id !== variation?.id))
+    setSelectedVariations(selectedVariations.filter(variations => variations?.variation?.id !== variation?.id))
   }
 
   const addCartDishQty = (id) => {

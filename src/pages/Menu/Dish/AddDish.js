@@ -34,6 +34,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
   const [isChecked, setIsChecked] = useState([{
     type_id: 0, no_of_varation_allowed: 0
   }])
+  const [variationTypeForVariationNumber, setVariationTypeForVariationNumber] = useState([])
 
 
   // LOADINGS 
@@ -241,6 +242,7 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
   // GET VARIATIONS 
   useEffect(() => {
     getVariation(user?.user?.restaurant[0]?.id).then(res => {
+      setVariationTypeForVariationNumber(res?.data)
       setVariations(res?.data.map(v => {
         return { type_id: parseInt(v.id), name: v.name, no_of_varation_allowed: 0 }
       }))
@@ -250,7 +252,6 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
   // GET SINGLE DISH 
   useEffect(() => {
     if (inEditMode?.status) {
-      console.log(inEditMode);
       setIsDishLoading(true)
       getDishById(inEditMode?.dish_id)
         .then(res => {
@@ -260,7 +261,13 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
           if (res.id) {
             getVariationByRestaurantIdAndDishId(res?.id)
               .then(res => {
-                console.log(res);
+                res.map(variation => {
+                  setIsChecked([...isChecked, {
+                    type_id: variation?.type_id
+                    , no_of_varation_allowed: variation?.no_of_varation_allowed
+                  }])
+                })
+
                 setSingleVariation(res);
                 setIsDishLoading(false)
               })
@@ -271,7 +278,11 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
   }, [inEditMode])
 
 
-const history = useHistory()
+  const history = useHistory()
+  useEffect(() => {
+    console.log({ isChecked })
+  },[isChecked])
+
   return (
     <>
       <Toaster
@@ -487,21 +498,29 @@ const history = useHistory()
                                       type="checkbox"
                                       name="" />
                                   </TableCell>
-                                  <TableCell>{variation?.name}{console.log(variation)}</TableCell>
+                                  <TableCell>{variation?.name}{console.log({ variation })}</TableCell>
                                   <TableCell>
-
                                     <select
-                                      disabled={((variation?.type_id === singleVariation[index]?.type_id) || (isChecked.filter(data => data.type_id === variation?.type_id).length > 0)) ? false : true}
+                                      disabled={isChecked.filter(data => data.type_id === variation?.type_id).length > 0 ? false : true}
+
                                       name='no_of_varation_allowed'
+
+                                      defaultValue={
+                                        {}
+                                        // variation?.type_id === isChecked[index]?.type_id? 
+                                        // {value:isChecked[index].type_id,label:variation?.name}
+                                        //  : 
+                                        // {value:0,label:'* Select No of Variation Allowed'}
+                                      }
+
                                       onChange={(e) => { handleAllowedVariation(e, variation.type_id) }}
-                                      defaultValue={singleVariation[index]?.no_of_varation_allowed}
+
                                       className={styles.selectVariations} >
+
                                       <option value={0}>* Select No of Variation Allowed</option>
-                                      <option value={1} >1</option>
-                                      <option value={2} >2</option>
-                                      <option value={3} >3</option>
-                                      <option value={4} >4</option>
-                                      <option value={5} >5</option>
+                                      {
+                                        [...Array(variationTypeForVariationNumber[index]?.variation_count)].map((elementInArray, index) => (<option key={index} value={index + 1}>{index + 1}</option>))
+                                      }
                                     </select>
                                   </TableCell>
                                 </TableRow>
@@ -652,7 +671,6 @@ const history = useHistory()
                               <TableRow key={index}>
                                 <TableCell>
                                   <input
-
                                     value={variation?.type_id}
                                     checked={variation.isChecked}
                                     onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed) }} type="checkbox"
@@ -667,23 +685,21 @@ const history = useHistory()
                                     onChange={(e) => { handleAllowedVariation(e, variation.type_id) }}
                                     className={styles.selectVariations} >
                                     <option value={0}>* Select No of Variation Allowed</option>
-                                    <option value={1} >1</option>
-                                    <option value={2} >2</option>
-                                    <option value={3} >3</option>
-                                    <option value={4} >4</option>
-                                    <option value={5} >5</option>
+                                    {
+                                      [...Array(variationTypeForVariationNumber[index]?.variation_count)].map((elementInArray, index) => (<option key={index} value={index + 1}>{index + 1}</option>))
+                                    }
                                   </select>
                                 </TableCell>
                               </TableRow>
                             )) :
                               <TableRow>
                                 <TableCell colSpan={3}>
-                                  <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',width:'100%',color:'#aaa'}}>
+                                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', width: '100%', color: '#aaa' }}>
                                     <span>No Dish Option Found!</span> <br />
-                                  <span>Add Dish Options To Link With Dishes</span> <br />
-                                  <Button onClick={()=>{history.push('/app/dish-options/')}} style={{background:'#0575B4',color:'#fff'}}>Add Dish Options</Button>
+                                    <span>Add Dish Options To Link With Dishes</span> <br />
+                                    <Button onClick={() => { history.push('/app/dish-options/') }} style={{ background: '#0575B4', color: '#fff' }}>Add Dish Options</Button>
                                   </div>
-                                  
+
                                 </TableCell>
                               </TableRow>
                             }

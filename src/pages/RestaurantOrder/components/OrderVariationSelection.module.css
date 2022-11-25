@@ -1,0 +1,57 @@
+.orderVariationContainer {
+  height: 62vh;
+  overflow-y: scroll;
+}
+.orderVariationContainer::-webkit-scrollbar {
+  display: none;
+}
+.variationRemoveButtonIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+.variationDisabledButton {
+  border-radius: 30px !important;
+  background-color: #ffbbbb !important;
+  color: rgb(255, 0, 0) !important;
+  margin: 10px 10px !important;
+  border: 2px solid #ff0000 !important;
+}
+.variationDisabledButtonIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+.variationAddButton {
+  border-radius: 30px !important;
+  background-color: #0575b4 !important;
+  color: #fff !important;
+  margin: 10px 10px !important;
+  border: 2px solid #ffffff !important;
+}
+.variationAddButtonIcon {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+.variationAddButtonSelected {
+  background-color: transparent !important;
+  color: "#fff !important";
+  color: #0575b4;
+  margin: 10px 10px;
+  border: 2px solid #0575b4;
+}
+.OrderAddToCardButton {
+  position: absolute !important;
+  bottom: 20 !important;
+  width: 92% !important;
+  background: #0575b4 !important;
+  color: #fff !important;
+  margin: 20px 5px !important;
+}
+
+.variationRemoveButton {
+  border-radius: 30px !important;
+  background-color: #d5d5d5 !important;
+  color: #fff !important;
+  margin: 10px 10px !important;
+  border: 2px solid #ffffff !important;
+}

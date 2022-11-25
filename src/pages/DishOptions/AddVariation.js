@@ -10,12 +10,12 @@ export default function AddVariation({inputList2,handleInputChange2,allVariation
           <table className="fl-table">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Variation Name</th>
-                <th>Variation Description</th>
-                <th>Price</th>
-                <th>Type</th>
-                <th>Add more</th>
+                <th width={"5%"}>#</th>
+                <th style={{textAlign:'left'}} width={"20%"}>Variation Name</th>
+                <th style={{textAlign:'left'}} width={"20%"}>Variation Description</th>
+                <th style={{textAlign:'left'}} width={"10%"}>Price</th>
+                <th width={"25%"}>Type</th>
+                <th width={"20%"}>Add more</th>
               </tr>
             </thead>
 
@@ -28,7 +28,7 @@ export default function AddVariation({inputList2,handleInputChange2,allVariation
                     </td>
                     <td>
                       <TextField
-                        style={{ marginTop: "5px", marginRight: "5px" }}
+                        style={{ marginTop: "5px", marginRight: "5px",width:'100%' }}
                         name="name"
                         type={'text'}
                         placeholder="Enter Name"
@@ -40,7 +40,7 @@ export default function AddVariation({inputList2,handleInputChange2,allVariation
                     </td>
                     <td>
                       <TextField
-                        style={{ marginTop: "5px", marginRight: "5px"}}
+                        style={{ marginTop: "5px", marginRight: "5px",width:'100%'}}
                         name="description"
                         type={'text'}
                         placeholder="Enter Description"
@@ -52,7 +52,7 @@ export default function AddVariation({inputList2,handleInputChange2,allVariation
                     </td>
                     <td>
                       <TextField
-                        style={{ marginTop: "5px", marginRight: "5px" }}
+                        style={{ marginTop: "5px", marginRight: "5px",width:'100%' }}
                         name="price"
                         type={'number'}
                         placeholder="Enter Price"
@@ -64,7 +64,7 @@ export default function AddVariation({inputList2,handleInputChange2,allVariation
                     </td>
                     <td>
                       <select
-                        style={{ padding: '10px 10px', width: '100%', fontSize: '1rem' }}
+                        style={{ padding: '15px 10px', width: '100%', fontSize: '1rem' }}
                         name="type_id"
                         value={x.type_id}
                         defaultValue={0}
@@ -81,7 +81,7 @@ export default function AddVariation({inputList2,handleInputChange2,allVariation
                         <IconButton
                           style={{ marginTop: "5px", marginRight: "5px" }}
                           onClick={(e) => handleDeleteClick2(i)} aria-label="delete">
-                          <Delete />
+                          <Delete style={{color:'red'}}/>
                         </IconButton>
                       }
                       {
@@ -93,13 +93,13 @@ export default function AddVariation({inputList2,handleInputChange2,allVariation
                           <Fragment>
                             {
                               inputList2.length - 1 === i &&
-                              <Button style={{ marginTop: "5px", marginRight: "5px" }} variant="outlined" onClick={(e) => handleAddClick2(i)}>
+                              <Button style={{ marginTop: "5px", marginRight: "5px",background:'#0575B4',color:'#fff' }} variant="outlined" onClick={(e) => handleAddClick2(i)}>
                                 <Add />Add More
                               </Button>
                             }
                           </Fragment> :
                           <Fragment>
-                            <Button style={{ marginTop: "5px", marginRight: "5px" }} variant="outlined" disabled>
+                            <Button style={{ marginTop: "5px", marginRight: "5px", background:'#aaa',color:'#fff' }} variant="outlined" disabled>
                               <Add />Add More
                             </Button>
                           </Fragment>

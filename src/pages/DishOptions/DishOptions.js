@@ -12,7 +12,7 @@ import AllVariationType from './AllVariationType';
 
 const DishOptions = () => {
   const [inputList, setInputList] = React.useState([{ name: "", description: "" }]);
-  const [inputList2, setInputList2] = React.useState([{ name: "", description: "", type_id: '', price: '' }]);
+  const [inputList2, setInputList2] = React.useState([{ name: "", description: "", type_id: '', price: 0 }]);
   const [isChangeDetect, setIsChangeDetect] = useState(Math.random())
   const { user } = useAuth();
 
@@ -204,7 +204,7 @@ const DishOptions = () => {
         .then(res => {
           if (res.data.length > 0) {
             toast.success('Variation Added Successfully!')
-            setInputList2([{ name: "", description: "", type_id: '', price: '' }])
+            setInputList2([{ name: "", description: "", type_id: '', price: 0 }])
             onAllType(true)
             setIsChangeDetect(Math.random())
           }

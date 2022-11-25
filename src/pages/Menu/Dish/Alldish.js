@@ -3,7 +3,8 @@ import { Table } from '@mui/material';
 import React, { Fragment } from 'react';
 import { getdish } from '../../../Apis/dish';
 import Loading from '../../../components/Loading/Loading';
-import AlldishesUI from '../../ViewMenu/AlldishesUI';
+import AlldishesUI from './AlldishesUI';
+
 
 const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,handleEditDish }) => {
   const [dishes, setDishes] = React.useState()
@@ -66,7 +67,7 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
   ) : (
     <Fragment>
       <div style={Styles.constainer} >
-        <h1 style={{color:'#0575B4'}} className='large text-center'>{menuName} Dishes</h1>
+        <h1 style={{color:'#0575B4'}} className='large text-center'>Dishes of {menuName}</h1>
         <Table sx={{ minWidth: 1150 }} className='servicesT'>
           <TableHead>
             <TableRow>

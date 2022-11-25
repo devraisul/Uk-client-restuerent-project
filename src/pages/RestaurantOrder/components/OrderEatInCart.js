@@ -120,9 +120,7 @@ export default function OrderEatInCart() {
                                     {data?.variation.length > 0 &&
                                       <h6>Options :
                                         (<>
-                                          {data?.variation.map(variation => (
-                                            <>{variation?.name},</>
-                                          ))}
+                                          {data?.variation.map(variation=>(<>{variation.variation.name},</>))}
                                         </>)
                                       </h6>
                                     }
