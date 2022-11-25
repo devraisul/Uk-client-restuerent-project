@@ -30,7 +30,7 @@ export const editRestaurent = async (id, data) => {
       "Authorization": `Bearer ${token}`
     },
   };
-  await axios.patch(`/api/restaurant/UpdateResturantDetails/${id}`, data, config)
+  await axios.patch(`/restaurant/UpdateResturantDetails/${id}`, data, config)
     .then(res => {
       editRestaurentResponse = res;
     })
