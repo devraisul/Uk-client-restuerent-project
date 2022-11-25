@@ -2,8 +2,6 @@ import axios from "axios";
 
 // Add Restaurent
 export const addRestaurent = async (data) => {
-  console.log('from api',data);
-  let addRestaurentResponse;
   const token = JSON.parse(localStorage?.token)
   const config = {
     headers: {
@@ -12,35 +10,56 @@ export const addRestaurent = async (data) => {
       "Authorization": `Bearer ${token}`
     },
   };
-  await axios.post(`/api/restaurant/`, data, config)
+  return await axios.post(`/api/restaurant/`, data, config)
     .then(res => {
-      addRestaurentResponse = res;
+      return res;
     })
-  return addRestaurentResponse
+
 }
 // Edit Restaurent
 export const editRestaurent = async (id, data) => {
-  let editRestaurentResponse;
-  const token = localStorage.token;
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo)?.token;
   const config = {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       'Accept': 'application/json',
-      "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${jwt}`
     },
   };
-  await axios.patch(`/restaurant/UpdateResturantDetails/${id}`, data, config)
+  const result = await axios.patch(`/api/restaurant/UpdateResturantDetails/${id}`, data, config)
     .then(res => {
-      editRestaurentResponse = res;
+      console.log('API->',res);
+      return res;
     })
     .catch(err => console.log(err))
-  return editRestaurentResponse
+return result
+}
+// Edit Restaurent
+export const editRestaurentLogo = async (id, data) => {
+
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo)?.token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt}`
+    },
+  };
+  const result = await axios.post(`/api/restaurant/uploadimage/${id}?_method=PATCH`, data, config)
+    .then(res => {
+      console.log({res});
+      return res;
+    })
+    .catch(err => console.log(err))
+    return result
 }
 
 // get Restaurent by ID
 export const getRestaurent = async (id) => {
-  console.log('API --->',id);
+  console.log('API --->', id);
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {
@@ -80,7 +99,7 @@ export const getAllRestaurent = async () => {
 
 // get Restaurent by ID
 export const getRestaurentByIdForCustomer = async (id) => {
-  console.log('API --->',id);
+  console.log('API --->', id);
   const config = {
     headers: {
       "Content-Type": "application/json",

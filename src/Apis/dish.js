@@ -80,6 +80,7 @@ export const getdish = async (Rid) => {
 }
 // Add Dish Image
 export const addDishImage = async (id,data) => {
+
   let getaddDishImage;
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
