@@ -29,6 +29,7 @@ export default function RestaurantOrder() {
     const owner = JSON.parse(localStorage.getItem('data'))
 
 
+
     // USE_EFFECTS 
     useEffect(() => {
         setIsMenuLoading(true)
@@ -61,17 +62,16 @@ export default function RestaurantOrder() {
     }, [menuQuery])
 
 
+
     return (
 
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid
                 className='singleColumn'
                 item
-                
                 xs={order_type === 'eat_in' ? (selectedTable ? 12 : 12) : 12}
                 sm={order_type === 'eat_in' ? (selectedTable ? 12 : 12) : 4}
-                md={order_type === 'eat_in' ? (selectedTable ? 5 : 12) : 5}
-            >
+                md={order_type === 'eat_in' ? (selectedTable ? 5 : 12) : 5} >
                 {selectedTable && <h2 className='columnTitle'>Cart</h2>}
                 {order_type === 'eat_in' && <OrderEatInCart />}
                 {order_type === 'delivery' && <OrderDeliveryCart />}

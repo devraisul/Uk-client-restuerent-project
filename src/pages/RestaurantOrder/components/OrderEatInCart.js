@@ -51,7 +51,6 @@ export default function OrderEatInCart() {
     setIsRiciptView(false)
   }
 
-
   const submitButton = () => {
     const data = {
       amount: 350,
@@ -84,6 +83,7 @@ export default function OrderEatInCart() {
       }, 1000);
     })
   }
+
   return (
     <Box>
       <Toaster position='top-right' />

@@ -174,27 +174,29 @@ export default function CollapsibleTable() {
     }, [])
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow style={{ background: '#0575B4' }} >
-                        <TableCell />
-                        <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order ID</TableCell>
-                        <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Type</TableCell>
-                        <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Status</TableCell>
-                        <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Time</TableCell>
-                        <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Amount</TableCell>
-                        <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Actions</TableCell>
-                    </TableRow>
-                </TableHead>
+        <>
+            {isLoading ? <Loading /> :
+                <TableContainer component={Paper}>
+                    <Table aria-label="collapsible table">
+                        <TableHead>
+                            <TableRow style={{ background: '#0575B4' }} >
+                                <TableCell />
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order ID</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Type</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Status</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Time</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Amount</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Actions</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <Row key={row.id} row={row} />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>}
+        </>
 
-                {isLoading ? <Loading /> :
-                    <TableBody>
-                        {rows.map((row) => (
-                            <Row key={row.id} row={row} />
-                        ))}
-                    </TableBody>}
-            </Table>
-        </TableContainer>
     );
 }

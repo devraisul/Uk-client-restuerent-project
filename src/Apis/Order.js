@@ -17,7 +17,7 @@ export const getCustomerOrder = async (customer_id) => {
   return result
 }
 
-export const getAllOrerByRestID = async () => {
+export const getAllOrerByRestID = async (id) => {
   let addMenuResponse;
   const userInfo = localStorage.getItem('customer_details')
   const jwt = JSON.parse(userInfo);
@@ -29,7 +29,7 @@ export const getAllOrerByRestID = async () => {
     },
   };
   // await axios.get(`/api/order/getorderby/customerid/${jwt[0].customer.id}`, config)
-  await axios.get(`/api/order/getorderby/customerid/40}`, config)
+  await axios.get(`/api/order/getorderby/customerid/${id}`, config)
     .then(res => {
       addMenuResponse = res;
     })
@@ -67,6 +67,28 @@ export const allOrders = async () => {
   };
  
   const result = await axios.get(`/api/order/All/order`, config)
+    .then(res => {
+      return res;
+    })
+    .catch(err => console.log(err));
+  return result
+}
+
+
+
+
+export const allPaddingOrdersByRestID = async (id) => {
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo)?.token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt}`
+    },
+  };
+ 
+  const result = await axios.get(`/api/order/All/pending/order/${id}`, config)
     .then(res => {
       return res;
     })

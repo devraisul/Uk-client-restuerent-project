@@ -44,17 +44,6 @@
 .cartBookedIndicator {
   background-color: rgb(255, 132, 132);
 }
-.OrderTable {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 150px;
-  width: 150px;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 10px !important;
-}
 
 .OrderSelectedTable {
   background-color: #84d2ff;

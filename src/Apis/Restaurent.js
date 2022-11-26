@@ -59,7 +59,6 @@ export const editRestaurentLogo = async (id, data) => {
 
 // get Restaurent by ID
 export const getRestaurent = async (id) => {
-  console.log('API --->', id);
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
   const config = {
