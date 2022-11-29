@@ -1,6 +1,6 @@
 import { TextField } from '@material-ui/core';
 import { Add, Delete } from '@mui/icons-material';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton, Typography } from '@mui/material';
 import React, { Fragment } from 'react';
 
 export default function AddVariationTypes({inputList,handleInputChange,handleDeleteClick,handleAddClick,onSubmitVariationType}) {
@@ -22,8 +22,18 @@ export default function AddVariationTypes({inputList,handleInputChange,handleDel
               return (
                 <tbody key={i}>
                   <tr style={{padding:'0px'}}>
-                    <td>
-                      <p >{i + 1}</p>
+                    <td
+                    style={{
+                      border: 'none',
+                      fontSize: '1rem',
+                      fontWeight: 'bold',
+                      display:'flex',
+                      justifyContent:'center',
+                      alignItems:'center',
+                      height:'100%',
+                      marginTop: "30px",
+                    }}>
+                      <Typography>{i + 1}</Typography>
                     </td>
                     <td>
                       <TextField

@@ -22,16 +22,16 @@ const DishHandle = () => {
 
   const [open, setOpen] = useState(false);
   const [inEditMode, setInEditMode] = useState({
-    status:false,
-    dish_id:""
+    status: false,
+    dish_id: ""
   });
 
   // ON EDIT/ADD POPUP CLOSED ==================== 
   const closeModal = () => {
     setOpen(false)
     setInEditMode({
-      status:false,
-      dish_id:""
+      status: false,
+      dish_id: ""
     })
   };
 
@@ -40,8 +40,8 @@ const DishHandle = () => {
   };
   const handleEditDish = (dish_id) => {
     setInEditMode({
-      status:true,
-      dish_id:dish_id
+      status: true,
+      dish_id: dish_id
     });
     setOpen(true)
   };
@@ -64,13 +64,15 @@ const DishHandle = () => {
 
   return (
     <Fragment>
-      
+
       <div>
         {/* NAVIGATION BUTTONS  */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-evenly'
-        }} className='btn-center'>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-evenly'
+          }}
+          className='btn-center'>
           <button
             title='Add Dish'
             style={{
@@ -79,7 +81,8 @@ const DishHandle = () => {
               background: '#0575B4',
               color: '#fff'
             }}
-            className='large btn' onClick={(e) => handleAddDish(e)}>
+            className='large btn'
+            onClick={(e) => handleAddDish(e)}>
             <AiOutlinePlus style={{ fontSize: '1.5rem' }} />
             <span style={{ marginLeft: '10px' }} className="menuNav">
               Add Dish

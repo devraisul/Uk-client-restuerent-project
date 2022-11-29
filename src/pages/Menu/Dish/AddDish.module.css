@@ -129,10 +129,12 @@
 }
 .selectVariations {
   width: 100% !important;
-  height: 20px;
+  height: 30px;
   font-size: 1rem;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 0px 7px;
+  background-color: #0575b4;
+  color: #fff;
 }
 .selectVariationContainerMain {
   padding: 0px 10px;
@@ -165,6 +167,16 @@
   background-color: #5392b7;
   border-radius: 5px;
   padding: 2px 2px;
+  box-shadow: 0 0 5px #000;
+  outline: none;
+}
+.addActionButton {
+  border: none;
+}
+.selectVariationsOption {
+  padding: 5px;
+  box-shadow: 0 0 10px #ddd;
+  outline: none;
 }
 .deleteActionButton {
   display: flex;

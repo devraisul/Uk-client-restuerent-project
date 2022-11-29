@@ -1,0 +1,28 @@
+.orderTableContainer {
+  position: relative;
+}
+.searchInputContainer {
+  position: absolute;
+  right: 0;
+}
+.pageTitle {
+  text-align: center;
+  color: #0575b4;
+}
+.searchInput {
+  padding: 10px 10px;
+  width: 300px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: 0 0 5px #ddd;
+  border: 2px solid #0575b4;
+}
+.tableContainer {
+  margin-top: 10px;
+}
+
+.orderSummury {
+  color: #fff !important;
+  font-weight: bold;
+  text-align: center;
+}

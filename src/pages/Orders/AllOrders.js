@@ -15,9 +15,11 @@ import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { BsThreeDotsVertical } from 'react-icons/bs';
+import { BiDish } from 'react-icons/bi';
+import { BsFillPersonFill, BsThreeDotsVertical } from 'react-icons/bs';
 import { allOrders } from '../../Apis/Order';
 import Loading from '../../components/Loading/Loading';
+import styles from './AllOrders.module.css';
 
 function createData(id, order_type, status, order_date, amount, customer_id, customer_name, customer_phone, customer_address, table_number, dishes) {
     return {
@@ -52,8 +54,7 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.id}
                 </TableCell>
-                <TableCell align="center">{row.order_type}</TableCell>
-
+                <TableCell align="center">{row.order_date}</TableCell>
                 {(row.status === 'Processing') && (
                     <TableCell style={{ color: '#ff8000', }} align="center">
                         <span style={{ padding: '3px 15px', background: '#ffcc99', borderRadius: '30px', width: '200px' }}>
@@ -75,8 +76,12 @@ function Row(props) {
                         </span>
                     </TableCell>
                 )}
-
-                <TableCell align="center">{row.order_date}</TableCell>
+                <TableCell align="center">{row.customer_name}</TableCell>
+                <TableCell align="center">{row.customer_phone ? row.customer_phone : '02948493849'}</TableCell>
+                <TableCell align="center">
+                    <Button title='Kitchen Copy'><BiDish style={{color:'#aaa',fontSize:'1.5rem'}} /></Button>
+                    <Button title='Customer Copy'><BsFillPersonFill style={{color:'#aaa',fontSize:'1.5rem'}} /></Button>
+                </TableCell>
                 <TableCell align="center">{row.amount}</TableCell>
                 <TableCell align="center">
                     <Button title='options'><BsThreeDotsVertical /></Button>
@@ -114,28 +119,22 @@ function Row(props) {
                             </Box>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
-                                    <TableRow>
-                                        <TableCell>a</TableCell>
-                                        <TableCell>Date</TableCell>
-                                        <TableCell>Customer</TableCell>
-                                        <TableCell align="right">Amount</TableCell>
-                                        <TableCell align="right">Total price ($)</TableCell>
+                                    <TableRow style={{background:'#0575B4'}}>
+                                        <TableCell style={{color:'#fff'}}>#</TableCell>
+                                        <TableCell style={{color:'#fff'}}>Dish Details</TableCell>
+                                        <TableCell style={{color:'#fff'}}>Variation Details</TableCell>
+                                        <TableCell style={{color:'#fff'}} align="right">Quantity</TableCell>
+                                        <TableCell style={{color:'#fff'}} align="right">Total price ($)</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {/* {row.dishes.map((dishe) => (
-                                        <TableRow key={dishe.id}>
-                                            <TableCell>a</TableCell>
-                                            <TableCell component="th" scope="row">
-
-                                            </TableCell>
-                                            <TableCell></TableCell>
-                                            <TableCell align="right"></TableCell>
-                                            <TableCell align="right">
-
-                                            </TableCell>
+                                    
+                                        <TableRow>
+                                            {console.log({row})}
+                                            <TableCell>{}</TableCell>
+                                            <TableCell>{}</TableCell>
                                         </TableRow>
-                                    ))} */}
+                                 
                                 </TableBody>
                             </Table>
                         </Box>
@@ -164,7 +163,8 @@ export default function CollapsibleTable() {
 
     useEffect(() => {
         allOrders().then((res) => {
-            setIsLoading(true)
+            setIsLoading(true);
+            console.log({res})
             res?.data.map(order => {
                 rows.push(createData(order?.id, order?.type, order?.status, order?.created_at, order?.amount, order?.customer_id, order?.customer_name, order?.customer_phone, order?.customer_address, order?.table_number, order?.detail))
             });
@@ -174,19 +174,26 @@ export default function CollapsibleTable() {
     }, [])
 
     return (
-        <>
+        <div className={styles.orderTableContainer}>
+
+            <div className={styles.searchInputContainer}>
+                <input className={styles.searchInput} placeholder='search' type="text" />
+            </div>
+            <h1 className={styles.pageTitle}>All Orders</h1>
             {isLoading ? <Loading /> :
-                <TableContainer component={Paper}>
+                <TableContainer className={styles.tableContainer} component={Paper}>
                     <Table aria-label="collapsible table">
                         <TableHead>
                             <TableRow style={{ background: '#0575B4' }} >
                                 <TableCell />
                                 <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order ID</TableCell>
-                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Type</TableCell>
-                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Status</TableCell>
                                 <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Time</TableCell>
-                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Amount</TableCell>
-                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Order Actions</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Status</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Customer Name</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Customer Phone</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Print</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Amount</TableCell>
+                                <TableCell style={{ color: '#fff', fontWeight: 'bold' }} align="center">Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -196,7 +203,7 @@ export default function CollapsibleTable() {
                         </TableBody>
                     </Table>
                 </TableContainer>}
-        </>
+        </div>
 
     );
 }

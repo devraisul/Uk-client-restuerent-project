@@ -1,3 +1,48 @@
 .variations {
   margin-left: 10px;
 }
+.OrderCartCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px rgb(201, 201, 201);
+}
+.OrderCartCard div {
+  display: flex;
+  align-items: center;
+}
+.OrderCartCard div img {
+  width: 50px;
+  height: auto;
+  margin-right: 20px;
+}
+.OrderCartCard button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.OrderQt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.OrderQt button {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0px;
+  margin: 0;
+}
+.OrderQt button:hover {
+  background-color: #ddd;
+}

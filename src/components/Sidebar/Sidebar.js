@@ -5,7 +5,7 @@ import {
 import { useTheme } from "@material-ui/styles";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
-import { MdBookmarkBorder, MdReviews } from 'react-icons/md';
+import { MdBookmarkBorder, MdOutlineToday, MdReviews } from 'react-icons/md';
 import { withRouter } from "react-router-dom";
 // styles
 import useStyles from "./styles";
@@ -65,24 +65,30 @@ function Sidebar({ location }) {
     },
     {
       id: 6,
+      label: "Todays Orders",
+      link: `/app/todays-orders`,
+      icon: <MdOutlineToday style={{ fontSize: '1.5rem' }} />,
+    },
+    {
+      id: 7,
       label: "All Orders",
       link: `/app/all-orders/${user?.restaurant[0]?.Key_ID}/${user?.restaurant[0]?.id}`,
       icon: <MdBookmarkBorder style={{ fontSize: '1.5rem' }} />,
     },
     {
-      id: 7,
+      id: 8,
       label: "View WebPage",
       link: `/usermenu/${user?.restaurant[0]?.Key_ID}?id=${user?.restaurant[0]?.id}`,
       icon: <Web />,
     },
     {
-      id: 8,
+      id: 9,
       label: "Reset Password",
       link: "/app/changepassword",
       icon: <LockSharp />,
     },
     {
-      id: 9,
+      id: 10,
       label: "Customer Satisfac",
       link: "/app/reviews",
       icon: <SentimentSatisfied />,

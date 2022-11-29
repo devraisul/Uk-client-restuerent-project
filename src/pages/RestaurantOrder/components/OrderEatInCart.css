@@ -54,7 +54,7 @@
 }
 .cartContainerMain {
   width: 100%;
-  padding: 10px 10px;
+  padding: 10px 0px;
 }
 .cartEmpty {
   display: flex;
@@ -123,34 +123,7 @@
 .cartList::-webkit-scrollbar {
   display: none;
 }
-.OrderCartCard {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 5px 0px;
-  padding: 10px 20px;
-  background-color: #fff;
-  border-radius: 10px;
 
-  box-shadow: 1px 1px 5px rgb(201, 201, 201);
-}
-.OrderCartCard div {
-  display: flex;
-  align-items: center;
-}
-.OrderCartCard div img {
-  width: 50px;
-  height: auto;
-  margin-right: 20px;
-}
-.OrderCartCard button {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .OrderCartButtonContainer {
   display: flex;
   justify-content: space-between;

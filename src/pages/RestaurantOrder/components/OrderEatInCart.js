@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Select, TextField } from '@material-ui/core'
+import { Box, Button, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@material-ui/core'
 import React, { useContext, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
@@ -8,10 +8,10 @@ import { MdDelete } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 import ReactToPrint from 'react-to-print'
 import { addOrder } from '../../../Apis/Order'
-
 import { AdminOrderContext } from '../context/AdminOrderContext'
 import OrderCalculator from './OrderCalculator'
 import './OrderEatInCart.css'
+import styles from './OrderEatInCart.module.css'
 import OrderPrintInvoice from './OrderPrintInvoice'
 import OrderTableSelection from './OrderTableSelection'
 
@@ -53,22 +53,32 @@ export default function OrderEatInCart() {
 
   const submitButton = () => {
     const data = {
-      amount: 350,
+      amount: 50,
       customer_name: inputCustomerName,
       table_number: selectedTable,
       type: 'eat_in',
       phone: inputPhone,
       address: inputAddress,
-      dishes: cartData.map(dish => {
+      dishes: [cartData.map(dish => {
         return {
-          Dish_Price: dish?.dish?.price,
           qty: dish?.qty,
-          id: dish?.dish?.id,
-          variation: dish?.variation.length > 0 ? dish?.variation.map(variation => {
-            return { id: variation?.id }
-          }) : []
+          dish_id: dish?.dish_id,
+
+
+          variation: dish?.variation.length > 0 ?
+            [
+              dish?.variation.map(variation => {
+
+                console.log(variation?.id)
+
+                return variation?.id
+
+              })
+            ] : []
+
+
         }
-      })
+      })]
     }
     console.log('ORDER -> ', data);
     addOrder(owner?.restaurant[0]?.id, data).then((res) => {
@@ -103,53 +113,62 @@ export default function OrderEatInCart() {
                           <p>Empty Cart!</p>
                         </div>
                         :
-                        <div style={{ height: '50vh' }} className='cartList'>
-                          {
-                            cartData.map((data, i) => (
-                              <div key={i} className='OrderCartCard'>
-                                <div style={{ width: '300px' }} >
-                                  <h4 style={{ marginRight: '10px' }}>{data?.dish?.id}</h4>
-                                  <img src={`https://mughalsignandprint.co.uk/restaurant2/${data?.dish?.image}`} alt="" />
-                                  <div
-                                    style={{
-                                      flexDirection: 'column',
-                                      alignItems: 'start',
-                                      justifyContent: 'start'
-                                    }}>
-                                    <h4>{data?.dish?.name}</h4>
-                                    {data?.variation.length > 0 &&
-                                      <h6>Options :
-                                        (<>
-                                          {data?.variation.map(variation=>(<>{variation.variation.name},</>))}
-                                        </>)
-                                      </h6>
-                                    }
-                                  </div>
-                                </div>
+                        <div style={{ height: '50vh' }} >
+                          <Table width={'100%'}>
+                            <TableHead>
+                              <TableRow style={{ background: '#0575B4', }}>
+                                <TableCell minWidth={'1%'} style={{ color: '#fff' }}>#</TableCell>
+                                <TableCell minWidth={'50%'} style={{ color: '#fff' }}>Details</TableCell>
+                                <TableCell minWidth={'30%'} style={{ color: '#fff' }}>Price £</TableCell>
+                                <TableCell minWidth={'10%'} style={{ color: '#fff' }}>Qty</TableCell>
+                                <TableCell minWidth={'9%'} style={{ color: '#fff' }}>Delete</TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody style={{ overflowY: 'scroll', minHeight: "40vh" }} >
+                              < >
+                                {
+                                  cartData.map((data, i) => (
+                                    <TableRow key={i}>
+                                      <TableCell>
+                                        <h4>{i + 1}</h4>
+                                      </TableCell>
 
-                                <div
-                                  style={{
-                                    display: 'flex',
-                                    width: '60px',
-                                    justifyContent: 'center',
-                                    alignItems: "center",
-                                    fontWeight: 'bold',
-                                    color: '#0575B4'
-                                  }} >
-                                  £ {data?.dish?.price}
-                                </div>
-
-                                <div className='OrderQt'>
-                                  <button onClick={() => removeCartDishQty(data?.dish?.id)}>-</button>
-                                  {data?.qty}
-                                  <button onClick={() => addCartDishQty(data?.dish?.id)}>+</button>
-                                </div>
-                                <button onClick={() => removeFromCart(data?.dish?.id)}>
-                                  <MdDelete style={{ fontSize: '1.5rem', color: 'red' }} />
-                                </button>
-                              </div>
-                            ))
-                          }
+                                      <TableCell>
+                                        <div style={{ display: "flex" }}>
+                                          <img style={{ width: '50px', height: "auto", objectFit: "contain", marginRight: "10px" }} src={`https://mughalsignandprint.co.uk/restaurant2/${data?.dish?.image}`} alt="" />
+                                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <h4>{data?.dish?.name}</h4>
+                                            {data?.variation.length > 0 &&
+                                              <h6>Options :
+                                                (<>
+                                                  {data?.variation.map(variation => (<>{variation.variation.name},</>))}
+                                                </>)
+                                              </h6>
+                                            }
+                                          </div>
+                                        </div>
+                                      </TableCell>
+                                      <TableCell>
+                                        <div style={{ color: '#0575B4' }} >{data?.dish?.price} </div>
+                                      </TableCell>
+                                      <TableCell>
+                                        <div className={styles.OrderQt}>
+                                          <button onClick={() => removeCartDishQty(data?.dish?.id)}>-</button>
+                                          {data?.qty}
+                                          <button onClick={() => addCartDishQty(data?.dish?.id)}>+</button>
+                                        </div>
+                                      </TableCell>
+                                      <TableCell>
+                                        <button onClick={() => removeFromCart(data?.dish?.id)}>
+                                          <MdDelete style={{ fontSize: '1.5rem', color: 'red' }} />
+                                        </button>
+                                      </TableCell>
+                                    </TableRow>
+                                  ))
+                                }
+                              </>
+                            </TableBody>
+                          </Table>
                         </div>
                     }
                   </>}
@@ -310,6 +329,6 @@ export default function OrderEatInCart() {
           </>
         }
       </>
-    </Box>
+    </Box >
   )
 }

@@ -33,6 +33,7 @@ import DishOptions from "../../pages/DishOptions/DishOptions";
 import DishHandle from "../../pages/Menu/DishHandle";
 import MenuHandle from "../../pages/Menu/MenuHandle";
 import AllOrders from "../../pages/Orders/AllOrders";
+import TodaysOrder from "../../pages/Orders/TodaysOrder/TodaysOrder";
 import ChangePass from "../../pages/ResetPass/ChangePass";
 import RestaurantOrderContainer from "../../pages/RestaurantOrder/RestaurantOrderContainer";
 import ShowReviews from "../../pages/showReviews/ShowReviews";
@@ -77,6 +78,7 @@ function Layout(props) {
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/menu" component={MenuHandle} />
               <Route path="/app/add-dish/:menuName/:restaurentId/:menuId" component={DishHandle} />
+              <Route path="/app/todays-orders" component={TodaysOrder} />
               <Route path="/app/addReview" component={AddReviewTag} />
               <Route path="/app/editReview/:id" component={EditReviewTag} />
               <Route path="/app/dish-options" component={DishOptions} />

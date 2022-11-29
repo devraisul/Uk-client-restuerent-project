@@ -10,6 +10,7 @@ export const addRestaurent = async (data) => {
       "Authorization": `Bearer ${token}`
     },
   };
+  console.log({fromCreateRestAPI:data})
   return await axios.post(`/api/restaurant/`, data, config)
     .then(res => {
       return res;

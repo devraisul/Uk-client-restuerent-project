@@ -3,18 +3,18 @@ import {
   TableCell, TableHead, TableRow
 } from "@material-ui/core";
 import { Edit } from "@material-ui/icons";
+import { Typography } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
 import { FiSave } from "react-icons/fi";
 import { getVariation, updateVariationType } from "../../Apis/variation";
+import Loading from "../../components/Loading/Loading";
 import { useAuth } from "../../context/AuthContext";
 
 const AllVariationType = ({ setIsChangeDetect }) => {
   const { user } = useAuth();
   const [variationData, setVariationData] = useState([])
-
   const [isChangedDetect, setIsChangedDetect] = useState(Math.random())
-
   const [editMode, setEditMode] = useState({
     mode: false,
     id: '',
@@ -26,11 +26,20 @@ const AllVariationType = ({ setIsChangeDetect }) => {
     description: ''
   })
 
+
+
+  // LOADING 
+  const [isLoading, setIsLoading] = useState(true)
+
+
   // GET ALL VARIATION TYPE 
   useEffect(() => {
+    setIsLoading(true)
     getVariation(user.restaurant[0].id)
       .then(res => {
+        console.log(res.data);
         setVariationData(res.data);
+        setIsLoading(false)
       })
   }, [isChangedDetect])
 
@@ -66,9 +75,10 @@ const AllVariationType = ({ setIsChangeDetect }) => {
   return (
     <>
       <Table className="mb-0">
-        <TableHead style={{
-          background: '#0575B4',
-        }}>
+        <TableHead
+          style={{
+            background: '#0575B4',
+          }}>
           <TableRow>
             <TableCell style={{ color: '#fff' }}>#</TableCell>
             <TableCell style={{ color: '#fff' }}>Name</TableCell>
@@ -78,88 +88,93 @@ const AllVariationType = ({ setIsChangeDetect }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {variationData.length > 0 ? variationData?.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell className="pl-3 fw-normal">{index + 1}</TableCell>
-              <TableCell className="pl-3 fw-normal">
-                <input style={{
-                  fontSize: "1rem",
-                  padding: '5px 10px',
-                  outline: 'none',
-                  border: 'none',
-                  borderBottom: (editMode.mode && editMode.id === item.id) ? '1px solid #0575B4' : 'none',
-                  background: '#F6F7FF'
-                }}
-                  ddisabled={(editMode.mode && editMode.id === item.id) ? false : true}
-                  required
-                  type="text"
-                  defaultValue={item.name}
-                  onChange={(e) => variationEditInputValues.name = e.target.value}
-                />
+          {isLoading ?
+            <TableRow>
+              <TableCell colSpan={5}>
+                <Loading />
               </TableCell>
-              <TableCell>
-                <input style={{
-                  fontSize: "1rem",
-                  padding: '5px 10px',
-                  outline: 'none',
-                  border: 'none',
-                  borderBottom: (editMode.mode && editMode.id === item.id) ? '1px solid #0575B4' : 'none',
-                  background: '#F6F7FF'
-                }}
-                  disabled={(editMode.mode && editMode.id === item.id) ? false : true}
-                  required
-                  type="text"
-                  defaultValue={item.description}
-                  onChange={(e) => variationEditInputValues.description = e.target.value}
-                />
-              </TableCell>
-              <TableCell>
-                {item.variation.length > 0
-                  ?
-                  <ol type='disk'>
-                    {item?.variation.map(variation => (
-                      <li>{variation?.name}</li>
-                    ))}
-                  </ol>
+            </TableRow>
+            : variationData.length > 0 ? variationData?.map((item, index) => (
+              <TableRow key={index}>
+                <TableCell className="pl-3 fw-normal">{index + 1}</TableCell>
+                <TableCell className="pl-3 fw-normal">
+                  <input
+                    style={{
+                      fontSize: "1rem",
+                      padding: '5px 10px',
+                      outline: 'none',
+                      border: 'none',
+                      borderBottom: (editMode.mode && editMode.id === item.id) ? '1px solid #0575B4' : 'none',
+                      background: '#F6F7FF'
+                    }}
+                    disabled={(editMode.mode && editMode.id === item.id) ? false : true}
+                    required
+                    type="text"
+                    defaultValue={item.name}
+                    onChange={(e) => variationEditInputValues.name = e.target.value}
+                  />
+                </TableCell>
+                <TableCell>
+                  <input
+                    style={{
+                      fontSize: "1rem",
+                      padding: '5px 10px',
+                      outline: 'none',
+                      border: 'none',
+                      borderBottom: (editMode.mode && editMode.id === item.id) ? '1px solid #0575B4' : 'none',
+                      background: '#F6F7FF'
+                    }}
+                    disabled={(editMode.mode && editMode.id === item.id) ? false : true}
+                    required
+                    type="text"
+                    defaultValue={item.description}
+                    onChange={(e) => variationEditInputValues.description = e.target.value}
+                  />
+                </TableCell>
+                <TableCell>
+                  {item?.variation.length > 0 ?
+                    <ol type='disk'>
+                      {item?.variation.map((variation, index) => (
+                        <li key={index}>{variation?.name}</li>
+                      ))}
+                    </ol> :
+                    <Typography>N/A</Typography>
+                  }
+                </TableCell>
+                <TableCell>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                    {(editMode.mode === false || editMode.id !== item.id) &&
+                      <>
+                        <button
+                          style={{ cursor: 'pointer', width: '100%' }}
+                          onClick={() => handleGoToEditMode(item)}
+                          title="Edit">
+                          <Edit style={{ color: 'green', textAlign: 'right' }} />
+                        </button>
 
-                  :
-                  <span>N/A</span>
-                }
-              </TableCell>
-              <TableCell>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                  {(editMode.mode === false || editMode.id !== item.id) &&
-                    <>
-                      <button
-                        style={{ cursor: 'pointer', width: '100%' }}
-                        onClick={() => handleGoToEditMode(item)}
-                        title="Edit">
-                        <Edit style={{ color: 'green', textAlign: 'right' }} />
-                      </button>
-
-                      {/* <button title="Delete" >
+                        {/* <button title="Delete" >
                         <Delete style={{ color: 'red' }} />
                       </button> */}
 
-                    </>
-                  }
-                  {(editMode.mode && editMode.id === item.id) &&
-                    <button style={{ width: '100%' }} onClick={handleUpdateVariationType} title='Update' >
-                      <FiSave style={{ color: '#0575B4', fontSize: '1.3rem', textAlign: 'right' }} />
-                    </button>
-                  }
-                </div>
-              </TableCell>
-            </TableRow>
-          )) :
-            <TableRow>
-              <TableCell style={{ background: "#DDD", }} colSpan={5}>
-                <div
-                  style={{ display: 'flex', fontSize: "2rem", justifyContent: 'center', alignItems: 'center' }} >
-                  No Data Found!
-                </div>
-              </TableCell>
-            </TableRow>
+                      </>
+                    }
+                    {(editMode.mode && editMode.id === item.id) &&
+                      <button style={{ width: '100%' }} onClick={handleUpdateVariationType} title='Update' >
+                        <FiSave style={{ color: '#0575B4', fontSize: '1.3rem', textAlign: 'right' }} />
+                      </button>
+                    }
+                  </div>
+                </TableCell>
+              </TableRow>
+            )) :
+              <TableRow>
+                <TableCell style={{ background: "#DDD", }} colSpan={5}>
+                  <div
+                    style={{ display: 'flex', fontSize: "2rem", justifyContent: 'center', alignItems: 'center' }} >
+                    No Data Found!
+                  </div>
+                </TableCell>
+              </TableRow>
           }
         </TableBody>
       </Table>

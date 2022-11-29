@@ -99,7 +99,7 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
           setIsLoading(false)
           setTimeout(() => { setsshowuploader(true) }, 200)
         }
-      })
+      }).catch(err => console.log({ err }))
     }
     if (dishimage === undefined) {
       setIsLoading(false)
@@ -240,8 +240,8 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                     variationData?.map((variation, i) => (
                       <li key={i} style={{
                         padding: '1px 20px',
-                        background: '#0575B4',
-                        color: '#ffffff',
+
+                        color: '#000',
                         margin: '1px 0px',
                         borderRadius: '30px',
                         justifyContent: 'space-between',
@@ -249,12 +249,10 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                       }}>
                         <span style={{ width: '20%' }} >{i + 1}</span>
                         <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name}</span>
-
                       </li>
                     ))
                   }
                 </ul>
-
                 {
                   //show upload image option on click
                   showLink && (
@@ -289,11 +287,12 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
             <TableCell width="10%">£ {dishes?.price}</TableCell>
             <TableCell width="20%">{trimString(dishes?.description)}</TableCell>
             <TableCell style={{ padding: '0' }} width="20%">
-              <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
                 {(dishes?.image) ? (
                   <img
                     style={{
@@ -308,42 +307,24 @@ const AlldishesUI = ({ dishes, menuId, index, rid, setIsChangeMenu, handleEditDi
                   />
                 ) : (dishes?.image)}
               </div>
-              {/* <button className='btn btn-primary2' onClick={(e) => handleAddClick(e)}>
-                  Upload Image
-                </button>
-                {//show upload image option on click
-                  showuploader ? (
-                    <Fragment>
-                      <div className='form-groupnopaddingnopadding'>
-                        <input
-                          type='file'
-                          id='image'
-                          name='image'
-                          onChange={(e) => onFileChange(e)}
-                        />
-                      </div>
-                      <input type='submit' className='btn btn-primary2' value='Add ' onClick={(e) => onSubmit(e)} />
-                    </Fragment>
-                  ) : null} */}
+
             </TableCell>
             <TableCell width="15%">
               <div>
                 <ul>
-                  {
-                    variationData?.map((variation, i) => (
-                      <li key={i} style={{
-                        width: "100%",
-                        padding: '1px 10px',
-                        margin: '1px 0px',
-                        borderRadius: '30px',
-                        justifyContent: 'space-between',
-                        display: 'flex'
-                      }}>
+                  {variationData?.map((variation, i) => (
+                    <li key={i} style={{
+                      width: "100%",
+                      padding: '1px 10px',
+                      margin: '1px 0px',
+                      borderRadius: '30px',
+                      justifyContent: 'space-between',
+                      display: 'flex'
+                    }}>
 
-                        <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name} ({variation.no_of_varation_allowed})</span>
-                      </li>
-                    ))
-                  }
+                      <span style={{ width: '80%', textAlign: "left" }} >{variation?.variation_type?.name} ({variation.no_of_varation_allowed})</span>
+                    </li>
+                  ))}
                 </ul>
                 {showLink && (
                   <Fragment>

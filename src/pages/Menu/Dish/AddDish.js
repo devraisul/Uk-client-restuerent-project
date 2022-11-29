@@ -4,15 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
+import Select from 'react-select';
 import { addDishes, addDishImage, getDishById, updateSingleDish } from '../../../Apis/dish';
-import { getVariation, getVariationByRestaurantIdAndDishId, Variationlink } from '../../../Apis/variation';
+import { getVariation2, getVariationByRestaurantIdAndDishId, variationlink } from '../../../Apis/variation';
 import Loading from '../../../components/Loading/Loading';
 import { useAuth } from '../../../context/AuthContext';
 import styles from './AddDish.module.css';
+
+
 const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, inEditMode }) => {
   const user = useAuth()
-
-
   // ===================== FROM API ========================
   // SINGLE DISH DATA ======================================
   const [singleDish, setSingleDish] = useState({})
@@ -31,19 +32,15 @@ const AddDish = ({ menuId, restaurentId, menuName, setIsChangeMenu, closeModal, 
 
   // VARIATION DATA 
   const [variations, setVariations] = useState([])
+  const [isChecked, setIsChecked] = useState([])
   const [variationTypeForVariationNumber, setVariationTypeForVariationNumber] = useState([])
 
-
-  // yess 
-  const [isChecked, setIsChecked] = useState([{ type_id: 0, no_of_varation_allowed: 0 }])
-
-const [allow, setAllow] = useState(0)
 
   // LOADINGS 
   const [isDishLoading, setIsDishLoading] = useState(true)
 
-
   // TOGGOLE BETWEEN TABS FUNCTIONS 
+
   const shitToDetailsTab = () => {
     setOnDetailsTab(true)
     setOnInformationTab(false)
@@ -60,19 +57,24 @@ const [allow, setAllow] = useState(0)
     setOnVariationTab(true)
   }
 
-  const handleChangeAllowed = (e,max) => {
-    if (e.target.value===max) {
-      setAllow(max)
-    }
-    if(e.target.value===0){
-      setAllow(0)
-    }
-    
+  const handleAllowedVariation = (e, vId) => {
+
+    const { label, value } = e;
+
+    const objID = isChecked.findIndex((obj => obj.type_id === vId));
+
+    isChecked[objID].no_of_varation_allowed = parseInt(value)
+
+    variations.map(variation => {
+      if (variation.type_id === parseInt(vId)) {
+        variation.no_of_varation_allowed = value
+      }
+    })
   }
 
-  // yesss 
   const handleCkeckBox = (e, allowed) => {
     const { value, checked } = e.target;
+    console.log({ value, checked });
     if (checked) {
       setIsChecked([...isChecked, { type_id: parseInt(value), no_of_varation_allowed: parseInt(allowed) }]);
     }
@@ -113,7 +115,7 @@ const [allow, setAllow] = useState(0)
             if (resImg?.data) {
               // IF IMAGE AND VARIATION HAVE 
               if (variationArray.length > 0) {
-                Variationlink(res.data[0].id, { varation: variationArray }).then((res) => {
+                variationlink(res.data[0].id, { varation: variationArray }).then((res) => {
                   if (res?.data.length > 0) {
                     setIsLoading(false)
                     setSubmittedSuccessfully(true);
@@ -141,7 +143,7 @@ const [allow, setAllow] = useState(0)
           // IF HAVE NO IMAGE AND HAVE VARIATION
           if (variationArray.length > 0) {
             console.log(res);
-            Variationlink(res?.data?.id, { varation: variationArray })
+            variationlink(res?.data?.id, { varation: variationArray })
               .then((res) => {
                 if (res?.data.length > 0) {
                   setIsLoading(false)
@@ -173,7 +175,6 @@ const [allow, setAllow] = useState(0)
       addDishes(restaurentId, dishData).then(res => {
         const variationArray = isChecked.filter(data => data.type_id !== 0)
         var Data = new FormData()
-
         // IF HAVE IMAGE AND HAVE VARIATIONS
         if (data?.image[0] !== undefined) {
           Data.append('image', data?.image[0], data?.image[0].name);
@@ -182,7 +183,7 @@ const [allow, setAllow] = useState(0)
             if (resImg.data) {
               // IF IMAGE AND VARIATION HAVE 
               if (variationArray.length > 0) {
-                Variationlink(res.data[0].id, { varation: variationArray }).then((res) => {
+                variationlink(res.data[0].id, { varation: variationArray }).then((res) => {
                   if (res?.data.length > 0) {
                     setIsLoading(false)
                     setSubmittedSuccessfully(true);
@@ -209,7 +210,7 @@ const [allow, setAllow] = useState(0)
         } else {
           // IF HAVE NO IMAGE AND HAVE VARIATION
           if (variationArray.length > 0) {
-            Variationlink(res.data[0].id, { varation: variationArray })
+            variationlink(res.data[0].id, { varation: variationArray })
               .then((res) => {
                 if (res?.data.length > 0) {
                   setIsLoading(false)
@@ -241,12 +242,10 @@ const [allow, setAllow] = useState(0)
 
   // GET VARIATIONS 
   useEffect(() => {
-    console.log({inEditMode})
-    getVariation(user?.user?.restaurant[0]?.id).then(res => {
-     
+    getVariation2(user?.user?.restaurant[0]?.id).then(res => {
       setVariationTypeForVariationNumber(res?.data)
       setVariations(res?.data.map(v => {
-        return { type_id: parseInt(v.id), name: v.name, no_of_varation_allowed: 0 }
+        return { type_id: v?.id, name: v?.name, no_of_varation_allowed: v?.variation_count }
       }))
     })
   }, [user]);
@@ -257,41 +256,34 @@ const [allow, setAllow] = useState(0)
       setIsDishLoading(true)
       getDishById(inEditMode?.dish_id)
         .then(res => {
-          console.log('data', res);
           setSingleDish(res);
-          console.log("dishData", res?.id);
           if (res.id) {
             getVariationByRestaurantIdAndDishId(res?.id)
               .then(res => {
-                res.map(variation => {
-                  setIsChecked([...isChecked, {
-                    type_id: variation?.type_id
-                    , no_of_varation_allowed: variation?.no_of_varation_allowed
-                  }])
-                })
-
+                setIsChecked(...isChecked, res.map((v, i) => {
+                  return {
+                    type_id: v?.type_id
+                    , no_of_varation_allowed: v?.no_of_varation_allowed
+                  }}))
+              
                 setSingleVariation(res);
                 setIsDishLoading(false)
               })
           }
         })
     }
-
   }, [inEditMode])
 
-
   const history = useHistory()
+
   useEffect(() => {
-    console.log({ allow })
-  }, [allow])
+    console.log({ isChecked })
+  }, [isChecked])
+
 
   return (
     <>
-      <Toaster
-        position="bottom-right"
-        reverseOrder={false}
-      />
-
+      <Toaster position="top-right" reverseOrder={false} />
       {submittedSuccessfully ?
         (<div className={styles.SubmitedMessage}>
           <img src="https://i.postimg.cc/MGXQ6w85/13-pizza-outline.gif" alt="done" className='doneImage' />
@@ -493,7 +485,6 @@ const [allow, setAllow] = useState(0)
                               {variations.map((variation, index) => (
                                 <TableRow key={index}>
                                   <TableCell>
-                                    
                                     <input
                                       defaultValue={variation?.type_id}
                                       defaultChecked={variation?.type_id === singleVariation[index]?.type_id ? true : false}
@@ -503,26 +494,25 @@ const [allow, setAllow] = useState(0)
                                   </TableCell>
                                   <TableCell>{variation?.name}</TableCell>
                                   <TableCell>
-                                    {console.log({length:variationTypeForVariationNumber[index].variation.length})}
-                                    <>
-                                      <label
-                                        htmlFor="allowed">
-                                        <span
-                                          className={styles.errorMsg}>
-                                            {console.log({err:errors?.Allowed})}
-                                          { allow === variationTypeForVariationNumber[index].variation.length && `Max allowed:  ${variationTypeForVariationNumber[index].variation.length}`}
-                                        </span>
-                                      </label>
-                                      
-                                      <input
-                                        disabled={isChecked.filter(data => data.type_id === variation?.type_id).length > 0 ? false : true}
-                                        defaultValue={allow}
-                                        onChange={(e)=>{handleChangeAllowed(e,variationTypeForVariationNumber[index].variation.length)}}
-                                        type="number"
-                                        placeholder="No of variation allowed"
-                                        id='allowed'
-                                         />
-                                    </>
+                                    <Select
+                                      isDisabled={variation?.type_id === singleVariation[index]?.type_id ? false : true}
+                                      defaultValue={singleVariation[index] === undefined ? { label: '* Select No of Variation Allowed', value: 0 } : { label: singleVariation[index].no_of_varation_allowed, value: singleVariation[index].no_of_varation_allowed }}
+                                      options={[...Array(variationTypeForVariationNumber[index]?.variation_count)].map((elementInArray, index) => {
+                                        return {
+                                          label: (index + 1), value: (index + 1)
+                                        }
+                                      })}
+                                      onChange={(e) => { handleAllowedVariation(e, variation.type_id) }}
+                                      theme={(theme) => ({
+                                        ...theme,
+                                        borderRadius: 0,
+                                        colors: {
+                                          ...theme.colors,
+                                          primary: "#0571AE"
+                                        }
+                                      })}
+                                    />
+
                                   </TableCell>
                                 </TableRow>
 
@@ -635,18 +625,26 @@ const [allow, setAllow] = useState(0)
 
                       </div>
                     </div>
-
                     {/* INFORMATION TAB  */}
-                    <div style={{ display: `${onInformationTab ? "block" : "none"}` }} className={styles.container}  >
+                    <div
+                      style={{ display: `${onInformationTab ? "block" : "none"}` }} className={styles.container}>
                       <h1>Add Informations</h1>
                       <div className={styles.addDishForm}>
                         <div className={styles.inputWrapper}>
                           <label htmlFor="ingredients">Ingredients <span className={styles.reqMessage}>(optional) </span></label>
                           <input type="text" placeholder="ingredients" id='ingredients' {...register("ingredients", {})} />
                         </div>
+
                         <div className={styles.inputWrapper}>
-                          <label htmlFor="calories">Calories <span className={styles.reqMessage}>(optional) </span></label>
-                          <input onWheel={(e) => e.target.blur()} type="number" placeholder="calories" id='calories' {...register("calories", {})} />
+                          <label htmlFor="calories">
+                            Calories <span className={styles.reqMessage}>(optional) </span>
+                          </label>
+                          <input
+                            onWheel={(e) => e.target.blur()}
+                            type="number"
+                            placeholder="calories"
+                            id='calories'
+                            {...register("calories", {})} />
                         </div>
 
                       </div>
@@ -661,9 +659,9 @@ const [allow, setAllow] = useState(0)
                         <Table>
                           <TableHead>
                             <TableRow style={{ background: '#0575B4' }}>
-                              <TableCell style={{ color: '#fff' }} width="2%">Linked</TableCell>
-                              <TableCell style={{ color: '#fff' }} width="59%">Variation Type</TableCell>
-                              <TableCell style={{ color: '#fff' }} width="39%">Allowed</TableCell>
+                              <TableCell style={{ color: '#fff' }} width="10%">Linked</TableCell>
+                              <TableCell style={{ color: '#fff' }} width="40%">Variation Type</TableCell>
+                              <TableCell style={{ color: '#fff' }} width="50%">Allowed</TableCell>
                             </TableRow>
                           </TableHead>
 
@@ -671,33 +669,38 @@ const [allow, setAllow] = useState(0)
                             {variations.length > 0 ? variations.map((variation, index) => (
                               <TableRow key={index}>
                                 <TableCell>
-                              
                                   <input
                                     value={variation?.type_id}
                                     checked={variation.isChecked}
                                     onChange={(e) => { handleCkeckBox(e, variation?.no_of_varation_allowed) }} type="checkbox"
                                     name="" />
                                 </TableCell>
-                                <TableCell>{variation?.name}</TableCell>
+                                <TableCell>{variation?.name}{console.log({
+                                  isChecked,
+                                  variation,
+                                  isCha: isChecked.filter(v => v?.type_id === variation?.type_id)
+                                })}</TableCell>
+                                {console.log({ ccccccvariation: variation })}
                                 <TableCell>
-                                  <>
-                                    <label
-                                      htmlFor="no_of_varation_allowed">
-                                      <span
-                                        className={styles.errorMsg}>
-                                        {errors?.no_of_varation_allowed && "Dish Name is required! "}
-                                      </span>
-                                    </label>
-                                    {console.log({ variation })}
-                                    <input
-                                      disabled={isChecked.filter(data => data.type_id === variation?.type_id).length > 0 ? false : true}
-                                      defaultValue={variation?.no_of_varation_allowed}
-                                      type="number"
-                                      onChange={()=>handleChangeAllowed()}
-                                      placeholder="No of variation allowed"
-                                      id='no_of_varation_allowed'
-                                      {...register("no_of_varation_allowed", { required: true, max:10 })} />
-                                  </>
+                                  <Select
+                                    isDisabled={isChecked.filter(vType => vType?.type_id === variation?.type_id).length > 0 ? false : true}
+                                    defaultValue={{ label: '* Select No of Variation Allowed', value: 0 }}
+                                    options={[...Array(variationTypeForVariationNumber[index]?.variation_count)].map((elementInArray, index) => {
+                                      return {
+                                        label: (index + 1), value: (index + 1)
+                                      }
+                                    })}
+                                    onChange={(e) => { handleAllowedVariation(e, variation.type_id) }}
+                                    theme={(theme) => ({
+                                      ...theme,
+                                      borderRadius: 0,
+                                      colors: {
+                                        ...theme.colors,
+                                        primary: "#0571AE"
+                                      }
+                                    })}
+                                  />
+
                                 </TableCell>
                               </TableRow>
                             )) :

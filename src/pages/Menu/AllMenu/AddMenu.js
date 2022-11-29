@@ -1,6 +1,6 @@
 import { Button, IconButton, TextField } from '@material-ui/core';
 import { Add, Delete } from '@material-ui/icons';
-import { Paper } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import React, { Fragment, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { addMenu } from '../../../Apis/Menu';
@@ -110,16 +110,24 @@ const AddMenu = ({ id, setChangeMonitor, onAllMenu }) => {
             return (
               <tbody >
                 <tr>
-                  <td style={{
-                    border: 'none',
-                    fontSize: '1rem',
-                    fontWeight: 'bold'
-                  }}>
-                    {i + 1}
+                  <td
+                    style={{
+                      border: 'none',
+                      fontSize: '1rem',
+                      fontWeight: 'bold',
+                      display:'flex',
+                      justifyContent:'center',
+                      alignItems:'center',
+                      height:'100%',
+                      marginTop: "30px",
+                    }}>
+                    <Typography>
+                      {i + 1}
+                    </Typography>
                   </td>
                   <td style={{ border: 'none' }}>
                     <TextField
-                      style={{ marginTop: "15px", marginRight: "15px" }}
+                      style={{ marginTop: "15px", marginRight: "15px", width: '100%' }}
                       name="name"
                       placeholder="Enter Menu Name"
                       value={x.name}
@@ -129,7 +137,7 @@ const AddMenu = ({ id, setChangeMonitor, onAllMenu }) => {
                   </td>
                   <td style={{ border: 'none' }}>
                     <TextField
-                      style={{ marginTop: "15px", marginRight: "15px" }}
+                      style={{ marginTop: "15px", marginRight: "15px", width: '100%' }}
                       name="description"
                       placeholder="Enter Menu Description"
                       value={x.description}
@@ -144,7 +152,7 @@ const AddMenu = ({ id, setChangeMonitor, onAllMenu }) => {
                         style={{ marginTop: "15px", marginRight: "15px" }}
                         onClick={(e) => handledeleteClick(i)}
                         aria-label="delete">
-                        <Delete style={{color:'#ff0000'}}  />
+                        <Delete style={{ color: '#ff0000' }} />
                       </IconButton>
                     ) : ('')}
                   </td>

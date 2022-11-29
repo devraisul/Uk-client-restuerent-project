@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading/Loading';
 import AlldishesUI from './AlldishesUI';
 
 
-const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,handleEditDish }) => {
+const Alldish = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId, handleEditDish }) => {
   const [dishes, setDishes] = React.useState()
   const [loading, setLoading] = React.useState(false)
 
@@ -37,8 +37,8 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
       alignItems: 'center',
       flexDirection: 'column',
       padding: '20px 5px',
-      width:'100%',
-      overflowX:'scroll'
+      width: '100%',
+      overflowX: 'scroll'
     },
     h1: {
       color: '#0575B4'
@@ -46,14 +46,14 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
     tableHead: {
       background: '#0575B4', border: 'none'
     },
-    uploadImageButton:{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%'
+    uploadImageButton: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: '100%'
     },
-    variationButton:{
+    variationButton: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -67,7 +67,7 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
   ) : (
     <Fragment>
       <div style={Styles.constainer} >
-        <h1 style={{color:'#0575B4'}} className='large text-center'>Dishes of {menuName}</h1>
+        <h1 style={{ color: '#0575B4' }} className='large text-center'>Dishes of {menuName}</h1>
         <Table sx={{ minWidth: 1150 }} className='servicesT'>
           <TableHead>
             <TableRow>
@@ -84,7 +84,7 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
             <Fragment>
               <TableBody>
                 <TableRow>
-                  <TableCell style={{fontSize:'2rem'}} colSpan={8}>No dish found!</TableCell>
+                  <TableCell style={{ fontSize: '2rem' }} colSpan={8}>No dish found!</TableCell>
                 </TableRow>
               </TableBody>
             </Fragment>
@@ -92,9 +92,9 @@ const Alldish = ({ isChangeMenu,setIsChangeMenu, menuId, menuName, restaurentId,
             <Fragment>
               {dishes?.map((dishes, i) => (
                 <AlldishesUI
-                handleEditDish={handleEditDish}
-                setIsChangeMenu={setIsChangeMenu}
-                  key={dishes?.ressult_id}
+                  key={i}
+                  handleEditDish={handleEditDish}
+                  setIsChangeMenu={setIsChangeMenu}
                   dishes={dishes}
                   rid={dishes?.restaurant_id}
                   index={i + 1}

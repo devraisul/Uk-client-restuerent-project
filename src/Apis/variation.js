@@ -98,6 +98,24 @@ export const getVariation = async (id) => {
     .catch(err => console.log(err));
   return getVariationResponse
 }
+export const getVariation2 = async (id) => {
+  let getVariationResponse;
+  const userInfo = localStorage.getItem('data')
+  const jwt = JSON.parse(userInfo);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      "Authorization": `Bearer ${jwt.token}`
+    },
+  };
+  await axios.get(`/api/variation2/${id}`, config)
+    .then(res => {
+      getVariationResponse = res;
+    })
+    .catch(err => console.log(err));
+  return getVariationResponse
+}
 
 export const delVariation = async (id) => {
   let delVariationResponse;
@@ -119,7 +137,7 @@ export const delVariation = async (id) => {
 }
 
 // add linkVariation
-export const Variationlink = async (id, varation) => {
+export const variationlink = async (id, varation) => {
   let addVariationResponse;
   const userInfo = localStorage.getItem('data')
   const jwt = JSON.parse(userInfo);
