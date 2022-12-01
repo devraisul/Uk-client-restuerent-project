@@ -31,18 +31,28 @@ const MenuHandle = () => {
   //show all menu
   return (
     <Fragment>
+
+      {/* NAVIGATION SECTION  */}
       <div>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-evenly'
-        }} className='btn-center'>
-          <button title='Add Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onAddMenu(e)}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-evenly'
+          }}
+          className='btn-center'>
+          <button
+            title='Add Menu'
+            style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn'
+            onClick={(e) => onAddMenu(e)}>
             <AiOutlinePlus style={{ fontSize: '1.5rem' }} />
             <span style={{ marginLeft: '10px' }} className="menuNav">
               Add Menu
             </span>
           </button>
-          <button title='All Menu' style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn' onClick={(e) => onAllMenu(e)}>
+          <button
+            title='All Menu'
+            style={{ display: 'flex', alignItems: 'center', background: '#0575B4', color: '#fff' }} className='large btn'
+            onClick={(e) => onAllMenu(e)}>
             <BiFoodMenu style={{ fontSize: '1.5rem' }} />
             <span style={{
               marginLeft: '10px'
@@ -50,27 +60,31 @@ const MenuHandle = () => {
               All Menu
             </span>
           </button>
-          <button title='Edit All' style={{
-            display: 'flex',
-            alignItems: 'center',
-            background: '#0575B4',
-            color: '#fff'
-          }} className='large btn' onClick={(e) => onEditAll(e)}>
-            <BiEdit style={{
-              fontSize: '1.5rem'
-            }} />
-            <span style={{
-              marginLeft: '10px'
-            }} className="menuNav">
+          <button
+            title='Edit All'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#0575B4',
+              color: '#fff'
+            }}
+            className='large btn'
+            onClick={(e) => onEditAll(e)}>
+            <BiEdit style={{ fontSize: '1.5rem' }} />
+            <span style={{ marginLeft: '10px' }} className="menuNav">
               Edit All
             </span>
           </button>
-          <Link title='Back to dashboard' style={{
-            display: 'flex',
-            alignItems: 'center',
-            background: '#0575B4',
-            color: '#fff'
-          }} className='large btn' to={`/app/dashboard`}>
+          <Link
+            title='Back to dashboard'
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: '#0575B4',
+              color: '#fff'
+            }}
+            className='large btn'
+            to={`/app/dashboard`}>
             <TbLayoutDashboard style={{ fontSize: '1.5rem' }} />
             <span style={{ marginLeft: '10px' }} className="menuNav">
               Back to dashboard
@@ -78,6 +92,8 @@ const MenuHandle = () => {
           </Link>
         </div>
       </div>
+
+      {/* MAIN SECTION  */}
       {showAddMenu ? (<AddMenu onAllMenu={onAllMenu} setChangeMonitor={setChangeMonitor} id={user.restaurant[0].id} />) : ('')}
       {editAll ? (<Editmenu setEditAll={setEditAll} setChangeMonitor={setChangeMonitor} id={user.restaurant[0].id} />) : ('')}
       {showAllMenu ? (<AllMenu changeMonitor={changeMonitor} id={user.restaurant[0].id} />) : ('')}

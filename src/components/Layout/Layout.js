@@ -30,6 +30,7 @@ import AdminViewReviews from "../../pages/Admin/AdminReviews/AdminViewReviews";
 import CustomerSatisfaction from "../../pages/CustomerSatisfection/CustomerSatisfaction";
 import Dashboard from "../../pages/dashboard/Dashboard";
 import DishOptions from "../../pages/DishOptions/DishOptions";
+import DealHandle from "../../pages/Menu/DealHandle";
 import DishHandle from "../../pages/Menu/DishHandle";
 import MenuHandle from "../../pages/Menu/MenuHandle";
 import AllOrders from "../../pages/Orders/AllOrders";
@@ -78,6 +79,7 @@ function Layout(props) {
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/menu" component={MenuHandle} />
               <Route path="/app/add-dish/:menuName/:restaurentId/:menuId" component={DishHandle} />
+              <Route path="/app/add-deal/:menuName/:restaurentId/:menuId" component={DealHandle} />
               <Route path="/app/todays-orders" component={TodaysOrder} />
               <Route path="/app/addReview" component={AddReviewTag} />
               <Route path="/app/editReview/:id" component={EditReviewTag} />

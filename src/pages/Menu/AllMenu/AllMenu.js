@@ -1,6 +1,8 @@
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import React, { Fragment, useState } from 'react';
 import { getMenu } from '../../../Apis/Menu';
 import Loading from '../../../components/Loading/Loading';
+import styles from './AllMenu.module.css';
 import AllmenuUI from './AllmenuUI';
 
 const AllMenu = ({ id,changeMonitor }) => {
@@ -17,50 +19,31 @@ const AllMenu = ({ id,changeMonitor }) => {
       })
   }, [id,changeHappend,changeMonitor])
 
-
-  // STYLES 
-  const Styles = {
-    constainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column',
-      padding: '20px 10px'
-    },
-    h1: {
-      color: '#0575B4'
-    },
-    tableHead: {
-      background: '#0575B4', border: 'none'
-    },
-  }
-
-
   return loading ? (
     <Loading />
   ) : (
     <Fragment>
-      <div style={Styles.constainer} >
-        <h1 style={Styles.h1} className='large text-center'>All Menu</h1>
-        <table className='servicesT'>
-          <thead>
-            <tr>
-              <th style={Styles.tableHead} width="10%">#</th>
-              <th style={Styles.tableHead} width="10%">Name</th>
-              <th style={Styles.tableHead} width="30%">Description</th>
-              <th style={Styles.tableHead} width="40%">Dishes</th>
-              <th style={Styles.tableHead} width="5%">Total dishes</th>
-              <th style={Styles.tableHead} width="5%">Edit</th>
-            </tr>
-          </thead>
+      <div className={styles.constainer} >
+        <h1 className={styles.h1} >All Menu</h1>
+        <Table className='servicesT'>
+          <TableHead style={{background:"#0575B4"}}>
+            <TableRow  style={{background:"#0575B4"}}>
+              <TableCell className={styles.tableHead} width="10%">#</TableCell>
+              <TableCell className={styles.tableHead} width="20%">Name</TableCell>
+              <TableCell className={styles.tableHead} width="40%">Description</TableCell>
+              <TableCell className={styles.tableHead} width="20%">Dishes</TableCell>
+              <TableCell className={styles.tableHead} width="20%">Deals</TableCell>
+              <TableCell className={styles.tableHead} width="20%">Edit</TableCell>
+            </TableRow>
+          </TableHead>
           {!menus?.length ? (<Fragment>
-            <tbody>
-              <tr>
-                <td style={{
+            <TableBody>
+              <TableRow>
+                <TableCell style={{
                   fontSize: '2rem'
-                }} colSpan={6}>No data Found!</td>
-              </tr>
-            </tbody>
+                }} colSpan={6}>No data Found!</TableCell>
+              </TableRow>
+            </TableBody>
           </Fragment>
           ) : (
             <Fragment>
@@ -75,7 +58,7 @@ const AllMenu = ({ id,changeMonitor }) => {
               ))}
             </Fragment>
           )}
-        </table>
+        </Table>
       </div>
     </Fragment>
   );

@@ -3,10 +3,11 @@ import { Table } from '@mui/material';
 import React, { Fragment } from 'react';
 import { getdish } from '../../../Apis/dish';
 import Loading from '../../../components/Loading/Loading';
-import AlldishesUI from './AlldishesUI';
+import AlldishesUI from '../Dish/AlldishesUI';
 
 
-const Alldish = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId, handleEditDish }) => {
+
+const AllDeals = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId, handleEditDish }) => {
   const [dishes, setDishes] = React.useState()
   const [loading, setLoading] = React.useState(false)
 
@@ -67,7 +68,7 @@ const Alldish = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId
   ) : (
     <Fragment>
       <div style={Styles.constainer} >
-        <h1 style={{ color: '#0575B4' }} className='large text-center'>Dishes of {menuName}</h1>
+        <h1 style={{ color: '#0575B4' }} className='large text-center'>Deals of {menuName}</h1>
         <Table sx={{ minWidth: 1150 }} className='servicesT'>
           <TableHead>
             <TableRow>
@@ -76,7 +77,7 @@ const Alldish = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId
               <TableCell style={Styles.tableHead} minWidth="10%">Price</TableCell>
               <TableCell style={Styles.tableHead} minWidth="30%">Description</TableCell>
               <TableCell style={Styles.tableHead} minWidth="10%">Image</TableCell>
-              <TableCell style={Styles.tableHead} minWidth="20%">Linked Variations</TableCell>
+              <TableCell style={Styles.tableHead} minWidth="20%">Linked Dishes</TableCell>
               <TableCell style={Styles.tableHead} minWidth="20%">Edit</TableCell>
             </TableRow>
           </TableHead>
@@ -84,7 +85,7 @@ const Alldish = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId
             <Fragment>
               <TableBody>
                 <TableRow>
-                  <TableCell style={{ fontSize: '2rem' }} colSpan={8}>No dish found!</TableCell>
+                  <TableCell style={{ fontSize: '2rem' }} colSpan={8}>No deals found!</TableCell>
                 </TableRow>
               </TableBody>
             </Fragment>
@@ -101,7 +102,8 @@ const Alldish = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId
                 />
               ))}
             </Fragment>
-          )}
+          )
+          }
         </Table>
       </div>
     </Fragment>
@@ -109,4 +111,4 @@ const Alldish = ({ isChangeMenu, setIsChangeMenu, menuId, menuName, restaurentId
   );
 };
 
-export default Alldish;
+export default AllDeals;
